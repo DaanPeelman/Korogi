@@ -14,13 +14,13 @@ import javax.persistence.PersistenceContext;
  * @see BaseEntity
  * @see EntityRepository
  */
-public abstract class BaseEntityEntityRepository<E extends BaseEntity> implements EntityRepository<E> {
+public abstract class BaseEntityRepository<E extends BaseEntity> implements EntityRepository<E> {
     @PersistenceContext
     protected EntityManager em;
 
     private Class<E> entityClass;
 
-    public BaseEntityEntityRepository(Class<E> entityClass) {
+    public BaseEntityRepository(Class<E> entityClass) {
         this.entityClass = entityClass;
     }
 

@@ -89,7 +89,8 @@ public class User extends BaseEntity {
      * @see User
      * @see com.korogi.core.domain.BaseEntity.BaseBuilder
      */
-    public static class UserBuilder extends BaseBuilder<User, UserBuilder> {
+    @SuppressWarnings("unchecked")
+    public static class UserBuilder<B extends UserBuilder> extends BaseBuilder<User, UserBuilder> {
         private String email;
         private String username;
         private String password;
@@ -109,34 +110,34 @@ public class User extends BaseEntity {
             setBuilder(this);
         }
 
-        public UserBuilder email(String email) {
+        public B email(String email) {
             this.email = email;
-            return builder;
+            return (B) builder;
         }
 
-        public UserBuilder username(String username) {
+        public B username(String username) {
             this.username = username;
-            return builder;
+            return (B) builder;
         }
 
-        public UserBuilder password(String password) {
+        public B password(String password) {
             this.password = password;
-            return builder;
+            return (B) builder;
         }
 
-        public UserBuilder activate() {
+        public B activate() {
             this.activated = true;
-            return builder;
+            return (B) builder;
         }
 
-        public UserBuilder deactivate() {
+        public B deactivate() {
             this.activated = false;
-            return builder;
+            return (B) builder;
         }
 
         @Override
-        public User build() {
-            return new User(this);
+        public final User build() {
+            return new User(builder);
         }
     }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @see User
  * @see User.UserBuilder
  */
-public class TestUserBuilder extends User.UserBuilder {
+public class TestUserBuilder extends User.UserBuilder<TestUserBuilder> {
 
     private TestUserBuilder() {
         super();

@@ -32,6 +32,7 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
+    @SuppressWarnings(value = "unused")
     protected User() {
         super();
     }

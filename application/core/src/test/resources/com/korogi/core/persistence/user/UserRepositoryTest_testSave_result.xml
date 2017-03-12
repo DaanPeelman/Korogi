@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <USERS  USERNAME="john.doe"
-            PASSWORD="p@ssw0rd" />
+    <USERS  EMAIL="john.doe@test.com"
+            USERNAME="john.doe"
+            PASSWORD="p@ssw0rd"
+            ACTIVATED="true"/>
 </dataset>

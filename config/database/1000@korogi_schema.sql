@@ -1,7 +1,9 @@
 CREATE TABLE KOROGI.USERS (
   id BIGINT NOT NULL,
+  email VARCHAR(128) NOT NULL,
   username VARCHAR(128) NOT NULL,
   password VARCHAR(128) NOT NULL,
+  activated BOOLEAN NOT NULL,
 
   creation_date DATETIME NOT NULL,
   created_by VARCHAR(128) NOT NULL,

@@ -12,8 +12,10 @@ import java.time.Month;
 public class UserMother {
     public static User johnDoe() {
         return newTestUser()
+                .email("john.doe@test.com")
                 .username("john.doe")
                 .password("p@ssw0rd")
+                .activate()
                 .build();
     }
 

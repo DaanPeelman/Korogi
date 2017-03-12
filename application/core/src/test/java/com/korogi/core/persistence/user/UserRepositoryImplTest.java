@@ -82,8 +82,10 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
         User originalUser = em.find(User.class, 1L);
 
         User userToUpdate = newUser(originalUser)
+                .email("john.doe.updated@test.com")
                 .username("john.doe.updated")
                 .password("password.updated")
+                .activate()
                 .build();
 
         User updatedUser = repository.saveOrUpdate(userToUpdate);

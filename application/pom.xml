@@ -18,6 +18,6 @@
         <module>core</module>
         <module>rest</module>
         <module>api</module>
-        <module>webapp</module>
+        <module>web</module>
     </modules>
 </project>

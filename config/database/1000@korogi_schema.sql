@@ -3,7 +3,7 @@ CREATE TABLE KOROGI.USERS (
   email VARCHAR(128) NOT NULL,
   username VARCHAR(128) NOT NULL,
   password VARCHAR(128) NOT NULL,
-  activation_code VARCHAR(36),
+  activation_code CHAR(36),
   activated BOOLEAN NOT NULL,
 
   creation_date TIMESTAMP NOT NULL,

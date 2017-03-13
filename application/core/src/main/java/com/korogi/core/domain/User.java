@@ -41,7 +41,7 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Size(max = 36)
+    @Size(min = 36, max = 36)
     @Column(name = "activation_code")
     private String activationCode;
 

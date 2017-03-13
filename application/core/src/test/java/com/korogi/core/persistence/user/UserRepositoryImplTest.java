@@ -20,9 +20,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     private UserRepositoryImpl repository;
 
     /**
-     * Should retrieve the user with the same id from the database.
-     *
-     * @throws Exception
+     * Should retrieve the User with the same id from the database.
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testFindById.xml")
@@ -32,13 +30,11 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
         User foundUser = repository.findById(idToFind);
 
         assertThat(foundUser).isNotNull();
-        assertThat(foundUser.id()).isEqualTo(1);
+        assertThat(foundUser.id()).isEqualTo(idToFind);
     }
 
     /**
-     * Should return null when no user with the given id was found to be present in the database.
-     *
-     * @throws Exception
+     * Should return null when no User with the given id was found to be present in the database.
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testFindById.xml")
@@ -47,10 +43,8 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     }
 
     /**
-     * Should save the passed user into the database and automatically set the creation date,
+     * Should save the passed User into the database and automatically set the creation date,
      * created by and version fields.
-     *
-     * @throws Exception
      */
     @Test
     @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_testSave_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
@@ -71,9 +65,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     }
 
     /**
-     * Should update the user in the database with the values in the updated user.
-     *
-     * @throws Exception
+     * Should update the User in the database with the values in the updated user.
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testUpdate.xml")
@@ -98,9 +90,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     }
 
     /**
-     * Should delete the user from the database.
-     *
-     * @throws Exception
+     * Should delete the User from the database.
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testDelete.xml")

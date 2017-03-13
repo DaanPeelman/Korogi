@@ -108,7 +108,7 @@ public abstract class BaseEntity implements Serializable {
      * @author Daan Peelman
      *
      * @param <E> the type of the <code>BaseEntity</code> to build
-     * @param <B> the type of the <code>UserBuilder</code> that is being used to build
+     * @param <B> the type of the <code>EntityBuilder</code> that is being used to build
      *
      * @see BaseEntity
      */

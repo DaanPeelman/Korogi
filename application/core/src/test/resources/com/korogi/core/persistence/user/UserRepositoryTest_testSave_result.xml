@@ -3,5 +3,6 @@
     <USERS  EMAIL="john.doe@test.com"
             USERNAME="john.doe"
             PASSWORD="p@ssw0rd"
-            ACTIVATED="true"/>
+            ACTIVATION_CODE="123"
+            ACTIVATED="false"/>
 </dataset>

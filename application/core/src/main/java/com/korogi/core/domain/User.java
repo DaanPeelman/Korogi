@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
  * @author Daan Peelman
  *
  * @see BaseEntity
+ * @see User.UserBuilder
  */
 @Entity
 @Table(name = "USERS")
@@ -40,6 +41,10 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
+    @Size(max = 36)
+    @Column(name = "activation_code")
+    private String activationCode;
+
     @NotNull
     @Column(name = "activated")
     private Boolean activated;
@@ -54,13 +59,28 @@ public class User extends BaseEntity {
         this.email = builder.email;
         this.username = builder.username;
         this.password = builder.password;
+        this.activationCode = builder.activationCode;
         this.activated = builder.activated;
     }
 
+    /**
+     * Creates a new UserBuilder to create Users.
+     *
+     * @return a new UserBuilder
+     */
     public static UserBuilder newUser() {
         return new UserBuilder();
     }
 
+    /**
+     * Creates a new UserBuilder with the fields of a given User.<br />
+     * <br />
+     * Use this to create a copy or update a User.
+     *
+     * @param user the User instance to copy the field values from
+     *
+     * @return a new UserBuilder instantiated with the same field values as the User that got passed
+     */
     public static UserBuilder newUser(User user) {
         return new UserBuilder(user);
     }
@@ -77,6 +97,10 @@ public class User extends BaseEntity {
         return this.password;
     }
 
+    public String activationCode() {
+        return this.activationCode;
+    }
+
     public Boolean activated() {
         return this.activated;
     }
@@ -86,14 +110,17 @@ public class User extends BaseEntity {
      *
      * @author Daan Peelman
      *
+     * @param <B> the type of the <code>RoleBuilder</code> that is being used to build
+     *
      * @see User
-     * @see com.korogi.core.domain.BaseEntity.BaseBuilder
+     * @see BaseEntity.BaseBuilder
      */
     @SuppressWarnings("unchecked")
     public static class UserBuilder<B extends UserBuilder> extends BaseBuilder<User, UserBuilder> {
         private String email;
         private String username;
         private String password;
+        private String activationCode;
         private Boolean activated;
 
         protected UserBuilder() {
@@ -106,6 +133,7 @@ public class User extends BaseEntity {
             this.email = user.email;
             this.username = user.username;
             this.password = user.password;
+            this.activationCode = user.activationCode;
             this.activated = user.activated;
             setBuilder(this);
         }
@@ -122,6 +150,11 @@ public class User extends BaseEntity {
 
         public B password(String password) {
             this.password = password;
+            return (B) builder;
+        }
+
+        public B activationCode(String activationCode) {
+            this.activationCode = activationCode;
             return (B) builder;
         }
 

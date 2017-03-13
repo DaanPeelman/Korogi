@@ -15,7 +15,8 @@ public class UserMother {
                 .email("john.doe@test.com")
                 .username("john.doe")
                 .password("p@ssw0rd")
-                .activate()
+                .activationCode("123")
+                .deactivate()
                 .build();
     }
 
@@ -32,6 +33,13 @@ public class UserMother {
         return newTestUser(johnDoe_persisted())
                 .modificationDate(LocalDateTime.of(2017, Month.MARCH, 16, 4, 54, 0))
                 .modifiedBy("john.doe.updated")
+                .build();
+    }
+
+    public static User johnDoe_updated_notActivated(){
+        return newTestUser(johnDoe_updated())
+                .activationCode("123")
+                .deactivate()
                 .build();
     }
 }

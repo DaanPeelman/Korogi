@@ -2,6 +2,7 @@ FROM openjdk:8-jre-slim
 MAINTAINER Daan Peelman <daanpeelman@gmail.com>
 
 ENV CATALINA_HOME /opt/tomcat
+ENV CATALINA_WEBAPPS $CATALINA_HOME/webapps
 ENV PATH $CATALINA_HOME/bin:$PATH
 
 ENV TOMCAT_MAJOR_VERSION 8
@@ -17,12 +18,11 @@ RUN wget -qO- https://archive.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR_VERSIO
 RUN tar zxf apache-tomcat-*.tar.gz
 RUN rm apache-tomcat-*.tar.gz
 RUN mv apache-tomcat* $CATALINA_HOME
-RUN rm -rf $CATALINA_HOME/webapps/*
-
-RUN ls $CATALINA_HOME/webapps
+RUN rm -rf $CATALINA_WEBAPPS/*
 
 RUN chmod +x $CATALINA_HOME/bin/*.sh
 
 EXPOSE 8080
+EXPOSE 8000
 
 CMD ["catalina.sh", "run"]

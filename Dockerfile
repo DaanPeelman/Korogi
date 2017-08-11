@@ -1,4 +1,5 @@
 FROM daanpeelman/korogi-base:latest
+MAINTAINER Daan Peelman <daanpeelman@gmail.com>
 
 ENV CATALINA_WEBAPPS $CATALINA_HOME/webapps
 

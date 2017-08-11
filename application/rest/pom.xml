@@ -13,4 +13,17 @@
     <artifactId>rest</artifactId>
     <name>Korogi - Rest</name>
     <packaging>war</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warName>rest</warName>
+                    <outputDirectory>deployments</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

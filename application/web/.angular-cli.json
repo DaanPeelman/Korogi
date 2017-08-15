@@ -19,6 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "vendor/reset.css",
+        "vendor/clearfix.css",
         "styles.css"
       ],
       "scripts": [],

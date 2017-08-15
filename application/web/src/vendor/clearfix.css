@@ -1,0 +1,102 @@
+/* based on http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified/ */
+
+.cf:before,
+.cf:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+.cf:after {clear: both;}
+.cf {zoom: 1;} /* IE < 8 */
+
+
+/*
+For a quick understanding read the following 6 links, For a detailed
+undertsnding read all links in the detailed history.
+---
+Quick Understanding
+---
+http://www.positioniseverything.net/easyclearing.html
+http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified/
+http://thinkvitamin.com/design/everything-you-know-about-clearfix-is-wrong/
+http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified/
+http://nicolasgallagher.com/micro-clearfix-hack/
+http://nicolasgallagher.com/better-float-containment-in-ie/ [Including Comments]
+https://gist.github.com/935783/
+---
+Detailed History
+---
+[2001-08-17]
+The "Spacer" Div Technique described in a "A List Apart" article
+by Mark Newhouse. Works in all browsers, but requires presentational markup.
+http://www.alistapart.com/articles/practicalcss
+[2002-08-15]
+Lydia Lalopolis suggests a CSS only solution using :after
+Doesn't work in IE.
+http://lists.w3.org/Archives/Public/www-style/2002Aug/0134.html
+http://lists.w3.org/Archives/Public/www-style/2002Aug/0135.html
+[2003-06-24]
+Matt Brubeck builds on Lydia Lalopolis' :after suggestion to fix the problem
+in her suggestion. Doesn't work in IE.
+http://www.cs.hmc.edu/~mbrubeck/clear-after
+http://lists.w3.org/Archives/Public/www-style/2002Aug/0135.html
+[2004-05-12]
+Tony Aslett proposes a cross broser solution using the :after
+suggetion above and combing it with Big John's and Holly Bergevin's ZoomFix
+to address IE's issue. Doesn't work in IE Mac
+http://csscreator.com/node/1667
+http://csscreator.com/attributes/containedfloat.php
+http://www.positioniseverything.net/articles/haslayout.html
+http://www.positioniseverything.net/explorer/escape-floats.html
+http://www.satzansatz.de/cssd/onhavinglayout.html
+[2004-05-14]
+Big John's' detailed article with solutions to fix IE Mac
+problems and suggestions for addressing remaining problems like the IE/Win
+Guillotine Bug and other issues with old Gecko browsers.
+http://www.positioniseverything.net/easyclearing.html
+http://fu2k.org/alex/css/cssjunk/FloatInlineBlock.html
+http://www.positioniseverything.net/explorer/guillotine.html
+http://css-class.com/articles/explorer/guillotine/index.htm
+[2004-10-24]
+Steve Smith - The Float nearly Everything method or the FnE Method.
+http://orderedlist.com/blog/articles/clearing-floats-the-fne-method/
+[2005-02-26]
+overflow:auto or overflow:hidden with width
+http://www.sitepoint.com/simple-clearing-of-floats/
+http://www.pmob.co.uk/
+http://www.pmob.co.uk/temp/float-clear.htm
+http://www.quirksmode.org/blog/archives/2005/03/clearing_floats.html
+http://www.quirksmode.org/css/clearing.html
+[2009-12-06]
+IE/Mac no longer needed
+http://perishablepress.com/press/2009/12/06/new-clearfix-hack/
+[2010-04-13]
+Thierry Koblentz:
+Everything you Know about Clearfix is Wrong
+clearfix Reloaded + overflow:hidden Demystified
+http://tjkdesign.com/articles/clearfix_block-formatting-context_and_hasLayout.asp
+http://tjkdesign.com/articles/clearing-floats_and_block-formatting_context.asp
+http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified/
+[2011-04-21]
+Nicolas Gallagher: A new micro clearfix hack
+http://nicolasgallagher.com/micro-clearfix-hack/
+[2011-04-26]
+Nicolas Gallagher: Better float containment in IE using CSS expressions.
+The comment thread also has some great discussion.
+http://nicolasgallagher.com/better-float-containment-in-ie/
+https://gist.github.com/935783/
+http://jsfiddle.net/necolas/CaNvV/show
+http://haslayout.net/haslayout
+http://www.css-101.org/collapsing-margin/03.php
+http://social.msdn.microsoft.com/Forums/en-US/iewebdevelopment/thread/d03ccc6e-bd74-4ce1-af96-b4e496704d85
+Other References:
+http://css.maxdesign.com.au/floatutorial/
+http://www.complexspiral.com/publications/containing-floats/
+http://coding.smashingmagazine.com/2007/05/01/css-float-theory-things-you-should-know/
+http://www.w3.org/TR/CSS2/visuren.html
+http://www.w3.org/TR/CSS2/visudet.html#containing-block-details
+http://www.w3.org/TR/CSS2/visuren.html#block-formatting
+https://developer.mozilla.org/en/CSS/block_formatting_context
+http://msdn.microsoft.com/en-us/library/bb250481%28VS.85%29.aspx
+*/

@@ -16,14 +16,103 @@
 
     <build>
         <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
+          <plugin>
+            <artifactId>exec-maven-plugin</artifactId>
+            <groupId>org.codehaus.mojo</groupId>
+            <version>1.4.0</version>
+            <executions>
+              <execution>
+                <id>angular-cli test</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>test</phase>
+                <configuration>
+                  <executable>node_modules/@angular/cli/bin/ng</executable>
+                  <arguments>
+                    <argument>test</argument>
+                    <argument>--single-run</argument>
+                  </arguments>
+                  <workingDirectory>${project.basedir}</workingDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <artifactId>exec-maven-plugin</artifactId>
+            <groupId>org.codehaus.mojo</groupId>
+            <version>1.4.0</version>
+            <executions>
+              <execution>
+                <id>angular-cli build</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>generate-resources</phase>
+                <configuration>
+                  <executable>node_modules/@angular/cli/bin/ng</executable>
+                  <arguments>
+                    <argument>build</argument>
+                    <argument>--prod</argument>
+                  </arguments>
+                  <workingDirectory>${project.basedir}</workingDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- COPY GENERATED ANGULAR RESOURCES TO WEB-INF FOLDER -->
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.0.2</version>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>${project.basedir}/dist</directory>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- CLEAN WEB-INF HTML AND ASSETS -->
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>3.0.0</version>
             <configuration>
-                <warName>web</warName>
-                <outputDirectory>deployments</outputDirectory>
+              <filesets>
+                <fileset>
+                  <directory>${project.basedir}/src/main/webapp</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                  <excludes>
+                    <exclude>**/WEB-INF/**/*</exclude>
+                  </excludes>
+                  <followSymlinks>false</followSymlinks>
+                </fileset>
+              </filesets>
             </configuration>
-        </plugin>
+          </plugin>
+
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-war-plugin</artifactId>
+              <configuration>
+                  <warName>web</warName>
+                  <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
+              </configuration>
+          </plugin>
         </plugins>
     </build>
 </project>

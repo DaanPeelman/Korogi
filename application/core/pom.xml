@@ -81,7 +81,7 @@
                 <executions>
                     <execution>
                         <id>copy-database-maintainer-files</id>
-                        <phase>generate-resources</phase>
+                        <phase>generate-test-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>

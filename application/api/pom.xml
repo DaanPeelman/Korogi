@@ -13,4 +13,18 @@
     <artifactId>api</artifactId>
     <name>Korogi - API</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- SPRING -->
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+        </dependency>
+
+        <!-- JACKSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,5 +1,7 @@
 .deployments/
 **/target/
+application/web/src/main/webapp/**/*
+!application/web/src/main/webapp/WEB-INF/**/*
 
 # IntelliJ #
 **/.idea/
@@ -18,3 +20,31 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Angular 2 #
+
+# compiled output
+application/web/dist
+application/web/tmp
+application/web/out-tsc
+
+# dependencies
+application/web/node_modules
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+yarn-error.log
+
+# e2e
+application/web/e2e/*.js
+application/web/e2e/*.map

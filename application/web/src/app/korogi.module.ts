@@ -1,16 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { KorogiComponent } from "./korogi.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    KorogiComponent
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [KorogiComponent]
 })
-export class AppModule { }
+export class KorogiModule { }

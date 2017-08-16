@@ -18,6 +18,12 @@
     <properties>
         <version.java>1.8</version.java>
 
+        <version.maven-resources-plugin>3.0.2</version.maven-resources-plugin>
+        <version.maven-war-plugin>3.1.0</version.maven-war-plugin>
+        <version.exec-maven-plugin>1.4.0</version.exec-maven-plugin>
+        <version.maven-clean-plugin>3.0.0</version.maven-clean-plugin>
+        <version.maven-war-plugin>3.0.0</version.maven-war-plugin>
+
         <version.spring>4.3.7.RELEASE</version.spring>
         <version.spring-hateoas>0.23.0.RELEASE</version.spring-hateoas>
         <version.hibernate>5.2.8.Final</version.hibernate>

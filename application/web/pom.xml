@@ -17,33 +17,27 @@
     <build>
         <plugins>
           <plugin>
-            <artifactId>exec-maven-plugin</artifactId>
             <groupId>org.codehaus.mojo</groupId>
-            <version>1.4.0</version>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>${version.exec-maven-plugin}</version>
             <executions>
+              <!-- INSTALL NPM MODULES -->
               <execution>
-                <id>angular-cli test</id>
+                <id>npm install</id>
                 <goals>
                   <goal>exec</goal>
                 </goals>
-                <phase>test</phase>
+                <phase>generate-resources</phase>
                 <configuration>
-                  <executable>node_modules/@angular/cli/bin/ng</executable>
+                  <executable>npm</executable>
                   <arguments>
-                    <argument>test</argument>
-                    <argument>--single-run</argument>
+                    <argument>install</argument>
                   </arguments>
                   <workingDirectory>${project.basedir}</workingDirectory>
                 </configuration>
               </execution>
-            </executions>
-          </plugin>
 
-          <plugin>
-            <artifactId>exec-maven-plugin</artifactId>
-            <groupId>org.codehaus.mojo</groupId>
-            <version>1.4.0</version>
-            <executions>
+              <!-- PRODUCTION BUILD ANGULAR PROJECT -->
               <execution>
                 <id>angular-cli build</id>
                 <goals>
@@ -59,13 +53,32 @@
                   <workingDirectory>${project.basedir}</workingDirectory>
                 </configuration>
               </execution>
+
+              <!-- RUN ANGULAR TESTS -->
+              <execution>
+                <id>angular-cli test</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>test</phase>
+                <configuration>
+                  <executable>node_modules/@angular/cli/bin/ng</executable>
+                  <arguments>
+                    <argument>test</argument>
+                    <argument>--single-run</argument>
+                  </arguments>
+                  <workingDirectory>${project.basedir}</workingDirectory>
+                  <skip>${skipTests}</skip>
+                </configuration>
+              </execution>
             </executions>
           </plugin>
 
           <!-- COPY GENERATED ANGULAR RESOURCES TO WEB-INF FOLDER -->
           <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-resources-plugin</artifactId>
-            <version>3.0.2</version>
+            <version>${version.maven-resources-plugin}</version>
             <executions>
               <execution>
                 <id>copy-resources</id>
@@ -87,8 +100,9 @@
 
           <!-- CLEAN WEB-INF HTML AND ASSETS -->
           <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-clean-plugin</artifactId>
-            <version>3.0.0</version>
+            <version>${version.maven-clean-plugin}</version>
             <configuration>
               <filesets>
                 <fileset>
@@ -105,9 +119,11 @@
             </configuration>
           </plugin>
 
+          <!-- PLACE WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-war-plugin</artifactId>
+              <version>${version.maven-war-plugin}</version>
               <configuration>
                   <warName>web</warName>
                   <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>

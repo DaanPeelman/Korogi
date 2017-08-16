@@ -44,9 +44,11 @@
 
     <build>
         <plugins>
+            <!-- PLACE WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>${version.maven-war-plugin}</version>
                 <configuration>
                     <warName>rest</warName>
                     <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>

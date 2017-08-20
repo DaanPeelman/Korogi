@@ -74,51 +74,7 @@
             </executions>
           </plugin>
 
-          <!-- COPY GENERATED ANGULAR RESOURCES TO WEB-INF FOLDER -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>${version.maven-resources-plugin}</version>
-            <executions>
-              <execution>
-                <id>copy-resources</id>
-                <phase>generate-resources</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${project.basedir}/dist</directory>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-
-          <!-- CLEAN WEB-INF HTML AND ASSETS -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-clean-plugin</artifactId>
-            <version>${version.maven-clean-plugin}</version>
-            <configuration>
-              <filesets>
-                <fileset>
-                  <directory>${project.basedir}/src/main/webapp</directory>
-                  <includes>
-                    <include>**/*</include>
-                  </includes>
-                  <excludes>
-                    <exclude>**/WEB-INF/**/*</exclude>
-                  </excludes>
-                  <followSymlinks>false</followSymlinks>
-                </fileset>
-              </filesets>
-            </configuration>
-          </plugin>
-
+          <!-- ADD ANGULAR GENERATED RESOURCES AS WEB-RESOURCES -->
           <!-- PLACE WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -126,6 +82,11 @@
               <version>${version.maven-war-plugin}</version>
               <configuration>
                   <warName>web</warName>
+                  <webResources>
+                    <resource>
+                      <directory>${project.basedir}/dist</directory>
+                    </resource>
+                  </webResources>
                   <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
               </configuration>
           </plugin>

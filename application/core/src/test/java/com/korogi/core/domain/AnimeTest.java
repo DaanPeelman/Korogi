@@ -134,7 +134,7 @@ public class AnimeTest {
 
         Anime newPrequal = clannad();
 
-        Anime updatedRole = Anime.newAnime(originalAnime)
+        Anime updatedAnime = Anime.newAnime(originalAnime)
                 .animeType(newAnimeType)
                 .nameEnglish(newNameEnglish)
                 .nameRomanized(newNameRomanized)
@@ -144,19 +144,19 @@ public class AnimeTest {
                 .prequal(newPrequal)
                 .build();
 
-        assertThat(updatedRole).isNotNull().isNotSameAs(originalAnime);
-        assertThat(updatedRole.getAnimeType()).isNotNull().isEqualTo(newAnimeType);
-        assertThat(updatedRole.getNameEnglish()).isNotNull().isEqualTo(newNameEnglish);
-        assertThat(updatedRole.getNameRomanized()).isNotNull().isEqualTo(newNameRomanized);
-        assertThat(updatedRole.getStartAir()).isNotNull().isEqualTo(newStartAir);
-        assertThat(updatedRole.getEndAir()).isNotNull().isEqualTo(newEndAir);
-        assertThat(updatedRole.getSynopsis()).isNotNull().isEqualTo(newSynopsis);
-        assertThat(updatedRole.getId()).isNotNull().isEqualTo(originalAnime.getId()).isEqualTo(originalId);
-        assertThat(updatedRole.getCreationDate()).isNotNull().isEqualTo(originalAnime.getCreationDate()).isEqualTo(originalCreationDate);
-        assertThat(updatedRole.getCreatedBy()).isNotNull().isEqualTo(originalAnime.getCreatedBy()).isEqualTo(originalCreatedBy);
-        assertThat(updatedRole.getModificationDate()).isNotNull().isEqualTo(originalAnime.getModificationDate()).isEqualTo(originalModificationDate);
-        assertThat(updatedRole.getModifiedBy()).isNotNull().isEqualTo(originalAnime.getModifiedBy()).isEqualTo(originalModifiedBy);
-        assertThat(updatedRole.getVersion()).isNotNull().isEqualTo(originalAnime.getVersion()).isEqualTo(originalVersion);
+        assertThat(updatedAnime).isNotNull().isNotSameAs(originalAnime);
+        assertThat(updatedAnime.getAnimeType()).isNotNull().isEqualTo(newAnimeType);
+        assertThat(updatedAnime.getNameEnglish()).isNotNull().isEqualTo(newNameEnglish);
+        assertThat(updatedAnime.getNameRomanized()).isNotNull().isEqualTo(newNameRomanized);
+        assertThat(updatedAnime.getStartAir()).isNotNull().isEqualTo(newStartAir);
+        assertThat(updatedAnime.getEndAir()).isNotNull().isEqualTo(newEndAir);
+        assertThat(updatedAnime.getSynopsis()).isNotNull().isEqualTo(newSynopsis);
+        assertThat(updatedAnime.getId()).isNotNull().isEqualTo(originalAnime.getId()).isEqualTo(originalId);
+        assertThat(updatedAnime.getCreationDate()).isNotNull().isEqualTo(originalAnime.getCreationDate()).isEqualTo(originalCreationDate);
+        assertThat(updatedAnime.getCreatedBy()).isNotNull().isEqualTo(originalAnime.getCreatedBy()).isEqualTo(originalCreatedBy);
+        assertThat(updatedAnime.getModificationDate()).isNotNull().isEqualTo(originalAnime.getModificationDate()).isEqualTo(originalModificationDate);
+        assertThat(updatedAnime.getModifiedBy()).isNotNull().isEqualTo(originalAnime.getModifiedBy()).isEqualTo(originalModifiedBy);
+        assertThat(updatedAnime.getVersion()).isNotNull().isEqualTo(originalAnime.getVersion()).isEqualTo(originalVersion);
         assertThat(originalAnime.getAnimeType()).isEqualTo(originalAnimeType);
         assertThat(originalAnime.getNameEnglish()).isEqualTo(originalNameEnglish);
         assertThat(originalAnime.getNameRomanized()).isEqualTo(originalNameRomanized);
@@ -164,7 +164,7 @@ public class AnimeTest {
         assertThat(originalAnime.getEndAir()).isEqualTo(originalEndAir);
         assertThat(originalAnime.getSynopsis()).isEqualTo(originalSynopsis);
 
-        assertThat(updatedRole.getPrequal()).isNotNull().isEqualTo(newPrequal);
-        assertThat(newPrequal.getSequal()).isNotNull().isEqualTo(updatedRole);
+        assertThat(updatedAnime.getPrequal()).isNotNull().isEqualTo(newPrequal);
+        assertThat(newPrequal.getSequal()).isNotNull().isEqualTo(updatedAnime);
     }
 }

@@ -19,7 +19,7 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
      * Should retrieve the Role with the same id from the database.
      */
     @Test
-    @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_testFindById.xml")
+    @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_findById.xml")
     public void findById() throws Exception {
         long idToFind = 1;
 

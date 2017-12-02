@@ -32,7 +32,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "USERS")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_USER")
 public class User extends BaseEntity {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1941052640738015822L;
 
     @NotBlank
     @Size(max = 128)

@@ -28,7 +28,7 @@ import lombok.ToString;
 @ToString
 @MappedSuperclass
 public abstract class BaseEntity extends Validatable implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2351633402360209718L;
 
     protected static final String ENTITY_SEQUENCE_GENERATOR = "ENTITY_SEQUENCE_GENERATOR";
 

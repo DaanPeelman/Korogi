@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <ANIME  ID="1"
+            ANIME_TYPE="TV"
+            NAME_EN="Steins;Gate"
+            NAME_RO="Steins;Gate"
+            START_AIR="2011-04-06"
+            END_AIR="2011-09-14"
+            SYNOPSIS="Steins;Gate synopsis here"
+
+            CREATION_DATE="2017-12-02 00:00:00"
+            CREATED_BY="john.doe" />
+
+    <ANIME  ID="2"
+            ANIME_TYPE="TV"
+            NAME_EN="Steins;Gate: Egoistic Poriomania updated"
+            NAME_RO="Steins;Gate: Oukoubakko no Poriomania updated"
+            START_AIR="2017-12-2"
+            END_AIR="2018-01-1"
+            SYNOPSIS="Steins;Gate: Egoistic Poriomania synopsis updated"
+            PREQUAL_ID="1"
+
+            CREATION_DATE="2017-12-02 00:00:00"
+            CREATED_BY="john.doe" />
+</dataset>

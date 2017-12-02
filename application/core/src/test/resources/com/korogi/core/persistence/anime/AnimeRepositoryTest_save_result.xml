@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <ANIME  ANIME_TYPE="TV"
+            NAME_EN="Steins;Gate"
+            NAME_RO="Steins;Gate"
+            START_AIR="2011-04-06"
+            END_AIR="2011-09-14"
+            SYNOPSIS="Steins;Gate synopsis" />
+</dataset>

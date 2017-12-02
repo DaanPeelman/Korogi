@@ -1,10 +1,10 @@
 package com.korogi.core.domain;
 
 import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
+import static javax.persistence.EnumType.STRING;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,10 +32,10 @@ import lombok.ToString;
 @Table(name = "ROLES")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ROLE")
 public class Role extends BaseEntity {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3587516112018572130L;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     @Column(name = "role_type")
     private RoleType roleType;
 

@@ -23,7 +23,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      * Should retrieve the User with the same id from the database.
      */
     @Test
-    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testFindById.xml")
+    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_findById.xml")
     public void findById() throws Exception {
         long idToFind = 1;
 
@@ -37,7 +37,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      * Should return null when no User with the given id was found to be present in the database.
      */
     @Test
-    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testFindById.xml")
+    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_findById.xml")
     public void findById_notExisting() throws Exception {
         assertThat(repository.findById(99L)).isNull();
     }
@@ -47,7 +47,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      * created by and version fields.
      */
     @Test
-    @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_testSave_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
+    @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void save() throws Exception {
         User userToSave = johnDoe();
 
@@ -68,8 +68,8 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      * Should update the User in the database with the values in the updated user.
      */
     @Test
-    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testUpdate.xml")
-    @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_testUpdate_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
+    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_update.xml")
+    @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_update_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void update() throws Exception {
         User originalUser = em.find(User.class, 1L);
 
@@ -93,8 +93,8 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      * Should delete the User from the database.
      */
     @Test
-    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testDelete.xml")
-    @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_testDelete_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
+    @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_delete.xml")
+    @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_delete_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void delete() throws Exception {
         User userToDelete = em.find(User.class, 1L);
 

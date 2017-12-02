@@ -1,8 +1,8 @@
 package com.korogi.core.persistence;
 
-import com.korogi.core.domain.BaseEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import com.korogi.core.domain.BaseEntity;
 
 /**
  * Abstract base class for classes that do CRUD operations to the database.
@@ -31,7 +31,7 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity> implements 
 
     @Override
     public E saveOrUpdate(E entity) {
-        if(entity.id() == null) {
+        if(entity.getId() == null) {
             return save(entity);
         } else {
             return update(entity);

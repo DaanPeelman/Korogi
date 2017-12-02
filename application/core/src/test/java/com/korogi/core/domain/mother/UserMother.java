@@ -2,9 +2,9 @@ package com.korogi.core.domain.mother;
 
 import static com.korogi.core.domain.builder.TestUserBuilder.newTestUser;
 
-import com.korogi.core.domain.User;
 import java.time.LocalDateTime;
 import java.time.Month;
+import com.korogi.core.domain.User;
 
 /**
  * @author Daan Peelman
@@ -15,7 +15,7 @@ public class UserMother {
                 .email("john.doe@test.com")
                 .username("john.doe")
                 .password("p@ssw0rd")
-                .activationCode("123")
+                .activationCode("123456789012345678901234567890123456")
                 .deactivate()
                 .build();
     }
@@ -38,7 +38,7 @@ public class UserMother {
 
     public static User johnDoe_updated_notActivated(){
         return newTestUser(johnDoe_updated())
-                .activationCode("123")
+                .activationCode("123456789012345678901234567890123456")
                 .deactivate()
                 .build();
     }

@@ -2,14 +2,19 @@ package com.korogi.core.domain;
 
 import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Entity class representing a User in the database.
@@ -17,8 +22,12 @@ import javax.validation.constraints.Size;
  * @author Daan Peelman
  *
  * @see BaseEntity
- * @see User.UserBuilder
+ * @see UserBuilder
  */
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder(builderMethodName = "newUser")
+@ToString(callSuper = true)
 @Entity
 @Table(name = "USERS")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_USER")
@@ -49,11 +58,6 @@ public class User extends BaseEntity {
     @Column(name = "activated")
     private Boolean activated;
 
-    @SuppressWarnings(value = "unused")
-    protected User() {
-        super();
-    }
-
     private User(UserBuilder builder) {
         super(builder);
         this.email = builder.email;
@@ -64,7 +68,7 @@ public class User extends BaseEntity {
     }
 
     /**
-     * Creates a new UserBuilder to create Users.
+     * Creates a new UserBuilder to create a new User.
      *
      * @return a new UserBuilder
      */
@@ -85,92 +89,44 @@ public class User extends BaseEntity {
         return new UserBuilder(user);
     }
 
-    public String email() {
-        return this.email;
-    }
-
-    public String username() {
-        return this.username;
-    }
-
-    public String password() {
-        return this.password;
-    }
-
-    public String activationCode() {
-        return this.activationCode;
-    }
-
-    public Boolean activated() {
-        return this.activated;
-    }
-
     /**
      * Builder class for building <code>User</code> entities.
      *
      * @author Daan Peelman
      *
-     * @param <B> the type of the <code>RoleBuilder</code> that is being used to build
-     *
      * @see User
-     * @see BaseEntity.BaseBuilder
+     * @see BaseEntityBuilder
      */
-    @SuppressWarnings("unchecked")
-    public static class UserBuilder<B extends UserBuilder> extends BaseBuilder<User, UserBuilder> {
-        private String email;
-        private String username;
-        private String password;
-        private String activationCode;
-        private Boolean activated;
-
-        protected UserBuilder() {
+    public static class UserBuilder extends BaseEntityBuilder<User> {
+        private UserBuilder() {
             super();
-            setBuilder(this);
         }
 
-        protected UserBuilder(User user) {
+        private UserBuilder(User user) {
             super(user);
             this.email = user.email;
             this.username = user.username;
             this.password = user.password;
             this.activationCode = user.activationCode;
             this.activated = user.activated;
-            setBuilder(this);
         }
 
-        public B email(String email) {
-            this.email = email;
-            return (B) builder;
-        }
-
-        public B username(String username) {
-            this.username = username;
-            return (B) builder;
-        }
-
-        public B password(String password) {
-            this.password = password;
-            return (B) builder;
-        }
-
-        public B activationCode(String activationCode) {
-            this.activationCode = activationCode;
-            return (B) builder;
-        }
-
-        public B activate() {
+        public UserBuilder activate() {
             this.activated = true;
-            return (B) builder;
+            return this;
         }
 
-        public B deactivate() {
+        public UserBuilder deactivate() {
             this.activated = false;
-            return (B) builder;
+            return this;
         }
 
         @Override
-        public final User build() {
-            return new User(builder);
+        public User build() {
+            User user = new User(this);
+            user.validate();
+
+            return user;
         }
     }
 }

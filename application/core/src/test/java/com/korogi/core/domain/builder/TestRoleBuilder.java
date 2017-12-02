@@ -1,7 +1,10 @@
 package com.korogi.core.domain.builder;
 
+import static com.korogi.core.domain.Role.newRole;
+
 import com.korogi.core.domain.Role;
-import java.time.LocalDateTime;
+import com.korogi.core.domain.Role.RoleBuilder;
+import com.korogi.core.domain.enumeration.RoleType;
 
 /**
  * Builder class for building test-<code>Role</code> entities.<br />
@@ -11,47 +14,31 @@ import java.time.LocalDateTime;
  * @author Daan Peelman
  *
  * @see Role
- * @see Role.RoleBuilder
+ * @see RoleBuilder
+ * @see BaseTestEntityBuilder
  */
-public class TestRoleBuilder extends Role.RoleBuilder<TestRoleBuilder> {
-
-    public TestRoleBuilder() {
-        super();
-        setBuilder(this);
+public class TestRoleBuilder extends BaseTestEntityBuilder<Role, RoleBuilder, TestRoleBuilder> {
+    public static TestRoleBuilder newTestRole() {
+        return new TestRoleBuilder();
     }
 
-    public TestRoleBuilder(Role role) {
-        super(role);
-        setBuilder(this);
+    public static TestRoleBuilder newTestRole(Role role) {
+        return new TestRoleBuilder(role);
     }
 
-    @Override
-    public TestRoleBuilder id(Long id) {
-        return (TestRoleBuilder) super.id(id);
+    private TestRoleBuilder() {
+        super(newRole());
+        setTestEntityBuilder(this);
     }
 
-    @Override
-    public TestRoleBuilder creationDate(LocalDateTime creationDate) {
-        return (TestRoleBuilder) super.creationDate(creationDate);
+    private TestRoleBuilder(Role role) {
+        super(newRole(role));
+        setTestEntityBuilder(this);
     }
 
-    @Override
-    public TestRoleBuilder createdBy(String createdBy) {
-        return (TestRoleBuilder) super.createdBy(createdBy);
-    }
+    public TestRoleBuilder roleType(RoleType roleType) {
+        entityBuilder.roleType(roleType);
 
-    @Override
-    public TestRoleBuilder modificationDate(LocalDateTime modificationDate) {
-        return (TestRoleBuilder) super.modificationDate(modificationDate);
-    }
-
-    @Override
-    public TestRoleBuilder modifiedBy(String modifiedBy) {
-        return (TestRoleBuilder) super.modifiedBy(modifiedBy);
-    }
-
-    @Override
-    public TestRoleBuilder version(Long version) {
-        return (TestRoleBuilder) super.version(version);
+        return this;
     }
 }

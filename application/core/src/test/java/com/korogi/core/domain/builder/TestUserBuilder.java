@@ -1,7 +1,9 @@
 package com.korogi.core.domain.builder;
 
+import static com.korogi.core.domain.User.newUser;
+
 import com.korogi.core.domain.User;
-import java.time.LocalDateTime;
+import com.korogi.core.domain.User.UserBuilder;
 
 /**
  * Builder class for building test-<code>User</code> entities.<br />
@@ -11,18 +13,18 @@ import java.time.LocalDateTime;
  * @author Daan Peelman
  *
  * @see User
- * @see User.UserBuilder
+ * @see UserBuilder
+ * @see BaseTestEntityBuilder
  */
-public class TestUserBuilder extends User.UserBuilder<TestUserBuilder> {
-
+public class TestUserBuilder extends BaseTestEntityBuilder<User, UserBuilder, TestUserBuilder> {
     private TestUserBuilder() {
-        super();
-        setBuilder(this);
+        super(newUser());
+        setTestEntityBuilder(this);
     }
 
     private TestUserBuilder(User user) {
-        super(user);
-        setBuilder(this);
+        super(newUser(user));
+        setTestEntityBuilder(this);
     }
 
     public static TestUserBuilder newTestUser() {
@@ -33,33 +35,38 @@ public class TestUserBuilder extends User.UserBuilder<TestUserBuilder> {
         return new TestUserBuilder(user);
     }
 
-    @Override
-    public TestUserBuilder id(Long id) {
-        return (TestUserBuilder) super.id(id);
+    public TestUserBuilder email(String email) {
+        entityBuilder.email(email);
+        return this;
     }
 
-    @Override
-    public TestUserBuilder creationDate(LocalDateTime creationDate) {
-        return (TestUserBuilder) super.creationDate(creationDate);
+    public TestUserBuilder username(String username) {
+        entityBuilder.username(username);
+        return this;
     }
 
-    @Override
-    public TestUserBuilder createdBy(String createdBy) {
-        return (TestUserBuilder) super.createdBy(createdBy);
+    public TestUserBuilder password(String password) {
+        entityBuilder.password(password);
+        return this;
     }
 
-    @Override
-    public TestUserBuilder modificationDate(LocalDateTime modificationDate) {
-        return (TestUserBuilder) super.modificationDate(modificationDate);
+    public TestUserBuilder activationCode(String activationCode) {
+        entityBuilder.activationCode(activationCode);
+        return this;
     }
 
-    @Override
-    public TestUserBuilder modifiedBy(String modifiedBy) {
-        return (TestUserBuilder) super.modifiedBy(modifiedBy);
+    public TestUserBuilder activated(Boolean activated) {
+        entityBuilder.activated(activated);
+        return this;
     }
 
-    @Override
-    public TestUserBuilder version(Long version) {
-        return (TestUserBuilder) super.version(version);
+    public TestUserBuilder activate() {
+        entityBuilder.activate();
+        return this;
+    }
+
+    public TestUserBuilder deactivate() {
+        entityBuilder.deactivate();
+        return this;
     }
 }

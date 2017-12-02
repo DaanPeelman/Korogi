@@ -24,13 +24,13 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testFindById.xml")
-    public void testFindById() throws Exception {
+    public void findById() throws Exception {
         long idToFind = 1;
 
         User foundUser = repository.findById(idToFind);
 
         assertThat(foundUser).isNotNull();
-        assertThat(foundUser.id()).isEqualTo(idToFind);
+        assertThat(foundUser.getId()).isEqualTo(idToFind);
     }
 
     /**
@@ -38,7 +38,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testFindById.xml")
-    public void testFindById_notExisting() throws Exception {
+    public void findById_notExisting() throws Exception {
         assertThat(repository.findById(99L)).isNull();
     }
 
@@ -48,7 +48,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
      */
     @Test
     @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_testSave_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void testSave() throws Exception {
+    public void save() throws Exception {
         User userToSave = johnDoe();
 
         User savedUser = repository.saveOrUpdate(userToSave);
@@ -56,12 +56,12 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
         em.flush();
 
         assertThat(savedUser).isNotNull();
-        assertThat(savedUser.id()).isNotNull();
-        assertThat(savedUser.creationDate()).isNotNull();
-        assertThat(savedUser.createdBy()).isNotNull();
-        assertThat(savedUser.modificationDate()).isNull();
-        assertThat(savedUser.modifiedBy()).isNull();
-        assertThat(savedUser.version()).isNotNull();
+        assertThat(savedUser.getId()).isNotNull();
+        assertThat(savedUser.getCreationDate()).isNotNull();
+        assertThat(savedUser.getCreatedBy()).isNotNull();
+        assertThat(savedUser.getModificationDate()).isNull();
+        assertThat(savedUser.getModifiedBy()).isNull();
+        assertThat(savedUser.getVersion()).isNotNull();
     }
 
     /**
@@ -70,7 +70,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testUpdate.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_testUpdate_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void testUpdate() throws Exception {
+    public void update() throws Exception {
         User originalUser = em.find(User.class, 1L);
 
         User userToUpdate = newUser(originalUser)
@@ -85,8 +85,8 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
         em.flush();
 
         assertThat(updatedUser).isNotNull();
-        assertThat(updatedUser.modificationDate()).isNotNull();
-        assertThat(updatedUser.modifiedBy()).isNotNull();
+        assertThat(updatedUser.getModificationDate()).isNotNull();
+        assertThat(updatedUser.getModifiedBy()).isNotNull();
     }
 
     /**
@@ -95,7 +95,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_testDelete.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_testDelete_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void testDelete() throws Exception {
+    public void delete() throws Exception {
         User userToDelete = em.find(User.class, 1L);
 
         repository.delete(userToDelete);

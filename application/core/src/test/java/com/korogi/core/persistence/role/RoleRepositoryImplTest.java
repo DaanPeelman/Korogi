@@ -20,12 +20,12 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_testFindById.xml")
-    public void testFindById() throws Exception {
+    public void findById() throws Exception {
         long idToFind = 1;
 
         Role foundRole = repository.findById(idToFind);
 
         assertThat(foundRole).isNotNull();
-        assertThat(foundRole.id()).isEqualTo(idToFind);
+        assertThat(foundRole.getId()).isEqualTo(idToFind);
     }
 }

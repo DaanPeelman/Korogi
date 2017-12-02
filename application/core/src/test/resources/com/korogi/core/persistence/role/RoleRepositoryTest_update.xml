@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <ROLES  ID="1"
+            ROLE_TYPE="ADMIN"
+
+            CREATION_DATE="2016-08-27 00:00:00"
+            CREATED_BY="john.doe"
+            VERSION="1" />
+</dataset>

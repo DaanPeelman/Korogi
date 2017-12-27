@@ -1,10 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+/* Korogi */
 
-body {
-  font-family: Ubuntu, Verdana, sans-serif;
-  font-size: 62.5%;
-}
+@import "styles/variables";
+@import "styles/responsive_utils";
+@import "styles/general";
+@import "styles/containers";
+@import "styles/columns";
 
-p {
-  font-size: 1.6em;
-}
+@import "styles/header";

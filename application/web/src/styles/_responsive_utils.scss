@@ -1,0 +1,84 @@
+@mixin media-min($width) {
+  @if $width {
+    @media only screen and (min-width: #{$width + 1}px) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-min($breakpoint) {
+  $width: map_get($grid-breakpoints, $breakpoint);
+
+  @include media-min($width) {
+    @content;
+  };
+}
+
+@mixin media-max($width) {
+  @if $width {
+    @media only screen and (max-width: #{$width}px) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-max($breakpoint) {
+  $width: map_get($grid-breakpoints, $breakpoint);
+
+  @include media-max($width) {
+    @content;
+  };
+}
+
+@mixin media-between($min-width, $max-width) {
+  @if $min-width and $max-width {
+    @media only screen and (min-width: #{$min-width + 1}px) and (max-width: #{$max-width}px) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-between($min-breakpoint, $max-breakpoint) {
+  $min-width: map_get($grid-breakpoints, $min-breakpoint);
+  $max-width: map_get($grid-breakpoints, $max-breakpoint);
+
+  @include media-between($min-breakpoint, $max-breakpoint) {
+    @content;
+  }
+}
+
+.hidden-sm {
+  @include media-breakpoint-max('md') {
+    display: none !important;
+  }
+}
+
+.hidden-md {
+  @include media-breakpoint-between('md', 'lg') {
+    display: none !important;
+  }
+}
+
+.hidden-lg {
+  @include media-breakpoint-between('lg', 'xl') {
+    display: none !important;
+  }
+}
+
+.hidden-xl {
+  @include media-breakpoint-min('xl') {
+    display: none !important;
+  }
+}
+
+.larger-sm {
+  @include media-breakpoint-max('sm') {
+    font-size: 2.10em;
+  }
+}

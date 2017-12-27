@@ -1,0 +1,22 @@
+@mixin create-column($column-number) {
+  float: left;
+  width: percentage($column-number / 12);
+}
+
+@for $i from 1 through $number-of-columns {
+  .col-#{$i} {
+    @include create-column($i);
+  }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $min-width: map_get($grid-breakpoints, $breakpoint);
+
+  @include media-breakpoint-min($breakpoint) {
+    @for $i from 1 through $number-of-columns {
+      .col-#{$breakpoint}-#{$i} {
+        @include create-column($i);
+      }
+    }
+  }
+}

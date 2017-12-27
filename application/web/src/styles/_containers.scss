@@ -1,0 +1,12 @@
+.container {
+  width: 95%;
+  margin: 0 auto;
+
+  @include media-breakpoint-min('sm') {
+    width: 90%;
+  }
+
+  @include media-min('1900px') {
+    width: 80%;
+  }
+}

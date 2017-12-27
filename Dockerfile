@@ -5,7 +5,10 @@ ENV CATALINA_WEBAPPS $CATALINA_HOME/webapps
 
 RUN rm -rf $CATALINA_WEBAPPS/*
 
+COPY config/tomcat/ $CATALINA_HOME/conf/
+
 COPY deployments/rest.war $CATALINA_WEBAPPS
 COPY deployments/web.war $CATALINA_WEBAPPS/ROOT.war
 
+EXPOSE 8443
 EXPOSE 8000

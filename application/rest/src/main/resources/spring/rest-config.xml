@@ -12,4 +12,12 @@
     <mvc:annotation-driven />
     <context:component-scan base-package="com.korogi.rest" />
     <context:component-scan base-package="com.korogi.api" />
+
+    <beans profile="dev">
+        <mvc:cors>
+            <mvc:mapping path="/**"
+                         allowed-origins="*"
+                         allowed-methods="*" />
+        </mvc:cors>
+    </beans>
 </beans>

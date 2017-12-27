@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { KorogiComponent } from "./korogi.component";
 import { HeaderModule } from "./shared/header/header.module";
+import { HttpClientModule } from "@angular/common/http";
+import { AnimeService } from "./shared/services/anime.service";
 
 @NgModule({
   declarations: [
@@ -10,9 +12,12 @@ import { HeaderModule } from "./shared/header/header.module";
   ],
   imports: [
     BrowserModule,
-    HeaderModule
+    HeaderModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AnimeService
+  ],
   bootstrap: [KorogiComponent]
 })
 export class KorogiModule { }

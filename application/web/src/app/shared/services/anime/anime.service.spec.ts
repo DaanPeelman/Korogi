@@ -2,9 +2,8 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { AnimeService } from './anime.service';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
-import { Anime } from '../models/anime';
-import { environment } from "../../../environments/environment";
-import { AnimeMother } from "../../testing/anime-mother";
+import { Anime } from '../../models/anime';
+import { AnimeMother } from "../../../testing/anime-mother";
 
 describe('AnimeService', () => {
   let animeService: AnimeService;
@@ -36,7 +35,7 @@ describe('AnimeService', () => {
         expect(result).toEqual(animesToReturn);
       });
 
-      const request: TestRequest = httpMock.expectOne(`${environment.restUrl}/anime`);
+      const request: TestRequest = httpMock.expectOne(`/rest/anime`);
       expect(request.request.method).toEqual("GET");
       request.flush(animesToReturn);
     });
@@ -51,7 +50,7 @@ describe('AnimeService', () => {
         expect(result).toEqual(animeToReturn);
       });
 
-      const request: TestRequest = httpMock.expectOne(`${environment.restUrl}/anime/${id}`);
+      const request: TestRequest = httpMock.expectOne(`/rest/anime/${id}`);
       expect(request.request.method).toEqual("GET");
       request.flush(animeToReturn);
     });

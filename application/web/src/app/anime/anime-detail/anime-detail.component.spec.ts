@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnimeDetailComponent } from './anime-detail.component';
 import { RouterTestingModule } from "@angular/router/testing";
-import { AnimeService } from "../../shared/services/anime.service";
+import { AnimeService } from "../../shared/services/anime/anime.service";
 import { instance, mock } from "ts-mockito";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 

@@ -5,6 +5,9 @@ import { KorogiComponent } from "./korogi.component";
 import { HeaderModule } from "./shared/header/header.module";
 import { HttpClientModule } from "@angular/common/http";
 import { AnimeService } from "./shared/services/anime.service";
+import { RouterModule } from "@angular/router";
+import { AnimeModule } from "./anime/anime.module";
+import { animeRoutes } from "./anime/anime.routes";
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import { AnimeService } from "./shared/services/anime.service";
   imports: [
     BrowserModule,
     HeaderModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(animeRoutes),
+
+    AnimeModule
   ],
   providers: [
     AnimeService

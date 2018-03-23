@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { KorogiComponent } from './korogi.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 describe('KorogiComponent', () => {
   let component: KorogiComponent;
@@ -8,7 +9,12 @@ describe('KorogiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KorogiComponent ]
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      declarations: [
+        KorogiComponent
+      ]
     })
     .compileComponents();
   }));

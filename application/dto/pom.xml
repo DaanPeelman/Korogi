@@ -10,27 +10,15 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>api</artifactId>
-    <name>Korogi - API</name>
+    <artifactId>dto</artifactId>
+    <name>Korogi - DTOs</name>
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- INTERNAL PROJECTS -->
+        <!-- LOMBOK -->
         <dependency>
-            <groupId>com.korogi</groupId>
-            <artifactId>dto</artifactId>
-        </dependency>
-
-        <!-- SPRING -->
-        <dependency>
-            <groupId>org.springframework.hateoas</groupId>
-            <artifactId>spring-hateoas</artifactId>
-        </dependency>
-
-        <!-- JACKSON -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 </project>

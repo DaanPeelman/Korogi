@@ -15,9 +15,10 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>dto</module>
         <module>core</module>
-        <module>rest</module>
         <module>api</module>
+        <module>rest</module>
         <module>web</module>
     </modules>
 </project>

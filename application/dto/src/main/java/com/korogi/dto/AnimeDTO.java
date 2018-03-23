@@ -1,4 +1,4 @@
-package com.korogi.api.dto;
+package com.korogi.dto;
 
 import static lombok.AccessLevel.PUBLIC;
 
@@ -7,13 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.hateoas.ResourceSupport;
 
 @Data
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newAnimeDTO")
-public class AnimeDTO extends ResourceSupport {
+public class AnimeDTO {
     private String nameEnglish;
     private String nameRomanized;
     private LocalDate startAir;

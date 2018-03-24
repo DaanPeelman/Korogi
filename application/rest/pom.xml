@@ -17,12 +17,17 @@
     <dependencies>
         <!-- INTERNAL PROJECTS -->
         <dependency>
-            <groupId>com.korogi</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.korogi</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
         <!-- SPRING -->
@@ -43,6 +48,21 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <!-- TESTING -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>core</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
     </dependencies>
 

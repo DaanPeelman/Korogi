@@ -18,11 +18,14 @@
     <properties>
         <version.java>1.8</version.java>
 
+        <version.servlet-api>3.1.0</version.servlet-api>
+
         <version.maven-compiler-plugin>3.6.2</version.maven-compiler-plugin>
         <version.maven-resources-plugin>3.0.2</version.maven-resources-plugin>
         <version.maven-war-plugin>3.1.0</version.maven-war-plugin>
         <version.exec-maven-plugin>1.6.0</version.exec-maven-plugin>
         <version.maven-clean-plugin>3.0.0</version.maven-clean-plugin>
+        <version.maven-jar-plugin>3.0.2</version.maven-jar-plugin>
 
         <version.spring>4.3.7.RELEASE</version.spring>
         <version.spring-hateoas>0.23.0.RELEASE</version.spring-hateoas>
@@ -49,7 +52,7 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.korogi</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>dto</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -62,6 +65,13 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>rest</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${version.servlet-api}</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- SPRING -->
@@ -126,6 +136,13 @@
             </dependency>
 
             <!-- TESTING -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>core</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

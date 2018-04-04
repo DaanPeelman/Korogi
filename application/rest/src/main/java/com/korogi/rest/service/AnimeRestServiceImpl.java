@@ -1,4 +1,4 @@
-package com.korogi.rest.services;
+package com.korogi.rest.service;
 
 import static com.korogi.dto.AnimeDTO.newAnimeDTO;
 import static java.time.Month.APRIL;

@@ -1,4 +1,4 @@
-package com.korogi.rest.services.mapper;
+package com.korogi.rest.mapper;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static com.fasterxml.jackson.databind.DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE;

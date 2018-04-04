@@ -1,4 +1,4 @@
-package com.korogi.rest.services;
+package com.korogi.rest.service;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;

@@ -1,11 +1,11 @@
-package com.korogi.rest.services.anime;
+package com.korogi.rest.service.anime;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.korogi.rest.services.BaseServiceTest;
+import com.korogi.rest.service.BaseServiceTest;
 import org.junit.Test;
 
 public class ConsultAnimeServiceTest extends BaseServiceTest {

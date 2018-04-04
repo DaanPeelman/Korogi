@@ -47,6 +47,6 @@
     "ts-mockito": "2.3.x",
     "ts-node": "5.0.x",
     "tslint": "5.9.x",
-    "typescript": "2.8.x"
+    "typescript": "2.7.x"
   }
 }

@@ -31,7 +31,7 @@ public class EntityToDTOResourceMapper {
 
     @SuppressWarnings("unchecked")
     public <DTO> Resource<DTO> toDTOResource(BaseEntity entity) {
-        return (Resource<DTO>) Optional.of(mappers.get(entity.getClass()))
+        return (Resource<DTO>) Optional.ofNullable(mappers.get(entity.getClass()))
                 .orElseThrow(() -> new RuntimeException("No mapper found for class '" + entity.getClass() + "'."))
                 .toDTOResource(entity);
     }

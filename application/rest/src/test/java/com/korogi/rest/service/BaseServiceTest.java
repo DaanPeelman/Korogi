@@ -43,7 +43,8 @@ import org.springframework.web.context.WebApplicationContext;
 )
 @WebAppConfiguration
 public abstract class BaseServiceTest {
-    protected static final String[] EXPECTED_ANIME_DETAILS_LINKS = new String[] { "self", "prequal", "sequal" };
+    protected static final String[] EXPECTED_ANIME_DETAILS_LINKS = new String[] { "self", "prequal", "sequal", "episodes" };
+    protected static final String[] EXPECTED_EPISODE_DETAILS_LINKS = new String[] { "self" };
 
     protected static final ErrorDTO RESOURCE_NOT_FOUND_ERROR_DTO = newErrorDTO()
             .status("Not Found")

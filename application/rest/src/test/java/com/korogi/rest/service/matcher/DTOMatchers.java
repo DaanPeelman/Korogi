@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.korogi.dto.AnimeDTO;
+import com.korogi.dto.EpisodeDTO;
 import com.korogi.dto.ErrorDTO;
 import com.korogi.rest.mapper.JavaTimeCompliantJsonMapper;
 import lombok.SneakyThrows;
@@ -20,6 +21,14 @@ public class DTOMatchers {
 
     public static Matcher<AnimeDTO> matchesAnimeDTO(AnimeDTO expected) {
         return new AnimeDTOMatcher(expected);
+    }
+
+    public static Matcher<EpisodeDTO> matchesEpisodeDTO(EpisodeDTO expected) {
+        return new EpisodeDTOMatcher(expected);
+    }
+
+    public static Matcher<EpisodeDTO[]> matchesEpisodeDTOs(EpisodeDTO[] expected) {
+        return new EpisodeDTOsMatcher(expected);
     }
 
     public static Matcher<Link[]> containsResourceLinks(String... expectedRelations) {

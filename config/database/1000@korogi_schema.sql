@@ -54,3 +54,24 @@ CREATE TABLE ANIME (
 );
 
 CREATE SEQUENCE SEQ_ANIME START WITH 1;
+
+CREATE TABLE EPISODES (
+  id BIGINT NOT NULL,
+  anime_id BIGINT NOT NULL,
+  name VARCHAR(128) NOT NULL,
+  synopsis TEXT NOT NULL,
+  duration_in_minutes SMALLINT NOT NULL,
+  air_date DATE NOT NULL,
+
+  creation_date TIMESTAMP NOT NULL,
+  created_by VARCHAR(128) NOT NULL,
+  modification_date TIMESTAMP,
+  modified_by VARCHAR(128),
+  version BIGINT NOT NULL,
+
+  CONSTRAINT pk_episodes PRIMARY KEY(id),
+
+  CONSTRAINT fk_episodes_anime FOREIGN KEY(anime_id) REFERENCES ANIME(id)
+);
+
+CREATE SEQUENCE SEQ_EPISODE START WITH 1;

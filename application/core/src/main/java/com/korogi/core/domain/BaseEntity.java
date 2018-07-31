@@ -27,7 +27,7 @@ import lombok.ToString;
 @ToString
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
-    private static final long serialVersionUID = -2351633402360209718L;
+    private static final long serialVersionUID = -7083538719673685269L;
 
     protected static final String ENTITY_SEQUENCE_GENERATOR = "ENTITY_SEQUENCE_GENERATOR";
 

@@ -1,11 +1,6 @@
 package com.korogi.core.persistence.anime;
 
-import static com.korogi.core.domain.Anime.newAnime;
-import static com.korogi.core.domain.enumeration.AnimeType.TV;
-import static com.korogi.core.domain.mother.AnimeMother.steinsGate;
-import static java.time.LocalDate.of;
-import static java.time.Month.DECEMBER;
-import static java.time.Month.JANUARY;
+import static com.korogi.core.domain.testdata.AnimeTestData.steinsGate_notPersisted;
 import static org.fest.assertions.Assertions.assertThat;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -28,7 +23,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     public void findById_withSequal() {
         long idToFind = 1L;
 
-        Anime foundAnime = repository.findById(idToFind);
+        Anime foundAnime = repository.findById(idToFind).orElse(null);
 
         assertThat(foundAnime).isNotNull();
         assertThat(foundAnime.getId()).isEqualTo(idToFind);
@@ -47,7 +42,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     public void findById_withPrequal() {
         long idToFind = 3L;
 
-        Anime foundAnime = repository.findById(idToFind);
+        Anime foundAnime = repository.findById(idToFind).orElse(null);
 
         assertThat(foundAnime).isNotNull();
         assertThat(foundAnime.getId()).isEqualTo(idToFind);
@@ -59,12 +54,12 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     }
 
     /**
-     * Should return null when no Anime with the given id was found to be present in the database.
+     * Should return an empty optional when no Anime with the given id was found to be present in the database.
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findById.xml")
     public void findById_notExisting() {
-        assertThat(repository.findById(99L)).isNull();
+        assertThat(repository.findById(99L).isPresent()).isFalse();
     }
 
     /**
@@ -74,7 +69,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @ExpectedDatabase(value = "/com/korogi/core/persistence/anime/AnimeRepositoryTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void save() {
-        Anime animeToSave = steinsGate();
+        Anime animeToSave = steinsGate_notPersisted().build();
 
         Anime savedAnime = repository.saveOrUpdate(animeToSave);
 
@@ -90,56 +85,6 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     }
 
     /**
-     * Should update the Anime in the database with the values in the updated Anime.
-     */
-    @Test
-    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_update.xml")
-    @ExpectedDatabase(value = "/com/korogi/core/persistence/anime/AnimeRepositoryTest_update_withPrequal_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void update_withPrequal() {
-        Anime originalAnime = em.find(Anime.class, 2L);
-
-        Anime animeToUpdate = newAnime(originalAnime)
-                .animeType(TV)
-                .nameEnglish("Steins;Gate: Egoistic Poriomania updated")
-                .nameRomanized("Steins;Gate: Oukoubakko no Poriomania updated")
-                .startAir(of(2017, DECEMBER, 2))
-                .endAir(of(2018, JANUARY, 1))
-                .synopsis("Steins;Gate: Egoistic Poriomania synopsis updated")
-                .prequal(em.find(Anime.class, 1L))
-                .build();
-
-        Anime updatedAnime = repository.saveOrUpdate(animeToUpdate);
-
-        em.flush();
-
-        assertThat(updatedAnime).isNotNull();
-        assertThat(updatedAnime.getModificationDate()).isNotNull();
-        assertThat(updatedAnime.getModifiedBy()).isNotNull();
-    }
-
-    /**
-     * Should update the Anime in the database with the values in the updated Anime.
-     */
-    @Test
-    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_update.xml")
-    @ExpectedDatabase(value = "/com/korogi/core/persistence/anime/AnimeRepositoryTest_update_withSequal_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void update_withSequal() {
-        Anime originalAnime = em.find(Anime.class, 1L);
-
-        Anime animeToUpdate = newAnime(originalAnime)
-                .sequal(em.find(Anime.class, 2L))
-                .build();
-
-        Anime updatedAnime = repository.saveOrUpdate(animeToUpdate);
-
-        em.flush();
-
-        assertThat(updatedAnime).isNotNull();
-        assertThat(updatedAnime.getModificationDate()).isNotNull();
-        assertThat(updatedAnime.getModifiedBy()).isNotNull();
-    }
-
-    /**
      * Should delete the Anime from the database.
      */
     @Test
@@ -151,5 +96,67 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
         repository.delete(animeToDelete);
 
         em.flush();
+    }
+
+    /**
+     * Should retrieve the Anime that is a prequal to the anime with the passed id from the database.
+     */
+    @Test
+    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findPrequalOfAnime.xml")
+    public void findPrequalOfAnime() throws Exception {
+        Anime animeToFind = em.find(Anime.class, 1L);
+
+        Anime foundAnime = repository.findPrequalOfAnime(2L).orElse(null);
+
+        assertThat(foundAnime).isNotNull().isEqualTo(animeToFind);
+    }
+
+    /**
+     * Should return an empty optional if the Anime with the passed id does not have a prequal linked to it in the database.
+     */
+    @Test
+    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findPrequalOfAnime.xml")
+    public void findPrequalOfAnime_hasNoPrequal() throws Exception {
+        assertThat(repository.findPrequalOfAnime(1L).isPresent()).isFalse();
+    }
+
+    /**
+     * Should return an empty optional when no Anime with the given id was found to be present in the database.
+     */
+    @Test
+    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findPrequalOfAnime.xml")
+    public void findPrequalOfAnime_notExisting() throws Exception {
+        assertThat(repository.findPrequalOfAnime(99L).isPresent()).isFalse();
+    }
+
+    /**
+     * Should retrieve the Anime that is a sequal to the anime with the passed id from the database.
+     */
+    @Test
+    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findSequalOfAnime.xml")
+    public void findSequalOfAnime() throws Exception {
+        Anime animeToFind = em.find(Anime.class, 2L);
+
+        Anime foundAnime = repository.findSequalOfAnime(1L).orElse(null);
+
+        assertThat(foundAnime).isNotNull().isEqualTo(animeToFind);
+    }
+
+    /**
+     * Should return an empty optional if the Anime with the passed id does not have a sequal linked to it in the database.
+     */
+    @Test
+    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findSequalOfAnime.xml")
+    public void findSequalOfAnime_hasNoSequal() throws Exception {
+        assertThat(repository.findSequalOfAnime(2L).isPresent()).isFalse();
+    }
+
+    /**
+     * Should return an empty optional when no Anime with the given id was found to be present in the database.
+     */
+    @Test
+    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findSequalOfAnime.xml")
+    public void findSequalOfAnime_notExisting() throws Exception {
+        assertThat(repository.findPrequalOfAnime(99L).isPresent()).isFalse();
     }
 }

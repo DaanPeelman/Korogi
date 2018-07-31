@@ -1,7 +1,14 @@
 package com.korogi.core.persistence;
 
+import static java.util.Collections.singletonMap;
+
+import java.util.Map;
+import java.util.Optional;
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import com.korogi.core.domain.BaseEntity;
 
 /**
@@ -25,8 +32,13 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity> implements 
     }
 
     @Override
-    public E findById(Long id) {
-        return em.find(entityClass, id);
+    public Optional<E> findById(Long id, String... relationsToPrefetch) {
+        EntityGraph<E> graph = em.createEntityGraph(entityClass);
+        graph.addAttributeNodes(relationsToPrefetch);
+
+        Map<String, Object> hints = singletonMap("javax.persistence.loadgraph", graph);
+
+        return Optional.ofNullable(em.find(entityClass, id, hints));
     }
 
     @Override
@@ -50,5 +62,13 @@ public abstract class BaseEntityRepositoryImpl<E extends BaseEntity> implements 
     @Override
     public void delete(E entity) {
         em.remove(entity);
+    }
+
+    protected Optional<E> toOptional(TypedQuery<E> query) {
+        try {
+            return Optional.of(query.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 }

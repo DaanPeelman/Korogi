@@ -21,6 +21,7 @@
             START_AIR="2012-02-22"
             END_AIR="2012-02-22"
             SYNOPSIS="Steins;Gate: Egoistic Poriomania synopsis here"
+            PREQUAL_ID="1"
 
             CREATION_DATE="2017-12-02 00:00:00"
             CREATED_BY="john.doe"

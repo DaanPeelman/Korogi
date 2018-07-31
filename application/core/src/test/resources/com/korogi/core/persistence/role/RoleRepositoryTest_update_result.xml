@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-    <ROLES  ID="1"
-            ROLE_TYPE="USER"
-
-            CREATION_DATE="2016-08-27 00:00:00"
-            CREATED_BY="john.doe" />
-</dataset>

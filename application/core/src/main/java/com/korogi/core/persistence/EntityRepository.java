@@ -1,5 +1,6 @@
 package com.korogi.core.persistence;
 
+import java.util.Optional;
 import com.korogi.core.domain.BaseEntity;
 
 /**
@@ -16,10 +17,11 @@ public interface EntityRepository<E extends BaseEntity> {
      * Retrieves an entity from the database by its id.
      *
      * @param id the id of the entity to find
+     * @param relationsToPrefetch the relations of the entity that should (already) be loaded eagerly
      *
-     * @return the entity retrieved from the database or null if none was found
+     * @return an optional populated with the entity retrieved from the database or an empty optional if none was found
      */
-    E findById(Long id);
+    Optional<E> findById(Long id, String... relationsToPrefetch);
 
     /**
      * Saves or updates an entity into the database.

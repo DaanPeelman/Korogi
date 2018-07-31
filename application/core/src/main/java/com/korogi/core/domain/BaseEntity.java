@@ -13,7 +13,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
-import com.korogi.core.validation.Validatable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -27,7 +26,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = PROTECTED)
 @ToString
 @MappedSuperclass
-public abstract class BaseEntity extends Validatable implements Serializable {
+public abstract class BaseEntity implements Serializable {
     private static final long serialVersionUID = -2351633402360209718L;
 
     protected static final String ENTITY_SEQUENCE_GENERATOR = "ENTITY_SEQUENCE_GENERATOR";
@@ -55,15 +54,6 @@ public abstract class BaseEntity extends Validatable implements Serializable {
     @Column(name = "version")
     private Long version;
 
-    protected BaseEntity(BaseEntityBuilder builder) {
-        this.id = builder.id;
-        this.creationDate = builder.creationDate;
-        this.createdBy = builder.createdBy;
-        this.modificationDate = builder.modificationDate;
-        this.modifiedBy = builder.modifiedBy;
-        this.version = builder.version;
-    }
-
     @PrePersist
     protected void prePersist() {
         this.creationDate = LocalDateTime.now();
@@ -74,40 +64,5 @@ public abstract class BaseEntity extends Validatable implements Serializable {
     protected void preUpdate() {
         this.modificationDate = LocalDateTime.now();
         this.modifiedBy = "AUTO"; // TODO set current user
-    }
-
-    /**
-     * Abstract base class for builders.
-     *
-     * @author Daan Peelman
-     *
-     * @param <E> the type of the <code>BaseEntity</code> to build
-     *
-     * @see BaseEntity
-     */
-    @NoArgsConstructor(access = PROTECTED)
-    public abstract static class BaseEntityBuilder<E extends BaseEntity> {
-        private Long id;
-        private LocalDateTime creationDate;
-        private String createdBy;
-        private LocalDateTime modificationDate;
-        private String modifiedBy;
-        private Long version;
-
-        protected BaseEntityBuilder(E entity) {
-            this.id = entity.getId();
-            this.creationDate = entity.getCreationDate();
-            this.createdBy = entity.getCreatedBy();
-            this.modificationDate = entity.getModificationDate();
-            this.modifiedBy = entity.getModifiedBy();
-            this.version = entity.getVersion();
-        }
-
-        /**
-         * Builds an entity based on the values set in the builder.
-         *
-         * @return the entity based on the values set in the builder
-         */
-        public abstract E build();
     }
 }

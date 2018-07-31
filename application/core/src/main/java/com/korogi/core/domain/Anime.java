@@ -1,9 +1,11 @@
 package com.korogi.core.domain;
 
 import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
+import static com.korogi.dto.AnimeDTO.newAnimeDTO;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
+import static lombok.AccessLevel.PROTECTED;
 
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -16,11 +18,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import com.korogi.core.domain.enumeration.AnimeType;
-import lombok.AccessLevel;
+import com.korogi.dto.AnimeDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -32,9 +36,8 @@ import org.hibernate.validator.constraints.NotBlank;
  * @see AnimeBuilder
  */
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder(builderMethodName = "newAnime")
-@ToString(callSuper = true)
+@NoArgsConstructor(access = PROTECTED)
+@ToString(callSuper = true, exclude = { "sequal" })
 @Entity
 @Table(name = "ANIME")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ANIME")
@@ -68,113 +71,34 @@ public class Anime extends BaseEntity {
 
     @OneToOne(fetch = LAZY, cascade = ALL)
     @JoinColumn(name = "prequal_id")
+    @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime prequal;
 
     @OneToOne(fetch = LAZY, cascade = ALL, mappedBy = "prequal")
+    @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime sequal;
 
-    private Anime(AnimeBuilder builder) {
-        super(builder);
-        this.animeType = builder.animeType;
-        this.nameEnglish = builder.nameEnglish;
-        this.nameRomanized = builder.nameRomanized;
-        this.startAir = builder.startAir;
-        this.endAir = builder.endAir;
-        this.synopsis = builder.synopsis;
-        setPrequal(builder.prequal);
-        setSequal(builder.sequal);
-    }
-
-    /**
-     * Sets the prequal to the given prequal and sets its sequal to this Anime if needed.
-     *
-     * @param prequal the new prequal
-     */
-    void setPrequal(Anime prequal) {
-        Anime previousPrequal = this.prequal;
-
+    @Builder(builderMethodName = "newAnime")
+    public Anime(AnimeType animeType, String nameEnglish, String nameRomanized, LocalDate startAir, LocalDate endAir, String synopsis, Anime prequal, Anime sequal) {
+        this.animeType = animeType;
+        this.nameEnglish = nameEnglish;
+        this.nameRomanized = nameRomanized;
+        this.startAir = startAir;
+        this.endAir = endAir;
+        this.synopsis = synopsis;
         this.prequal = prequal;
-
-        if (previousPrequal != null && previousPrequal.sequal == this) {
-            previousPrequal.setSequal(null);
-        }
-
-        if (prequal != null && prequal.sequal != this) {
-            prequal.setSequal(this);
-        }
-    }
-
-    /**
-     * Sets the sequal to the given sequal and sets it prequal to this Anime if needed.
-     *
-     * @param sequal the new sequal
-     */
-    void setSequal(Anime sequal) {
-        Anime previousSequal = this.sequal;
         this.sequal = sequal;
-
-        if (previousSequal != null && previousSequal.prequal == this) {
-            previousSequal.setPrequal(null);
-        }
-
-        if (sequal != null && sequal.prequal != this) {
-            sequal.setPrequal(this);
-        }
     }
 
-    /**
-     * Creates a new AnimeBuilder to create a new Anime.
-     *
-     * @return a new AnimeBuilder
-     */
-    public static AnimeBuilder newAnime() {
-        return new AnimeBuilder();
-    }
-
-    /**
-     * Creates a new AnimeBuilder with the fields of a given Anime.<br />
-     * <br />
-     * Use this to create a copy or update an Anime.
-     *
-     * @param anime the Anime instance to copy the field values from
-     *
-     * @return a new AnimeBuilder instantiated with the same field values as the Anime that got passed
-     */
-    public static AnimeBuilder newAnime(Anime anime) {
-        return new AnimeBuilder(anime);
-    }
-
-    /**
-     * Builder class for building <code>Anime</code> entities.
-     *
-     * @author Daan Peelman
-     *
-     * @see Anime
-     * @see BaseEntityBuilder
-     */
-    public static class AnimeBuilder extends BaseEntityBuilder<Anime> {
-        private AnimeBuilder() {
-            super();
-        }
-
-        private AnimeBuilder(Anime anime) {
-            super(anime);
-            this.animeType = anime.animeType;
-            this.nameEnglish = anime.nameEnglish;
-            this.nameRomanized = anime.nameRomanized;
-            this.startAir = anime.startAir;
-            this.endAir = anime.endAir;
-            this.synopsis = anime.synopsis;
-            this.prequal = anime.prequal;
-            this.sequal = anime.sequal;
-        }
-
-        @Override
-        public Anime build() {
-            Anime anime = new Anime(this);
-            anime.validate();
-
-            return anime;
-        }
+    public AnimeDTO toDTO() {
+        return newAnimeDTO()
+                .nameEnglish(nameEnglish)
+                .nameRomanized(nameRomanized)
+                .startAir(startAir)
+                .endAir(endAir)
+                .synopsis(synopsis)
+                .backdropUrl("assets/images/backdrop.jpg")
+                .posterUrl("assets/poster.jpg")
+                .build();
     }
 }

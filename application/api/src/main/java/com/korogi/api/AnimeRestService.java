@@ -1,11 +1,12 @@
 package com.korogi.api;
 
-import java.util.List;
-import com.korogi.api.hateoas.EmbeddedResource;
 import com.korogi.dto.AnimeDTO;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.hateoas.Resource;
 
 public interface AnimeRestService {
-    PagedResources<EmbeddedResource<AnimeDTO>> getAnime(List<String> embeds);
-    EmbeddedResource<AnimeDTO> getAnime(Long id, List<String> embeds);
+    PagedResources<Resource<AnimeDTO>> getAnime();
+    Resource<AnimeDTO> getAnimeDetails(Long id);
+    Resource<AnimeDTO> getPrequalDetails(Long id);
+    Resource<AnimeDTO> getSequalDetails(Long id);
 }

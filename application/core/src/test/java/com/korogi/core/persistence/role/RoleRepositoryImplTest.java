@@ -1,7 +1,6 @@
 package com.korogi.core.persistence.role;
 
-import static com.korogi.core.domain.enumeration.RoleType.USER;
-import static com.korogi.core.domain.mother.RoleMother.admin;
+import static com.korogi.core.domain.testdata.RoleTestData.admin;
 import static org.fest.assertions.Assertions.assertThat;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -27,7 +26,7 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
     public void findById() throws Exception {
         long idToFind = 1;
 
-        Role foundRole = repository.findById(idToFind);
+        Role foundRole = repository.findById(idToFind).get();
 
         assertThat(foundRole).isNotNull();
         assertThat(foundRole.getId()).isEqualTo(idToFind);
@@ -39,7 +38,7 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_findById.xml")
     public void findById_notExisting() throws Exception {
-        assertThat(repository.findById(99L)).isNull();
+        assertThat(repository.findById(99L).isPresent()).isFalse();
     }
 
     /**
@@ -49,7 +48,7 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @ExpectedDatabase(value = "/com/korogi/core/persistence/role/RoleRepositoryTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void save() throws Exception {
-        Role roleToSave = admin();
+        Role roleToSave = admin().build();
 
         Role savedRole = repository.saveOrUpdate(roleToSave);
 
@@ -62,28 +61,6 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
         assertThat(savedRole.getModificationDate()).isNull();
         assertThat(savedRole.getModifiedBy()).isNull();
         assertThat(savedRole.getVersion()).isNotNull();
-    }
-
-    /**
-     * Should update the Role in the database with the values in the updated Role.
-     */
-    @Test
-    @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_update.xml")
-    @ExpectedDatabase(value = "/com/korogi/core/persistence/role/RoleRepositoryTest_update_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void update() throws Exception {
-        Role originalRole = em.find(Role.class, 1L);
-
-        Role roleToUpdate = Role.newRole(originalRole)
-                .roleType(USER)
-                .build();
-
-        Role updatedRole = repository.saveOrUpdate(roleToUpdate);
-
-        em.flush();
-
-        assertThat(updatedRole).isNotNull();
-        assertThat(updatedRole.getModificationDate()).isNotNull();
-        assertThat(updatedRole.getModifiedBy()).isNotNull();
     }
 
     /**

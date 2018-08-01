@@ -1,12 +1,14 @@
 package com.korogi.core.persistence.anime;
 
 import static com.korogi.core.domain.testdata.AnimeTestData.steinsGate_notPersisted;
+import static java.util.Collections.singletonList;
 import static org.fest.assertions.Assertions.assertThat;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.korogi.core.domain.Anime;
+import com.korogi.core.domain.Personage;
 import com.korogi.core.persistence.BaseRepositoryTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +69,14 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
      * created by and version fields.
      */
     @Test
+    @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_save.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/anime/AnimeRepositoryTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void save() {
-        Anime animeToSave = steinsGate_notPersisted().build();
+        Personage personage = em.find(Personage.class, 1L);
+
+        Anime animeToSave = steinsGate_notPersisted()
+                .personages(singletonList(personage))
+                .build();
 
         Anime savedAnime = repository.saveOrUpdate(animeToSave);
 
@@ -82,6 +89,9 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
         assertThat(savedAnime.getModificationDate()).isNull();
         assertThat(savedAnime.getModifiedBy()).isNull();
         assertThat(savedAnime.getVersion()).isNotNull();
+
+        assertThat(savedAnime.getPersonages()).isNotEmpty().contains(personage);
+        assertThat(personage.getAnime()).isNotEmpty().contains(savedAnime);
     }
 
     /**

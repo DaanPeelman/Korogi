@@ -1,6 +1,7 @@
 package com.korogi.rest.service;
 
 import static com.korogi.core.domain.Anime_.episodes;
+import static com.korogi.core.domain.Anime_.personages;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -10,6 +11,7 @@ import com.korogi.core.domain.Anime;
 import com.korogi.core.persistence.anime.AnimeRepository;
 import com.korogi.dto.AnimeDTO;
 import com.korogi.dto.EpisodeDTO;
+import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.mapper.EntityToDTOResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +89,15 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     ) {
         Anime anime = animeRepository.findById(id, episodes.getName()).orElseThrow(ResourceNotFoundException::new);
         return entityToDTOResourceMapper.toPagedResources(anime.getEpisodes(), 1L, 20L);
+    }
+
+    @RequestMapping(value = "{" + PATH_VARIABLE_ID + "}/personages", method = GET)
+    @ResponseStatus(OK)
+    @Override
+    public @ResponseBody PagedResources<Resource<PersonageDTO>> getAnimePersonages(
+            @PathVariable(PATH_VARIABLE_ID) Long id
+    ) {
+        Anime anime = animeRepository.findById(id, personages.getName()).orElseThrow(ResourceNotFoundException::new);
+        return entityToDTOResourceMapper.toPagedResources(anime.getPersonages(), 1L, 20L);
     }
 }

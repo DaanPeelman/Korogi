@@ -19,8 +19,9 @@ class AnimeResourceMapper implements ResourceMapper<AnimeDTO, Anime> {
         Link prequalLink = linkTo(methodOn(AnimeRestServiceImpl.class).getPrequalDetails(anime.getId())).withRel("prequal");
         Link sequalLink = linkTo(methodOn(AnimeRestServiceImpl.class).getSequalDetails(anime.getId())).withRel("sequal");
         Link episodesLink = linkTo(methodOn(AnimeRestServiceImpl.class).getAnimeEpisodes(anime.getId())).withRel("episodes");
+        Link personagesLink = linkTo(methodOn(AnimeRestServiceImpl.class).getAnimePersonages(anime.getId())).withRel("personages");
 
-        return new Resource<>(anime.toDTO(), selfLink, prequalLink, sequalLink, episodesLink);
+        return new Resource<>(anime.toDTO(), selfLink, prequalLink, sequalLink, episodesLink, personagesLink);
     }
 
     @Override

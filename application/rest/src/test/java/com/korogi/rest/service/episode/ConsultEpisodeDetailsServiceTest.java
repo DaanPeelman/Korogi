@@ -25,7 +25,7 @@ public class ConsultEpisodeDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails.xml")
-    public void consultAnimeDetails() throws Exception {
+    public void consultEpisodeDetails() throws Exception {
         EpisodeDTO expectedEpisodeDTO = newEpisodeDTO()
                 .name("Prologue of the Beginning and Ending")
                 .synopsis("Prologue of the Beginning and Ending synopsis here")

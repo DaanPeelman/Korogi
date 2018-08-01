@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <ANIME  ID="1"
+            ANIME_TYPE="TV"
+            NAME_EN="Steins;Gate"
+            NAME_RO="Steins;Gate"
+            START_AIR="2011-04-06"
+            END_AIR="2011-09-14"
+            SYNOPSIS="Steins;Gate synopsis here"
+
+            CREATION_DATE="2018-08-01 00:00:00"
+            CREATED_BY="john.doe"
+            MODIFICATION_DATE="2018-01-01 00:00:00"
+            MODIFIED_BY="john.doe"
+            VERSION="1" />
+
+    <PERSONAGES ID="1"
+                FIRST_NAME="Okabe"
+                LAST_NAME="Rintarou"
+                PHOTO_URL="http://photo.url.be"
+
+                CREATION_DATE="2018-01-01 00:00:00"
+                CREATED_BY="john.doe"
+                MODIFICATION_DATE="2018-01-01 00:00:00"
+                MODIFIED_BY="john.doe"
+                VERSION="1" />
+
+    <ANIME_PERSONAGES   ANIME_ID="1"
+                        PERSONAGE_ID="1" />
+
+    <PERSONAGES ID="2"
+                FIRST_NAME="Makise"
+                LAST_NAME="Kurisu"
+                PHOTO_URL="http://photo.url.be"
+
+                CREATION_DATE="2018-01-01 00:00:00"
+                CREATED_BY="john.doe"
+                MODIFICATION_DATE="2018-01-01 00:00:00"
+                MODIFIED_BY="john.doe"
+                VERSION="1" />
+
+    <ANIME_PERSONAGES   ANIME_ID="1"
+                        PERSONAGE_ID="2" />
+</dataset>

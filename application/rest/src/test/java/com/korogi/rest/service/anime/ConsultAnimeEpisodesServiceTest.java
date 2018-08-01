@@ -59,6 +59,7 @@ public class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
      * a JSON corresponding to an Error with status 'Not Found', code '404' and message saying 'Resource was not found'
      */
     @Test
+    @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes.xml")
     public void consultAnimeEpisodes_notExistingAnime() throws Exception {
         performAndPrint(get(URL, 99))
                 .andExpect(status().isNotFound())

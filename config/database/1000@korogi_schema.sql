@@ -75,3 +75,30 @@ CREATE TABLE EPISODES (
 );
 
 CREATE SEQUENCE SEQ_EPISODE START WITH 1;
+
+CREATE TABLE PERSONAGES (
+  id BIGINT NOT NULL,
+  first_name VARCHAR(128) NOT NULL,
+  last_name VARCHAR(128) NOT NULL,
+  photo_url VARCHAR(512),
+
+  creation_date TIMESTAMP NOT NULL,
+  created_by VARCHAR(128) NOT NULL,
+  modification_date TIMESTAMP,
+  modified_by VARCHAR(128),
+  version BIGINT NOT NULL,
+
+  CONSTRAINT pk_personages PRIMARY KEY(id)
+);
+
+CREATE SEQUENCE SEQ_PERSONAGE START WITH 1;
+
+CREATE TABLE ANIME_PERSONAGES(
+  anime_id BIGINT NOT NULL,
+  personage_id BIGINT NOT NULL,
+
+  CONSTRAINT pk_anime_personages PRIMARY KEY(anime_id, personage_id),
+
+  CONSTRAINT fk_anime_personages_anime FOREIGN KEY(anime_id) REFERENCES ANIME(id),
+  CONSTRAINT fk_anime_personages_personages FOREIGN KEY(personage_id) REFERENCES PERSONAGES(id)
+)

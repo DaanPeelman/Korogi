@@ -7,7 +7,7 @@ import java.util.List;
 import org.hamcrest.Description;
 import org.springframework.hateoas.Link;
 
-public class ResourceLinkMatcher extends DTOMatchers.BaseDTOMatcher<Link[]> {
+public class ResourceLinkMatcher extends DTOMatcher<Link[]> {
     public ResourceLinkMatcher(String... expectedRelations) {
         super(Arrays.stream(expectedRelations).map(rel -> new Link("/", rel)).toArray(Link[]::new), Link[].class);
     }

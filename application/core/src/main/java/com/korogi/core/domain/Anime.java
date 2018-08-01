@@ -16,6 +16,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -47,7 +49,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newAnime")
-@ToString(callSuper = true, exclude = { "sequal", "episodes" })
+@ToString(callSuper = true, exclude = { "sequal", "episodes", "personages" })
 @Entity
 @Table(name = "ANIME")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ANIME")
@@ -88,8 +90,19 @@ public class Anime extends BaseEntity {
     @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime sequal;
 
+    @Builder.Default
     @OneToMany(fetch = LAZY, mappedBy = "anime", cascade = ALL)
     private List<Episode> episodes = new ArrayList<>();
+
+    @Builder.Default
+    @Size(min = 1)
+    @ManyToMany(fetch = LAZY, cascade = PERSIST)
+    @JoinTable(
+            name = "ANIME_PERSONAGES",
+            joinColumns = @JoinColumn(name = "anime_id"),
+            inverseJoinColumns = @JoinColumn(name = "personage_id")
+    )
+    private List<Personage> personages = new ArrayList<>();
 
     public AnimeDTO toDTO() {
         return newAnimeDTO()

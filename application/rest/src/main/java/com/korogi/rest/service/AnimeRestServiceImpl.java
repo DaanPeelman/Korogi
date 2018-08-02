@@ -2,6 +2,8 @@ package com.korogi.rest.service;
 
 import static com.korogi.core.domain.Anime_.episodes;
 import static com.korogi.core.domain.Anime_.personages;
+import static com.korogi.core.domain.Anime_.prequal;
+import static com.korogi.core.domain.Anime_.sequal;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -57,7 +59,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     public @ResponseBody Resource<AnimeDTO> getAnimeDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
-        Anime anime = animeRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Anime anime = animeRepository.findById(id, prequal.getName(), sequal.getName()).orElseThrow(ResourceNotFoundException::new);
         return entityToDTOResourceMapper.toDTOResource(anime);
     }
 
@@ -67,7 +69,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     public @ResponseBody Resource<AnimeDTO> getPrequalDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
-        Anime anime = animeRepository.findPrequalOfAnime(id).orElseThrow(ResourceNotFoundException::new);
+        Anime anime = animeRepository.findPrequalOfAnime(id, prequal.getName(), sequal.getName()).orElseThrow(ResourceNotFoundException::new);
         return entityToDTOResourceMapper.toDTOResource(anime);
     }
 
@@ -77,7 +79,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     public @ResponseBody Resource<AnimeDTO> getSequalDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
-        Anime anime = animeRepository.findSequalOfAnime(id).orElseThrow(ResourceNotFoundException::new);
+        Anime anime = animeRepository.findSequalOfAnime(id, prequal.getName(), sequal.getName()).orElseThrow(ResourceNotFoundException::new);
         return entityToDTOResourceMapper.toDTOResource(anime);
     }
 

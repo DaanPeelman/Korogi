@@ -1,10 +1,13 @@
 package com.korogi.core.persistence.anime;
 
+import static com.korogi.core.persistence.util.PrefetcherUtil.prefetch;
+
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import com.korogi.core.domain.Anime;
 import com.korogi.core.domain.Anime_;
@@ -34,29 +37,35 @@ public class AnimeRepositoryImpl extends BaseEntityRepositoryImpl<Anime> impleme
     }
 
     @Override
-    public Optional<Anime> findPrequalOfAnime(Long id) {
+    public Optional<Anime> findPrequalOfAnime(Long id, String... relationsToPrefetch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Anime> query = cb.createQuery(Anime.class);
 
         Root<Anime> anime = query.from(Anime.class);
-        query.select(anime.get(Anime_.prequal));
+        Join<Anime, Anime> prequal = anime.join(Anime_.prequal);
+        query.select(prequal);
         query.where(
                 cb.equal(anime.get(Anime_.id), id)
         );
+
+        prefetch(prequal, relationsToPrefetch);
 
         return toOptional(em.createQuery(query));
     }
 
     @Override
-    public Optional<Anime> findSequalOfAnime(Long id) {
+    public Optional<Anime> findSequalOfAnime(Long id, String... relationsToPrefetch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Anime> query = cb.createQuery(Anime.class);
 
         Root<Anime> anime = query.from(Anime.class);
-        query.select(anime.get(Anime_.sequal));
+        Join<Anime, Anime> sequal = anime.join(Anime_.sequal);
+        query.select(sequal);
         query.where(
                 cb.equal(anime.get(Anime_.id), id)
         );
+
+        prefetch(sequal, relationsToPrefetch);
 
         return toOptional(em.createQuery(query));
     }

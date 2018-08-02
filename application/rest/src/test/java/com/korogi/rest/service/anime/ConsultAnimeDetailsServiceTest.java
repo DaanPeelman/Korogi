@@ -71,7 +71,7 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(jsonPath("$", matchesAnimeDTO(expectedAnimeDTO)))
                 .andExpect(jsonPath("$.links", containsResourceLinks(concatenate(EXPECTED_ANIME_DETAILS_LINKS, "prequal"))));
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(4);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
     }
 
     /**
@@ -99,7 +99,7 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(jsonPath("$", matchesAnimeDTO(expectedAnimeDTO)))
                 .andExpect(jsonPath("$.links", containsResourceLinks(concatenate(EXPECTED_ANIME_DETAILS_LINKS, "prequal", "sequal"))));
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(4);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
     }
 
     /**

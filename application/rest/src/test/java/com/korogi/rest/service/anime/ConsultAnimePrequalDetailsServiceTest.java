@@ -27,7 +27,7 @@ public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
-    public void consultAnimePrequalDetailsl() throws Exception {
+    public void consultAnimePrequalDetails() throws Exception {
         AnimeDTO expectedAnimeDTO = newAnimeDTO()
                 .nameEnglish("Steins;Gate")
                 .nameRomanized("Steins;Gate")
@@ -71,7 +71,7 @@ public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
                 .andExpect(jsonPath("$", matchesAnimeDTO(expectedAnimeDTO)))
                 .andExpect(jsonPath("$.links", containsResourceLinks(concatenate(EXPECTED_ANIME_DETAILS_LINKS, "prequal", "sequal"))));
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(4);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
     }
 
     /**

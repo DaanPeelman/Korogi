@@ -3,54 +3,43 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Anime } from "../../models/anime";
 import "rxjs/add/operator/map";
-import "rxjs/add/operator/do";
+import "rxjs/add/operator/mergeMap";
 import { BaseRestService } from "../base-rest-service";
-import { EmbeddedResource } from "../../resources/embedded-resource";
-import { PagedResources } from "../../resources/paged-resources";
+import { PagedResources } from "../../resources/final/paged-resources";
 import { PageMetaData } from "../../resources/page-meta-data";
+import { RelationLoaderService } from "../relation-loader/relation-loader.service";
+import { EnrichedResource } from "../../resources/final/enriched-resource";
+import { ModelMapperService } from "../../mappers/model-mapper.service";
+import { MultipleResources } from "../../resources/original/multiple-resources";
+import { SingleResource } from "../../resources/original/single-resource";
 
 @Injectable()
 export class AnimeService extends BaseRestService implements IAnimeService {
   private static URL: string = "anime";
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private modelMapper: ModelMapperService,
+    private relationLoaderService: RelationLoaderService
   ) {
     super(AnimeService.URL);
   }
 
   findAllAnime(): Observable<PagedResources<Anime>> {
     return this.httpClient
-      .get(this.baseRestEndPoint)
-      .map((data: any[]) => new PagedResources<Anime>(this.toEmbeddedResources(data['content']), PageMetaData.toPageMetaData(data['page'])));
+      .get<MultipleResources>(this.baseRestEndPoint)
+      .map(data => new PagedResources<Anime>(this.modelMapper.mapToModels(data), PageMetaData.toPageMetaData(data.page)));
   }
 
-  findAnime(id: string): Observable<EmbeddedResource<Anime>> {
+  findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<Anime>> {
     return this.httpClient
-      .get(`${this.baseRestEndPoint}/${id}`)
-      .map((data: any) => this.toEmbeddedResource(data));
-  }
-
-  private toEmbeddedResources(anime: Anime[]): EmbeddedResource<Anime>[] {
-    return anime.map((singleAnime) => this.toEmbeddedResource(singleAnime));
-  }
-
-  private toEmbeddedResource(anime: Anime): EmbeddedResource<Anime> {
-    return new EmbeddedResource(Anime.toAnime(anime), anime['embedded'], this.toLinksMap(anime['links']));
-  }
-
-  private toLinksMap(objects: any[]): { [key:string]: string; } {
-    const map: { [key:string]: string; } = {};
-
-    for (const object of objects) {
-      map[object['rel']] = object['href'];
-    }
-
-    return map;
+      .get<SingleResource>(`${this.baseRestEndPoint}/${id}`)
+      .map(res => new EnrichedResource<Anime>(this.modelMapper.mapToModel(res), res.links))
+      .flatMap(resource => this.relationLoaderService.populateWithRelations(resource, relationsToLoad));
   }
 }
 
 export interface IAnimeService {
   findAllAnime(): Observable<PagedResources<Anime>>;
-  findAnime(id: string): Observable<EmbeddedResource<Anime>>;
+  findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<Anime>>;
 }

@@ -19,6 +19,8 @@ public class AnimeTestData {
                 .nameRomanized("Steins;Gate")
                 .startAir(of(2011, APRIL, 6))
                 .endAir(of(2011, SEPTEMBER, 14))
-                .synopsis("Steins;Gate synopsis");
+                .synopsis("Steins;Gate synopsis")
+                .backdropUrl("http://backdrop.url.be/steins.gate")
+                .posterUrl("http://poster.url.be/stains.gate");
     }
 }

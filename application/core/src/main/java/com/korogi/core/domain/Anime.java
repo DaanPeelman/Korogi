@@ -35,6 +35,7 @@ import lombok.ToString;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 /**
  * Entity class representing an Anime in the database.
@@ -81,6 +82,18 @@ public class Anime extends BaseEntity {
     @Column(name = "synopsis")
     private String synopsis;
 
+    @URL
+    @NotBlank
+    @Size(max = 512)
+    @Column(name = "backdrop_url")
+    private String backdropUrl;
+
+    @URL
+    @NotBlank
+    @Size(max = 512)
+    @Column(name = "poster_url")
+    private String posterUrl;
+
     @OneToOne(fetch = LAZY, cascade = PERSIST)
     @JoinColumn(name = "prequal_id")
     @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
@@ -104,6 +117,14 @@ public class Anime extends BaseEntity {
     )
     private List<Personage> personages = new ArrayList<>();
 
+    public boolean hasPrequal() {
+        return this.prequal != null;
+    }
+
+    public boolean hasSequal() {
+        return this.sequal != null;
+    }
+
     public AnimeDTO toDTO() {
         return newAnimeDTO()
                 .nameEnglish(nameEnglish)
@@ -111,8 +132,8 @@ public class Anime extends BaseEntity {
                 .startAir(startAir)
                 .endAir(endAir)
                 .synopsis(synopsis)
-                .backdropUrl("assets/images/backdrop.jpg")
-                .posterUrl("assets/poster.jpg")
+                .backdropUrl(backdropUrl)
+                .posterUrl(posterUrl)
                 .build();
     }
 }

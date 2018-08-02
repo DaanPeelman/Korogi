@@ -7,6 +7,8 @@
             START_AIR="2011-04-06"
             END_AIR="2011-09-14"
             SYNOPSIS="Steins;Gate synopsis here"
+            BACKDROP_URL="http://backdrop.url.be/anime1"
+            POSTER_URL="http://poster.url.be/anime1"
 
             CREATION_DATE="2017-07-31 00:00:00"
             CREATED_BY="john.doe"
@@ -47,6 +49,8 @@
             START_AIR="2012-02-22"
             END_AIR="2012-02-22"
             SYNOPSIS="Steins;Gate: Egoistic Poriomania synopsis here"
+            BACKDROP_URL="http://backdrop.url.be/anime2"
+            POSTER_URL="http://poster.url.be/anime2"
             PREQUAL_ID="1"
 
             CREATION_DATE="2017-12-02 00:00:00"

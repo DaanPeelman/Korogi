@@ -1,6 +1,10 @@
-<div class="col-sm-12">
-  backdrop here
-</div>
-<div>
-  {{ anime | json }}
+<div *ngIf="anime" class="col-sm-12">
+  <div class="col-sm-12 backdrop">
+    <img [src]="anime.backdropUrl" />
+  </div>
+  <div class="container cf">
+    <div>
+      {{ anime | json }}
+    </div>
+  </div>
 </div>

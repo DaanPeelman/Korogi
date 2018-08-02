@@ -41,6 +41,8 @@ CREATE TABLE ANIME (
   end_air DATE,
   synopsis TEXT NOT NULL,
   prequal_id BIGINT,
+  backdrop_url VARCHAR(512) NOT NULL,
+  poster_url VARCHAR(512) NOT NULL,
 
   creation_date TIMESTAMP NOT NULL,
   created_by VARCHAR(128) NOT NULL,

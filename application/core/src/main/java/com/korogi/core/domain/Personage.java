@@ -24,7 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 /**
@@ -45,12 +45,12 @@ import org.hibernate.validator.constraints.URL;
 @Table(name = "PERSONAGES")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_PERSONAGE")
 public class Personage extends BaseEntity {
-    @NotEmpty
+    @NotBlank
     @Size(max = 128)
     @Column(name = "first_name")
     private String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 128)
     @Column(name = "last_name")
     private String lastName;

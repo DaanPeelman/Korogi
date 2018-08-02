@@ -10,19 +10,14 @@ $header-height: 45px;
   top: 0;
   left: 0;
 
-  ul {
-    height: $header-height;
+  z-index: 1;
+
+  &.no-bg {
+    background: none;
   }
 
-  a {
+  ul {
     height: $header-height;
-    line-height: $header-height;
-
-    display: block;
-
-    color: $font-color-white;
-
-    text-decoration: none;
   }
 
   li {
@@ -30,15 +25,33 @@ $header-height: 45px;
 
     display: inline;
 
-    padding-left: 0.6em;
-    padding-right: 0.6em;
+    a {
+      height: $header-height;
+      line-height: $header-height;
 
-    &.first {
-      @extend .no-padding-left;
+      display: block;
+      padding-left: 0.8em;
+      padding-right: 0.8em;
+
+      color: $font-color-white;
+
+      text-decoration: none;
+
+      &:hover {
+        color: #f39c12;
+      }
     }
 
-    &.last {
-      @extend .no-padding-right;
+    &:hover {
+      border-bottom: 3px solid #f39c12;
+    }
+
+    &.active {
+      border-bottom: 3px solid #e67e22;
+
+      a {
+        color: #e67e22;
+      }
     }
   }
 }

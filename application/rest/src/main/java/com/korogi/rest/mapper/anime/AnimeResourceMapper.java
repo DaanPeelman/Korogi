@@ -3,6 +3,8 @@ package com.korogi.rest.mapper.anime;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.korogi.core.domain.Anime;
 import com.korogi.dto.AnimeDTO;
 import com.korogi.rest.mapper.ResourceMapper;
@@ -15,13 +17,19 @@ import org.springframework.stereotype.Component;
 class AnimeResourceMapper implements ResourceMapper<AnimeDTO, Anime> {
     @Override
     public Resource<AnimeDTO> toDTOResource(Anime anime) {
-        Link selfLink = linkTo(methodOn(AnimeRestServiceImpl.class).getAnimeDetails(anime.getId())).withSelfRel();
-        Link prequalLink = linkTo(methodOn(AnimeRestServiceImpl.class).getPrequalDetails(anime.getId())).withRel("prequal");
-        Link sequalLink = linkTo(methodOn(AnimeRestServiceImpl.class).getSequalDetails(anime.getId())).withRel("sequal");
-        Link episodesLink = linkTo(methodOn(AnimeRestServiceImpl.class).getAnimeEpisodes(anime.getId())).withRel("episodes");
-        Link personagesLink = linkTo(methodOn(AnimeRestServiceImpl.class).getAnimePersonages(anime.getId())).withRel("personages");
+        List<Link> links = new ArrayList<>();
 
-        return new Resource<>(anime.toDTO(), selfLink, prequalLink, sequalLink, episodesLink, personagesLink);
+        links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getAnimeDetails(anime.getId())).withSelfRel());
+        if (anime.hasPrequal()) {
+            links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getPrequalDetails(anime.getId())).withRel("prequal"));
+        }
+        if (anime.hasSequal()) {
+            links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getSequalDetails(anime.getId())).withRel("sequal"));
+        }
+        links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getAnimeEpisodes(anime.getId())).withRel("episodes"));
+        links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getAnimePersonages(anime.getId())).withRel("personages"));
+
+        return new Resource<>(anime.toDTO(), links);
     }
 
     @Override

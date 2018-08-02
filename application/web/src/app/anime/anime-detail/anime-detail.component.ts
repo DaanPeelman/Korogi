@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Anime } from "../../shared/models/anime";
 import { AnimeService } from "../../shared/services/anime/anime.service";
 import { ActivatedRoute, Params } from "@angular/router";
-import { EmbeddedResource } from "../../shared/resources/embedded-resource";
+import { EnrichedResource } from "../../shared/resources/final/enriched-resource";
+import { Episode } from "../../shared/models/episode";
+import { Personage } from "../../shared/models/personage";
 
 @Component({
   selector: 'korogi-anime-detail',
@@ -11,6 +13,10 @@ import { EmbeddedResource } from "../../shared/resources/embedded-resource";
 })
 export class AnimeDetailComponent implements OnInit {
   anime: Anime;
+  prequal: Anime;
+  sequal: Anime;
+  episodes: Episode[];
+  personages: Personage[];
 
   constructor(
     private route: ActivatedRoute,
@@ -18,10 +24,16 @@ export class AnimeDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.animeService.findAnime(params['id']).subscribe((resource: EmbeddedResource<Anime>) => {
-        this.anime = resource.content;
-      });
-    });
+    this.route.params
+      .flatMap((params: Params) => this.animeService.findAnime(params['id'], Anime.RELATION_PREQUAL, Anime.RELATION_SEQUAL, Anime.RELATION_EPISODES, Anime.RELATION_PERSONAGES))
+      .subscribe((resource: EnrichedResource<Anime>) => this.setData(resource));
+  }
+
+  private setData(resource: EnrichedResource<Anime>): void {
+    this.anime = resource.data;
+    this.prequal = resource.embedded[Anime.RELATION_PREQUAL];
+    this.sequal = resource.embedded[Anime.RELATION_SEQUAL];
+    this.episodes = resource.embedded[Anime.RELATION_EPISODES];
+    this.personages = resource.embedded[Anime.RELATION_PERSONAGES];
   }
 }

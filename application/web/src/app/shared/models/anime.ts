@@ -1,37 +1,8 @@
 export class Anime {
-  /**
-   * Creates an instance of an <code>Anime</code> class from a given object.
-   *
-   * @param toCopy the object to create an Anime instance of
-   * @returns {Anime} the newly constructed Anime instance based on the object that was passed
-   */
-  static toAnime(toCopy: any): Anime {
-    return new Anime(
-      toCopy.nameEnglish,
-      toCopy.nameRomanized,
-      toCopy.startAir,
-      toCopy.endAir,
-      toCopy.synopsis,
-      toCopy.backdropUrl,
-      toCopy.posterUrl
-    );
-  }
-
-  /**
-   * Creates instances of <code>Anime</code> classes from given objects.
-   *
-   * @param {any[]} toCopy the objects to create Anime instances of
-   * @returns {Anime[]} an array containing newly constructed Anime instances based on the objects that were passed
-   */
-  static toAnimes(toCopy: any[]): Anime[] {
-    const copied: Anime[] = [];
-
-    for (const objectToCopy of toCopy) {
-      copied.push(Anime.toAnime(objectToCopy));
-    }
-
-    return copied;
-  }
+  static readonly RELATION_PREQUAL: string = "prequal";
+  static readonly RELATION_SEQUAL: string = "sequal";
+  static readonly RELATION_EPISODES: string = "episodes";
+  static readonly RELATION_PERSONAGES: string = "personages";
 
   constructor(
     public nameEnglish: string,

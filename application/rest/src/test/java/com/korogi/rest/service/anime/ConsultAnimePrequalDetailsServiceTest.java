@@ -1,5 +1,6 @@
 package com.korogi.rest.service.anime;
 
+import static com.korogi.core.util.ArrayUtil.concatenate;
 import static com.korogi.dto.AnimeDTO.newAnimeDTO;
 import static com.korogi.rest.service.matcher.DTOMatchers.containsResourceLinks;
 import static com.korogi.rest.service.matcher.DTOMatchers.matchesAnimeDTO;
@@ -22,26 +23,55 @@ public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
      * OK http status
      * JSON content type
      * a JSON corresponding to the prequal of the Anime with the given id in the database
+     * all default HATEOAS links plus the sequal link
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
-    public void consultAnimePrequalDetails() throws Exception {
+    public void consultAnimePrequalDetailsl() throws Exception {
         AnimeDTO expectedAnimeDTO = newAnimeDTO()
                 .nameEnglish("Steins;Gate")
                 .nameRomanized("Steins;Gate")
                 .startAir(LocalDate.of(2011, 4, 6))
                 .endAir(LocalDate.of(2011, 9, 14))
                 .synopsis("Steins;Gate synopsis here")
-                .backdropUrl("assets/images/backdrop.jpg")
-                .posterUrl("assets/poster.jpg")
+                .backdropUrl("http://backdrop.url.be/steins.gate")
+                .posterUrl("http://poster.url.be/steins.gate")
                 .build();
 
         performAndPrint(get(URL, 2))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", matchesAnimeDTO(expectedAnimeDTO)))
-                .andExpect(jsonPath("$.links", containsResourceLinks(EXPECTED_ANIME_DETAILS_LINKS)));
+                .andExpect(jsonPath("$.links", containsResourceLinks(concatenate(EXPECTED_ANIME_DETAILS_LINKS, "sequal"))));
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
+    }
+
+    /**
+     * When consulting an existing an Anime's prequal's details that has a prequal and a sequal, it should return:
+     * OK http status
+     * JSON content type
+     * a JSON corresponding to the prequal of the Anime with the given id in the database
+     * all default HATEOAS links plus the prequal and sequal link
+     */
+    @Test
+    @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
+    public void consultAnimePrequalDetails_withPrequalAndSequal() throws Exception {
+        AnimeDTO expectedAnimeDTO = newAnimeDTO()
+                .nameEnglish("Steins;Gate: Egoistic Poriomania")
+                .nameRomanized("Steins;Gate: Oukoubakko no Poriomania")
+                .startAir(LocalDate.of(2012, 2, 22))
+                .endAir(LocalDate.of(2012, 2, 22))
+                .synopsis("Steins;Gate: Egoistic Poriomania synopsis here")
+                .backdropUrl("http://backdrop.url.be/steins.gate.egoistic.poriomania")
+                .posterUrl("http://poster.url.be/steins.gate.egoistic.poriomania")
+                .build();
+
+        performAndPrint(get(URL, 3))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", matchesAnimeDTO(expectedAnimeDTO)))
+                .andExpect(jsonPath("$.links", containsResourceLinks(concatenate(EXPECTED_ANIME_DETAILS_LINKS, "prequal", "sequal"))));
+
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(4);
     }
 
     /**

@@ -8,6 +8,8 @@ import { AnimeService } from "./shared/services/anime/anime.service";
 import { RouterModule } from "@angular/router";
 import { AnimeModule } from "./anime/anime.module";
 import { animeRoutes } from "./anime/anime.routes";
+import { RelationLoaderService } from "./shared/services/relation-loader/relation-loader.service";
+import { ModelMapperService } from "./shared/mappers/model-mapper.service";
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { animeRoutes } from "./anime/anime.routes";
     AnimeModule
   ],
   providers: [
+    RelationLoaderService,
+    ModelMapperService,
     AnimeService
   ],
   bootstrap: [KorogiComponent]

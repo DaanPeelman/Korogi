@@ -12,9 +12,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newEpisodeDTO")
-public class EpisodeDTO {
+public class EpisodeDTO extends BaseDTO {
+    private static final String TYPE = "episode";
+
     private String name;
     private String synopsis;
     private Integer durationInMinutes;
     private LocalDate airDate;
+
+    @Override
+    public String type() {
+        return TYPE;
+    }
 }

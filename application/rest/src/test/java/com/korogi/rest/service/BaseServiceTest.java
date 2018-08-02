@@ -43,7 +43,7 @@ import org.springframework.web.context.WebApplicationContext;
 )
 @WebAppConfiguration
 public abstract class BaseServiceTest {
-    protected static final String[] EXPECTED_ANIME_DETAILS_LINKS = new String[] { "self", "prequal", "sequal", "episodes", "personages" };
+    protected static final String[] EXPECTED_ANIME_DETAILS_LINKS = new String[] { "self", "episodes", "personages" };
     protected static final String[] EXPECTED_EPISODE_DETAILS_LINKS = new String[] { "self" };
     protected static final String[] EXPECTED_PERSONAGE_DETAILS_LINKS = new String[] { "self" };
 

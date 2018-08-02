@@ -17,7 +17,7 @@ public class ResourceLinkMatcher extends DTOMatcher<Link[]> {
         List<String> expectedRelations = toRelationArray(expected);
         List<String> actualRelations = toRelationArray(parseToObject(item));
 
-        return actualRelations.equals(expectedRelations);
+        return actualRelations.size() == expectedRelations.size() && actualRelations.containsAll(expectedRelations);
     }
 
     @Override

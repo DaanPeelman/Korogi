@@ -22,3 +22,17 @@ p, li {
 .no-padding-right {
   padding-right: 0;
 }
+
+.backdrop {
+  background-color: black;
+
+  height: 350px;
+  overflow: hidden;
+
+  img {
+    opacity: 0.7;
+
+    position: relative;
+    top: -50%;
+  }
+}

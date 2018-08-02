@@ -25,7 +25,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Entity class representing an Episode in the database.
@@ -53,12 +53,12 @@ public class Episode extends BaseEntity {
     @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime anime;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 128)
     @Column(name = "name")
     private String name;
 
-    @NotEmpty
+    @NotBlank
     @Column(name = "synopsis")
     private String synopsis;
 

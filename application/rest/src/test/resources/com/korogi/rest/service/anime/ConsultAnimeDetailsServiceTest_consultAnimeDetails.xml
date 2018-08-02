@@ -7,6 +7,8 @@
             START_AIR="2011-04-06"
             END_AIR="2011-09-14"
             SYNOPSIS="Steins;Gate synopsis here"
+            BACKDROP_URL="http://backdrop.url.be/steins.gate"
+            POSTER_URL="http://poster.url.be/steins.gate"
 
             CREATION_DATE="2017-12-02 00:00:00"
             CREATED_BY="john.doe"
@@ -21,7 +23,42 @@
             START_AIR="2012-02-22"
             END_AIR="2012-02-22"
             SYNOPSIS="Steins;Gate: Egoistic Poriomania synopsis here"
+            BACKDROP_URL="http://backdrop.url.be/steins.gate.egoistic.poriomania"
+            POSTER_URL="http://poster.url.be/steins.gate.egoistic.poriomania"
             PREQUAL_ID="1"
+
+            CREATION_DATE="2017-12-02 00:00:00"
+            CREATED_BY="john.doe"
+            MODIFICATION_DATE="2017-12-02 00:00:00"
+            MODIFIED_BY="john.doe"
+            VERSION="1" />
+
+    <ANIME  ID="3"
+            ANIME_TYPE="MOVIE"
+            NAME_EN="Steins;Gate: The Movie − Load Region of Déjà Vu"
+            NAME_RO="Steins;Gate Movie: Fuka Ryouiki no Déjà vu"
+            START_AIR="2013-04-20"
+            END_AIR="2013-04-20"
+            SYNOPSIS="Steins;Gate: The Movie − Load Region of Déjà Vu synopsis here"
+            BACKDROP_URL="http://backdrop.url.be/steins.gate.load.region.of.deja.vu"
+            POSTER_URL="http://poster.url.be/steins.gate.load.region.of.deja.vu"
+            PREQUAL_ID="2"
+
+            CREATION_DATE="2017-12-02 00:00:00"
+            CREATED_BY="john.doe"
+            MODIFICATION_DATE="2017-12-02 00:00:00"
+            MODIFIED_BY="john.doe"
+            VERSION="1" />
+
+    <ANIME  ID="4"
+            ANIME_TYPE="TV"
+            NAME_EN="From the New World"
+            NAME_RO="Shinsekai yori"
+            START_AIR="2012-09-29"
+            END_AIR="2013-03-23"
+            SYNOPSIS="From the New World synopsis here"
+            BACKDROP_URL="http://backdrop.url.be/from.the.new.world"
+            POSTER_URL="http://poster.url.be/from.the.new.world"
 
             CREATION_DATE="2017-12-02 00:00:00"
             CREATED_BY="john.doe"

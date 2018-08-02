@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newAnimeDTO")
-public class AnimeDTO {
+public class AnimeDTO extends BaseDTO {
+    private static final String TYPE = "anime";
+
     private String nameEnglish;
     private String nameRomanized;
     private LocalDate startAir;
@@ -20,4 +22,9 @@ public class AnimeDTO {
     private String synopsis;
     private String backdropUrl;
     private String posterUrl;
+
+    @Override
+    public String type() {
+        return TYPE;
+    }
 }

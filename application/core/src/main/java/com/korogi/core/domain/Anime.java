@@ -1,7 +1,6 @@
 package com.korogi.core.domain;
 
 import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
-import static com.korogi.dto.AnimeDTO.newAnimeDTO;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.EnumType.STRING;
@@ -25,7 +24,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import com.korogi.core.domain.enumeration.AnimeType;
-import com.korogi.dto.AnimeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -123,17 +121,5 @@ public class Anime extends BaseEntity {
 
     public boolean hasSequal() {
         return this.sequal != null;
-    }
-
-    public AnimeDTO toDTO() {
-        return newAnimeDTO()
-                .nameEnglish(nameEnglish)
-                .nameRomanized(nameRomanized)
-                .startAir(startAir)
-                .endAir(endAir)
-                .synopsis(synopsis)
-                .backdropUrl(backdropUrl)
-                .posterUrl(posterUrl)
-                .build();
     }
 }

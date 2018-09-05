@@ -15,12 +15,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- INTERNAL PROJECTS -->
-        <dependency>
-            <groupId>com.korogi</groupId>
-            <artifactId>dto</artifactId>
-        </dependency>
-
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

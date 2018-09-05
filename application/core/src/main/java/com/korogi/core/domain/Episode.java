@@ -1,7 +1,6 @@
 package com.korogi.core.domain;
 
 import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
-import static com.korogi.dto.EpisodeDTO.newEpisodeDTO;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
@@ -16,7 +15,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import com.korogi.dto.EpisodeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -69,13 +67,4 @@ public class Episode extends BaseEntity {
     @NotNull
     @Column(name = "air_date")
     private LocalDate airDate;
-
-    public EpisodeDTO toDTO() {
-        return newEpisodeDTO()
-                .name(this.name)
-                .synopsis(this.synopsis)
-                .durationInMinutes(this.durationInMinutes)
-                .airDate(this.airDate)
-                .build();
-    }
 }

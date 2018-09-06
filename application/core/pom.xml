@@ -35,6 +35,12 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+        <!-- FLYWAY -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
         <!-- HIBERNATE -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -111,32 +117,6 @@
                         <goals>
                             <goal>test-jar</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${version.maven-resources-plugin}</version>
-                <executions>
-                    <execution>
-                        <id>copy-database-maintainer-files</id>
-                        <phase>generate-test-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/test-classes/database</outputDirectory>
-                            <overwrite>true</overwrite>
-                            <resources>
-                                <resource>
-                                    <directory>${project.parent.parent.basedir}/config/database</directory>
-                                    <includes>
-                                        <include>*.sql</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

@@ -4,9 +4,7 @@ import java.io.IOException;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 import com.opentable.db.postgres.embedded.EmbeddedPostgres;
-import org.springframework.stereotype.Component;
 
-@Component
 public class EmbeddedPostgreSQLDatasourceFactory {
     private EmbeddedPostgres embeddedPostgres;
 

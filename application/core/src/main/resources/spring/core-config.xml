@@ -8,35 +8,10 @@
                            http://www.springframework.org/schema/context/spring-context.xsd'>
     <context:component-scan base-package="com.korogi.core.persistence" />
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="packagesToScan">
-            <list>
-                <value>com.korogi.core.domain</value>
-            </list>
-        </property>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="false" />
-                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL9Dialect" />
-            </bean>
-        </property>
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.connection.driver_class">org.postgresql.Driver</prop>
-                <prop key="hibernate.connection.url">jdbc:postgresql://korogi-postgres:5432/postgres</prop>
-                <prop key="hibernate.connection.username">korogi</prop>
-                <prop key="hibernate.connection.password">korogi</prop>
-
-                <prop key="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</prop>
-
-                <prop key="hibernate.c3p0.min_size">1</prop>
-                <prop key="hibernate.c3p0.max_size">10</prop>
-                <prop key="hibernate.c3p0.timeout">600</prop>
-                <prop key="hibernate.c3p0.max_statements">10</prop>
-                <prop key="hibernate.c3p0.idle_test_period">3000</prop>
-                <prop key="hibernate.c3p0.acquire_increment">1</prop>
-            </props>
-        </property>
+    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
+        <property name="baselineOnMigrate" value="true" />
+        <property name="locations" value="classpath:database/" />
+        <property name="dataSource" ref="dataSource" />
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

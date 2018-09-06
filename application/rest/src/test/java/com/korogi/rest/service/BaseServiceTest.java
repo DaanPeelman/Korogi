@@ -29,8 +29,9 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
         locations = {
-                "classpath:spring/test-rest-config.xml",
-                "classpath:spring/test-persistence-config.xml"
+                "classpath:spring/test-persistence-config.xml",
+                "classpath:spring/core-config.xml",
+                "classpath:spring/test-rest-config.xml"
         }
 )
 @Transactional

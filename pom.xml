@@ -30,6 +30,7 @@
         <version.spring>4.3.7.RELEASE</version.spring>
         <version.spring-hateoas>0.23.0.RELEASE</version.spring-hateoas>
         <version.postgresql>42.2.4</version.postgresql>
+        <version.flyway>5.1.4</version.flyway>
         <version.hibernate>5.2.8.Final</version.hibernate>
         <version.hibernate-validator>5.4.0.Final</version.hibernate-validator>
         <version.javax-el>3.0.1-b08</version.javax-el>
@@ -98,6 +99,19 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${version.postgresql}</version>
+            </dependency>
+
+            <!-- FLYWAY -->
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${version.flyway}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- HIBERNATE -->

@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Daan Peelman
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring/test-persistence-config.xml" })
+@ContextConfiguration(locations = { "classpath:spring/test-persistence-config.xml", "classpath:spring/core-config.xml" })
 @Transactional
 @TestExecutionListeners(
     {

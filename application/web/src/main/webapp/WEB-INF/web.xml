@@ -5,14 +5,32 @@
                              http://java.sun.com/xml/ns/javaee/web-app.xsd'
          version='3.0'>
 
-    <display-name>Korogi - Web</display-name>
+  <display-name>Korogi - Web</display-name>
 
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
+  <servlet>
+    <servlet-name>angularServlet</servlet-name>
+    <servlet-class>com.korogi.webapp.servlet.AngularServlet</servlet-class>
+  </servlet>
+
+  <!-- When request to static resource, serve set resource -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.html</url-pattern>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.png</url-pattern>
+    <url-pattern>*.gif</url-pattern>
+  </servlet-mapping>
+
+  <!-- Serve index.html page (with 200 status code) to let Angular do the routing -->
+  <servlet-mapping>
+    <servlet-name>angularServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
 
   <error-page>
-    <!-- Let Angular do the routing when direct visit to url that is not homepage -->
+    <!-- For Angular app not found page -->
     <error-code>404</error-code>
     <location>/index.html</location>
   </error-page>

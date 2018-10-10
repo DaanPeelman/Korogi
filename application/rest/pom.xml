@@ -79,6 +79,10 @@
             <artifactId>hamcrest-all</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.opentable.components</groupId>
             <artifactId>otj-pg-embedded</artifactId>
         </dependency>

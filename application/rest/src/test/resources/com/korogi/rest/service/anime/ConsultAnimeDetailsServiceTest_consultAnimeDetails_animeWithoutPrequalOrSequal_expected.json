@@ -1,0 +1,24 @@
+{
+  "nameEnglish": "From the New World",
+  "nameRomanized": "Shinsekai yori",
+  "startAir": "2012-09-29",
+  "endAir": "2013-03-23",
+  "synopsis": "From the New World synopsis here",
+  "backdropUrl": "http://backdrop.url.be/from.the.new.world",
+  "posterUrl": "http://poster.url.be/from.the.new.world",
+  "type": "anime",
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost/anime/4"
+    },
+    {
+      "rel": "episodes",
+      "href": "http://localhost/anime/4/episodes"
+    },
+    {
+      "rel": "personages",
+      "href": "http://localhost/anime/4/personages"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "links": [],
+  "content": [
+    {
+      "firstName": "Okabe",
+      "lastName": "Rintarou",
+      "photoUrl": "http://photo.url.be/okabe.rintarou",
+      "type": "personage",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/personages/1"
+        }
+      ]
+    },
+    {
+      "firstName": "Makise",
+      "lastName": "Kurisu",
+      "photoUrl": "http://photo.url.be/makise.kurisu",
+      "type": "personage",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/personages/2"
+        }
+      ]
+    }
+  ],
+  "page": {
+    "size": 2,
+    "totalElements": 20,
+    "totalPages": 10,
+    "number": 1
+  }
+}

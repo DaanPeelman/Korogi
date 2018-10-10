@@ -1,0 +1,28 @@
+{
+  "nameEnglish": "Steins;Gate",
+  "nameRomanized": "Steins;Gate",
+  "startAir": "2011-04-06",
+  "endAir": "2011-09-14",
+  "synopsis": "Steins;Gate synopsis here",
+  "backdropUrl": "http://backdrop.url.be/steins.gate",
+  "posterUrl": "http://poster.url.be/steins.gate",
+  "type": "anime",
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost/anime/1"
+    },
+    {
+      "rel": "sequal",
+      "href": "http://localhost/anime/1/sequal"
+    },
+    {
+      "rel": "episodes",
+      "href": "http://localhost/anime/1/episodes"
+    },
+    {
+      "rel": "personages",
+      "href": "http://localhost/anime/1/personages"
+    }
+  ]
+}

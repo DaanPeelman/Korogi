@@ -1,0 +1,32 @@
+{
+  "nameEnglish": "Steins;Gate: Egoistic Poriomania",
+  "nameRomanized": "Steins;Gate: Oukoubakko no Poriomania",
+  "startAir": "2012-02-22",
+  "endAir": "2012-02-22",
+  "synopsis": "Steins;Gate: Egoistic Poriomania synopsis here",
+  "backdropUrl": "http://backdrop.url.be/steins.gate.egoistic.poriomania",
+  "posterUrl": "http://poster.url.be/steins.gate.egoistic.poriomania",
+  "type": "anime",
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost/anime/2"
+    },
+    {
+      "rel": "prequal",
+      "href": "http://localhost/anime/2/prequal"
+    },
+    {
+      "rel": "sequal",
+      "href": "http://localhost/anime/2/sequal"
+    },
+    {
+      "rel": "episodes",
+      "href": "http://localhost/anime/2/episodes"
+    },
+    {
+      "rel": "personages",
+      "href": "http://localhost/anime/2/personages"
+    }
+  ]
+}

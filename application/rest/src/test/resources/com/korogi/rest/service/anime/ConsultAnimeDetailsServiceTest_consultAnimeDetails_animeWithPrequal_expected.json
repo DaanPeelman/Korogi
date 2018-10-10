@@ -1,0 +1,28 @@
+{
+  "nameEnglish": "Steins;Gate: The Movie − Load Region of Déjà Vu",
+  "nameRomanized": "Steins;Gate Movie: Fuka Ryouiki no Déjà vu",
+  "startAir": "2013-04-20",
+  "endAir": "2013-04-20",
+  "synopsis": "Steins;Gate: The Movie − Load Region of Déjà Vu synopsis here",
+  "backdropUrl": "http://backdrop.url.be/steins.gate.load.region.of.deja.vu",
+  "posterUrl": "http://poster.url.be/steins.gate.load.region.of.deja.vu",
+  "type": "anime",
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost/anime/3"
+    },
+    {
+      "rel": "prequal",
+      "href": "http://localhost/anime/3/prequal"
+    },
+    {
+      "rel": "episodes",
+      "href": "http://localhost/anime/3/episodes"
+    },
+    {
+      "rel": "personages",
+      "href": "http://localhost/anime/3/personages"
+    }
+  ]
+}

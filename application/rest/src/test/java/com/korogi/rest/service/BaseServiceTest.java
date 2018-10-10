@@ -9,6 +9,7 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
 import com.korogi.dto.ErrorDTO;
 import com.korogi.rest.service.util.HibernateStatisticsUtil;
+import com.korogi.rest.service.util.MockMvcAssertionUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -21,7 +22,6 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -31,7 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
         locations = {
                 "classpath:spring/test-persistence-config.xml",
                 "classpath:spring/core-config.xml",
-                "classpath:spring/test-rest-config.xml"
+                "classpath:spring/rest-config.xml"
         }
 )
 @Transactional
@@ -73,10 +73,12 @@ public abstract class BaseServiceTest {
         this.hibernateStatisticsUtil = new HibernateStatisticsUtil(hibernateStatisticsInterceptor);
     }
 
-    protected ResultActions performAndPrint(RequestBuilder requestBuilder) throws Exception {
-        return this.mockMvc.perform(requestBuilder)
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON_UTF8));
+    protected MockMvcAssertionUtil performAndPrint(RequestBuilder requestBuilder) throws Exception {
+        return new MockMvcAssertionUtil(
+                this.mockMvc.perform(requestBuilder)
+                    .andDo(print())
+                    .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON_UTF8))
+        );
     }
 
     @After

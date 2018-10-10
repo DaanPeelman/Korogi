@@ -1,0 +1,12 @@
+{
+  "firstName": "Okabe",
+  "lastName": "Rintarou",
+  "photoUrl": "http://photo.url.be/okabe.rintarou",
+  "type": "personage",
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost/personages/1"
+    }
+  ]
+}

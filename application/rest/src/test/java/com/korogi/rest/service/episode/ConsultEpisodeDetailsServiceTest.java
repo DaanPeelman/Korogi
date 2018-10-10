@@ -1,16 +1,9 @@
 package com.korogi.rest.service.episode;
 
-import static com.korogi.dto.EpisodeDTO.newEpisodeDTO;
-import static com.korogi.rest.service.matcher.DTOMatchers.containsResourceLinks;
-import static com.korogi.rest.service.matcher.DTOMatchers.matchesEpisodeDTO;
-import static com.korogi.rest.service.matcher.DTOMatchers.matchesErrorDTO;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDate;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.korogi.dto.EpisodeDTO;
 import com.korogi.rest.service.BaseServiceTest;
 import org.junit.Test;
 
@@ -26,17 +19,9 @@ public class ConsultEpisodeDetailsServiceTest extends BaseServiceTest {
     @Test
     @DatabaseSetup("/com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails.xml")
     public void consultEpisodeDetails() throws Exception {
-        EpisodeDTO expectedEpisodeDTO = newEpisodeDTO()
-                .name("Prologue of the Beginning and Ending")
-                .synopsis("Prologue of the Beginning and Ending synopsis here")
-                .durationInMinutes(24)
-                .airDate(LocalDate.of(2011, 4, 5))
-                .build();
-
         performAndPrint(get(URL, 1))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", matchesEpisodeDTO(expectedEpisodeDTO)))
-                .andExpect(jsonPath("$.links", containsResourceLinks(EXPECTED_EPISODE_DETAILS_LINKS)));
+                .andExpectResponseMatchingFile("com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails_expected.json");
 
         hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -52,7 +37,7 @@ public class ConsultEpisodeDetailsServiceTest extends BaseServiceTest {
     public void consultEpisodeDetails_notExisting() throws Exception {
         performAndPrint(get(URL, 99))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$", matchesErrorDTO(RESOURCE_NOT_FOUND_ERROR_DTO)));
+                .andExpectResponseMatchingFile("com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails_notExisting_expected.json");
 
         hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }

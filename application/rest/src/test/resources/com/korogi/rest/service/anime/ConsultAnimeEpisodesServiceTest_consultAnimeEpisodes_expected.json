@@ -1,0 +1,37 @@
+{
+  "links": [],
+  "content": [
+    {
+      "name": "Prologue of the Beginning and Ending",
+      "synopsis": "Prologue of the Beginning and Ending synopsis here",
+      "durationInMinutes": 24,
+      "airDate": "2011-04-05",
+      "type": "episode",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/episodes/1"
+        }
+      ]
+    },
+    {
+      "name": "Paranoia of Time Leaps",
+      "synopsis": "Paranoia of Time Leaps synopsis here",
+      "durationInMinutes": 24,
+      "airDate": "2011-04-12",
+      "type": "episode",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/episodes/2"
+        }
+      ]
+    }
+  ],
+  "page": {
+    "size": 2,
+    "totalElements": 20,
+    "totalPages": 10,
+    "number": 1
+  }
+}

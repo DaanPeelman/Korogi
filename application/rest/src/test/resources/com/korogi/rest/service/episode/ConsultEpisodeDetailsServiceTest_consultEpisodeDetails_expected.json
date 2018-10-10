@@ -1,0 +1,13 @@
+{
+  "name": "Prologue of the Beginning and Ending",
+  "synopsis": "Prologue of the Beginning and Ending synopsis here",
+  "durationInMinutes": 24,
+  "airDate": "2011-04-05",
+  "type": "episode",
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost/episodes/1"
+    }
+  ]
+}

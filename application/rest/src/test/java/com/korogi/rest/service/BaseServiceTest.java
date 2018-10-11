@@ -1,13 +1,11 @@
 package com.korogi.rest.service;
 
-import static com.korogi.dto.ErrorDTO.newErrorDTO;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
-import com.korogi.dto.ErrorDTO;
 import com.korogi.rest.service.util.HibernateStatisticsUtil;
 import com.korogi.rest.service.util.MockMvcAssertionUtil;
 import org.junit.After;
@@ -44,15 +42,6 @@ import org.springframework.web.context.WebApplicationContext;
 )
 @WebAppConfiguration
 public abstract class BaseServiceTest {
-    protected static final String[] EXPECTED_ANIME_DETAILS_LINKS = new String[] { "self", "episodes", "personages" };
-    protected static final String[] EXPECTED_EPISODE_DETAILS_LINKS = new String[] { "self" };
-    protected static final String[] EXPECTED_PERSONAGE_DETAILS_LINKS = new String[] { "self" };
-
-    protected static final ErrorDTO RESOURCE_NOT_FOUND_ERROR_DTO = newErrorDTO()
-            .status("Not Found")
-            .code(404)
-            .message("Resource not found")
-            .build();
 
     @Autowired
     private WebApplicationContext wac;

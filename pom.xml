@@ -21,7 +21,6 @@
         <version.servlet-api>3.1.0</version.servlet-api>
 
         <version.maven-compiler-plugin>3.6.2</version.maven-compiler-plugin>
-        <version.maven-resources-plugin>3.0.2</version.maven-resources-plugin>
         <version.maven-war-plugin>3.1.0</version.maven-war-plugin>
         <version.exec-maven-plugin>1.6.0</version.exec-maven-plugin>
         <version.maven-clean-plugin>3.0.0</version.maven-clean-plugin>
@@ -78,6 +77,38 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>webapp</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!-- MAVEN PLUGINS -->
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.maven-war-plugin}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${version.exec-maven-plugin}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${version.maven-clean-plugin}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${version.maven-jar-plugin}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${version.maven-dependency-plugin}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.orm.tooling</groupId>
+                <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                <version>${version.hibernate}</version>
             </dependency>
 
             <dependency>

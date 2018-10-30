@@ -23,6 +23,7 @@
 
     <build>
         <plugins>
+          <!-- CLEAN ANGULAR DIST FOLDER -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-clean-plugin</artifactId>
@@ -99,20 +100,45 @@
           </plugin>
 
           <!-- ADD ANGULAR GENERATED RESOURCES AS WEB-RESOURCES -->
-          <!-- PLACE WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-war-plugin</artifactId>
               <version>${version.maven-war-plugin}</version>
               <configuration>
-                  <warName>web</warName>
                   <webResources>
                     <resource>
                       <directory>${project.basedir}/dist</directory>
                     </resource>
                   </webResources>
-                  <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
               </configuration>
+          </plugin>
+
+          <!-- COPY WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>${version.maven-dependency-plugin}</version>
+            <executions>
+              <execution>
+                <id>copy</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>${project.artifactId}</artifactId>
+                  <type>war</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
+                  <destFileName>web.war</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
           </plugin>
         </plugins>
     </build>

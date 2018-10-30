@@ -106,14 +106,31 @@
 
     <build>
         <plugins>
-            <!-- PLACE WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
+            <!-- COPY WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.maven-war-plugin}</version>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${version.maven-dependency-plugin}</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <warName>rest</warName>
-                    <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <type>war</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
+                            <destFileName>rest.war</destFileName>
+                        </artifactItem>
+                    </artifactItems>
                 </configuration>
             </plugin>
         </plugins>

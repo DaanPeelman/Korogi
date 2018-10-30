@@ -302,6 +302,7 @@
 
     <build>
         <plugins>
+            <!-- CLEAN DEPLOYMENTS FOLDER -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -318,6 +319,8 @@
                     </filesets>
                 </configuration>
             </plugin>
+
+            <!-- COMPILE PROJECT WITH SPECIFIC JAVA VERSION -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

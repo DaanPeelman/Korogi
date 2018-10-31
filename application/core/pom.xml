@@ -111,6 +111,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>${version.maven-jar-plugin}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -122,6 +123,7 @@
             <plugin>
                 <groupId>org.hibernate.orm.tooling</groupId>
                 <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                <version>${version.hibernate}</version>
                 <executions>
                     <execution>
                         <configuration>

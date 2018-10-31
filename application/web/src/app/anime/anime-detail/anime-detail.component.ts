@@ -5,6 +5,7 @@ import { ActivatedRoute, Params } from "@angular/router";
 import { EnrichedResource } from "../../shared/resources/final/enriched-resource";
 import { Episode } from "../../shared/models/episode";
 import { Personage } from "../../shared/models/personage";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'korogi-anime-detail',
@@ -20,7 +21,8 @@ export class AnimeDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private animeService: AnimeService
+    private animeService: AnimeService,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
@@ -30,6 +32,8 @@ export class AnimeDetailComponent implements OnInit {
   }
 
   private setData(resource: EnrichedResource<Anime>): void {
+    this.titleService.setTitle(`${resource.data.nameEnglish} - Korogi`);
+
     this.anime = resource.data;
     this.prequal = resource.embedded[Anime.RELATION_PREQUAL];
     this.sequal = resource.embedded[Anime.RELATION_SEQUAL];

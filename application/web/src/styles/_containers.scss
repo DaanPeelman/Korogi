@@ -1,5 +1,6 @@
 .container {
   width: 95%;
+  padding-bottom: 1%;
   margin: 0 auto;
 
   @include media-breakpoint-min('sm') {

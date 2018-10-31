@@ -1,10 +1,23 @@
-body {
+html {
   font-family: Ubuntu, Verdana, sans-serif;
   font-size: 62.5%;
+
+  color: #333333;
+
+  background-color: #eeeeee;
+}
+
+h1 {
+  font-size: 3.2rem;
+  font-weight: bold;
+
+  margin-bottom: 2.4rem;
 }
 
 p, li {
-  font-size: 1.6em;
+  font-size: 1.6rem;
+
+  line-height: 2.3rem;
 }
 
 .left {
@@ -24,15 +37,32 @@ p, li {
 }
 
 .backdrop {
-  background-color: black;
-
   height: 350px;
   overflow: hidden;
 
-  img {
-    opacity: 0.7;
+  background-position-x: center;
+  background-position-y: 25%;
 
-    position: relative;
-    top: -50%;
-  }
+  position: relative;
+
+  z-index: -1;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+
+  width: 100%;
+  height: inherit;
+}
+
+.pull-up-1 {
+  margin-top: -70px;
+}
+
+.color-white {
+  color: $font-color-white;
+}
+
+.background-white {
+  background-color: white;
 }

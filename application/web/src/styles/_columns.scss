@@ -3,9 +3,26 @@
   width: percentage($column-number / 12);
 }
 
+@mixin create-column-padding($column-number) {
+  @include create-column($column-number);
+  padding: 0.75%;
+}
+
+@mixin create-horizontal-offset($column-number) {
+  margin-left: percentage($column-number / 12);
+}
+
 @for $i from 1 through $number-of-columns {
   .col-#{$i} {
+    @include create-column-padding($i);
+  }
+
+  .col-no-padding-#{$i} {
     @include create-column($i);
+  }
+
+  .col-offset-#{$i} {
+    @include create-horizontal-offset($i);
   }
 }
 
@@ -15,7 +32,15 @@
   @include media-breakpoint-min($breakpoint) {
     @for $i from 1 through $number-of-columns {
       .col-#{$breakpoint}-#{$i} {
+        @include create-column-padding($i);
+      }
+
+      .col-no-padding-#{$breakpoint}-#{$i} {
         @include create-column($i);
+      }
+
+      .col-#{$breakpoint}-offset-#{$i} {
+        @include create-horizontal-offset($i);
       }
     }
   }

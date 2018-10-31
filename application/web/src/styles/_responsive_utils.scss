@@ -79,6 +79,6 @@
 
 .larger-sm {
   @include media-breakpoint-max('sm') {
-    font-size: 2.10em;
+    font-size: 2.10rem;
   }
 }

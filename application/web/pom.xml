@@ -27,6 +27,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-clean-plugin</artifactId>
+            <version>${version.maven-clean-plugin}</version>
             <configuration>
               <filesets>
                 <fileset>
@@ -43,6 +44,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
+            <version>${version.exec-maven-plugin}</version>
             <executions>
               <!-- INSTALL NPM MODULES -->
               <execution>
@@ -101,6 +103,7 @@
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-war-plugin</artifactId>
+              <version>${version.maven-war-plugin}</version>
               <configuration>
                   <webResources>
                     <resource>
@@ -114,6 +117,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
+            <version>${version.maven-dependency-plugin}</version>
             <executions>
               <execution>
                 <id>copy</id>

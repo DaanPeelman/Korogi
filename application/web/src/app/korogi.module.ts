@@ -7,7 +7,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AnimeService } from "./shared/services/anime/anime.service";
 import { RouterModule } from "@angular/router";
 import { AnimeModule } from "./anime/anime.module";
-import { animeRoutes } from "./anime/anime.routes";
 import { RelationLoaderService } from "./shared/services/relation-loader/relation-loader.service";
 import { ModelMapperService } from "./shared/mappers/model-mapper.service";
 
@@ -19,7 +18,7 @@ import { ModelMapperService } from "./shared/mappers/model-mapper.service";
     BrowserModule,
     HeaderModule,
     HttpClientModule,
-    RouterModule.forRoot(animeRoutes),
+    RouterModule.forRoot([]),
 
     AnimeModule
   ],

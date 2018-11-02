@@ -1,15 +1,19 @@
 <div *ngIf="anime" class="col-no-padding-sm-12">
-  <div class="col-no-padding-sm-12 backdrop" [style.background-image]="'url(' + anime.backdropUrl + ')'">
+  <div class="col-sm-12 backdrop" [style.background-image]="'url(' + anime.backdropUrl + ')'">
     <div class="dark-overlay"></div>
   </div>
   <div class="container cf">
     <div class="col-12 background-white">
       <div class="col-sm-2">
-        <img class="pull-up-1" [src]="anime.posterUrl" />
+        <div class="col-content">
+          <img class="pull-up-1" [src]="anime.posterUrl" />
+        </div>
       </div>
       <div class="col-sm-10">
-        <h1 class="pull-up-1 color-white">{{ anime.nameEnglish }}</h1>
-        <p>{{ anime.synopsis }}</p>
+        <div class="col-content">
+          <h1 class="pull-up-1 color-white">{{ anime.nameEnglish }}</h1>
+          <p>{{ anime.synopsis }}</p>
+        </div>
       </div>
     </div>
   </div>

@@ -21,6 +21,7 @@
     "@angular/platform-browser": "5.2.x",
     "@angular/platform-browser-dynamic": "5.2.x",
     "@angular/router": "5.2.x",
+    "bootstrap": "4.1.x",
     "core-js": "2.5.x",
     "intl": "1.2.x",
     "rxjs": "5.5.x",

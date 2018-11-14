@@ -1,18 +1,72 @@
-<div *ngIf="anime" class="col-no-padding-sm-12">
-  <div class="col-sm-12 backdrop" [style.background-image]="'url(' + anime.backdropUrl + ')'">
-    <div class="dark-overlay"></div>
+<div *ngIf="anime">
+  <div class="row ml-0 mr-0">
+    <div class="col-12 pl-0 pr-0 backdrop" [style.background-image]="'url(' + anime.backdropUrl + ')'">
+      <div class="dark-overlay"></div>
+    </div>
   </div>
-  <div class="container cf">
-    <div class="col-12 background-white">
-      <div class="col-sm-2">
-        <div class="col-content">
-          <img class="pull-up-1" [src]="anime.posterUrl" />
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-top-0 straight-top mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <img class="pull-up-1 rounded border-3 border-white" [src]="anime.posterUrl" />
+              </div>
+              <div class="col-sm-9">
+                <h1 class="pull-up-1 color-white">{{ anime.nameEnglish }}</h1>
+                <p class="card-text">{{ anime.synopsis }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-sm-10">
-        <div class="col-content">
-          <h1 class="pull-up-1 color-white">{{ anime.nameEnglish }}</h1>
-          <p>{{ anime.synopsis }}</p>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Episodes</h2>
+            <div class="row">
+              <div class="col-s-12 col-md-6 col-lg-3" *ngFor="let episode of episodes">
+                <div class="card bg-dark card-brighten">
+                  <img class="card-img" src="https://media.kitsu.io/episodes/thumbnails/86680/original.jpg?1416321769">
+                  <div class="card-img-overlay">
+                    <p class="card-text color-white opaque">Episode 1</p>
+                    <p class="card-text color-white font-weight-bold align-card-text-bottom">{{ episode.name }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-s-12 col-md-6 col-lg-3">
+                <div class="card bg-dark card-brighten">
+                  <img class="card-img" src="https://media.kitsu.io/episodes/thumbnails/86681/original.jpg?1416321770">
+                  <div class="card-img-overlay">
+                    <p class="card-text color-white opaque">Episode 2</p>
+                    <p class="card-text color-white font-weight-bold align-card-text-bottom">Episode</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-s-12 col-md-6 col-lg-3">
+                <div class="card bg-dark card-brighten">
+                  <img class="card-img" src="https://media.kitsu.io/episodes/thumbnails/86682/original.jpg?1416321772">
+                  <div class="card-img-overlay">
+                    <p class="card-text color-white opaque">Episode 3</p>
+                    <p class="card-text color-white font-weight-bold align-card-text-bottom">Episode</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-s-12 col-md-6 col-lg-3">
+                <div class="card bg-dark card-brighten">
+                  <img class="card-img" src="https://media.kitsu.io/episodes/thumbnails/86683/original.jpg?1416321772">
+                  <div class="card-img-overlay">
+                    <p class="card-text color-white opaque">Episode 4</p>
+                    <p class="card-text color-white font-weight-bold align-card-text-bottom">Episode</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,14 +1,18 @@
-<nav class="header no-bg">
-  <div class="container cf">
-    <ul class="left col-12">
-      <li class="left visible-sm hidden-md hidden-lg hidden-xl larger-sm"><a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
-      <li class="left hidden-sm"><a href="#">Dashboard</a></li>
-      <li class="left hidden-sm active"><a href="#">Anime</a></li>
-      <li class="left hidden-sm"><a href="#">Community</a></li>
-      <li class="left hidden-sm"><a href="#">Item 1</a></li>
-      <li class="left hidden-sm"><a href="#">Item 2</a></li>
-      <li class="right"><a href="#"><img class="avatar-circle-small" src="assets/images/avatar.jpg"></a></li>
-      <li class="right larger-sm"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-    </ul>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" [class.bg-none]="transparant" [class.bg-light]="! transparant">
+  <div class="container">
+    <a class="navbar-brand" href="#">Korogi</a>
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" [routerLink]="['/dashboard']" [routerLinkActive]="'active'"><a class="nav-link" href="#">Dashboard</a></li>
+        <li class="nav-item" [routerLink]="['/anime']" [routerLinkActive]="'active'"><a class="nav-link" href="#">Anime</a></li>
+        <li class="nav-item" [routerLink]="['/community']" [routerLinkActive]="'active'"><a class="nav-link" href="#">Community</a></li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item no-border-hover"><a class="nav-link" href="#"><img class="rounded-circle border-white border-2 avatar-small" src="assets/images/avatar.jpg"></a></li>
+      </ul>
+    </div>
   </div>
 </nav>

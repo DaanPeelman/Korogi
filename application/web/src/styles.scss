@@ -1,9 +1,100 @@
 /* Korogi */
 
-@import "styles/variables";
-@import "styles/responsive_utils";
-@import "styles/general";
-@import "styles/containers";
-@import "styles/columns";
+$theme-colors: (
+  "primary":    black,
+  "secondary":  red,
+  //"success":    $success,
+  //"info":       $info,
+  "warning":    cyan,
+  "danger":     cyan,
+  "light":      yellow
+);
 
-@import "styles/header";
+$navbar-dark-color: #ecf0f1;
+$navbar-dark-hover-color: #f39c12;
+$navbar-dark-active-color: #e67e22;
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "styles/variables";
+@import "styles/general";
+
+.avatar-small {
+  height: 30px;
+  width: 30px;
+}
+
+.bg-none {
+  background: transparent;
+}
+
+.nav-item {
+  &.active {
+    border-bottom: 3px solid #e67e22;
+
+    &:hover {
+      border-bottom: 3px solid #e67e22;
+    }
+  }
+
+  &:hover {
+    border-bottom: 3px solid #f39c12;
+  }
+
+  &.no-border-hover:hover {
+    border-bottom: none;
+  }
+}
+
+.border-2 {
+  border-width: 2px;
+  border-style: solid;
+}
+
+.border-3 {
+  border-width: 5px;
+  border-style: solid;
+}
+
+.straight-top {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.align-card-text-bottom {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  left: 1.25rem;
+}
+
+.card-brighten {
+  .opaque {
+    opacity: 0.6;
+  }
+
+  img {
+    opacity: 0.4;
+  }
+
+  &:hover {
+    .opaque {
+      opacity: 0.8;
+    }
+
+    img {
+      opacity: 0.7;
+    }
+  }
+}
+//@import "styles/variables";
+//@import "styles/responsive_utils";
+//@import "styles/general";
+//@import "styles/containers";
+//@import "styles/columns";
+
+//@import "styles/header";

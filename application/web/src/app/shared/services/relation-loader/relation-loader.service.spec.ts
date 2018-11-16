@@ -5,15 +5,13 @@ import { HttpClientTestingModule, HttpTestingController, TestRequest } from "@an
 import { ModelMapperService } from "../../mappers/model-mapper.service";
 import { instance, mock, when } from "ts-mockito";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
-import { Anime } from "../../models/anime";
 import { AnimeTestData } from "../../../testing/test-data/anime-test-data";
 import { Link } from "../../resources/link";
 import { EpisodeTestData } from "../../../testing/test-data/episode-test-data";
 import { PersonageTestData } from "../../../testing/test-data/personage-test-data";
 import { MultipleResources } from "../../resources/original/multiple-resources";
 import { PageMetaData } from "../../resources/page-meta-data";
-import { Episode } from "../../models/episode";
-import { Personage } from "../../models/personage";
+import { AnimeDTO, EpisodeDTO, PersonageDTO } from "../../../generated/models";
 
 describe('RelationLoaderService', () => {
   let relationLoaderService: RelationLoaderService;
@@ -46,7 +44,7 @@ describe('RelationLoaderService', () => {
 
   describe("populateWithRelations", () => {
     it("should do http GET requests for every relation that was passed and enrich the resource with the response", () => {
-      const anime: Anime = AnimeTestData.steinsGate();
+      const anime: AnimeDTO = AnimeTestData.steinsGate();
       const links: Link[] = [
         new Link("relation1", "http://relation1.com"),
         new Link("relation2", "http://relation2.com"),
@@ -69,10 +67,10 @@ describe('RelationLoaderService', () => {
         page: new PageMetaData(10, 10, 10, 10)
       };
 
-      when(modelMapperService.mapToModel<Episode>(relation1Response)).thenReturn(EpisodeTestData.steinsGate_episode1());
-      when(modelMapperService.mapToModels<Personage>(relation2Response)).thenReturn([ PersonageTestData.okabeRintarou(), PersonageTestData.makiseKurisu() ]);
+      when(modelMapperService.mapToModel<EpisodeDTO>(relation1Response)).thenReturn(EpisodeTestData.steinsGate_episode1());
+      when(modelMapperService.mapToModels<PersonageDTO>(relation2Response)).thenReturn([ PersonageTestData.okabeRintarou(), PersonageTestData.makiseKurisu() ]);
 
-      relationLoaderService.populateWithRelations(new EnrichedResource<Anime>(anime, links), [links[0].rel, links[2].rel])
+      relationLoaderService.populateWithRelations(new EnrichedResource<AnimeDTO>(anime, links), [links[0].rel, links[2].rel])
         .subscribe(finalEnrichedResource => {
           expect(finalEnrichedResource.data).toEqual(AnimeTestData.steinsGate());
           expect(finalEnrichedResource.links).toEqual(links);
@@ -97,14 +95,14 @@ describe('RelationLoaderService', () => {
     });
 
     it("should do no http GET requests if no relation was asked to be loaded", () => {
-      const anime: Anime = AnimeTestData.steinsGate();
+      const anime: AnimeDTO = AnimeTestData.steinsGate();
       const links: Link[] = [
         new Link("relation1", "http://relation1.com"),
         new Link("relation2", "http://relation2.com"),
         new Link("relation3", "http://relation3.com")
       ];
 
-      relationLoaderService.populateWithRelations(new EnrichedResource<Anime>(anime, links), [])
+      relationLoaderService.populateWithRelations(new EnrichedResource<AnimeDTO>(anime, links), [])
         .subscribe(finalEnrichedResource => {
           expect(finalEnrichedResource.data).toEqual(AnimeTestData.steinsGate());
           expect(finalEnrichedResource.links).toEqual(links);
@@ -116,14 +114,14 @@ describe('RelationLoaderService', () => {
     });
 
     it("should do no http GET requests if the relation asked to load is not present in the resource's links", () => {
-      const anime: Anime = AnimeTestData.steinsGate();
+      const anime: AnimeDTO = AnimeTestData.steinsGate();
       const links: Link[] = [
         new Link("relation1", "http://relation1.com"),
         new Link("relation2", "http://relation2.com"),
         new Link("relation3", "http://relation3.com")
       ];
 
-      relationLoaderService.populateWithRelations(new EnrichedResource<Anime>(anime, links), ["relation4"])
+      relationLoaderService.populateWithRelations(new EnrichedResource<AnimeDTO>(anime, links), ["relation4"])
         .subscribe(finalEnrichedResource => {
           expect(finalEnrichedResource.data).toEqual(AnimeTestData.steinsGate());
           expect(finalEnrichedResource.links).toEqual(links);

@@ -15,6 +15,13 @@
     <packaging>war</packaging>
 
     <dependencies>
+      <!-- INTERNAL PROJECTS -->
+      <dependency>
+        <groupId>com.korogi</groupId>
+        <artifactId>dto</artifactId>
+        <scope>provided</scope>
+      </dependency>
+
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
@@ -40,13 +47,43 @@
             </configuration>
           </plugin>
 
+          <!-- GENERATE TYPESCRIPT MODEL CLASSES FROM DTO MODULE -->
+          <plugin>
+            <groupId>cz.habarta.typescript-generator</groupId>
+            <artifactId>typescript-generator-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>generate-angular-models</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <jsonLibrary>jackson2</jsonLibrary>
+              <classPatterns>
+                <classPattern>com.korogi.dto.**</classPattern>
+              </classPatterns>
+              <excludeClassPatterns>
+                <excludeClassPattern>com.korogi.dto.**Builder</excludeClassPattern>
+              </excludeClassPatterns>
+              <outputFileType>implementationFile</outputFileType>
+              <mapClasses>asClasses</mapClasses>
+              <mapEnum>asEnum</mapEnum>
+              <mapDate>asString</mapDate>
+              <outputKind>module</outputKind>
+              <outputFile>src/app/generated/models.ts</outputFile>
+            </configuration>
+          </plugin>
+
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <executions>
               <!-- INSTALL NPM MODULES -->
               <execution>
-                <id>npm install</id>
+                <id>npm ci</id>
                 <goals>
                   <goal>exec</goal>
                 </goals>

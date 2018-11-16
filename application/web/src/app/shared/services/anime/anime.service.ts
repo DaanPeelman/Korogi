@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import { Anime } from "../../models/anime";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/mergeMap";
 import { BaseRestService } from "../base-rest-service";
@@ -12,6 +11,7 @@ import { EnrichedResource } from "../../resources/final/enriched-resource";
 import { ModelMapperService } from "../../mappers/model-mapper.service";
 import { MultipleResources } from "../../resources/original/multiple-resources";
 import { SingleResource } from "../../resources/original/single-resource";
+import { AnimeDTO } from "../../../generated/models";
 
 @Injectable()
 export class AnimeService extends BaseRestService implements IAnimeService {
@@ -25,21 +25,21 @@ export class AnimeService extends BaseRestService implements IAnimeService {
     super(AnimeService.URL);
   }
 
-  findAllAnime(): Observable<PagedResources<Anime>> {
+  findAllAnime(): Observable<PagedResources<AnimeDTO>> {
     return this.httpClient
       .get<MultipleResources>(this.baseRestEndPoint)
-      .map(data => new PagedResources<Anime>(this.modelMapper.mapToModels(data), PageMetaData.toPageMetaData(data.page)));
+      .map(data => new PagedResources<AnimeDTO>(this.modelMapper.mapToModels(data), PageMetaData.toPageMetaData(data.page)));
   }
 
-  findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<Anime>> {
+  findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<AnimeDTO>> {
     return this.httpClient
       .get<SingleResource>(`${this.baseRestEndPoint}/${id}`)
-      .map(res => new EnrichedResource<Anime>(this.modelMapper.mapToModel(res), res.links))
+      .map(res => new EnrichedResource<AnimeDTO>(this.modelMapper.mapToModel(res), res.links))
       .flatMap(resource => this.relationLoaderService.populateWithRelations(resource, relationsToLoad));
   }
 }
 
 export interface IAnimeService {
-  findAllAnime(): Observable<PagedResources<Anime>>;
-  findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<Anime>>;
+  findAllAnime(): Observable<PagedResources<AnimeDTO>>;
+  findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<AnimeDTO>>;
 }

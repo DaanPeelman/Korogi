@@ -6,12 +6,12 @@ import { instance, mock, when } from "ts-mockito";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs/Observable";
-import { Anime } from "../../shared/models/anime";
 import { EnrichedResource } from "../../shared/resources/final/enriched-resource";
 import { AnimeTestData } from "../../testing/test-data/anime-test-data";
 import { StubUtil } from "../../testing/util/stub-util";
 import { EpisodeTestData } from "../../testing/test-data/episode-test-data";
 import { PersonageTestData } from "../../testing/test-data/personage-test-data";
+import { AnimeDTO, AnimeRelation } from "../../generated/models";
 
 describe('AnimeDetailComponent', () => {
   let component: AnimeDetailComponent;
@@ -60,15 +60,15 @@ describe('AnimeDetailComponent', () => {
       params["id"] = id;
 
       const embedded = [];
-      embedded[Anime.RELATION_PREQUAL] = AnimeTestData.naruto();
-      embedded[Anime.RELATION_SEQUAL] = AnimeTestData.steinsGateEgoisticPoriomania();
-      embedded[Anime.RELATION_EPISODES] = [EpisodeTestData.steinsGate_episode1(), EpisodeTestData.steinsGate_episode2()];
-      embedded[Anime.RELATION_PERSONAGES] = [PersonageTestData.okabeRintarou(), PersonageTestData.makiseKurisu()];
+      embedded[AnimeRelation.PREQUAL] = AnimeTestData.naruto();
+      embedded[AnimeRelation.SEQUAL] = AnimeTestData.steinsGateEgoisticPoriomania();
+      embedded[AnimeRelation.EPISODES] = [EpisodeTestData.steinsGate_episode1(), EpisodeTestData.steinsGate_episode2()];
+      embedded[AnimeRelation.PERSONAGES] = [PersonageTestData.okabeRintarou(), PersonageTestData.makiseKurisu()];
 
-      const enrichedResource: EnrichedResource<Anime> = new EnrichedResource<Anime>(AnimeTestData.steinsGate(), []);
+      const enrichedResource: EnrichedResource<AnimeDTO> = new EnrichedResource<AnimeDTO>(AnimeTestData.steinsGate(), []);
       enrichedResource.embedded = embedded;
 
-      when(animeServiceMock.findAnime(id, Anime.RELATION_PREQUAL, Anime.RELATION_SEQUAL, Anime.RELATION_EPISODES, Anime.RELATION_PERSONAGES)).thenReturn(Observable.of(enrichedResource));
+      when(animeServiceMock.findAnime(id, AnimeRelation.PREQUAL, AnimeRelation.SEQUAL, AnimeRelation.EPISODES, AnimeRelation.PERSONAGES)).thenReturn(Observable.of(enrichedResource));
 
       component.ngOnInit();
 

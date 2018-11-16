@@ -1,12 +1,10 @@
 import { inject, TestBed } from '@angular/core/testing';
 
 import { ModelMapperService } from './model-mapper.service';
-import { Anime } from "../models/anime";
 import { AnimeTestData } from "../../testing/test-data/anime-test-data";
 import { EpisodeTestData } from "../../testing/test-data/episode-test-data";
-import { Episode } from "../models/episode";
 import { PersonageTestData } from "../../testing/test-data/personage-test-data";
-import { Personage } from "../models/personage";
+import { AnimeDTO, EpisodeDTO, PersonageDTO } from "../../generated/models";
 
 describe('ModelMapperService', () => {
   let modelMapperService: ModelMapperService;
@@ -26,10 +24,10 @@ describe('ModelMapperService', () => {
       const resource: any = AnimeTestData.steinsGate();
       resource.type = "anime";
 
-      const convertedResource: Anime = modelMapperService.mapToModel(resource);
+      const convertedResource: AnimeDTO = modelMapperService.mapToModel(resource);
 
       expect(convertedResource).not.toBeFalsy();
-      expect(convertedResource instanceof Anime).toEqual(true);
+      expect(convertedResource instanceof AnimeDTO).toEqual(true);
       expect(convertedResource).toEqual(AnimeTestData.steinsGate());
     });
   });
@@ -38,10 +36,10 @@ describe('ModelMapperService', () => {
     const resource: any = EpisodeTestData.steinsGate_episode1();
     resource.type = "episode";
 
-    const convertedResource: Episode = modelMapperService.mapToModel(resource);
+    const convertedResource: EpisodeDTO = modelMapperService.mapToModel(resource);
 
     expect(convertedResource).not.toBeFalsy();
-    expect(convertedResource instanceof Episode).toEqual(true);
+    expect(convertedResource instanceof EpisodeDTO).toEqual(true);
     expect(convertedResource).toEqual(EpisodeTestData.steinsGate_episode1());
   });
 
@@ -49,10 +47,10 @@ describe('ModelMapperService', () => {
     const resource: any = PersonageTestData.okabeRintarou();
     resource.type = "personage";
 
-    const convertedResource: Personage = modelMapperService.mapToModel(resource);
+    const convertedResource: PersonageDTO = modelMapperService.mapToModel(resource);
 
     expect(convertedResource).not.toBeFalsy();
-    expect(convertedResource instanceof Personage).toEqual(true);
+    expect(convertedResource instanceof PersonageDTO).toEqual(true);
     expect(convertedResource).toEqual(PersonageTestData.okabeRintarou());
   });
 
@@ -71,12 +69,12 @@ describe('ModelMapperService', () => {
         ]
       };
 
-      const convertedResources: Anime[] = modelMapperService.mapToModels(resources);
+      const convertedResources: AnimeDTO[] = modelMapperService.mapToModels(resources);
 
       expect(convertedResources).not.toBeFalsy();
       expect(convertedResources.length).toEqual(2);
-      expect(convertedResources[0] instanceof Anime).toEqual(true);
-      expect(convertedResources[1] instanceof Anime).toEqual(true);
+      expect(convertedResources[0] instanceof AnimeDTO).toEqual(true);
+      expect(convertedResources[1] instanceof AnimeDTO).toEqual(true);
       expect(convertedResources).toContain(AnimeTestData.steinsGate());
       expect(convertedResources).toContain(AnimeTestData.naruto());
     });
@@ -95,12 +93,12 @@ describe('ModelMapperService', () => {
         ]
       };
 
-      const convertedResources: Episode[] = modelMapperService.mapToModels(resources);
+      const convertedResources: EpisodeDTO[] = modelMapperService.mapToModels(resources);
 
       expect(convertedResources).not.toBeFalsy();
       expect(convertedResources.length).toEqual(2);
-      expect(convertedResources[0] instanceof Episode).toEqual(true);
-      expect(convertedResources[1] instanceof Episode).toEqual(true);
+      expect(convertedResources[0] instanceof EpisodeDTO).toEqual(true);
+      expect(convertedResources[1] instanceof EpisodeDTO).toEqual(true);
       expect(convertedResources).toContain(EpisodeTestData.steinsGate_episode1());
       expect(convertedResources).toContain(EpisodeTestData.steinsGate_episode2());
     });
@@ -119,12 +117,12 @@ describe('ModelMapperService', () => {
         ]
       };
 
-      const convertedResources: Personage[] = modelMapperService.mapToModels(resources);
+      const convertedResources: PersonageDTO[] = modelMapperService.mapToModels(resources);
 
       expect(convertedResources).not.toBeFalsy();
       expect(convertedResources.length).toEqual(2);
-      expect(convertedResources[0] instanceof Personage).toEqual(true);
-      expect(convertedResources[1] instanceof Personage).toEqual(true);
+      expect(convertedResources[0] instanceof PersonageDTO).toEqual(true);
+      expect(convertedResources[1] instanceof PersonageDTO).toEqual(true);
       expect(convertedResources).toContain(PersonageTestData.okabeRintarou());
       expect(convertedResources).toContain(PersonageTestData.makiseKurisu());
     });

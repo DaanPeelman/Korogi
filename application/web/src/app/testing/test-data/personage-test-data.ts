@@ -1,19 +1,23 @@
-import { Personage } from "../../shared/models/personage";
+import { PersonageDTO } from "../../generated/models";
 
 export class PersonageTestData {
-  static okabeRintarou(): Personage {
-    return new Personage(
-      "Okabe",
-      "Rintarou",
-      "http://photo.url.com/okabe.rintarou"
-    );
+  static okabeRintarou(): PersonageDTO {
+    let personageDTO: PersonageDTO = new PersonageDTO();
+
+    personageDTO.firstName = "Okabe";
+    personageDTO.lastName = "Rintarou";
+    personageDTO.photoUrl = "http://photo.url.com/okabe.rintarou";
+
+    return personageDTO;
   }
 
-  static makiseKurisu(): Personage {
-    return new Personage(
-      "Makise",
-      "Kurisu",
-      "http://photo.url.com/makise.kurisu"
-    )
+  static makiseKurisu(): PersonageDTO {
+    let personageDTO: PersonageDTO = new PersonageDTO();
+
+    personageDTO.firstName = "Makise";
+    personageDTO.lastName = "Kurisu";
+    personageDTO.photoUrl = "http://photo.url.com/makise.kurisu";
+
+    return personageDTO;
   }
 }

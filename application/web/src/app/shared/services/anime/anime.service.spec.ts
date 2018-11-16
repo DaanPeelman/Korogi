@@ -2,7 +2,6 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { AnimeService } from './anime.service';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
-import { Anime } from '../../models/anime';
 import { AnimeTestData } from "../../../testing/test-data/anime-test-data";
 import { PagedResources } from "../../resources/final/paged-resources";
 import { MultipleResources } from "../../resources/original/multiple-resources";
@@ -14,6 +13,7 @@ import { ModelMapperService } from "../../mappers/model-mapper.service";
 import { RelationLoaderService } from "../relation-loader/relation-loader.service";
 import { Observable } from "rxjs/Observable";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
+import { AnimeDTO } from "../../../generated/models";
 
 describe('AnimeService', () => {
   let animeService: AnimeService;
@@ -66,7 +66,7 @@ describe('AnimeService', () => {
 
       when(modelMapperService.mapToModels(response)).thenReturn([ AnimeTestData.steinsGate() ]);
 
-      animeService.findAllAnime().subscribe((result: PagedResources<Anime>) => {
+      animeService.findAllAnime().subscribe((result: PagedResources<AnimeDTO>) => {
         expect(result).not.toBeFalsy();
         expect(result.resources).not.toBeFalsy();
         expect(result.resources.length).toEqual(1);
@@ -92,16 +92,16 @@ describe('AnimeService', () => {
       const selfLink: Link = new Link('self', 'http:localhost:8080/rest/self');
       response.links = [selfLink];
 
-      when(modelMapperService.mapToModel<Anime>(response)).thenReturn(AnimeTestData.steinsGate());
-      const enrichedResource: EnrichedResource<Anime> = new EnrichedResource<Anime>(AnimeTestData.steinsGate(), [ selfLink ]);
+      when(modelMapperService.mapToModel<AnimeDTO>(response)).thenReturn(AnimeTestData.steinsGate());
+      const enrichedResource: EnrichedResource<AnimeDTO> = new EnrichedResource<AnimeDTO>(AnimeTestData.steinsGate(), [ selfLink ]);
       when(relationLoaderService.populateWithRelations(anything(), anything())).thenReturn(Observable.of(enrichedResource));
 
-      animeService.findAnime(id).subscribe((result: EnrichedResource<Anime>) => {
+      animeService.findAnime(id).subscribe((result: EnrichedResource<AnimeDTO>) => {
         const [capturedEnrichedResource, capturedRelationsToLoad] = capture(relationLoaderService.populateWithRelations).last();
 
-        expect((<EnrichedResource<Anime>> capturedEnrichedResource).data).toEqual(AnimeTestData.steinsGate());
-        expect((<EnrichedResource<Anime>> capturedEnrichedResource).links.length).toEqual(1);
-        expect((<EnrichedResource<Anime>> capturedEnrichedResource).links).toContain(selfLink);
+        expect((<EnrichedResource<AnimeDTO>> capturedEnrichedResource).data).toEqual(AnimeTestData.steinsGate());
+        expect((<EnrichedResource<AnimeDTO>> capturedEnrichedResource).links.length).toEqual(1);
+        expect((<EnrichedResource<AnimeDTO>> capturedEnrichedResource).links).toContain(selfLink);
 
         expect((<string[]> capturedRelationsToLoad).length).toEqual(0);
 

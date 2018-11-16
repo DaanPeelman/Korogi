@@ -1,21 +1,25 @@
-import { Episode } from "../../shared/models/episode";
+import { EpisodeDTO } from "../../generated/models";
 
 export class EpisodeTestData {
-  static steinsGate_episode1(): Episode {
-    return new Episode(
-      "Prologue of the Beginning and Ending",
-      "Steins Gate episode 1 synopsis",
-      24,
-      "2011-04-05"
-    );
+  static steinsGate_episode1(): EpisodeDTO {
+    let episodeDTO: EpisodeDTO = new EpisodeDTO();
+
+    episodeDTO.name = "Prologue of the Beginning and Ending";
+    episodeDTO.synopsis = "Steins Gate episode 1 synopsis";
+    episodeDTO.durationInMinutes = 24;
+    episodeDTO.airDate = "2011-04-05";
+
+    return episodeDTO;
   }
 
-  static steinsGate_episode2(): Episode {
-    return new Episode(
-      "Paranoia of Time Leaps",
-      "Steins Gate episode 2 synopsis",
-      24,
-      "2011-04-12"
-    );
+  static steinsGate_episode2(): EpisodeDTO {
+    let episodeDTO: EpisodeDTO = new EpisodeDTO();
+
+    episodeDTO.name = "Paranoia of Time Leaps";
+    episodeDTO.synopsis = "Steins Gate episode 2 synopsis";
+    episodeDTO.durationInMinutes = 24;
+    episodeDTO.airDate = "2011-04-12";
+
+    return episodeDTO;
   }
 }

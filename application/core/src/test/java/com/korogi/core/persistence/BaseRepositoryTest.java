@@ -3,6 +3,8 @@ package com.korogi.core.persistence;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.korogi.core.config.CoreConfig;
+import com.korogi.core.config.TestPersistenceConfig;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -15,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Daan Peelman
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring/test-persistence-config.xml", "classpath:spring/core-config.xml" })
+@ContextConfiguration(classes = { TestPersistenceConfig.class, CoreConfig.class})
 @Transactional
 @TestExecutionListeners(
     {

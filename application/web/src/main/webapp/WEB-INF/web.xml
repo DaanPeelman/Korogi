@@ -7,11 +7,6 @@
 
   <display-name>Korogi - Web</display-name>
 
-  <servlet>
-    <servlet-name>angularServlet</servlet-name>
-    <servlet-class>com.korogi.webapp.servlet.AngularServlet</servlet-class>
-  </servlet>
-
   <!-- When request to static resource, serve set resource -->
   <servlet-mapping>
     <servlet-name>default</servlet-name>
@@ -21,12 +16,6 @@
     <url-pattern>*.jpg</url-pattern>
     <url-pattern>*.png</url-pattern>
     <url-pattern>*.gif</url-pattern>
-  </servlet-mapping>
-
-  <!-- Serve index.html page (with 200 status code) to let Angular do the routing -->
-  <servlet-mapping>
-    <servlet-name>angularServlet</servlet-name>
-    <url-pattern>/</url-pattern>
   </servlet-mapping>
 
   <error-page>

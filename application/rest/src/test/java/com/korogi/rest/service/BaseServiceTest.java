@@ -5,7 +5,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.korogi.core.config.CoreConfig;
+import com.korogi.core.config.TestPersistenceConfig;
 import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
+import com.korogi.rest.config.RestConfig;
 import com.korogi.rest.service.util.HibernateStatisticsUtil;
 import com.korogi.rest.service.util.MockMvcAssertionUtil;
 import org.junit.After;
@@ -26,10 +29,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        locations = {
-                "classpath:spring/test-persistence-config.xml",
-                "classpath:spring/core-config.xml",
-                "classpath:spring/rest-config.xml"
+        classes = {
+                TestPersistenceConfig.class,
+                CoreConfig.class,
+                RestConfig.class
         }
 )
 @Transactional

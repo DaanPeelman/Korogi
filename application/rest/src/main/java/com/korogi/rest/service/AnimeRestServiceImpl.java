@@ -5,6 +5,7 @@ import static com.korogi.core.domain.Anime_.personages;
 import static com.korogi.core.domain.Anime_.prequal;
 import static com.korogi.core.domain.Anime_.sequal;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
@@ -19,7 +20,6 @@ import com.korogi.rest.mapper.EntityToDTOResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/anime", produces = { MediaType.APPLICATION_JSON_VALUE })
+@RequestMapping(value = "/anime", produces = { APPLICATION_JSON_VALUE })
 @Transactional(readOnly = true)
 public class AnimeRestServiceImpl implements AnimeRestService {
     private static final String PATH_VARIABLE_ID = "id";

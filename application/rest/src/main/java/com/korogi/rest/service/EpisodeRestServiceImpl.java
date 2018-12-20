@@ -1,6 +1,7 @@
 package com.korogi.rest.service;
 
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import com.korogi.api.EpisodeRestService;
@@ -12,7 +13,6 @@ import com.korogi.rest.mapper.EntityToDTOResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/episodes", produces = { MediaType.APPLICATION_JSON_VALUE })
+@RequestMapping(value = "/episodes", produces = { APPLICATION_JSON_VALUE })
 @Transactional(readOnly = true)
 public class EpisodeRestServiceImpl implements EpisodeRestService {
     private static final String PATH_VARIABLE_ID = "id";

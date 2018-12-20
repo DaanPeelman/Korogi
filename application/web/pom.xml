@@ -14,6 +14,28 @@
     <name>Korogi - Webapplication</name>
     <packaging>war</packaging>
 
+    <properties>
+      <npm.executable>npm</npm.executable>
+      <!--suppress UnresolvedMavenProperty -->
+      <npm.skip.ci>${skipNpmCi}</npm.skip.ci>
+      <!--suppress UnresolvedMavenProperty -->
+      <npm.skip.tests>${skipTests}</npm.skip.tests>
+    </properties>
+
+    <profiles>
+      <profile>
+        <id>platform-windows</id>
+        <activation>
+          <os>
+            <family>windows</family>
+          </os>
+        </activation>
+        <properties>
+          <npm.executable>npm.cmd</npm.executable>
+        </properties>
+      </profile>
+    </profiles>
+
     <dependencies>
       <!-- INTERNAL PROJECTS -->
       <dependency>
@@ -96,11 +118,10 @@
                 </goals>
                 <phase>initialize</phase>
                 <configuration>
-                  <executable>npm</executable>
-                  <arguments>
-                    <argument>ci</argument>
-                  </arguments>
+                  <executable>${npm.executable}</executable>
+                  <commandlineArgs>ci</commandlineArgs>
                   <workingDirectory>${project.basedir}</workingDirectory>
+                  <skip>${npm.skip.ci}</skip>
                 </configuration>
               </execution>
 
@@ -112,11 +133,8 @@
                 </goals>
                 <phase>compile</phase>
                 <configuration>
-                  <executable>node_modules/@angular/cli/bin/ng</executable>
-                  <arguments>
-                    <argument>build</argument>
-                    <argument>--prod</argument>
-                  </arguments>
+                  <executable>${npm.executable}</executable>
+                  <commandlineArgs>run-script build</commandlineArgs>
                   <workingDirectory>${project.basedir}</workingDirectory>
                 </configuration>
               </execution>
@@ -129,13 +147,10 @@
                 </goals>
                 <phase>test</phase>
                 <configuration>
-                  <executable>node_modules/@angular/cli/bin/ng</executable>
-                  <arguments>
-                    <argument>test</argument>
-                    <argument>--single-run</argument>
-                  </arguments>
+                  <executable>${npm.executable}</executable>
+                  <commandlineArgs>run-script test-single-run</commandlineArgs>
                   <workingDirectory>${project.basedir}</workingDirectory>
-                  <skip>${skipTests}</skip>
+                  <skip>${npm.skip.tests}</skip>
                 </configuration>
               </execution>
             </executions>

@@ -17,6 +17,7 @@
 
     <properties>
         <version.java>1.8</version.java>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <version.servlet-api>3.1.0</version.servlet-api>
 

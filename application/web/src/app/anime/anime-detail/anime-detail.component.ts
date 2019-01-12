@@ -3,7 +3,10 @@ import { AnimeService } from "../../shared/services/anime/anime.service";
 import { ActivatedRoute, Params } from "@angular/router";
 import { EnrichedResource } from "../../shared/resources/final/enriched-resource";
 import { Title } from "@angular/platform-browser";
-import { AnimeDTO, AnimeRelation, EpisodeDTO, PersonageDTO } from "../../generated/models";
+import { AnimeDTO } from "../../shared/models/anime-dto";
+import { EpisodeDTO } from "../../shared/models/episode-dto";
+import { PersonageDTO } from "../../shared/models/personage-dto";
+import { BaseAnimeRelation } from "../../generated/models";
 
 @Component({
   selector: 'korogi-anime-detail',
@@ -25,7 +28,7 @@ export class AnimeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params
-      .flatMap((params: Params) => this.animeService.findAnime(params['id'], AnimeRelation.PREQUAL, AnimeRelation.SEQUAL, AnimeRelation.EPISODES, AnimeRelation.PERSONAGES))
+      .flatMap((params: Params) => this.animeService.findAnime(params['id'], BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES))
       .subscribe((resource: EnrichedResource<AnimeDTO>) => this.setData(resource));
   }
 
@@ -33,9 +36,9 @@ export class AnimeDetailComponent implements OnInit {
     this.titleService.setTitle(`${resource.data.nameEnglish} - Korogi`);
 
     this.anime = resource.data;
-    this.prequal = resource.embedded[AnimeRelation.PREQUAL];
-    this.sequal = resource.embedded[AnimeRelation.SEQUAL];
-    this.episodes = resource.embedded[AnimeRelation.EPISODES];
-    this.personages = resource.embedded[AnimeRelation.PERSONAGES];
+    this.prequal = resource.embedded[BaseAnimeRelation.PREQUAL];
+    this.sequal = resource.embedded[BaseAnimeRelation.SEQUAL];
+    this.episodes = resource.embedded[BaseAnimeRelation.EPISODES];
+    this.personages = resource.embedded[BaseAnimeRelation.PERSONAGES];
   }
 }

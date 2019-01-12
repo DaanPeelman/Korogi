@@ -28,7 +28,7 @@
         <version.maven-jar-plugin>3.0.2</version.maven-jar-plugin>
         <version.maven-dependency-plugin>3.1.0</version.maven-dependency-plugin>
         <version.maven-surefire-plugin>2.22.1</version.maven-surefire-plugin>
-        <version.typescript-generator-maven-plugin>2.8.449</version.typescript-generator-maven-plugin>
+        <version.typescript-generator-maven-plugin>2.11.472</version.typescript-generator-maven-plugin>
 
         <version.spring>4.3.7.RELEASE</version.spring>
         <version.spring-hateoas>0.23.0.RELEASE</version.spring-hateoas>

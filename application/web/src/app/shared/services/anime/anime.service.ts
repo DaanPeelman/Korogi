@@ -11,7 +11,7 @@ import { EnrichedResource } from "../../resources/final/enriched-resource";
 import { ModelMapperService } from "../../mappers/model-mapper.service";
 import { MultipleResources } from "../../resources/original/multiple-resources";
 import { SingleResource } from "../../resources/original/single-resource";
-import { AnimeDTO } from "../../../generated/models";
+import { AnimeDTO } from "../../models/anime-dto";
 
 @Injectable()
 export class AnimeService extends BaseRestService implements IAnimeService {

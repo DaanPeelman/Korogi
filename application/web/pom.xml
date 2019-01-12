@@ -15,186 +15,190 @@
     <packaging>war</packaging>
 
     <properties>
-      <npm.executable>npm</npm.executable>
-      <!--suppress UnresolvedMavenProperty -->
-      <npm.skip.ci>${skipNpmCi}</npm.skip.ci>
-      <!--suppress UnresolvedMavenProperty -->
-      <npm.skip.tests>${skipTests}</npm.skip.tests>
+        <npm.executable>npm</npm.executable>
+        <!--suppress UnresolvedMavenProperty -->
+        <npm.skip.ci>${skipNpmCi}</npm.skip.ci>
+        <!--suppress UnresolvedMavenProperty -->
+        <npm.skip.tests>${skipTests}</npm.skip.tests>
     </properties>
 
     <profiles>
-      <profile>
-        <id>platform-windows</id>
-        <activation>
-          <os>
-            <family>windows</family>
-          </os>
-        </activation>
-        <properties>
-          <npm.executable>npm.cmd</npm.executable>
-        </properties>
-      </profile>
+        <profile>
+            <id>platform-windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <npm.executable>npm.cmd</npm.executable>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
-      <!-- INTERNAL PROJECTS -->
-      <dependency>
-        <groupId>com.korogi</groupId>
-        <artifactId>dto</artifactId>
-        <scope>provided</scope>
-      </dependency>
+        <!-- INTERNAL PROJECTS -->
+        <dependency>
+            <groupId>com.korogi</groupId>
+            <artifactId>dto</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-          <!-- CLEAN ANGULAR DIST & GENERATED FOLDER -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-clean-plugin</artifactId>
-            <configuration>
-              <filesets>
-                <fileset>
-                  <directory>dist</directory>
-                  <includes>
-                    <include>**/*</include>
-                  </includes>
-                  <followSymlinks>false</followSymlinks>
-                </fileset>
-                <fileset>
-                  <directory>src/app/generated</directory>
-                  <includes>
-                    <include>**/*</include>
-                  </includes>
-                  <followSymlinks>false</followSymlinks>
-                </fileset>
-              </filesets>
-            </configuration>
-          </plugin>
-
-          <!-- GENERATE TYPESCRIPT MODEL CLASSES FROM DTO MODULE -->
-          <plugin>
-            <groupId>cz.habarta.typescript-generator</groupId>
-            <artifactId>typescript-generator-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>generate-angular-models</id>
-                <goals>
-                  <goal>generate</goal>
-                </goals>
-                <phase>generate-sources</phase>
-              </execution>
-            </executions>
-            <configuration>
-              <jsonLibrary>jackson2</jsonLibrary>
-              <classPatterns>
-                <classPattern>com.korogi.dto.**</classPattern>
-              </classPatterns>
-              <excludeClassPatterns>
-                <excludeClassPattern>com.korogi.dto.**Builder</excludeClassPattern>
-              </excludeClassPatterns>
-              <outputFileType>implementationFile</outputFileType>
-              <mapClasses>asClasses</mapClasses>
-              <mapEnum>asEnum</mapEnum>
-              <mapDate>asString</mapDate>
-              <outputKind>module</outputKind>
-              <outputFile>src/app/generated/models.ts</outputFile>
-            </configuration>
-          </plugin>
-
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <executions>
-              <!-- INSTALL NPM MODULES -->
-              <execution>
-                <id>npm ci</id>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <phase>initialize</phase>
+            <!-- CLEAN ANGULAR DIST & GENERATED FOLDER -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
-                  <executable>${npm.executable}</executable>
-                  <commandlineArgs>ci</commandlineArgs>
-                  <workingDirectory>${project.basedir}</workingDirectory>
-                  <skip>${npm.skip.ci}</skip>
+                    <filesets>
+                        <fileset>
+                            <directory>dist</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                        <fileset>
+                            <directory>src/app/generated</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
                 </configuration>
-              </execution>
+            </plugin>
 
-              <!-- PRODUCTION BUILD ANGULAR PROJECT -->
-              <execution>
-                <id>angular-cli build</id>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <phase>compile</phase>
+            <!-- GENERATE TYPESCRIPT MODEL CLASSES FROM DTO MODULE -->
+            <plugin>
+                <groupId>cz.habarta.typescript-generator</groupId>
+                <artifactId>typescript-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-angular-models</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
                 <configuration>
-                  <executable>${npm.executable}</executable>
-                  <commandlineArgs>run-script build</commandlineArgs>
-                  <workingDirectory>${project.basedir}</workingDirectory>
+                    <jsonLibrary>jackson2</jsonLibrary>
+                    <classPatterns>
+                        <classPattern>com.korogi.dto.**</classPattern>
+                    </classPatterns>
+                    <excludeClassPatterns>
+                        <excludeClassPattern>com.korogi.dto.**Builder</excludeClassPattern>
+                    </excludeClassPatterns>
+                    <excludePropertyAnnotations>
+                        <excludePropertyAnnotation>com.korogi.dto.annotation.ExcludeFromTypescriptGenerator</excludePropertyAnnotation>
+                    </excludePropertyAnnotations>
+                    <outputFileType>implementationFile</outputFileType>
+                    <addTypeNamePrefix>Base</addTypeNamePrefix>
+                    <mapClasses>asClasses</mapClasses>
+                    <mapEnum>asEnum</mapEnum>
+                    <mapDate>asString</mapDate>
+                    <outputKind>module</outputKind>
+                    <outputFile>src/app/generated/models.ts</outputFile>
                 </configuration>
-              </execution>
+            </plugin>
 
-              <!-- RUN ANGULAR TESTS -->
-              <execution>
-                <id>angular-cli test</id>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <phase>test</phase>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <!-- INSTALL NPM MODULES -->
+                    <execution>
+                        <id>npm ci</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <executable>${npm.executable}</executable>
+                            <commandlineArgs>ci</commandlineArgs>
+                            <workingDirectory>${project.basedir}</workingDirectory>
+                            <skip>${npm.skip.ci}</skip>
+                        </configuration>
+                    </execution>
+
+                    <!-- PRODUCTION BUILD ANGULAR PROJECT -->
+                    <execution>
+                        <id>angular-cli build</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <executable>${npm.executable}</executable>
+                            <commandlineArgs>run-script build</commandlineArgs>
+                            <workingDirectory>${project.basedir}</workingDirectory>
+                        </configuration>
+                    </execution>
+
+                    <!-- RUN ANGULAR TESTS -->
+                    <execution>
+                        <id>angular-cli test</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>test</phase>
+                        <configuration>
+                            <executable>${npm.executable}</executable>
+                            <commandlineArgs>run-script test-single-run</commandlineArgs>
+                            <workingDirectory>${project.basedir}</workingDirectory>
+                            <skip>${npm.skip.tests}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- ADD ANGULAR GENERATED RESOURCES AS WEB-RESOURCES -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                  <executable>${npm.executable}</executable>
-                  <commandlineArgs>run-script test-single-run</commandlineArgs>
-                  <workingDirectory>${project.basedir}</workingDirectory>
-                  <skip>${npm.skip.tests}</skip>
+                    <webResources>
+                        <resource>
+                            <directory>${project.basedir}/dist</directory>
+                        </resource>
+                    </webResources>
                 </configuration>
-              </execution>
-            </executions>
-          </plugin>
+            </plugin>
 
-          <!-- ADD ANGULAR GENERATED RESOURCES AS WEB-RESOURCES -->
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-war-plugin</artifactId>
-              <configuration>
-                  <webResources>
-                    <resource>
-                      <directory>${project.basedir}/dist</directory>
-                    </resource>
-                  </webResources>
-              </configuration>
-          </plugin>
-
-          <!-- COPY WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>copy</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>${project.groupId}</groupId>
-                  <artifactId>${project.artifactId}</artifactId>
-                  <type>war</type>
-                  <overWrite>true</overWrite>
-                  <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
-                  <destFileName>web.war</destFileName>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </plugin>
+            <!-- COPY WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <type>war</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
+                            <destFileName>web.war</destFileName>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

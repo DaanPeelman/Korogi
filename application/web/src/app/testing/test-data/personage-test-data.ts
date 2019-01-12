@@ -1,4 +1,4 @@
-import { PersonageDTO } from "../../generated/models";
+import { PersonageDTO } from "../../shared/models/personage-dto";
 
 export class PersonageTestData {
   static okabeRintarou(): PersonageDTO {

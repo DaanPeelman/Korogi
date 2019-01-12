@@ -7,23 +7,23 @@ import { MultipleResources } from "../resources/original/multiple-resources";
 
 @Injectable()
 export class ModelMapperService {
-  private mappers: any[] = [];
+    private mappers: any[] = [];
 
-  constructor() {
-    this.mappers["anime"] = new AnimeMapper();
-    this.mappers["episode"] = new EpisodeMapper();
-    this.mappers["personage"] = new PersonageMapper();
-  }
+    constructor() {
+        this.mappers["anime"] = new AnimeMapper();
+        this.mappers["episode"] = new EpisodeMapper();
+        this.mappers["personage"] = new PersonageMapper();
+    }
 
-  mapToModel<T>(resourceToMap: SingleResource): T {
-    return this.mappers[resourceToMap.type].map(resourceToMap);
-  }
+    mapToModel<T>(resourceToMap: SingleResource): T {
+        return this.mappers[resourceToMap.type].map(resourceToMap);
+    }
 
-  mapToModels<T>(resourceToMap: MultipleResources): T[] {
-    return resourceToMap.content.map(resource => this.mapToModel(resource))
-  }
+    mapToModels<T>(resourceToMap: MultipleResources): T[] {
+        return resourceToMap.content.map(resource => this.mapToModel(resource))
+    }
 }
 
 export interface IMapper<T> {
-  map(resource: any): T;
+    map(resource: any): T;
 }

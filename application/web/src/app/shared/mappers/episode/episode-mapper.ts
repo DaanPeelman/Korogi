@@ -1,15 +1,18 @@
 import { IMapper } from "../model-mapper.service";
-import { EpisodeDTO } from "../../../generated/models";
+import { EpisodeDTO } from "../../models/episode-dto";
 
 export class EpisodeMapper implements IMapper<EpisodeDTO> {
-  map(resource: any): EpisodeDTO {
-    let episodeDTO: EpisodeDTO = new EpisodeDTO();
+    private convert(resource: any): EpisodeDTO {
+        return Object.assign(
+            Object.create(EpisodeDTO.prototype),
+            resource
+        );
+    }
 
-    episodeDTO.name = resource.name;
-    episodeDTO.synopsis = resource.synopsis;
-    episodeDTO.durationInMinutes = resource.durationInMinutes;
-    episodeDTO.airDate = resource.airDate;
+    map(resource: any): EpisodeDTO {
+        let episodeDTO: EpisodeDTO = this.convert(resource);
+        delete episodeDTO["type"];
 
-    return episodeDTO;
-  }
+        return episodeDTO;
+    }
 }

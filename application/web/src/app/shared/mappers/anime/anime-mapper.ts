@@ -1,18 +1,18 @@
 import { IMapper } from "../model-mapper.service";
-import { AnimeDTO } from "../../../generated/models";
+import { AnimeDTO } from "../../models/anime-dto";
 
 export class AnimeMapper implements IMapper<AnimeDTO> {
-  map(resource: any): AnimeDTO {
-    let animeDTO: AnimeDTO = new AnimeDTO();
+    private convert(resource: any): AnimeDTO {
+        return Object.assign(
+            Object.create(AnimeDTO.prototype),
+            resource
+        );
+    }
 
-    animeDTO.nameEnglish = resource.nameEnglish;
-    animeDTO.nameRomanized = resource.nameRomanized;
-    animeDTO.startAir = resource.startAir;
-    animeDTO.endAir = resource.endAir;
-    animeDTO.synopsis = resource.synopsis;
-    animeDTO.backdropUrl = resource.backdropUrl;
-    animeDTO.posterUrl = resource.posterUrl;
+    map(resource: any): AnimeDTO {
+        let animeDTO: AnimeDTO = this.convert(resource);
+        delete animeDTO["type"];
 
-    return animeDTO;
-  }
+        return animeDTO;
+    }
 }

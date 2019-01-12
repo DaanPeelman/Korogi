@@ -1,14 +1,18 @@
 import { IMapper } from "../model-mapper.service";
-import { PersonageDTO } from "../../../generated/models";
+import { PersonageDTO } from "../../models/personage-dto";
 
 export class PersonageMapper implements IMapper<PersonageDTO> {
-  map(resource: any): PersonageDTO {
-    let personageDTO: PersonageDTO = new PersonageDTO();
+    private convert(resource: any): PersonageDTO {
+        return Object.assign(
+            Object.create(PersonageDTO.prototype),
+            resource
+        );
+    }
 
-    personageDTO.firstName = resource.firstName;
-    personageDTO.lastName = resource.lastName;
-    personageDTO.photoUrl = resource.photoUrl;
+    map(resource: any): PersonageDTO {
+        let personageDTO: PersonageDTO = this.convert(resource);
+        delete personageDTO["type"];
 
-    return personageDTO;
-  }
+        return personageDTO;
+    }
 }

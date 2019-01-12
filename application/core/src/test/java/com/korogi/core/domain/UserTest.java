@@ -1,7 +1,7 @@
 package com.korogi.core.domain;
 
 import static com.korogi.core.domain.User.newUser;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.UUID;
 import org.junit.Test;

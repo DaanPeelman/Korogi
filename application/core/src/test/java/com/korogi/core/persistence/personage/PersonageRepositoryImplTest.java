@@ -2,7 +2,7 @@ package com.korogi.core.persistence.personage;
 
 import static com.korogi.core.domain.testdata.PersonageTestData.okabeRintarou_notPersisted;
 import static java.util.Collections.singletonList;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -42,7 +42,7 @@ public class PersonageRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/personage/PersonageRepositoryImplTest_findById.xml")
     public void findById_notExisting() throws Exception {
-        assertThat(repository.findById(99L).isPresent()).isFalse();
+        assertThat(repository.findById(99L)).isNotPresent();
     }
 
     /**

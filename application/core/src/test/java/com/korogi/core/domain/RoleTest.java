@@ -1,7 +1,7 @@
 package com.korogi.core.domain;
 
 import static com.korogi.core.domain.Role.newRole;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.korogi.core.domain.enumeration.RoleType;
 import org.junit.Test;

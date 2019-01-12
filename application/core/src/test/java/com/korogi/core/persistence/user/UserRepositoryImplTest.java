@@ -1,7 +1,7 @@
 package com.korogi.core.persistence.user;
 
 import static com.korogi.core.domain.testdata.UserTestData.johnDoe;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -26,7 +26,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     public void findById() throws Exception {
         long idToFind = 1;
 
-        User foundUser = repository.findById(idToFind).get();
+        User foundUser = repository.findById(idToFind).orElse(null);
 
         assertThat(foundUser).isNotNull();
         assertThat(foundUser.getId()).isEqualTo(idToFind);
@@ -38,7 +38,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_findById.xml")
     public void findById_notExisting() throws Exception {
-        assertThat(repository.findById(99L).isPresent()).isFalse();
+        assertThat(repository.findById(99L)).isNotPresent();
     }
 
     /**

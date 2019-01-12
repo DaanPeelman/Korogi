@@ -1,6 +1,6 @@
 package com.korogi.rest.service.util;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
 

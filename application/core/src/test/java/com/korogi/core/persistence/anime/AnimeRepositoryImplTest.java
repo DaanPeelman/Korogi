@@ -2,7 +2,7 @@ package com.korogi.core.persistence.anime;
 
 import static com.korogi.core.domain.testdata.AnimeTestData.steinsGate_notPersisted;
 import static java.util.Collections.singletonList;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -61,7 +61,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findById.xml")
     public void findById_notExisting() {
-        assertThat(repository.findById(99L).isPresent()).isFalse();
+        assertThat(repository.findById(99L)).isNotPresent();
     }
 
     /**
@@ -116,9 +116,9 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     public void findPrequalOfAnime() throws Exception {
         Anime animeToFind = em.find(Anime.class, 1L);
 
-        Anime foundAnime = repository.findPrequalOfAnime(2L).orElse(null);
-
-        assertThat(foundAnime).isNotNull().isEqualTo(animeToFind);
+        assertThat(repository.findPrequalOfAnime(2L))
+                .isPresent()
+                .contains(animeToFind);
     }
 
     /**
@@ -127,7 +127,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findPrequalOfAnime.xml")
     public void findPrequalOfAnime_hasNoPrequal() throws Exception {
-        assertThat(repository.findPrequalOfAnime(1L).isPresent()).isFalse();
+        assertThat(repository.findPrequalOfAnime(1L)).isNotPresent();
     }
 
     /**
@@ -136,7 +136,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findPrequalOfAnime.xml")
     public void findPrequalOfAnime_notExisting() throws Exception {
-        assertThat(repository.findPrequalOfAnime(99L).isPresent()).isFalse();
+        assertThat(repository.findPrequalOfAnime(99L)).isNotPresent();
     }
 
     /**
@@ -147,9 +147,9 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     public void findSequalOfAnime() throws Exception {
         Anime animeToFind = em.find(Anime.class, 2L);
 
-        Anime foundAnime = repository.findSequalOfAnime(1L).orElse(null);
-
-        assertThat(foundAnime).isNotNull().isEqualTo(animeToFind);
+        assertThat(repository.findSequalOfAnime(1L))
+                .isPresent()
+                .contains(animeToFind);
     }
 
     /**
@@ -158,7 +158,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findSequalOfAnime.xml")
     public void findSequalOfAnime_hasNoSequal() throws Exception {
-        assertThat(repository.findSequalOfAnime(2L).isPresent()).isFalse();
+        assertThat(repository.findSequalOfAnime(2L)).isNotPresent();
     }
 
     /**
@@ -167,6 +167,6 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/anime/AnimeRepositoryTest_findSequalOfAnime.xml")
     public void findSequalOfAnime_notExisting() throws Exception {
-        assertThat(repository.findPrequalOfAnime(99L).isPresent()).isFalse();
+        assertThat(repository.findPrequalOfAnime(99L)).isNotPresent();
     }
 }

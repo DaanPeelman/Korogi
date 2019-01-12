@@ -1,7 +1,7 @@
 package com.korogi.core.persistence.role;
 
 import static com.korogi.core.domain.testdata.RoleTestData.admin;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -26,7 +26,7 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
     public void findById() throws Exception {
         long idToFind = 1;
 
-        Role foundRole = repository.findById(idToFind).get();
+        Role foundRole = repository.findById(idToFind).orElse(null);
 
         assertThat(foundRole).isNotNull();
         assertThat(foundRole.getId()).isEqualTo(idToFind);
@@ -38,7 +38,7 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_findById.xml")
     public void findById_notExisting() throws Exception {
-        assertThat(repository.findById(99L).isPresent()).isFalse();
+        assertThat(repository.findById(99L)).isNotPresent();
     }
 
     /**

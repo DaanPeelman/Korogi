@@ -1,7 +1,7 @@
 package com.korogi.core.persistence.episode;
 
 import static com.korogi.core.domain.testdata.EpisodeTestData.steinsGateEpisode1_notPeristed;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -42,7 +42,7 @@ public class EpisodeRepositoryImplTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/episode/EpisodeRepositoryTest_findById.xml")
     public void findById_notExisting() throws Exception {
-        assertThat(repository.findById(99L).isPresent()).isFalse();
+        assertThat(repository.findById(99L)).isNotPresent();
     }
 
     /**

@@ -180,6 +180,7 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${version.lombok}</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- MAPSTRUCT -->
@@ -187,11 +188,13 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-jdk8</artifactId>
                 <version>${version.mapstruct}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${version.mapstruct}</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- TESTING -->

@@ -7,7 +7,7 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS
 
 import java.util.List;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.korogi.rest.advice.RestControllerAdvice;
+import com.korogi.rest.advice.RestControllerExceptionAdvice;
 import com.korogi.rest.mapper.ResourceMapper;
 import com.korogi.rest.service.AnimeRestServiceImpl;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableTransactionManagement(proxyTargetClass = true)
 @ComponentScan(
         basePackageClasses = {
-                RestControllerAdvice.class,
+                RestControllerExceptionAdvice.class,
                 ResourceMapper.class,
                 AnimeRestServiceImpl.class
         }

@@ -39,23 +39,23 @@ public class CacheableResourcePatternUtilTest {
 
     @Test
     public void isCacheableResource_jpg() throws Exception {
-        assertThat(util.isCacheableResource("test.jpg")).isTrue();
-        assertThat(util.isCacheableResource("/test.jpg")).isTrue();
-        assertThat(util.isCacheableResource("/assets/images/test.jpg")).isTrue();
+        assertThat(util.isCacheableResource("test.jpg")).isFalse();
+        assertThat(util.isCacheableResource("/test.jpg")).isFalse();
+        assertThat(util.isCacheableResource("/assets/images/test.jpg")).isFalse();
     }
 
     @Test
     public void isCacheableResource_png() throws Exception {
-        assertThat(util.isCacheableResource("test.png")).isTrue();
-        assertThat(util.isCacheableResource("/test.png")).isTrue();
-        assertThat(util.isCacheableResource("/assets/images/test.png")).isTrue();
+        assertThat(util.isCacheableResource("test.png")).isFalse();
+        assertThat(util.isCacheableResource("/test.png")).isFalse();
+        assertThat(util.isCacheableResource("/assets/images/test.png")).isFalse();
     }
 
     @Test
     public void isCacheableResource_gif() throws Exception {
-        assertThat(util.isCacheableResource("test.gif")).isTrue();
-        assertThat(util.isCacheableResource("/test.gif")).isTrue();
-        assertThat(util.isCacheableResource("/assets/images/test.gif")).isTrue();
+        assertThat(util.isCacheableResource("test.gif")).isFalse();
+        assertThat(util.isCacheableResource("/test.gif")).isFalse();
+        assertThat(util.isCacheableResource("/assets/images/test.gif")).isFalse();
     }
 
     @Test

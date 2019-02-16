@@ -18,6 +18,15 @@
     <url-pattern>*.gif</url-pattern>
   </servlet-mapping>
 
+    <filter>
+        <filter-name>CacheControlFilter</filter-name>
+        <filter-class>com.korogi.webapp.filter.CacheControlFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CacheControlFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
   <error-page>
     <!-- For Angular app not found page -->
     <error-code>404</error-code>

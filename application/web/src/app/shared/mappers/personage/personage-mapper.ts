@@ -4,7 +4,7 @@ import { PersonageDTO } from "../../models/personage-dto";
 export class PersonageMapper implements IMapper<PersonageDTO> {
     private convert(resource: any): PersonageDTO {
         return Object.assign(
-            Object.create(PersonageDTO.prototype),
+            new PersonageDTO(),
             resource
         );
     }

@@ -4,7 +4,7 @@ import { EpisodeDTO } from "../../models/episode-dto";
 export class EpisodeMapper implements IMapper<EpisodeDTO> {
     private convert(resource: any): EpisodeDTO {
         return Object.assign(
-            Object.create(EpisodeDTO.prototype),
+            new EpisodeDTO(),
             resource
         );
     }

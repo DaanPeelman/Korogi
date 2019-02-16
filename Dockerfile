@@ -1,6 +1,8 @@
 FROM tomcat:8.5-jre8-alpine
 MAINTAINER Daan Peelman <daanpeelman@gmail.com>
 
+RUN apk add --no-cache tzdata
+
 ENV CATALINA_WEBAPPS $CATALINA_HOME/webapps
 
 RUN rm -rf $CATALINA_WEBAPPS/*

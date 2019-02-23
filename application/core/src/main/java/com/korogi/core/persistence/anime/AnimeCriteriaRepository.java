@@ -4,7 +4,12 @@ import com.korogi.core.domain.Anime;
 import com.korogi.core.persistence.EntityCriteriaRepository;
 
 /**
+ * Criteria repository for read operations with an <code>Anime</code> entity.
+ *
  * @author Daan Peelman
+ *
+ * @see EntityCriteriaRepository
+ * @see Anime
  */
-public interface AnimeCriteriaRepository extends EntityCriteriaRepository<Anime> {
+interface AnimeCriteriaRepository extends EntityCriteriaRepository<Anime> {
 }

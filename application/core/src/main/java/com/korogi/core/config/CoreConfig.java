@@ -4,6 +4,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import com.cosium.spring.data.jpa.entity.graph.repository.support.EntityGraphJpaRepositoryFactoryBean;
 import com.korogi.core.persistence.EntityRepository;
+import com.korogi.core.util.UUIDGenerator;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 @Configuration
-@ComponentScan(basePackageClasses = EntityRepository.class)
+@ComponentScan(basePackageClasses = { EntityRepository.class, UUIDGenerator.class })
 @EnableJpaRepositories(basePackageClasses = EntityRepository.class, repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class)
 public class CoreConfig {
 

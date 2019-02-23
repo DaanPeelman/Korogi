@@ -4,7 +4,7 @@ import static com.korogi.dto.ErrorDTO.newErrorDTO;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-import java.util.UUID;
+import com.korogi.core.util.UUIDGenerator;
 import com.korogi.dto.ErrorDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +15,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 @Slf4j
 public class RestControllerExceptionAdvice {
+
+    private final UUIDGenerator uuidGenerator;
+
+    public RestControllerExceptionAdvice(
+            UUIDGenerator uuidGenerator
+    ) {
+        this.uuidGenerator = uuidGenerator;
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception) {
@@ -29,7 +37,7 @@ public class RestControllerExceptionAdvice {
 
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<ErrorDTO> handleThrowable(Throwable throwable) {
-        String logCode = UUID.randomUUID().toString();
+        String logCode = uuidGenerator.generateUUIDString();
 
         log.error("Unexpected error: '" + logCode + "'", throwable);
 

@@ -44,7 +44,7 @@
         <version.lombok>[1.18.0,1.19.0)</version.lombok>
         <version.mapstruct>[1.3.0.Final,1.4.0.Final)</version.mapstruct>
 
-        <version.junit>[4.12.0,4.13.0)</version.junit>
+        <version.junit>4.12</version.junit>
         <version.hamcrest>[1.3.0,1.4.0)</version.hamcrest>
         <version.jsonassert>[1.5.0,1.6.0)</version.jsonassert>
         <version.mockito>[2.24.0,2.25.0)</version.mockito>

@@ -7,11 +7,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor(access = PUBLIC)
+@EqualsAndHashCode(callSuper = true)
 @Builder(builderMethodName = "newAnimeDTO")
 public class AnimeDTO extends BaseDTO {
     private static final String TYPE = "anime";

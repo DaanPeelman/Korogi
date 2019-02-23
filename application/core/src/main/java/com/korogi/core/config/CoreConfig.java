@@ -22,11 +22,11 @@ public class CoreConfig {
     @Bean(initMethod = "migrate")
     @Autowired
     public Flyway flyway(DataSource dataSource) {
-        Flyway flyway = new Flyway();
-
-        flyway.setBaselineOnMigrate(true);
-        flyway.setLocations("classpath:database/");
-        flyway.setDataSource(dataSource);
+        Flyway flyway = Flyway.configure()
+                .baselineOnMigrate(true)
+                .locations("classpath:database/")
+                .dataSource(dataSource)
+                .load();
 
         return flyway;
     }

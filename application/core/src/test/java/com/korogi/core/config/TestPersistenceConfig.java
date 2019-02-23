@@ -65,7 +65,7 @@ public class TestPersistenceConfig {
         Map<String, Object> jpaProperties = new HashMap<>();
 
         jpaProperties.put("hibernate.format_sql", "true");
-        jpaProperties.put("hibernate.ejb.interceptor", hibernateStatisticsInterceptor);
+        jpaProperties.put("hibernate.session_factory.interceptor", hibernateStatisticsInterceptor);
 
         return jpaProperties;
     }

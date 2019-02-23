@@ -7,10 +7,10 @@ import org.springframework.hateoas.Resource;
 public abstract class BaseResourceMapper<TO, FROM> implements ResourceMapper<TO, FROM> {
     public static final String COMPONENT_MODEL = "spring";
 
-    private final Class<FROM> toClass;
+    private final Class<FROM> fromClass;
 
-    public BaseResourceMapper(Class<FROM> toClass) {
-        this.toClass = toClass;
+    public BaseResourceMapper(Class<FROM> fromClass) {
+        this.fromClass = fromClass;
     }
 
     @Override
@@ -20,7 +20,7 @@ public abstract class BaseResourceMapper<TO, FROM> implements ResourceMapper<TO,
 
     @Override
     public Class<FROM> fromObjectClass() {
-        return toClass;
+        return fromClass;
     }
 
     protected abstract TO map(FROM from);

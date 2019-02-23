@@ -31,12 +31,8 @@ abstract class AnimeResourceMapper extends BaseResourceMapper<AnimeDTO, Anime> {
         List<Link> links = new ArrayList<>();
 
         links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getAnimeDetails(anime.getId())).withSelfRel());
-        if (anime.hasPrequal()) {
-            links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getPrequalDetails(anime.getId())).withRel(PREQUAL.getValue()));
-        }
-        if (anime.hasSequal()) {
-            links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getSequalDetails(anime.getId())).withRel(SEQUAL.getValue()));
-        }
+        links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getPrequalDetails(anime.getId())).withRel(PREQUAL.getValue()));
+        links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getSequalDetails(anime.getId())).withRel(SEQUAL.getValue()));
         links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getAnimeEpisodes(anime.getId())).withRel(EPISODES.getValue()));
         links.add(linkTo(methodOn(AnimeRestServiceImpl.class).getAnimePersonages(anime.getId())).withRel(PERSONAGES.getValue()));
 

@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author Daan Peelman
  */
-public class UserRepositoryImplTest extends BaseRepositoryTest {
+public class UserRepositoryTest extends BaseRepositoryTest {
     @Autowired
-    private UserRepositoryImpl repository;
+    private UserRepository repository;
 
     /**
      * Should retrieve the User with the same id from the database.
@@ -50,7 +50,7 @@ public class UserRepositoryImplTest extends BaseRepositoryTest {
     public void save() throws Exception {
         User userToSave = johnDoe().build();
 
-        User savedUser = repository.saveOrUpdate(userToSave);
+        User savedUser = repository.save(userToSave);
 
         em.flush();
 

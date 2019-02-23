@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author Daan Peelman
  */
-public class RoleRepositoryImplTest extends BaseRepositoryTest {
+public class RoleRepositoryTest extends BaseRepositoryTest {
     @Autowired
-    private RoleRepositoryImpl repository;
+    private RoleRepository repository;
 
     /**
      * Should retrieve the Role with the same id from the database.
@@ -50,7 +50,7 @@ public class RoleRepositoryImplTest extends BaseRepositoryTest {
     public void save() throws Exception {
         Role roleToSave = admin().build();
 
-        Role savedRole = repository.saveOrUpdate(roleToSave);
+        Role savedRole = repository.save(roleToSave);
 
         em.flush();
 

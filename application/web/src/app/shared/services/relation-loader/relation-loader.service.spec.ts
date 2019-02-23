@@ -134,5 +134,44 @@ describe('RelationLoaderService', () => {
                     expect(finalEnrichedResource.embedded["relation4"]).toBeFalsy();
                 });
         });
+
+        it("should add an empty relation if the server responded with 404", () => {
+            const anime: AnimeDTO = AnimeTestData.steinsGate();
+            const links: Link[] = [
+                new Link("relation1", "http://relation1.com"),
+            ];
+
+            relationLoaderService.populateWithRelations(new EnrichedResource<AnimeDTO>(anime, links), [links[0].rel])
+                .subscribe(finalEnrichedResource => {
+                    expect(finalEnrichedResource.data).toEqual(AnimeTestData.steinsGate());
+                    expect(finalEnrichedResource.links).toEqual(links);
+
+                    expect(finalEnrichedResource.embedded[links[0].rel]).toBeUndefined();
+                });
+
+            const requestToRetrieveRelation1: TestRequest = httpMock.expectOne(links[0].href);
+            expect(requestToRetrieveRelation1.request.method).toEqual("GET");
+
+            requestToRetrieveRelation1.error(undefined, {status: 404});
+        });
+
+        it("should throw an error if the server responded with 500", () => {
+            const anime: AnimeDTO = AnimeTestData.steinsGate();
+            const links: Link[] = [
+                new Link("relation1", "http://relation1.com"),
+            ];
+
+            relationLoaderService.populateWithRelations(new EnrichedResource<AnimeDTO>(anime, links), [links[0].rel])
+                .subscribe(() => {
+                    expect(true).toBeFalsy("Expected an error to have been thrown but it was not");
+                }, () => {
+                    // error was thrown
+                });
+
+            const requestToRetrieveRelation1: TestRequest = httpMock.expectOne(links[0].href);
+            expect(requestToRetrieveRelation1.request.method).toEqual("GET");
+
+            requestToRetrieveRelation1.error(undefined, {status: 500});
+        });
     });
 });

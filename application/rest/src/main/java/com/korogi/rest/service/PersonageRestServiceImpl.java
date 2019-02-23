@@ -2,7 +2,6 @@ package com.korogi.rest.service;
 
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import com.korogi.api.PersonageRestService;
 import com.korogi.core.domain.Personage;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,14 +38,14 @@ public class PersonageRestServiceImpl implements PersonageRestService {
         this.entityToDTOResourceMapper = entityToDTOResourceMapper;
     }
 
-    @RequestMapping(method = GET)
+    @GetMapping
     @ResponseStatus(OK)
     @Override
     public @ResponseBody PagedResources<Resource<PersonageDTO>> getPersonages() {
         return null;
     }
 
-    @RequestMapping(value = "{" + PATH_VARIABLE_ID + "}", method = GET)
+    @GetMapping(value = "{" + PATH_VARIABLE_ID + "}")
     @ResponseStatus(OK)
     @Override
     public @ResponseBody Resource<PersonageDTO> getPersonageDetails(

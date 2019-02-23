@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Primary;
 public class TestRestControllerExceptionAdviceConfig {
     @Bean
     @Primary
-    public AnimeRepository animeRepository() {
+    public AnimeRepository mockAnimeRepository() {
         return mock(AnimeRepository.class);
     }
 }

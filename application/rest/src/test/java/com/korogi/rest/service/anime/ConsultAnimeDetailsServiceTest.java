@@ -15,7 +15,6 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
      * OK http status
      * JSON content type
      * a JSON corresponding to the Anime with the given id in the database
-     * all default HATEOAS links plus the sequal link
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
@@ -24,7 +23,7 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
             .andExpect(status().isOk())
             .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithSequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -32,7 +31,6 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
      * OK http status
      * JSON content type
      * a JSON corresponding to the Anime with the given id in the database
-     * all default HATEOAS links plus the prequal link
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
@@ -41,7 +39,7 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -49,7 +47,6 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
      * OK http status
      * JSON content type
      * a JSON corresponding to the Anime with the given id in the database
-     * all default HATEOAS links plus the prequal and sequal link
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
@@ -58,15 +55,14 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequalAndSequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
      * When consulting an existing Anime's details that has neither a prequal nor a sequal, it should return:
      * OK http status
      * JSON content type
-     * a JSON corresponding to the Anime with the given id in the database
-     * all default HATEOAS links
+     * a JSON corresponding to the Anime with the given id in the databases
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
@@ -75,7 +71,7 @@ public class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithoutPrequalOrSequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**

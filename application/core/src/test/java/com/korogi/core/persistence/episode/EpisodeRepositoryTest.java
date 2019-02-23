@@ -13,9 +13,9 @@ import com.korogi.core.persistence.BaseRepositoryTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class EpisodeRepositoryImplTest extends BaseRepositoryTest {
+public class EpisodeRepositoryTest extends BaseRepositoryTest {
     @Autowired
-    private EpisodeRepositoryImpl repository;
+    private EpisodeRepository repository;
 
     /**
      * Should retrieve the Episode with the same id from the database.
@@ -58,7 +58,7 @@ public class EpisodeRepositoryImplTest extends BaseRepositoryTest {
                 .anime(anime)
                 .build();
 
-        Episode savedEpisode = repository.saveOrUpdate(episodeToSave);
+        Episode savedEpisode = repository.save(episodeToSave);
 
         em.flush();
 

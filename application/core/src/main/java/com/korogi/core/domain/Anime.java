@@ -1,6 +1,7 @@
 package com.korogi.core.domain;
 
 import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
+import static java.util.Optional.ofNullable;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.EnumType.STRING;
@@ -11,6 +12,7 @@ import static lombok.AccessLevel.PUBLIC;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -121,5 +123,13 @@ public class Anime extends BaseEntity {
 
     public boolean hasSequal() {
         return this.sequal != null;
+    }
+
+    public Optional<Anime> findPrequal() {
+        return ofNullable(this.prequal);
+    }
+
+    public Optional<Anime> findSequal() {
+        return ofNullable(this.sequal);
     }
 }

@@ -24,7 +24,7 @@ public class ConsultAnimeSequalDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -41,7 +41,7 @@ public class ConsultAnimeSequalDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_withPrequalAndSequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(3);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**

@@ -17,6 +17,10 @@
       "href": "http://localhost/anime/3/prequal"
     },
     {
+      "rel": "sequal",
+      "href": "http://localhost/anime/3/sequal"
+    },
+    {
       "rel": "episodes",
       "href": "http://localhost/anime/3/episodes"
     },

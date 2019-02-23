@@ -13,9 +13,9 @@ import com.korogi.core.persistence.BaseRepositoryTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AnimeRepositoryImplTest extends BaseRepositoryTest {
+public class AnimeRepositoryTest extends BaseRepositoryTest {
     @Autowired
-    private AnimeRepositoryImpl repository;
+    private AnimeRepository repository;
 
     /**
      * Should retrieve the Anime with the same id from the database.
@@ -78,7 +78,7 @@ public class AnimeRepositoryImplTest extends BaseRepositoryTest {
                 .personages(singletonList(personage))
                 .build();
 
-        Anime savedAnime = repository.saveOrUpdate(animeToSave);
+        Anime savedAnime = repository.save(animeToSave);
 
         em.flush();
 

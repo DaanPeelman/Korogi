@@ -20,6 +20,7 @@ import java.util.UUID;
 import com.korogi.core.persistence.anime.AnimeRepository;
 import com.korogi.core.util.UUIDGenerator;
 import com.korogi.rest.config.TestRestControllerExceptionAdviceConfig;
+import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.service.BaseServiceTest;
 import org.junit.After;
 import org.junit.Before;
@@ -53,6 +54,17 @@ public class RestControllerExceptionAdviceTest extends BaseServiceTest {
         reset(animeRepository);
         reset(uuidGenerator);
         reset(logger);
+    }
+
+    @Test
+    public void handleResourceNotFoundException() throws Exception {
+        when(animeRepository.findById(1L)).thenThrow(new ResourceNotFoundException());
+
+        performAndPrint(get("/anime/{id}", 1L))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", equalTo("Not Found")))
+                .andExpect(jsonPath("$.code", equalTo(404)))
+                .andExpect(jsonPath("$.message", equalTo("Resource not found")));
     }
 
     @Test

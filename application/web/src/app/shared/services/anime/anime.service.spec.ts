@@ -1,5 +1,4 @@
 import { inject, TestBed } from '@angular/core/testing';
-
 import { AnimeService } from './anime.service';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { AnimeTestData } from "../../../testing/test-data/anime-test-data";
@@ -11,7 +10,7 @@ import { Link } from "../../resources/link";
 import { anything, capture, instance, mock, when } from "ts-mockito";
 import { ModelMapperService } from "../../mappers/model-mapper.service";
 import { RelationLoaderService } from "../relation-loader/relation-loader.service";
-import { Observable } from "rxjs/Observable";
+import { of as observableOf } from "rxjs";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
 import { AnimeDTO } from "../../models/anime-dto";
 
@@ -94,7 +93,7 @@ describe('AnimeService', () => {
 
             when(modelMapperService.mapToModel<AnimeDTO>(response)).thenReturn(AnimeTestData.steinsGate());
             const enrichedResource: EnrichedResource<AnimeDTO> = new EnrichedResource<AnimeDTO>(AnimeTestData.steinsGate(), [selfLink]);
-            when(relationLoaderService.populateWithRelations(anything(), anything())).thenReturn(Observable.of(enrichedResource));
+            when(relationLoaderService.populateWithRelations(anything(), anything())).thenReturn(observableOf(enrichedResource));
 
             animeService.findAnime(id).subscribe((result: EnrichedResource<AnimeDTO>) => {
                 const [capturedEnrichedResource, capturedRelationsToLoad] = capture(relationLoaderService.populateWithRelations).last();

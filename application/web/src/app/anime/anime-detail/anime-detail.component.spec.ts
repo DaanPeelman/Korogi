@@ -1,11 +1,10 @@
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-
 import { AnimeDetailComponent } from './anime-detail.component';
 import { AnimeService } from "../../shared/services/anime/anime.service";
 import { instance, mock, when } from "ts-mockito";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs/Observable";
+import { of as observableOf } from "rxjs";
 import { EnrichedResource } from "../../shared/resources/final/enriched-resource";
 import { AnimeTestData } from "../../testing/test-data/anime-test-data";
 import { StubUtil } from "../../testing/util/stub-util";
@@ -69,7 +68,7 @@ describe('AnimeDetailComponent', () => {
             const enrichedResource: EnrichedResource<AnimeDTO> = new EnrichedResource<AnimeDTO>(AnimeTestData.steinsGate(), []);
             enrichedResource.embedded = embedded;
 
-            when(animeServiceMock.findAnime(id, BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES)).thenReturn(Observable.of(enrichedResource));
+            when(animeServiceMock.findAnime(id, BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES)).thenReturn(observableOf(enrichedResource));
 
             component.ngOnInit();
 

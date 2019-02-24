@@ -1,10 +1,7 @@
+import { forkJoin as observableForkJoin, Observable, of as observableOf } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/add/operator/catch';
 import { EnrichedResource } from "../../resources/final/enriched-resource";
 import { ModelMapperService } from "../../mappers/model-mapper.service";
 import { SingleResource } from "../../resources/original/single-resource";
@@ -23,10 +20,10 @@ export class RelationLoaderService {
     }
 
     public populateWithRelations<T>(enrichedResource: EnrichedResource<T>, relationsToLoad: string[]): Observable<EnrichedResource<T>> {
-        let observables: Observable<any>[] = [Observable.of(enrichedResource)].concat(this.createRelationHttpRequests(enrichedResource, relationsToLoad));
+        let observables: Observable<any>[] = [observableOf(enrichedResource)].concat(this.createRelationHttpRequests(enrichedResource, relationsToLoad));
 
-        return Observable.forkJoin(observables)
-            .map((value: any[]) => {
+        return observableForkJoin(observables).pipe(
+            map((value: any[]) => {
                 let resourceToEnrich: EnrichedResource<T> = value[0];
                 let loadedRelations: Relation[] = value.splice(1);
 
@@ -35,16 +32,18 @@ export class RelationLoaderService {
                 }
 
                 return resourceToEnrich;
-            });
+            })
+        );
     }
 
     private createRelationHttpRequests(enrichedResource: EnrichedResource<any>, relationsToLoad: string[]): Observable<any>[] {
         return enrichedResource.links
             .filter(link => relationsToLoad.indexOf(link.rel) > -1)
             .map(link =>
-                this.httpClient.get<Resource>(link.href)
-                    .map(resource => new Relation(link.rel, this.mapToModel(resource)))
-                    .catch(e => this.returnEmptyRelationOrThrowError(e, link.rel))
+                this.httpClient.get<Resource>(link.href).pipe(
+                    map(resource => new Relation(link.rel, this.mapToModel(resource))),
+                    catchError(e => this.returnEmptyRelationOrThrowError(e, link.rel))
+                )
             );
     }
 
@@ -54,7 +53,7 @@ export class RelationLoaderService {
 
     private returnEmptyRelationOrThrowError(e: HttpErrorResponse, rel: string): Observable<Relation> {
         if (e.status === 404) {
-            return Observable.of(new Relation(rel, undefined));
+            return observableOf(new Relation(rel, undefined));
         } else {
             throw e;
         }

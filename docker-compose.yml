@@ -12,7 +12,8 @@ services:
       - 8443:8443
     volumes:
       - ./config/certificates:/usr/local/tomcat/conf/certificates:ro
-      - ./config/secrets:/usr/local/secrets:ro
+    env_file:
+      - ./config/secrets/database.properties
     environment:
       - JPDA_ADDRESS=8000
       - JPDA_TRANSPORT=dt_socket

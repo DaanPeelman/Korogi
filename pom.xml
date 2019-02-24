@@ -19,7 +19,7 @@
         <version.java>1.8</version.java>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <version.servlet-api>[3.1.0,3.2.0)</version.servlet-api>
+        <version.servlet-api>3.1.0</version.servlet-api>
 
         <version.maven-compiler-plugin>3.8.0</version.maven-compiler-plugin>
         <version.maven-war-plugin>3.2.2</version.maven-war-plugin>
@@ -33,25 +33,25 @@
         <version.spring>5.1.5.RELEASE</version.spring>
         <version.spring-hateoas>0.25.1.RELEASE</version.spring-hateoas>
         <version.spring-data-jpa>2.1.5.RELEASE</version.spring-data-jpa>
-        <version.spring-data-jpa-entity-graph>[2.0.0,2.1.0)</version.spring-data-jpa-entity-graph>
-        <version.postgresql>[42.2.0,42.3.0)</version.postgresql>
-        <version.flyway>[5.2.0,5.3.0)</version.flyway>
+        <version.spring-data-jpa-entity-graph>2.0.7</version.spring-data-jpa-entity-graph>
+        <version.postgresql>42.2.5</version.postgresql>
+        <version.flyway>5.2.4</version.flyway>
         <version.hibernate>5.2.18.Final</version.hibernate>
-        <version.hibernate-validator>[6.0.0.Final,6.1.0.Final)</version.hibernate-validator>
+        <version.hibernate-validator>6.0.15.Final</version.hibernate-validator>
         <version.javax-el>3.0.1-b11</version.javax-el>
-        <version.c3p0>[0.9.5.0,0.9.6.0)</version.c3p0>
-        <version.jackson>[2.9.0,2.10.0)</version.jackson>
-        <version.lombok>[1.18.0,1.19.0)</version.lombok>
-        <version.mapstruct>[1.3.0.Final,1.4.0.Final)</version.mapstruct>
+        <version.c3p0>0.9.5.3</version.c3p0>
+        <version.jackson>2.9.8</version.jackson>
+        <version.lombok>1.18.6</version.lombok>
+        <version.mapstruct>1.3.0.Final</version.mapstruct>
 
         <version.junit>4.12</version.junit>
-        <version.hamcrest>[1.3.0,1.4.0)</version.hamcrest>
-        <version.jsonassert>[1.5.0,1.6.0)</version.jsonassert>
-        <version.mockito>[2.24.0,2.25.0)</version.mockito>
-        <version.otj-pg-embedded>[0.13.0,0.14.0)</version.otj-pg-embedded>
-        <version.dbunit>[2.6.0,2.7.0)</version.dbunit>
-        <version.json-path>[2.4.0,2.5.0)</version.json-path>
-        <version.spring-test-dbunit>[1.3.0,1.4.0)</version.spring-test-dbunit>
+        <version.hamcrest>1.3</version.hamcrest>
+        <version.jsonassert>1.5.0</version.jsonassert>
+        <version.mockito>2.24.5</version.mockito>
+        <version.otj-pg-embedded>0.13.1</version.otj-pg-embedded>
+        <version.dbunit>2.6.0</version.dbunit>
+        <version.json-path>2.4.0</version.json-path>
+        <version.spring-test-dbunit>1.3.0</version.spring-test-dbunit>
     </properties>
 
     <dependencyManagement>

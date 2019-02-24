@@ -3,5 +3,6 @@ config
 !config/tomcat
 test
 .gitignore
+docker-compose.yml
 pom.xml
 README.md

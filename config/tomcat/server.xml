@@ -104,7 +104,7 @@
                sslImplementationName="org.apache.tomcat.util.net.openssl.OpenSSLImplementation">
         <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol" />
         <SSLHostConfig>
-            <Certificate certificateKeystoreFile="conf/certificates/korogi-test-keystore" certificateKeystorePassword="changeit"/>
+            <Certificate certificateKeystoreFile="conf/certificates/korogi-keystore" certificateKeystorePassword="changeit"/>
         </SSLHostConfig>
     </Connector>
 

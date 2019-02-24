@@ -3,8 +3,7 @@
 application/web/src/main/webapp/**/*
 !application/web/src/main/webapp/WEB-INF/**/*
 application/web/src/app/generated/**/*
-config/**/*
-!config/tomcat/**/*
+postgresql/
 
 # IntelliJ #
 **/.idea/

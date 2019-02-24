@@ -1,9 +1,10 @@
 import { ReplaySubject } from "rxjs/ReplaySubject";
+import { ParamMap } from "@angular/router";
 
 export class StubUtil {
-  static subActivatedRoute(): any {
-    return {
-      params: new ReplaySubject<any>()
-    };
-  }
+    static subActivatedRoute(): any {
+        return {
+            paramMap: new ReplaySubject<ParamMap>()
+        };
+    }
 }

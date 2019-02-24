@@ -12,6 +12,7 @@ import { EpisodeTestData } from "../../testing/test-data/episode-test-data";
 import { PersonageTestData } from "../../testing/test-data/personage-test-data";
 import { BaseAnimeRelation } from "../../generated/models";
 import { AnimeDTO } from "../../shared/models/anime-dto";
+import { ParamMapImpl } from "../../testing/util/param-map-impl";
 
 describe('AnimeDetailComponent', () => {
     let component: AnimeDetailComponent;
@@ -56,8 +57,8 @@ describe('AnimeDetailComponent', () => {
     describe("ngOnInit", () => {
         it("should call the AnimeService to load the Anime with the identifier retrieved from the path and set all the fields on the component", fakeAsync(() => {
             const id: string = "1";
-            const params = [];
-            params["id"] = id;
+            const params = new ParamMapImpl();
+            params.add("id", id);
 
             const embedded = [];
             embedded[BaseAnimeRelation.PREQUAL] = AnimeTestData.naruto();
@@ -72,7 +73,7 @@ describe('AnimeDetailComponent', () => {
 
             component.ngOnInit();
 
-            activatedRouteStub.params.next(params);
+            activatedRouteStub.paramMap.next(params);
 
             tick();
 

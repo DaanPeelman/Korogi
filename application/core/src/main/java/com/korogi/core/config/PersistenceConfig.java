@@ -6,25 +6,37 @@ import com.korogi.core.domain.BaseEntity;
 import org.hibernate.c3p0.internal.C3P0ConnectionProvider;
 import org.hibernate.dialect.PostgreSQL9Dialect;
 import org.postgresql.Driver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
+@PropertySource("file:/usr/local/secrets/database.properties")
 public class PersistenceConfig {
+
+    @Value("${database.url}")
+    private String databaseUrl;
+
+    @Value("${database.username}")
+    private String databaseUsername;
+
+    @Value("${database.password}")
+    private String databasePassword;
 
     @Bean
     public DataSource dataSource() {
         SingleConnectionDataSource dataSource = new SingleConnectionDataSource();
 
         dataSource.setDriverClassName(Driver.class.getName());
-        dataSource.setUrl("jdbc:postgresql://korogi-postgres:5432/postgres");
-        dataSource.setUsername("korogi");
-        dataSource.setPassword("korogi");
+        dataSource.setUrl(databaseUrl);
+        dataSource.setUsername(databaseUsername);
+        dataSource.setPassword(databasePassword);
 
         return dataSource;
     }
@@ -54,9 +66,9 @@ public class PersistenceConfig {
         Properties jpaProperties = new Properties();
 
         jpaProperties.setProperty("hibernate.connection.driver_class", Driver.class.getName());
-        jpaProperties.setProperty("hibernate.connection.url", "jdbc:postgresql://korogi-postgres:5432/postgres");
-        jpaProperties.setProperty("hibernate.connection.username", "korogi");
-        jpaProperties.setProperty("hibernate.connection.password", "korogi");
+        jpaProperties.setProperty("hibernate.connection.url", databaseUrl);
+        jpaProperties.setProperty("hibernate.connection.username", databaseUsername);
+        jpaProperties.setProperty("hibernate.connection.password", databasePassword);
 
         jpaProperties.setProperty("hibernate.connection.provider_class", C3P0ConnectionProvider.class.getName());
 

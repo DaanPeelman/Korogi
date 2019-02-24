@@ -1,7 +1,7 @@
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { AnimeDetailComponent } from './anime-detail.component';
 import { AnimeService } from "../../shared/services/anime/anime.service";
-import { instance, mock, when } from "ts-mockito";
+import { anyString, instance, mock, verify, when } from "ts-mockito";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { of as observableOf } from "rxjs";
@@ -86,6 +86,31 @@ describe('AnimeDetailComponent', () => {
             expect(component.personages.length).toEqual(2);
             expect(component.personages).toContain(PersonageTestData.okabeRintarou());
             expect(component.personages).toContain(PersonageTestData.makiseKurisu());
+        }));
+
+        it("should call the AnimeService to load the Anime with the full identifier retrieved from the path when the identifier is larger than 1 in length", fakeAsync(() => {
+            const id: string = "12"; // id is 2 in length
+            const params = new ParamMapImpl();
+            params.add("id", id);
+
+            const embedded = [];
+            embedded[BaseAnimeRelation.PREQUAL] = AnimeTestData.naruto();
+
+            const enrichedResource: EnrichedResource<AnimeDTO> = new EnrichedResource<AnimeDTO>(AnimeTestData.steinsGate(), []);
+            enrichedResource.embedded = embedded;
+
+            when(animeServiceMock.findAnime(anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(observableOf(enrichedResource));
+
+            component.ngOnInit();
+
+            activatedRouteStub.paramMap.next(params);
+
+            tick();
+
+            expect(component.anime).toEqual(AnimeTestData.steinsGate());
+
+            // verify findAnime was called with the full id and only once
+            verify(animeServiceMock.findAnime(id, BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES)).once();
         }));
     });
 });

@@ -8,6 +8,7 @@ import { AnimeDTO } from "../../shared/models/anime-dto";
 import { EpisodeDTO } from "../../shared/models/episode-dto";
 import { PersonageDTO } from "../../shared/models/personage-dto";
 import { BaseAnimeRelation } from "../../generated/models";
+import { of as observableOf } from "rxjs";
 
 @Component({
     selector: 'korogi-anime-detail',
@@ -30,7 +31,7 @@ export class AnimeDetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.paramMap.pipe(
-            mergeMap(params => params.get("id")),
+            mergeMap(params => observableOf(params.get("id"))),
             mergeMap(id => this.animeService.findAnime(id, BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES))
         ).subscribe((resource: EnrichedResource<AnimeDTO>) => this.setData(resource));
     }

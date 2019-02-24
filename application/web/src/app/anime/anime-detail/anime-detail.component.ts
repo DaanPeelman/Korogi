@@ -1,7 +1,7 @@
 import { mergeMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { AnimeService } from "../../shared/services/anime/anime.service";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { EnrichedResource } from "../../shared/resources/final/enriched-resource";
 import { Title } from "@angular/platform-browser";
 import { AnimeDTO } from "../../shared/models/anime-dto";
@@ -29,8 +29,9 @@ export class AnimeDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.params.pipe(
-            mergeMap((params: Params) => this.animeService.findAnime(params['id'], BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES))
+        this.route.paramMap.pipe(
+            mergeMap(params => params.get("id")),
+            mergeMap(id => this.animeService.findAnime(id, BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES))
         ).subscribe((resource: EnrichedResource<AnimeDTO>) => this.setData(resource));
     }
 

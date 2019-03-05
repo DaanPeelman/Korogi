@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  transparant: boolean;
+  transparent: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    this.transparant = true;
+    this.transparent = true;
   }
 
 }

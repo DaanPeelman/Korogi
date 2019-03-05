@@ -41,7 +41,7 @@ import org.hibernate.annotations.LazyToOneOption;
 @ToString(callSuper = true)
 @Entity
 @Table(name = "EPISODES")
-@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_EPISODE")
+@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_EPISODE", allocationSize = 1)
 public class Episode extends BaseEntity {
     private static final long serialVersionUID = -970686580041286530L;
 

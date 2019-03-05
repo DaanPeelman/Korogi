@@ -1,7 +1,9 @@
-FROM tomcat:8.5-jre8-alpine
+FROM tomcat:8.5-jre11-slim
+#TODO use alpine image once available
 MAINTAINER Daan Peelman <daanpeelman@gmail.com>
 
-RUN apk add --no-cache tzdata
+#RUN apk add --no-cache tzdata
+#TODO uncomment wen using alpine image
 
 ENV CATALINA_WEBAPPS $CATALINA_HOME/webapps
 

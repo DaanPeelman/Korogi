@@ -35,7 +35,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Entity
 @Table(name = "ROLES")
-@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ROLE")
+@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ROLE", allocationSize = 1)
 public class Role extends BaseEntity {
     private static final long serialVersionUID = 2000395564011152659L;
 

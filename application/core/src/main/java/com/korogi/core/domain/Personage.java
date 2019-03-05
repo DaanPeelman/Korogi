@@ -41,7 +41,7 @@ import org.hibernate.validator.constraints.URL;
 @ToString(callSuper = true)
 @Entity
 @Table(name = "PERSONAGES")
-@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_PERSONAGE")
+@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_PERSONAGE", allocationSize = 1)
 public class Personage extends BaseEntity {
     @NotBlank
     @Size(max = 128)

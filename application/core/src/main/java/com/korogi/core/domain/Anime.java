@@ -51,7 +51,7 @@ import org.hibernate.validator.constraints.URL;
 @ToString(callSuper = true, exclude = { "sequal", "episodes", "personages" })
 @Entity
 @Table(name = "ANIME")
-@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ANIME")
+@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ANIME", allocationSize = 1)
 public class Anime extends BaseEntity {
     private static final long serialVersionUID = -2472387246309958379L;
 

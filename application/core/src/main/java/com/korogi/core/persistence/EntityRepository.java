@@ -1,7 +1,7 @@
 package com.korogi.core.persistence;
 
-import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphJpaRepository;
 import com.korogi.core.domain.BaseEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 /**
@@ -11,9 +11,9 @@ import org.springframework.data.repository.NoRepositoryBean;
  *
  * @param <E> the entity to do CRUD operations with
  *
- * @see EntityGraphJpaRepository
+ * @see JpaRepository
  * @see BaseEntity
  */
 @NoRepositoryBean
-public interface EntityRepository<E extends BaseEntity> extends EntityGraphJpaRepository<E, Long> {
+public interface EntityRepository<E extends BaseEntity> extends JpaRepository<E, Long> {
 }

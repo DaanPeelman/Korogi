@@ -7,7 +7,7 @@ import { PagedResources } from "../../resources/final/paged-resources";
 import { PageMetaData } from "../../resources/page-meta-data";
 import { RelationLoaderService } from "../relation-loader/relation-loader.service";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
-import { ModelMapperService } from "../../mappers/model-mapper.service";
+import { ModelMapperService } from "../model-mapper/model-mapper.service";
 import { MultipleResources } from "../../resources/original/multiple-resources";
 import { SingleResource } from "../../resources/original/single-resource";
 import { AnimeDTO } from "../../models/anime-dto";

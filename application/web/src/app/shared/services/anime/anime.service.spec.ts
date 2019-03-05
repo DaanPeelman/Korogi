@@ -8,7 +8,7 @@ import { PageMetaData } from "../../resources/page-meta-data";
 import { SingleResource } from "../../resources/original/single-resource";
 import { Link } from "../../resources/link";
 import { anything, capture, instance, mock, when } from "ts-mockito";
-import { ModelMapperService } from "../../mappers/model-mapper.service";
+import { ModelMapperService } from "../model-mapper/model-mapper.service";
 import { RelationLoaderService } from "../relation-loader/relation-loader.service";
 import { of as observableOf } from "rxjs";
 import { EnrichedResource } from "../../resources/final/enriched-resource";

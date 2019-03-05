@@ -3,7 +3,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
-import { ModelMapperService } from "../../mappers/model-mapper.service";
+import { ModelMapperService } from "../model-mapper/model-mapper.service";
 import { SingleResource } from "../../resources/original/single-resource";
 import { MultipleResources } from "../../resources/original/multiple-resources";
 import { Resource } from "../../resources/original/resource";

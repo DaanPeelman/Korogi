@@ -2,7 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { RelationLoaderService } from './relation-loader.service';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from "@angular/common/http/testing";
-import { ModelMapperService } from "../../mappers/model-mapper.service";
+import { ModelMapperService } from "../model-mapper/model-mapper.service";
 import { instance, mock, when } from "ts-mockito";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
 import { AnimeTestData } from "../../../testing/test-data/anime-test-data";

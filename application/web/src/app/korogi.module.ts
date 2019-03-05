@@ -8,7 +8,8 @@ import { AnimeService } from "./shared/services/anime/anime.service";
 import { RouterModule } from "@angular/router";
 import { AnimeModule } from "./anime/anime.module";
 import { RelationLoaderService } from "./shared/services/relation-loader/relation-loader.service";
-import { ModelMapperService } from "./shared/mappers/model-mapper.service";
+import { ModelMapperService } from "./shared/services/model-mapper/model-mapper.service";
+import { MapperModule } from "./shared/mapper/mapper.module";
 
 @NgModule({
     declarations: [
@@ -19,6 +20,8 @@ import { ModelMapperService } from "./shared/mappers/model-mapper.service";
         HeaderModule,
         HttpClientModule,
         RouterModule.forRoot([]),
+
+        MapperModule.forRoot(),
 
         AnimeModule
     ],

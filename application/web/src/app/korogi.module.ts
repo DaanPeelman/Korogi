@@ -11,22 +11,23 @@ import { RelationLoaderService } from "./shared/services/relation-loader/relatio
 import { ModelMapperService } from "./shared/mappers/model-mapper.service";
 
 @NgModule({
-  declarations: [
-    KorogiComponent
-  ],
-  imports: [
-    BrowserModule,
-    HeaderModule,
-    HttpClientModule,
-    RouterModule.forRoot([]),
+    declarations: [
+        KorogiComponent
+    ],
+    imports: [
+        BrowserModule,
+        HeaderModule,
+        HttpClientModule,
+        RouterModule.forRoot([]),
 
-    AnimeModule
-  ],
-  providers: [
-    RelationLoaderService,
-    ModelMapperService,
-    AnimeService
-  ],
-  bootstrap: [KorogiComponent]
+        AnimeModule
+    ],
+    providers: [
+        RelationLoaderService,
+        ModelMapperService,
+        AnimeService
+    ],
+    bootstrap: [KorogiComponent]
 })
-export class KorogiModule { }
+export class KorogiModule {
+}

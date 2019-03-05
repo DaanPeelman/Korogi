@@ -25,10 +25,11 @@
     "bootstrap": "4.1.x",
     "core-js": "2.5.x",
     "intl": "1.2.x",
+    "moment": "^2.24.0",
     "rxjs": "6.4.x",
+    "rxjs-compat": "^6.0.0-rc.0",
     "tslib": "1.9.x",
-    "zone.js": "0.8.x",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "zone.js": "0.8.x"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.x",
@@ -37,6 +38,7 @@
     "@angular/language-service": "7.2.x",
     "@types/jasmine": "2.8.x",
     "@types/jasminewd2": "2.0.x",
+    "@types/moment": "^2.13.0",
     "@types/node": "9.6.x",
     "codelyzer": "4.2.x",
     "jasmine-core": "3.1.x",

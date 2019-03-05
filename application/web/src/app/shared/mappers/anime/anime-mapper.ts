@@ -1,18 +1,12 @@
-import { IMapper } from "../model-mapper.service";
 import { AnimeDTO } from "../../models/anime-dto";
+import { BaseMapper } from "../base-mapper";
 
-export class AnimeMapper implements IMapper<AnimeDTO> {
-    private convert(resource: any): AnimeDTO {
-        return Object.assign(
-            new AnimeDTO(),
-            resource
-        );
+export class AnimeMapper extends BaseMapper<AnimeDTO> {
+    protected getObjectInstance(): AnimeDTO {
+        return new AnimeDTO();
     }
 
-    map(resource: any): AnimeDTO {
-        let animeDTO: AnimeDTO = this.convert(resource);
-        delete animeDTO["type"];
-
-        return animeDTO;
+    forType(): string {
+        return "anime";
     }
 }

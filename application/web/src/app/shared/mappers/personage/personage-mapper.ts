@@ -1,18 +1,12 @@
-import { IMapper } from "../model-mapper.service";
 import { PersonageDTO } from "../../models/personage-dto";
+import { BaseMapper } from "../base-mapper";
 
-export class PersonageMapper implements IMapper<PersonageDTO> {
-    private convert(resource: any): PersonageDTO {
-        return Object.assign(
-            new PersonageDTO(),
-            resource
-        );
+export class PersonageMapper extends BaseMapper<PersonageDTO> {
+    protected getObjectInstance(): PersonageDTO {
+        return new PersonageDTO();
     }
 
-    map(resource: any): PersonageDTO {
-        let personageDTO: PersonageDTO = this.convert(resource);
-        delete personageDTO["type"];
-
-        return personageDTO;
+    forType(): string {
+        return "personage";
     }
 }

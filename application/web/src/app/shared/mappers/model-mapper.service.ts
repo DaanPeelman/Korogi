@@ -4,10 +4,11 @@ import { PersonageMapper } from "./personage/personage-mapper";
 import { EpisodeMapper } from "./episode/episode-mapper";
 import { SingleResource } from "../resources/original/single-resource";
 import { MultipleResources } from "../resources/original/multiple-resources";
+import { IMapper } from "./mapper";
 
 @Injectable()
 export class ModelMapperService {
-    private mappers: any[] = [];
+    private mappers: IMapper<any>[] = [];
 
     constructor() {
         this.mappers["anime"] = new AnimeMapper();
@@ -22,8 +23,4 @@ export class ModelMapperService {
     mapToModels<T>(resourceToMap: MultipleResources): T[] {
         return resourceToMap.content.map(resource => this.mapToModel(resource))
     }
-}
-
-export interface IMapper<T> {
-    map(resource: any): T;
 }

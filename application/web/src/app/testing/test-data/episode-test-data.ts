@@ -1,4 +1,5 @@
 import { EpisodeDTO } from "../../shared/models/episode-dto";
+import { DateUtil } from "../../shared/utils/date-util";
 
 export class EpisodeTestData {
     static steinsGate_episode1(): EpisodeDTO {
@@ -7,7 +8,7 @@ export class EpisodeTestData {
         episodeDTO.name = "Prologue of the Beginning and Ending";
         episodeDTO.synopsis = "Steins Gate episode 1 synopsis";
         episodeDTO.durationInMinutes = 24;
-        episodeDTO.airDate = "2011-04-05";
+        episodeDTO.airDate = DateUtil.parse("2011-04-05");
 
         return episodeDTO;
     }
@@ -18,7 +19,7 @@ export class EpisodeTestData {
         episodeDTO.name = "Paranoia of Time Leaps";
         episodeDTO.synopsis = "Steins Gate episode 2 synopsis";
         episodeDTO.durationInMinutes = 24;
-        episodeDTO.airDate = "2011-04-12";
+        episodeDTO.airDate = DateUtil.parse("2011-04-12");
 
         return episodeDTO;
     }

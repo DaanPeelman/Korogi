@@ -122,7 +122,6 @@
                     <addTypeNamePrefix>Base</addTypeNamePrefix>
                     <mapClasses>asClasses</mapClasses>
                     <mapEnum>asEnum</mapEnum>
-                    <mapDate>asString</mapDate>
                     <outputKind>module</outputKind>
                     <outputFile>src/app/generated/models.ts</outputFile>
                 </configuration>

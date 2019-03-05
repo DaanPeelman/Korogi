@@ -1,18 +1,12 @@
-import { IMapper } from "../model-mapper.service";
 import { EpisodeDTO } from "../../models/episode-dto";
+import { BaseMapper } from "../base-mapper";
 
-export class EpisodeMapper implements IMapper<EpisodeDTO> {
-    private convert(resource: any): EpisodeDTO {
-        return Object.assign(
-            new EpisodeDTO(),
-            resource
-        );
+export class EpisodeMapper extends BaseMapper<EpisodeDTO> {
+    protected getObjectInstance(): EpisodeDTO {
+        return new EpisodeDTO();
     }
 
-    map(resource: any): EpisodeDTO {
-        let episodeDTO: EpisodeDTO = this.convert(resource);
-        delete episodeDTO["type"];
-
-        return episodeDTO;
+    forType(): string {
+        return "episode";
     }
 }

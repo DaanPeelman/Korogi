@@ -4,13 +4,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.korogi.rest.service.BaseServiceTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ConsultAnimeServiceTest extends BaseServiceTest {
+class ConsultAnimeServiceTest extends BaseServiceTest {
     private static final String URL = "/anime";
 
     @Test
-    public void consultAnime() throws Exception {
+    void consultAnime() throws Exception {
         performAndPrint(get(URL))
                 .andExpect(status().isOk());
 

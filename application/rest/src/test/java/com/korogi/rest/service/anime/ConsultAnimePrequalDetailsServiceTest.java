@@ -5,9 +5,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.korogi.rest.service.BaseServiceTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
+class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
     private static final String URL = "/anime/{id}/prequal";
 
     /**
@@ -18,7 +18,7 @@ public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
-    public void consultAnimePrequalDetails() throws Exception {
+    void consultAnimePrequalDetails() throws Exception {
         performAndPrint(get(URL, 2))
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails_expected.json");
@@ -34,7 +34,7 @@ public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
-    public void consultAnimePrequalDetails_withPrequalAndSequal() throws Exception {
+    void consultAnimePrequalDetails_withPrequalAndSequal() throws Exception {
         performAndPrint(get(URL, 3))
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails_withPrequalAndSequal_expected.json");
@@ -50,7 +50,7 @@ public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
-    public void consultAnimePrequalDetails_hasNoPrequal() throws Exception {
+    void consultAnimePrequalDetails_hasNoPrequal() throws Exception {
         performAndPrint(get(URL, 1))
                 .andExpect(status().isNotFound())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails_consultAnimePrequalDetails_hasNoPrequal_expected.json");
@@ -66,7 +66,7 @@ public class ConsultAnimePrequalDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
-    public void consultAnimePrequalDetails_notExisting() throws Exception {
+    void consultAnimePrequalDetails_notExisting() throws Exception {
         performAndPrint(get(URL, 99))
                 .andExpect(status().isNotFound())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails_notExisting_expected.json");

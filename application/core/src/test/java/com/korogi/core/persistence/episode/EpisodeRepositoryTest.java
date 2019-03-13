@@ -10,10 +10,10 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.korogi.core.domain.Anime;
 import com.korogi.core.domain.Episode;
 import com.korogi.core.persistence.BaseRepositoryTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class EpisodeRepositoryTest extends BaseRepositoryTest {
+class EpisodeRepositoryTest extends BaseRepositoryTest {
     @Autowired
     private EpisodeRepository repository;
 
@@ -22,7 +22,7 @@ public class EpisodeRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/episode/EpisodeRepositoryTest_findById.xml")
-    public void findById() throws Exception {
+    void findById() throws Exception {
         long idToFind = 1L;
 
         Episode foundEpisode = repository.findById(idToFind).orElse(null);
@@ -41,7 +41,7 @@ public class EpisodeRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/episode/EpisodeRepositoryTest_findById.xml")
-    public void findById_notExisting() throws Exception {
+    void findById_notExisting() throws Exception {
         assertThat(repository.findById(99L)).isNotPresent();
     }
 
@@ -52,7 +52,7 @@ public class EpisodeRepositoryTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/episode/EpisodeRepositoryTest_save.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/episode/EpisodeRepositoryTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void save() throws Exception {
+    void save() throws Exception {
         Anime anime = em.find(Anime.class, 1L);
         Episode episodeToSave = steinsGateEpisode1_notPeristed()
                 .anime(anime)
@@ -80,7 +80,7 @@ public class EpisodeRepositoryTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/episode/EpisodeRepositoryTest_delete.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/episode/EpisodeRepositoryTest_delete_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void delete() throws Exception {
+    void delete() throws Exception {
         Episode episodeToDelete = em.find(Episode.class, 1L);
 
         repository.delete(episodeToDelete);

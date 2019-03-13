@@ -10,10 +10,10 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.korogi.core.domain.Anime;
 import com.korogi.core.domain.Personage;
 import com.korogi.core.persistence.BaseRepositoryTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PersonageRepositoryTest extends BaseRepositoryTest {
+class PersonageRepositoryTest extends BaseRepositoryTest {
     @Autowired
     private PersonageRepository repository;
 
@@ -22,7 +22,7 @@ public class PersonageRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/personage/PersonageRepositoryImplTest_findById.xml")
-    public void findById() throws Exception {
+    void findById() throws Exception {
         long idToFind = 1L;
 
         Personage foundPersonage = repository.findById(idToFind).orElse(null);
@@ -41,7 +41,7 @@ public class PersonageRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/personage/PersonageRepositoryImplTest_findById.xml")
-    public void findById_notExisting() throws Exception {
+    void findById_notExisting() throws Exception {
         assertThat(repository.findById(99L)).isNotPresent();
     }
 
@@ -52,7 +52,7 @@ public class PersonageRepositoryTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/personage/PersonageRepositoryImplTest_save.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/personage/PersonageRepositoryImplTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void save() throws Exception {
+    void save() throws Exception {
         Anime anime = em.find(Anime.class, 1L);
         Personage personageToSave = okabeRintarou_notPersisted()
                 .anime(singletonList(anime))
@@ -78,7 +78,7 @@ public class PersonageRepositoryTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/personage/PersonageRepositoryImplTest_delete.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/personage/PersonageRepositoryImplTest_delete_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void delete() throws Exception {
+    void delete() throws Exception {
         Personage personageToDelete = em.find(Personage.class, 1L);
 
         repository.delete(personageToDelete);

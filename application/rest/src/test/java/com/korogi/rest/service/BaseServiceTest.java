@@ -11,13 +11,13 @@ import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
 import com.korogi.rest.config.RestConfig;
 import com.korogi.rest.service.util.HibernateStatisticsUtil;
 import com.korogi.rest.service.util.MockMvcAssertionUtil;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {
                 TestPersistenceConfig.class,
@@ -54,7 +54,7 @@ public abstract class BaseServiceTest {
 
     protected HibernateStatisticsUtil hibernateStatisticsUtil;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(this.wac)
@@ -71,7 +71,7 @@ public abstract class BaseServiceTest {
         );
     }
 
-    @After
+    @AfterEach
     public void after() throws Exception {
         this.hibernateStatisticsUtil.resetQueryCount();
     }

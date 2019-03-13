@@ -5,9 +5,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.korogi.rest.service.BaseServiceTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ConsultAnimePersonagesServiceTest extends BaseServiceTest {
+class ConsultAnimePersonagesServiceTest extends BaseServiceTest {
     private static final String URL = "/anime/{id}/personages";
 
     /**
@@ -18,7 +18,7 @@ public class ConsultAnimePersonagesServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePersonagesServiceTest_consultAnimePersonages.xml")
-    public void consultAnimePersonages() throws Exception {
+    void consultAnimePersonages() throws Exception {
         performAndPrint(get(URL, 1))
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimePersonagesServiceTest_consultAnimePersonages_expected.json");
@@ -34,7 +34,7 @@ public class ConsultAnimePersonagesServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePersonagesServiceTest_consultAnimePersonages.xml")
-    public void consultAnimePersonages_notExistingAnime() throws Exception {
+    void consultAnimePersonages_notExistingAnime() throws Exception {
         performAndPrint(get(URL, 99))
                 .andExpect(status().isNotFound())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimePersonagesServiceTest_consultAnimePersonages_notExistingAnime_expected.json");

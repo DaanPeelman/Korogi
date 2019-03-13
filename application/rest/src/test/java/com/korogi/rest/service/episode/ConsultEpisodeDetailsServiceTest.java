@@ -5,9 +5,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.korogi.rest.service.BaseServiceTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ConsultEpisodeDetailsServiceTest extends BaseServiceTest {
+class ConsultEpisodeDetailsServiceTest extends BaseServiceTest {
     private static final String URL = "/episodes/{id}";
 
     /**
@@ -18,7 +18,7 @@ public class ConsultEpisodeDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails.xml")
-    public void consultEpisodeDetails() throws Exception {
+    void consultEpisodeDetails() throws Exception {
         performAndPrint(get(URL, 1))
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails_expected.json");
@@ -34,7 +34,7 @@ public class ConsultEpisodeDetailsServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails.xml")
-    public void consultEpisodeDetails_notExisting() throws Exception {
+    void consultEpisodeDetails_notExisting() throws Exception {
         performAndPrint(get(URL, 99))
                 .andExpect(status().isNotFound())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/episode/ConsultEpisodeDetailsServiceTest_consultEpisodeDetails_notExisting_expected.json");

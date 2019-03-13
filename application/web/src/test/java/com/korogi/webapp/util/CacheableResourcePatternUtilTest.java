@@ -2,25 +2,23 @@ package com.korogi.webapp.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * @author Daan Peelman
  */
-@RunWith(BlockJUnit4ClassRunner.class)
-public class CacheableResourcePatternUtilTest {
+class CacheableResourcePatternUtilTest {
     private CacheableResourcePatternUtil util;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void setup() {
         util = new CacheableResourcePatternUtil();
     }
 
     @Test
-    public void isCacheableResource_css() throws Exception {
+    void isCacheableResource_css() throws Exception {
         assertThat(util.isCacheableResource("test.css")).isTrue();
         assertThat(util.isCacheableResource("/test.css")).isTrue();
         assertThat(util.isCacheableResource("/assets/css/test.css")).isTrue();
@@ -28,7 +26,7 @@ public class CacheableResourcePatternUtilTest {
     }
 
     @Test
-    public void isCacheableResource_js() throws Exception {
+    void isCacheableResource_js() throws Exception {
         assertThat(util.isCacheableResource("test.js")).isTrue();
         assertThat(util.isCacheableResource("/test.js")).isTrue();
         assertThat(util.isCacheableResource("/assets/js/test.js")).isTrue();
@@ -38,35 +36,35 @@ public class CacheableResourcePatternUtilTest {
     }
 
     @Test
-    public void isCacheableResource_jpg() throws Exception {
+    void isCacheableResource_jpg() throws Exception {
         assertThat(util.isCacheableResource("test.jpg")).isFalse();
         assertThat(util.isCacheableResource("/test.jpg")).isFalse();
         assertThat(util.isCacheableResource("/assets/images/test.jpg")).isFalse();
     }
 
     @Test
-    public void isCacheableResource_png() throws Exception {
+    void isCacheableResource_png() throws Exception {
         assertThat(util.isCacheableResource("test.png")).isFalse();
         assertThat(util.isCacheableResource("/test.png")).isFalse();
         assertThat(util.isCacheableResource("/assets/images/test.png")).isFalse();
     }
 
     @Test
-    public void isCacheableResource_gif() throws Exception {
+    void isCacheableResource_gif() throws Exception {
         assertThat(util.isCacheableResource("test.gif")).isFalse();
         assertThat(util.isCacheableResource("/test.gif")).isFalse();
         assertThat(util.isCacheableResource("/assets/images/test.gif")).isFalse();
     }
 
     @Test
-    public void isCacheableResource_noExtension() throws Exception {
+    void isCacheableResource_noExtension() throws Exception {
         assertThat(util.isCacheableResource("")).isFalse();
         assertThat(util.isCacheableResource("/")).isFalse();
         assertThat(util.isCacheableResource("/anime/1")).isFalse();
     }
 
     @Test
-    public void isCacheableResource_html() throws Exception {
+    void isCacheableResource_html() throws Exception {
         assertThat(util.isCacheableResource("index.html")).isFalse();
         assertThat(util.isCacheableResource("/index.html")).isFalse();
         assertThat(util.isCacheableResource("/anime/index.html")).isFalse();

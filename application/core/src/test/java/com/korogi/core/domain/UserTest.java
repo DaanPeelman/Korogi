@@ -4,18 +4,18 @@ import static com.korogi.core.domain.User.newUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.UUID;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Daan Peelman
  */
-public class UserTest {
+class UserTest {
 
     /**
      * Should create a new user with the values passed to the builder.
      */
     @Test
-    public void newUser_new() throws Exception {
+    void newUser_new() throws Exception {
         String email = "john.doe@test.com";
         String username = "john.doe";
         String password = "p@ssw0rd";

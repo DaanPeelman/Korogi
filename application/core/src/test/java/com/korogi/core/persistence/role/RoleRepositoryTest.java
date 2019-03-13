@@ -8,13 +8,13 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.korogi.core.domain.Role;
 import com.korogi.core.persistence.BaseRepositoryTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Daan Peelman
  */
-public class RoleRepositoryTest extends BaseRepositoryTest {
+class RoleRepositoryTest extends BaseRepositoryTest {
     @Autowired
     private RoleRepository repository;
 
@@ -23,7 +23,7 @@ public class RoleRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_findById.xml")
-    public void findById() throws Exception {
+    void findById() throws Exception {
         long idToFind = 1;
 
         Role foundRole = repository.findById(idToFind).orElse(null);
@@ -37,7 +37,7 @@ public class RoleRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_findById.xml")
-    public void findById_notExisting() throws Exception {
+    void findById_notExisting() throws Exception {
         assertThat(repository.findById(99L)).isNotPresent();
     }
 
@@ -47,7 +47,7 @@ public class RoleRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @ExpectedDatabase(value = "/com/korogi/core/persistence/role/RoleRepositoryTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void save() throws Exception {
+    void save() throws Exception {
         Role roleToSave = admin().build();
 
         Role savedRole = repository.save(roleToSave);
@@ -69,7 +69,7 @@ public class RoleRepositoryTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/role/RoleRepositoryTest_delete.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/role/RoleRepositoryTest_delete_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void delete() throws Exception {
+    void delete() throws Exception {
         Role roleToDelete = em.find(Role.class, 1L);
 
         repository.delete(roleToDelete);

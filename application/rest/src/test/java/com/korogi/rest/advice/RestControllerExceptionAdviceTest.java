@@ -22,9 +22,9 @@ import com.korogi.core.util.UUIDGenerator;
 import com.korogi.rest.config.TestRestControllerExceptionAdviceConfig;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.service.BaseServiceTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,7 +33,7 @@ import org.springframework.test.context.ContextConfiguration;
  * @author Daan Peelman
  */
 @ContextConfiguration(classes = { TestRestControllerExceptionAdviceConfig.class })
-public class RestControllerExceptionAdviceTest extends BaseServiceTest {
+class RestControllerExceptionAdviceTest extends BaseServiceTest {
 
     @Autowired
     private AnimeRepository animeRepository;
@@ -43,21 +43,21 @@ public class RestControllerExceptionAdviceTest extends BaseServiceTest {
 
     private Logger logger;
 
-    @Before
-    public void injectLogger() throws Exception {
+    @BeforeEach
+    void injectLogger() throws Exception {
         this.logger = mock(Logger.class);
         injectIntoStaticField(RestControllerExceptionAdvice.class, "log", logger);
     }
 
-    @After
-    public void resetMocks() {
+    @AfterEach
+    void resetMocks() {
         reset(animeRepository);
         reset(uuidGenerator);
         reset(logger);
     }
 
     @Test
-    public void handleResourceNotFoundException() throws Exception {
+    void handleResourceNotFoundException() throws Exception {
         when(animeRepository.findById(1L)).thenThrow(new ResourceNotFoundException());
 
         performAndPrint(get("/anime/{id}", 1L))
@@ -68,7 +68,7 @@ public class RestControllerExceptionAdviceTest extends BaseServiceTest {
     }
 
     @Test
-    public void handleThrowable() throws Exception {
+    void handleThrowable() throws Exception {
         RuntimeException runtimeExceptionToThrow = new RuntimeException();
         String generatedUUID = UUID.randomUUID().toString();
 

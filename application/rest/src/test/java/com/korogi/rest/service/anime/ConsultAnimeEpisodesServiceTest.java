@@ -5,9 +5,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.korogi.rest.service.BaseServiceTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
+class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
     private static final String URL = "/anime/{id}/episodes";
 
     /**
@@ -18,7 +18,7 @@ public class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes.xml")
-    public void consultAnimeEpisodes() throws Exception {
+    void consultAnimeEpisodes() throws Exception {
         performAndPrint(get(URL, 1))
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes_expected.json");
@@ -34,7 +34,7 @@ public class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes.xml")
-    public void consultAnimeEpisodes_notExistingAnime() throws Exception {
+    void consultAnimeEpisodes_notExistingAnime() throws Exception {
         performAndPrint(get(URL, 99))
                 .andExpect(status().isNotFound())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes_notExistingAnime_expected.json");

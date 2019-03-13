@@ -7,18 +7,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import com.korogi.core.domain.enumeration.AnimeType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Daan Peelman
  */
-public class AnimeTest {
+class AnimeTest {
 
     /**
      * Should create a new anime with the values passed to the builder.
      */
     @Test
-    public void newAnime_new() throws Exception {
+    void newAnime_new() throws Exception {
         AnimeType animeType = TV;
         String nameEnglish = "English name";
         String nameRomanized = "Romanized name";

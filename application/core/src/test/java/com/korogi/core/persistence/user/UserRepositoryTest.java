@@ -8,13 +8,13 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.korogi.core.domain.User;
 import com.korogi.core.persistence.BaseRepositoryTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Daan Peelman
  */
-public class UserRepositoryTest extends BaseRepositoryTest {
+class UserRepositoryTest extends BaseRepositoryTest {
     @Autowired
     private UserRepository repository;
 
@@ -23,7 +23,7 @@ public class UserRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_findById.xml")
-    public void findById() throws Exception {
+    void findById() throws Exception {
         long idToFind = 1;
 
         User foundUser = repository.findById(idToFind).orElse(null);
@@ -37,7 +37,7 @@ public class UserRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_findById.xml")
-    public void findById_notExisting() throws Exception {
+    void findById_notExisting() throws Exception {
         assertThat(repository.findById(99L)).isNotPresent();
     }
 
@@ -47,7 +47,7 @@ public class UserRepositoryTest extends BaseRepositoryTest {
      */
     @Test
     @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_save_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void save() throws Exception {
+    void save() throws Exception {
         User userToSave = johnDoe().build();
 
         User savedUser = repository.save(userToSave);
@@ -69,7 +69,7 @@ public class UserRepositoryTest extends BaseRepositoryTest {
     @Test
     @DatabaseSetup("/com/korogi/core/persistence/user/UserRepositoryTest_delete.xml")
     @ExpectedDatabase(value = "/com/korogi/core/persistence/user/UserRepositoryTest_delete_result.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
-    public void delete() throws Exception {
+    void delete() throws Exception {
         User userToDelete = em.find(User.class, 1L);
 
         repository.delete(userToDelete);

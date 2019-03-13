@@ -16,19 +16,19 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.korogi.webapp.util.CacheableResourcePatternUtil;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * @author Daan Peelman
  */
-@RunWith(MockitoJUnitRunner.class)
-public class CacheControlFilterTest {
+@ExtendWith(MockitoExtension.class)
+class CacheControlFilterTest {
     private static final long EXPECTED_MAX_AGE_IN_SECONDS = ((60 * 60) * 24) * (7 * 4);
     private static final String REQUEST_URI = "MY_REQUEST_URI";
 
@@ -47,14 +47,14 @@ public class CacheControlFilterTest {
     @Mock
     private FilterChain chain;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         injectIntoStaticField(filter.getClass(), "CACHEABLE_RESOURCE_PATTERN_UTIL", cacheableResourcePatternUtil);
         when(request.getRequestURI()).thenReturn(REQUEST_URI);
     }
 
     @Test
-    public void doFilter_cacheableResource() throws Exception {
+    void doFilter_cacheableResource() throws Exception {
         ArgumentCaptor<Long> captorExpiresDate = ArgumentCaptor.forClass(Long.class);
 
         when(cacheableResourcePatternUtil.isCacheableResource(REQUEST_URI)).thenReturn(true);
@@ -74,7 +74,7 @@ public class CacheControlFilterTest {
     }
 
     @Test
-    public void doFilter_noCacheableResource() throws Exception {
+    void doFilter_noCacheableResource() throws Exception {
         when(cacheableResourcePatternUtil.isCacheableResource(REQUEST_URI)).thenReturn(false);
 
         filter.doFilter(request, response, chain);

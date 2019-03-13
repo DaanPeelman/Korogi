@@ -2,19 +2,16 @@ package com.korogi.core.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Daan Peelman
  */
-@RunWith(BlockJUnit4ClassRunner.class)
-public class UUIDGeneratorTest {
+class UUIDGeneratorTest {
     private UUIDGenerator generator = new UUIDGenerator();
 
     @Test
-    public void generateUUIDString() throws Exception {
+    void generateUUIDString() throws Exception {
         assertThat(generator.generateUUIDString()).isNotEmpty();
     }
 }

@@ -55,7 +55,7 @@ public abstract class BaseServiceTest {
     protected HibernateStatisticsUtil hibernateStatisticsUtil;
 
     @BeforeEach
-    public void setup() throws Exception {
+    void setup() throws Exception {
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(this.wac)
                 .build();
@@ -72,7 +72,7 @@ public abstract class BaseServiceTest {
     }
 
     @AfterEach
-    public void after() throws Exception {
+    void after() throws Exception {
         this.hibernateStatisticsUtil.resetQueryCount();
     }
 }

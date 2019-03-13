@@ -6,15 +6,13 @@ import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor(access = PUBLIC)
-@EqualsAndHashCode(callSuper = true)
 @Builder(builderMethodName = "newEpisodeDTO")
-public class EpisodeDTO extends BaseDTO {
+public class EpisodeDTO implements DTO {
     private static final String TYPE = "episode";
 
     private String name;

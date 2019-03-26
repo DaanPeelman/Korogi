@@ -1,3 +1,4 @@
+.scripts/
 .deployments/
 **/target/
 application/web/src/main/webapp/**/*

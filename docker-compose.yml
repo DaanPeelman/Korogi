@@ -15,7 +15,7 @@ services:
     env_file:
       - ./config/secrets/database.properties
     environment:
-      - JPDA_ADDRESS=8000
+      - JPDA_ADDRESS=*:8000
       - JPDA_TRANSPORT=dt_socket
       - TZ=${KOROGI_TZ}
     links:

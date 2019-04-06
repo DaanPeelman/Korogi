@@ -5,18 +5,18 @@
                              http://java.sun.com/xml/ns/javaee/web-app.xsd'
          version='3.0'>
 
-  <display-name>Korogi - Web</display-name>
+    <display-name>Korogi - Web</display-name>
 
-  <!-- When request to static resource, serve set resource -->
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>*.html</url-pattern>
-    <url-pattern>*.css</url-pattern>
-    <url-pattern>*.js</url-pattern>
-    <url-pattern>*.jpg</url-pattern>
-    <url-pattern>*.png</url-pattern>
-    <url-pattern>*.gif</url-pattern>
-  </servlet-mapping>
+    <!-- When request to static resource, serve set resource -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>*.gif</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>CacheControlFilter</filter-name>
@@ -24,12 +24,16 @@
     </filter>
     <filter-mapping>
         <filter-name>CacheControlFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.css</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CacheControlFilter</filter-name>
+        <url-pattern>*.js</url-pattern>
     </filter-mapping>
 
-  <error-page>
-    <!-- For Angular app not found page -->
-    <error-code>404</error-code>
-    <location>/index.html</location>
-  </error-page>
+    <error-page>
+        <!-- For Angular app not found page -->
+        <error-code>404</error-code>
+        <location>/index.html</location>
+    </error-page>
 </web-app>

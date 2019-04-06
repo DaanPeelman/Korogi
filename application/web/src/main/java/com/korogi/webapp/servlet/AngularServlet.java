@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Serve index.html page (with 200 status code) to let Angular do the routing
  */
-@WebServlet(urlPatterns = { "/" }, loadOnStartup = 1)
+@WebServlet(urlPatterns = {"/"}, loadOnStartup = 1)
 public class AngularServlet extends HttpServlet {
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      req.getRequestDispatcher("/index.html").forward(req, resp);
-  }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/index.html").forward(req, resp);
+    }
 }

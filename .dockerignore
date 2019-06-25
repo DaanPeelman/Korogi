@@ -2,6 +2,7 @@
 application
 config
 !config/tomcat
+logs
 test
 .gitignore
 docker-compose.yml

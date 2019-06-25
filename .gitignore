@@ -1,5 +1,6 @@
 .scripts/
 .deployments/
+logs/*
 **/target/
 application/web/src/main/webapp/**/*
 !application/web/src/main/webapp/WEB-INF/**/*

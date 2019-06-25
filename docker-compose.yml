@@ -12,6 +12,7 @@ services:
       - 8443:8443
     volumes:
       - ./config/certificates:/usr/local/tomcat/conf/certificates:ro
+      - ./logs:/opt/logs
     env_file:
       - ./config/secrets/database.properties
     environment:

@@ -70,11 +70,13 @@ public class PersistenceConfig {
 
         jpaProperties.setProperty("hibernate.connection.provider_class", C3P0ConnectionProvider.class.getName());
 
+        jpaProperties.setProperty("hibernate.c3p0.preferredTestQuery", "SELECT 1");
+        jpaProperties.setProperty("hibernate.c3p0.testConnectionOnCheckin", "true");
         jpaProperties.setProperty("hibernate.c3p0.min_size", "1");
         jpaProperties.setProperty("hibernate.c3p0.max_size", "10");
         jpaProperties.setProperty("hibernate.c3p0.timeout", "600");
         jpaProperties.setProperty("hibernate.c3p0.max_statements", "10");
-        jpaProperties.setProperty("hibernate.c3p0.idle_test_period", "3000");
+        jpaProperties.setProperty("hibernate.c3p0.idle_test_period", "30");
         jpaProperties.setProperty("hibernate.c3p0.acquire_increment", "1");
 
         return jpaProperties;

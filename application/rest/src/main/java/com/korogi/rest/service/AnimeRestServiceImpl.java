@@ -1,5 +1,8 @@
 package com.korogi.rest.service;
 
+import static com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils.fromAttributePaths;
+import static com.korogi.core.domain.Anime_.EPISODES;
+import static com.korogi.core.domain.Anime_.PERSONAGES;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -89,7 +92,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     public @ResponseBody PagedResources<Resource<EpisodeDTO>> getAnimeEpisodes(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
-        Anime anime = animeRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Anime anime = animeRepository.findById(id, fromAttributePaths(EPISODES)).orElseThrow(ResourceNotFoundException::new);
 
         return entityToDTOResourceMapper.toPagedResources(anime.getEpisodes(), 1L, 20L);
     }
@@ -100,7 +103,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     public @ResponseBody PagedResources<Resource<PersonageDTO>> getAnimePersonages(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
-        Anime anime = animeRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Anime anime = animeRepository.findById(id, fromAttributePaths(PERSONAGES)).orElseThrow(ResourceNotFoundException::new);
 
         return entityToDTOResourceMapper.toPagedResources(anime.getPersonages(), 1L, 20L);
     }

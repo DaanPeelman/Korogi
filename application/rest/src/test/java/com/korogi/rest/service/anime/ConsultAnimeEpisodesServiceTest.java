@@ -23,7 +23,7 @@ class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(2);
+        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**

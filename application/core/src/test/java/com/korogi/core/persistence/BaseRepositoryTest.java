@@ -16,7 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Daan Peelman
  */
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { TestPersistenceConfig.class, CoreConfig.class})
+@ContextConfiguration(
+        classes = {
+                TestPersistenceConfig.class,
+                CoreConfig.class
+        }
+)
 @Transactional
 @TestExecutionListeners(
     {

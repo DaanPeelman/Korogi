@@ -34,6 +34,7 @@
         <version.spring>5.1.5.RELEASE</version.spring>
         <version.spring-hateoas>0.25.1.RELEASE</version.spring-hateoas>
         <version.spring-data-jpa>2.1.5.RELEASE</version.spring-data-jpa>
+        <version.spring-data-jpa-entity-graph>2.1.0</version.spring-data-jpa-entity-graph>
         <version.postgresql>42.2.5</version.postgresql>
         <version.flyway>5.2.4</version.flyway>
         <version.hibernate>5.4.1.Final</version.hibernate>
@@ -123,6 +124,11 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${version.spring-data-jpa}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cosium.spring.data</groupId>
+                <artifactId>spring-data-jpa-entity-graph</artifactId>
+                <version>${version.spring-data-jpa-entity-graph}</version>
             </dependency>
 
             <!-- DATABASE -->

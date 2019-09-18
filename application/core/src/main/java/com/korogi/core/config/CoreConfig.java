@@ -16,7 +16,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 @Configuration
-@ComponentScan(basePackageClasses = { EntityRepository.class, UUIDGenerator.class })
+@ComponentScan(basePackageClasses = {
+        EntityRepository.class,
+        UUIDGenerator.class
+})
 @EnableJpaRepositories(
         basePackageClasses = EntityRepository.class,
         repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class

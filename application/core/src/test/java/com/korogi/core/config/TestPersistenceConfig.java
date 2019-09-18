@@ -11,6 +11,7 @@ import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
 import org.hibernate.dialect.PostgreSQL9Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,23 +20,23 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@ComponentScan(basePackageClasses = {
+        EmbeddedPostgreSQLDatasourceFactory.class,
+        HibernateStatisticsInterceptor.class
+})
 @EnableTransactionManagement
 public class TestPersistenceConfig {
 
     @Bean
-    public DataSource datasource() throws IOException {
-        return new EmbeddedPostgreSQLDatasourceFactory().getDatasource();
+    @Autowired
+    public DataSource datasource(EmbeddedPostgreSQLDatasourceFactory embeddedPostgreSQLDatasourceFactory) throws IOException {
+        return embeddedPostgreSQLDatasourceFactory.getDatasource();
     }
 
     @Bean
     @Autowired
     public DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection(DataSource dataSource) {
         return new DatabaseDataSourceConnectionFactoryBean(dataSource);
-    }
-
-    @Bean
-    public HibernateStatisticsInterceptor hibernateStatisticsInterceptor() {
-        return new HibernateStatisticsInterceptor();
     }
 
     @Bean

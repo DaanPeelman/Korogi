@@ -4,13 +4,20 @@ import java.io.IOException;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 import com.opentable.db.postgres.embedded.EmbeddedPostgres;
+import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmbeddedPostgreSQLDatasourceFactory {
+public class EmbeddedPostgreSQLDataSourceFactory extends AbstractFactoryBean<DataSource> {
     private EmbeddedPostgres embeddedPostgres;
 
-    public DataSource getDatasource() throws IOException {
+    @Override
+    public Class<DataSource> getObjectType() {
+        return DataSource.class;
+    }
+
+    @Override
+    protected DataSource createInstance() throws Exception {
         if (embeddedPostgres == null) {
             embeddedPostgres = EmbeddedPostgres.start();
         }

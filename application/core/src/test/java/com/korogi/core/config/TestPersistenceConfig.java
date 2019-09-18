@@ -1,11 +1,10 @@
 package com.korogi.core.config;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
 import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
-import com.korogi.core.datasource.EmbeddedPostgreSQLDatasourceFactory;
+import com.korogi.core.datasource.EmbeddedPostgreSQLDataSourceFactory;
 import com.korogi.core.domain.BaseEntity;
 import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
 import org.hibernate.dialect.PostgreSQL9Dialect;
@@ -21,17 +20,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackageClasses = {
-        EmbeddedPostgreSQLDatasourceFactory.class,
+        EmbeddedPostgreSQLDataSourceFactory.class,
         HibernateStatisticsInterceptor.class
 })
 @EnableTransactionManagement
 public class TestPersistenceConfig {
-
-    @Bean
-    @Autowired
-    public DataSource datasource(EmbeddedPostgreSQLDatasourceFactory embeddedPostgreSQLDatasourceFactory) throws IOException {
-        return embeddedPostgreSQLDatasourceFactory.getDatasource();
-    }
 
     @Bean
     @Autowired

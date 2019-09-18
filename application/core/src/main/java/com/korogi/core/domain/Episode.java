@@ -5,6 +5,7 @@ import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 import static lombok.AccessLevel.PUBLIC;
+import static org.hibernate.annotations.LazyToOneOption.NO_PROXY;
 
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -18,12 +19,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 /**
  * Entity class representing an Episode in the database.
@@ -33,12 +33,13 @@ import org.hibernate.annotations.LazyToOneOption;
  * @see BaseEntity
  * @see EpisodeBuilder
  */
-@Getter
-@Setter(value = PROTECTED)
+@Data
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newEpisode")
+@EqualsAndHashCode(callSuper = true, exclude = "anime")
 @ToString(callSuper = true)
+
 @Entity
 @Table(name = "EPISODES")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_EPISODE", allocationSize = 1)
@@ -48,7 +49,7 @@ public class Episode extends BaseEntity {
     @NotNull
     @ManyToOne(fetch = LAZY, cascade = PERSIST)
     @JoinColumn(name = "anime_id", nullable = false)
-    @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
+    @LazyToOne(NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime anime;
 
     @NotBlank

@@ -19,9 +19,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.URL;
 
@@ -33,12 +33,13 @@ import org.hibernate.validator.constraints.URL;
  * @see BaseEntity
  * @see PersonageBuilder
  */
-@Getter
-@Setter(value = PROTECTED)
+@Data
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newPersonage")
+@EqualsAndHashCode(callSuper = true, exclude = "anime")
 @ToString(callSuper = true)
+
 @Entity
 @Table(name = "PERSONAGES")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_PERSONAGE", allocationSize = 1)

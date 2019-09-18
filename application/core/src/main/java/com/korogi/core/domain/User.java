@@ -14,9 +14,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -27,12 +27,13 @@ import lombok.ToString;
  * @see BaseEntity
  * @see UserBuilder
  */
-@Getter
-@Setter(value = PROTECTED)
+@Data
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newUser")
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+
 @Entity
 @Table(name = "USERS")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_USER", allocationSize = 1)

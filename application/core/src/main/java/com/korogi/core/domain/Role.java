@@ -14,9 +14,9 @@ import javax.validation.constraints.NotNull;
 import com.korogi.core.domain.enumeration.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -27,12 +27,13 @@ import lombok.ToString;
  * @see BaseEntity
  * @see RoleBuilder
  */
-@Getter
-@Setter(value = PROTECTED)
+@Data
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newRole")
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+
 @Entity
 @Table(name = "ROLES")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ROLE", allocationSize = 1)

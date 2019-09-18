@@ -7,6 +7,7 @@ import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 import static lombok.AccessLevel.PUBLIC;
+import static org.hibernate.annotations.LazyToOneOption.NO_PROXY;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,12 +28,11 @@ import javax.validation.constraints.Size;
 import com.korogi.core.domain.enumeration.AnimeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.validator.constraints.URL;
 
 /**
@@ -43,12 +43,13 @@ import org.hibernate.validator.constraints.URL;
  * @see BaseEntity
  * @see AnimeBuilder
  */
-@Getter
-@Setter(value = PROTECTED)
+@Data
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PUBLIC)
 @Builder(builderMethodName = "newAnime")
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true, exclude = { "sequal", "episodes", "personages" })
+
 @Entity
 @Table(name = "ANIME")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ANIME", allocationSize = 1)
@@ -94,11 +95,11 @@ public class Anime extends BaseEntity {
 
     @OneToOne(fetch = LAZY, cascade = PERSIST)
     @JoinColumn(name = "prequal_id")
-    @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
+    @LazyToOne(NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime prequal;
 
     @OneToOne(fetch = LAZY, cascade = PERSIST, mappedBy = "prequal")
-    @LazyToOne(LazyToOneOption.NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
+    @LazyToOne(NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime sequal;
 
     @Builder.Default

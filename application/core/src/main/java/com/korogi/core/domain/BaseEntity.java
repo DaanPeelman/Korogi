@@ -1,18 +1,19 @@
 package com.korogi.core.domain;
 
+import static javax.persistence.GenerationType.SEQUENCE;
 import static lombok.AccessLevel.PROTECTED;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -24,7 +25,9 @@ import lombok.ToString;
  */
 @Getter
 @NoArgsConstructor(access = PROTECTED)
+@EqualsAndHashCode
 @ToString
+
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
     private static final long serialVersionUID = -7083538719673685269L;
@@ -32,7 +35,7 @@ public abstract class BaseEntity implements Serializable {
     protected static final String ENTITY_SEQUENCE_GENERATOR = "ENTITY_SEQUENCE_GENERATOR";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ENTITY_SEQUENCE_GENERATOR)
+    @GeneratedValue(strategy = SEQUENCE, generator = ENTITY_SEQUENCE_GENERATOR)
     @Column(name = "id")
     private Long id;
 

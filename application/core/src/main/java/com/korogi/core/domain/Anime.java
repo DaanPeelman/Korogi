@@ -20,6 +20,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -104,6 +105,7 @@ public class Anime extends BaseEntity {
 
     @Builder.Default
     @OneToMany(fetch = LAZY, mappedBy = "anime", cascade = ALL)
+    @OrderBy(Episode_.ID)
     private List<Episode> episodes = new ArrayList<>();
 
     @Builder.Default
@@ -114,5 +116,6 @@ public class Anime extends BaseEntity {
             joinColumns = @JoinColumn(name = "anime_id"),
             inverseJoinColumns = @JoinColumn(name = "personage_id")
     )
+    @OrderBy(Personage_.ID)
     private List<Personage> personages = new ArrayList<>();
 }

@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -67,5 +68,6 @@ public class Personage extends BaseEntity {
             joinColumns = @JoinColumn(name = "personage_id"),
             inverseJoinColumns = @JoinColumn(name = "anime_id")
     )
+    @OrderBy(Anime_.ID)
     private List<Anime> anime = new ArrayList<>();
 }

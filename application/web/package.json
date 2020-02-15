@@ -7,7 +7,7 @@
     "start": "node ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.json",
     "build": "node ./node_modules/@angular/cli/bin/ng build --prod",
     "test": "node ./node_modules/@angular/cli/bin/ng test",
-    "test-single-run": "node ./node_modules/@angular/cli/bin/ng test --watch=false",
+    "test-single-run": "node ./node_modules/@angular/cli/bin/ng test --browsers ChromeHeadless --watch=false",
     "lint": "node ./node_modules/@angular/cli/bin/ng lint",
     "e2e": "node ./node_modules/@angular/cli/bin/ng e2e"
   },
@@ -48,7 +48,6 @@
     "karma-coverage-istanbul-reporter": "1.4.x",
     "karma-jasmine": "1.1.x",
     "karma-jasmine-html-reporter": "1.0.x",
-    "karma-phantomjs-launcher": "1.0.x",
     "protractor": "5.3.x",
     "ts-mockito": "2.3.x",
     "ts-node": "5.0.x",

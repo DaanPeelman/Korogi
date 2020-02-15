@@ -47,8 +47,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     @GetMapping
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody
-    PagedModel<EntityModel<AnimeDTO>> getAnime() {
+    public @ResponseBody PagedModel<EntityModel<AnimeDTO>> getAnime() {
         List<Anime> anime = animeRepository.findByCriteria();
 
         return entityToDTOResourceMapper.toPagedResources(anime, 1L, 20L);

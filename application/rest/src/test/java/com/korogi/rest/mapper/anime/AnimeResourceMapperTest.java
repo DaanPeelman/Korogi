@@ -6,9 +6,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.korogi.core.domain.Anime;
 import com.korogi.core.util.FieldAssertionUtil;
 import com.korogi.dto.AnimeDTO;
+import com.korogi.rest.mapper.ResourceMapperTestUtil;
 import org.junit.jupiter.api.Test;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
 
 /**
  * @author Daan Peelman
@@ -19,7 +20,7 @@ class AnimeResourceMapperTest {
     @Test
     void toDTOResource() throws Exception {
         Anime animeToMap = steinsGate_notPersisted().build();
-        Resource<AnimeDTO> mappedResource = mapper.toDTOResource(animeToMap);
+        EntityModel<AnimeDTO> mappedResource = mapper.toDTOResource(animeToMap);
 
         assertThat(mappedResource).isNotNull();
         assertThat(mappedResource.getContent()).isNotNull();
@@ -31,6 +32,7 @@ class AnimeResourceMapperTest {
                 .isNotNull()
                 .isNotEmpty()
                 .hasSize(5)
+                .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
                 .containsExactly(
                         new Link("/anime/{id}", "self"),
                         new Link("/anime/{id}/prequal", "prequal"),

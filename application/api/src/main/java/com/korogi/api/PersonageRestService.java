@@ -1,10 +1,10 @@
 package com.korogi.api;
 
 import com.korogi.dto.PersonageDTO;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 
 public interface PersonageRestService {
-    PagedResources<Resource<PersonageDTO>> getPersonages();
-    Resource<PersonageDTO> getPersonageDetails(Long id);
+    PagedModel<EntityModel<PersonageDTO>> getPersonages();
+    EntityModel<PersonageDTO> getPersonageDetails(Long id);
 }

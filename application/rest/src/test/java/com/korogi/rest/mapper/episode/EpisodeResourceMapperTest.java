@@ -6,9 +6,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.korogi.core.domain.Episode;
 import com.korogi.core.util.FieldAssertionUtil;
 import com.korogi.dto.EpisodeDTO;
+import com.korogi.rest.mapper.ResourceMapperTestUtil;
 import org.junit.jupiter.api.Test;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
 
 /**
  * @author Daan Peelman
@@ -19,7 +20,7 @@ class EpisodeResourceMapperTest {
     @Test
     void toDTOResource() throws Exception {
         Episode episodeToMap = steinsGateEpisode1_notPeristed().build();
-        Resource<EpisodeDTO> mappedResource = mapper.toDTOResource(episodeToMap);
+        EntityModel<EpisodeDTO> mappedResource = mapper.toDTOResource(episodeToMap);
 
         assertThat(mappedResource).isNotNull();
         assertThat(mappedResource.getContent()).isNotNull();
@@ -31,6 +32,7 @@ class EpisodeResourceMapperTest {
                 .isNotNull()
                 .isNotEmpty()
                 .hasSize(1)
+                .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
                 .containsExactly(
                         new Link("/episodes/{id}", "self")
                 );

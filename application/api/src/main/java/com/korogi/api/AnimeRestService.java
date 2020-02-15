@@ -3,14 +3,14 @@ package com.korogi.api;
 import com.korogi.dto.AnimeDTO;
 import com.korogi.dto.EpisodeDTO;
 import com.korogi.dto.PersonageDTO;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 
 public interface AnimeRestService {
-    PagedResources<Resource<AnimeDTO>> getAnime();
-    Resource<AnimeDTO> getAnimeDetails(Long id);
-    Resource<AnimeDTO> getPrequalDetails(Long id);
-    Resource<AnimeDTO> getSequalDetails(Long id);
-    PagedResources<Resource<EpisodeDTO>> getAnimeEpisodes(Long id);
-    PagedResources<Resource<PersonageDTO>> getAnimePersonages(Long id);
+    PagedModel<EntityModel<AnimeDTO>> getAnime();
+    EntityModel<AnimeDTO> getAnimeDetails(Long id);
+    EntityModel<AnimeDTO> getPrequalDetails(Long id);
+    EntityModel<AnimeDTO> getSequalDetails(Long id);
+    PagedModel<EntityModel<EpisodeDTO>> getAnimeEpisodes(Long id);
+    PagedModel<EntityModel<PersonageDTO>> getAnimePersonages(Long id);
 }

@@ -6,9 +6,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.korogi.core.domain.Personage;
 import com.korogi.core.util.FieldAssertionUtil;
 import com.korogi.dto.PersonageDTO;
+import com.korogi.rest.mapper.ResourceMapperTestUtil;
 import org.junit.jupiter.api.Test;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
 
 /**
  * @author Daan Peelman
@@ -19,7 +20,7 @@ class PersonageResourceMapperTest {
     @Test
     void toDTOResource() throws Exception {
         Personage personageToMap = okabeRintarou_notPersisted().build();
-        Resource<PersonageDTO> mappedResource = mapper.toDTOResource(personageToMap);
+        EntityModel<PersonageDTO> mappedResource = mapper.toDTOResource(personageToMap);
 
         assertThat(mappedResource).isNotNull();
         assertThat(mappedResource.getContent()).isNotNull();
@@ -31,6 +32,7 @@ class PersonageResourceMapperTest {
                 .isNotNull()
                 .isNotEmpty()
                 .hasSize(1)
+                .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
                 .containsExactly(
                         new Link("/personages/{id}", "self")
                 );

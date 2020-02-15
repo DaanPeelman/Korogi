@@ -16,8 +16,8 @@ import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.mapper.EntityToDTOResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +47,8 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     @GetMapping
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody PagedResources<Resource<AnimeDTO>> getAnime() {
+    public @ResponseBody
+    PagedModel<EntityModel<AnimeDTO>> getAnime() {
         List<Anime> anime = animeRepository.findByCriteria();
 
         return entityToDTOResourceMapper.toPagedResources(anime, 1L, 20L);
@@ -56,7 +57,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody Resource<AnimeDTO> getAnimeDetails(
+    public @ResponseBody EntityModel<AnimeDTO> getAnimeDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
         Anime anime = animeRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -67,7 +68,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/prequal")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody Resource<AnimeDTO> getPrequalDetails(
+    public @ResponseBody EntityModel<AnimeDTO> getPrequalDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
         Anime anime = animeRepository.findPrequalOfAnime(id).orElseThrow(ResourceNotFoundException::new);
@@ -78,7 +79,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/sequal")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody Resource<AnimeDTO> getSequalDetails(
+    public @ResponseBody EntityModel<AnimeDTO> getSequalDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
         Anime anime = animeRepository.findSequalOfAnime(id).orElseThrow(ResourceNotFoundException::new);
@@ -89,7 +90,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/episodes")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody PagedResources<Resource<EpisodeDTO>> getAnimeEpisodes(
+    public @ResponseBody PagedModel<EntityModel<EpisodeDTO>> getAnimeEpisodes(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
         Anime anime = animeRepository.findById(id, fromAttributePaths(EPISODES)).orElseThrow(ResourceNotFoundException::new);
@@ -100,7 +101,7 @@ public class AnimeRestServiceImpl implements AnimeRestService {
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/personages")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody PagedResources<Resource<PersonageDTO>> getAnimePersonages(
+    public @ResponseBody PagedModel<EntityModel<PersonageDTO>> getAnimePersonages(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
         Anime anime = animeRepository.findById(id, fromAttributePaths(PERSONAGES)).orElseThrow(ResourceNotFoundException::new);

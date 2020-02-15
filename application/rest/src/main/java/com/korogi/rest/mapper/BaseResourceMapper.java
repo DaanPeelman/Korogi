@@ -1,8 +1,8 @@
 package com.korogi.rest.mapper;
 
 import java.util.List;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
 
 public abstract class BaseResourceMapper<TO, FROM> implements ResourceMapper<TO, FROM> {
     public static final String COMPONENT_MODEL = "spring";
@@ -14,8 +14,8 @@ public abstract class BaseResourceMapper<TO, FROM> implements ResourceMapper<TO,
     }
 
     @Override
-    public Resource<TO> toDTOResource(FROM from) {
-        return new Resource<>(map(from), createLinks(from));
+    public EntityModel<TO> toDTOResource(FROM from) {
+        return new EntityModel<>(map(from), createLinks(from));
     }
 
     @Override

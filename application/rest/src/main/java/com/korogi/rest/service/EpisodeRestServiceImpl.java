@@ -10,8 +10,8 @@ import com.korogi.dto.EpisodeDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.mapper.EntityToDTOResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,14 +41,14 @@ public class EpisodeRestServiceImpl implements EpisodeRestService {
     @GetMapping
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody PagedResources<Resource<EpisodeDTO>> getEpisodes() {
+    public @ResponseBody PagedModel<EntityModel<EpisodeDTO>> getEpisodes() {
         return null;
     }
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody Resource<EpisodeDTO> getEpisodeDetails(
+    public @ResponseBody EntityModel<EpisodeDTO> getEpisodeDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
         Episode episode = episodeRepository.findById(id).orElseThrow(ResourceNotFoundException::new);

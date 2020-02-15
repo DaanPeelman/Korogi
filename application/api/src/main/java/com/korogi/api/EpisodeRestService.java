@@ -1,10 +1,10 @@
 package com.korogi.api;
 
 import com.korogi.dto.EpisodeDTO;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 
 public interface EpisodeRestService {
-    PagedResources<Resource<EpisodeDTO>> getEpisodes();
-    Resource<EpisodeDTO> getEpisodeDetails(Long id);
+    PagedModel<EntityModel<EpisodeDTO>> getEpisodes();
+    EntityModel<EpisodeDTO> getEpisodeDetails(Long id);
 }

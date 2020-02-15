@@ -10,8 +10,8 @@ import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.mapper.EntityToDTOResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,14 +41,14 @@ public class PersonageRestServiceImpl implements PersonageRestService {
     @GetMapping
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody PagedResources<Resource<PersonageDTO>> getPersonages() {
+    public @ResponseBody PagedModel<EntityModel<PersonageDTO>> getPersonages() {
         return null;
     }
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody Resource<PersonageDTO> getPersonageDetails(
+    public @ResponseBody EntityModel<PersonageDTO> getPersonageDetails(
             @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
         Personage personage = personageRepository.findById(id).orElseThrow(ResourceNotFoundException::new);

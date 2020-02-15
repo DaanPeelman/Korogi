@@ -11,7 +11,7 @@ import { PersonageMapper } from "./personage/personage-mapper";
     ]
 })
 export class MapperModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<MapperModule> {
         return {
             ngModule: MapperModule,
             providers: [

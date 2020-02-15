@@ -3,7 +3,6 @@ package com.korogi.dto;
 import static lombok.AccessLevel.PUBLIC;
 
 import java.time.LocalDate;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +28,7 @@ public class AnimeDTO implements DTO {
         return TYPE;
     }
 
-    public enum AnimeRelation {
+    public enum AnimeRelation implements DTORelation {
         PREQUAL("prequal"),
         SEQUAL("sequal"),
         EPISODES("episodes"),
@@ -41,7 +40,7 @@ public class AnimeDTO implements DTO {
             this.value = value;
         }
 
-        @JsonValue
+        @Override
         public String getValue() {
             return value;
         }

@@ -4,17 +4,20 @@ services:
     image: "korogi"
     depends_on:
       - korogi-postgres
+      - keycloak
     restart: always
     build: .
     ports:
-      - 8080:8080
+      - 8081:8080
       - 8787:8000
-      - 8443:8443
+      - 8444:8443
     volumes:
-      - ./config/certificates:/usr/local/tomcat/conf/certificates:ro
+      - ./config/korogi/certificates:/usr/local/tomcat/conf/certificates:ro
+      - ./config/korogi/keycloak:/opt/keystore:ro
       - ./logs:/opt/logs
     env_file:
-      - ./config/secrets/database.properties
+      - config/korogi/secrets/database.properties
+      - config/korogi/secrets/keycloak.properties
     environment:
       - JPDA_ADDRESS=*:8000
       - JPDA_TRANSPORT=dt_socket
@@ -33,3 +36,16 @@ services:
     environment:
       - POSTGRES_USER=korogi
       - POSTGRES_PASSWORD=korogi
+  keycloak:
+    image: "jboss/keycloak"
+    restart: on-failure
+    ports:
+      - 8080:8080
+      - 8443:8443
+    volumes:
+      - ./config/keycloak/realms:/tmp/keycloak:ro
+      - ./config/keycloak/certificates:/etc/x509/https:ro
+    environment:
+      - KEYCLOAK_USER=keycloak_admin
+      - KEYCLOAK_PASSWORD=secret
+      - KEYCLOAK_IMPORT=/tmp/keycloak/korogi-realm.json

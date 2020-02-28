@@ -9,12 +9,14 @@ import com.korogi.core.config.CoreConfig;
 import com.korogi.core.config.TestPersistenceConfig;
 import com.korogi.core.interceptor.HibernateStatisticsInterceptor;
 import com.korogi.rest.config.RestConfig;
+import com.korogi.rest.config.SecurityConfig;
 import com.korogi.rest.service.util.HibernateStatisticsUtil;
 import com.korogi.rest.service.util.MockMvcAssertionUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -31,9 +33,11 @@ import org.springframework.web.context.WebApplicationContext;
         classes = {
                 TestPersistenceConfig.class,
                 CoreConfig.class,
+                SecurityConfig.class,
                 RestConfig.class
         }
 )
+@ImportResource("classpath:application-test.properties")
 @Transactional
 @TestExecutionListeners(
         {

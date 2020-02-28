@@ -3,12 +3,14 @@ package com.korogi.rest.advice;
 import static com.korogi.dto.ErrorDTO.newErrorDTO;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import com.korogi.core.util.UUIDGenerator;
 import com.korogi.dto.ErrorDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -33,6 +35,17 @@ public class RestControllerExceptionAdvice {
                 .build();
 
         return new ResponseEntity<>(errorDTO, NOT_FOUND);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorDTO> handleAccessDeniedException(AccessDeniedException exception) {
+        ErrorDTO errorDTO = newErrorDTO()
+                .status(UNAUTHORIZED.getReasonPhrase())
+                .code(UNAUTHORIZED.value())
+                .message("You are either not authenticated or not authorized to view this resource")
+                .build();
+
+        return new ResponseEntity<>(errorDTO, UNAUTHORIZED);
     }
 
     @ExceptionHandler(Throwable.class)

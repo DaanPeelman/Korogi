@@ -24,6 +24,7 @@ services:
       - TZ=${KOROGI_TZ}
     links:
       - korogi-postgres:korogi-postgres
+      - keycloak:keycloak
     entrypoint: catalina.sh
     command: jpda run
   korogi-postgres:

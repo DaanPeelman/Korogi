@@ -38,7 +38,7 @@ services:
       - POSTGRES_USER=korogi
       - POSTGRES_PASSWORD=korogi
   keycloak:
-    image: "jboss/keycloak"
+    image: "jboss/keycloak:9.0.0"
     restart: on-failure
     ports:
       - 8080:8080

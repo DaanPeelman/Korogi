@@ -30,6 +30,7 @@
         <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
         <version.maven-enforcer-plugin>1.4.1</version.maven-enforcer-plugin>
         <version.typescript-generator-maven-plugin>2.20.583</version.typescript-generator-maven-plugin>
+        <version.copy-rename-maven-plugin>1.0.1</version.copy-rename-maven-plugin>
 
         <version.javax-annotation>1.3.2</version.javax-annotation>
         <version.spring>5.2.4.RELEASE</version.spring>
@@ -421,6 +422,11 @@
                     <artifactId>typescript-generator-maven-plugin</artifactId>
                     <version>${version.typescript-generator-maven-plugin}</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.coderplus.maven.plugins</groupId>
+                    <artifactId>copy-rename-maven-plugin</artifactId>
+                    <version>${version.copy-rename-maven-plugin}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -443,14 +449,22 @@
                 </configuration>
             </plugin>
 
-            <!-- CLEAN DEPLOYMENTS FOLDER -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
                     <filesets>
+                        <!-- CLEAN DEPLOYMENTS FOLDER -->
                         <fileset>
-                            <directory>deployments</directory>
+                            <directory>delivery/deployments</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                        <!-- CLEAN TOMCAT CONTEXTS FOLDER -->
+                        <fileset>
+                            <directory>delivery/config/korogi/tomcat/contexts</directory>
                             <includes>
                                 <include>**/*</include>
                             </includes>

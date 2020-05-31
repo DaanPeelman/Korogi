@@ -12,12 +12,12 @@ services:
       - 8788:8000
       - 8444:8443
     volumes:
-      - ./config/korogi/certificates:/usr/local/tomcat/conf/certificates:ro
-      - ./config/korogi/keycloak:/opt/keystore:ro
+      - ./delivery/config/korogi/certificates:/usr/local/tomcat/conf/certificates:ro
+      - ./delivery/config/korogi/keycloak:/opt/keystore:ro
       - ./logs:/opt/logs
     env_file:
-      - config/korogi/secrets/database.properties
-      - config/korogi/secrets/keycloak.properties
+      - delivery/config/korogi/secrets/database.properties
+      - delivery/config/korogi/secrets/keycloak.properties
     environment:
       - JPDA_ADDRESS=*:8000
       - JPDA_TRANSPORT=dt_socket
@@ -44,8 +44,8 @@ services:
       - 8080:8080
       - 8443:8443
     volumes:
-      - ./config/keycloak/realms:/tmp/keycloak:ro
-      - ./config/keycloak/certificates:/etc/x509/https:ro
+      - ./delivery/config/keycloak/realms:/tmp/keycloak:ro
+      - ./delivery/config/keycloak/certificates:/etc/x509/https:ro
     environment:
       - KEYCLOAK_USER=keycloak_admin
       - KEYCLOAK_PASSWORD=secret

@@ -143,6 +143,17 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources-filtered</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- COPY WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
             <plugin>
@@ -164,11 +175,30 @@
                             <artifactId>${project.artifactId}</artifactId>
                             <type>war</type>
                             <overWrite>true</overWrite>
-                            <outputDirectory>${project.parent.parent.basedir}/deployments</outputDirectory>
-                            <destFileName>rest.war</destFileName>
+                            <outputDirectory>${project.parent.parent.basedir}/delivery/deployments</outputDirectory>
                         </artifactItem>
                     </artifactItems>
                 </configuration>
+            </plugin>
+
+            <!-- COPY CONTEXT FILE INTO TOMCAT CONFIG FOLDER FOR DOCKER BUILD -->
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-context-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>target/classes/tomcat/context.xml</sourceFile>
+                            <destinationFile>${project.parent.parent.basedir}/delivery/config/korogi/tomcat/contexts/rest.xml</destinationFile>
+                            <overWrite>true</overWrite>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

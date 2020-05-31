@@ -6,13 +6,15 @@ MAINTAINER Daan Peelman <daanpeelman@gmail.com>
 #TODO uncomment wen using alpine image
 
 ENV CATALINA_WEBAPPS $CATALINA_HOME/webapps
+ENV CATALINA_CONF $CATALINA_HOME/conf
+ENV CATALINA_CONF_CATALINA $CATALINA_CONF/Catalina
 
 RUN rm -rf $CATALINA_WEBAPPS/*
 
 EXPOSE 8443
 EXPOSE 8000
 
-COPY config/tomcat/ $CATALINA_HOME/conf/
+COPY delivery/config/korogi/tomcat/server.xml $CATALINA_CONF
+COPY delivery/config/korogi/tomcat/contexts $CATALINA_CONF_CATALINA/localhost
 
-COPY deployments/rest.war $CATALINA_WEBAPPS
-COPY deployments/web.war $CATALINA_WEBAPPS/ROOT.war
+COPY delivery/deployments $CATALINA_HOME/deploy

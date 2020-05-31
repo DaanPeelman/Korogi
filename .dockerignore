@@ -1,7 +1,8 @@
 .scripts
 application
-config
-!config/tomcat
+delivery
+!delivery/config/korogi/tomcat
+!delivery/deployments
 logs
 test
 .gitignore

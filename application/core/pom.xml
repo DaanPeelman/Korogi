@@ -156,6 +156,7 @@
                             <failOnError>true</failOnError>
                             <enableLazyInitialization>true</enableLazyInitialization> <!-- avoid unnecessary N+1 queries for bidirectional OneToOne mappings -->
                             <enableAssociationManagement>true</enableAssociationManagement> <!-- auto set child/parent in bidirectional relationships without having to create custom setters  -->
+                            <enableDirtyTracking>true</enableDirtyTracking>
                         </configuration>
                         <goals>
                             <goal>enhance</goal>

@@ -24,7 +24,7 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Compile
-      run: mvn compile -B -PJenkins
+      run: mvn test-compile -B -PJenkins
   test:
     runs-on: ubuntu-latest
     steps:

@@ -26,16 +26,13 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Package
         run: mvn clean package -B -PJenkins -DskipTests
-      - name: Upload war artifacts
+      - name: Upload delivery artifacts
         uses: actions/upload-artifact@v2.1.4
         with:
-          name: war-artifacts
-          path: deployments/*.war
-      - name: Upload Tomcat config artifacts
-        uses: actions/upload-artifact@v2.1.4
-        with:
-          name: tomcat-config-artifacts
-          path: config/korogi/tomcat/*
+          name: delivery-artifacts
+          path: 
+            delivery/deployments
+            delivery/config/korogi/tomcat
 
   build-push-docker:
     runs-on: ubuntu-latest
@@ -43,16 +40,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Download war artifacts
-        uses: actions/download-artifact@v2.0.5
-        with:
-          name: war-artifacts
-          path: deployments
       - name: Download Tomcat config artifacts
         uses: actions/download-artifact@v2.0.5
         with:
-          name: tomcat-config-artifacts
-          path: config/korogi/tomcat
+          name: delivery-artifacts
       - name: Build and push docker image
         uses: docker/build-push-action@v1.1.1
         with:

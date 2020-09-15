@@ -18,10 +18,12 @@ services:
     env_file:
       - delivery/config/korogi/secrets/database.properties
       - delivery/config/korogi/secrets/keycloak.properties
+      - delivery/config/korogi/secrets/oauth.properties
     environment:
       - JPDA_ADDRESS=*:8000
       - JPDA_TRANSPORT=dt_socket
       - TZ=${KOROGI_TZ}
+      - OAUTH_BASE_REDIRECT_URI=${OAUTH_BASE_REDIRECT_URI}
     links:
       - korogi-postgres:korogi-postgres
       - keycloak:keycloak

@@ -1,99 +1,109 @@
 package com.korogi.rest.config;
 
-import org.keycloak.adapters.KeycloakConfigResolver;
-import org.keycloak.adapters.KeycloakDeployment;
-import org.keycloak.adapters.KeycloakDeploymentBuilder;
-import org.keycloak.adapters.spi.HttpFacade;
-import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
-import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
-import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
-import org.keycloak.representations.adapters.config.AdapterConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
-import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.stereotype.Component;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
+import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 
-/**
- * @author Daan Peelman
- */
-@KeycloakConfiguration
+@Configuration
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
-public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final List<String> clients = Arrays.asList("google");
 
-    @Bean
-    @Override
-    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-        return new NullAuthenticatedSessionStrategy();
+    private final String redirectUriTemplate;
+    private final String googleClientId;
+    private final String googleClientSecret;
+
+    public SecurityConfig(
+            @Value("${oauth.baseRedirectUri}") String baseRedirectUri,
+            @Value("${oauth.google.clientId}") String googleClientId,
+            @Value("${oauth.google.clientSecret}") String googleClientSecret
+    ) {
+        System.out.println(System.getenv("TZ"));
+
+        this.redirectUriTemplate = baseRedirectUri + "/callback/{registrationId}";
+        this.googleClientId = googleClientId;
+        this.googleClientSecret = googleClientSecret;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-        http.authorizeRequests();
+        http
+            .oauth2Login()
+            .authorizationEndpoint()
+            .authorizationRequestRepository(authorizationRequestRepository())
+            .and()
+            .tokenEndpoint()
+            .accessTokenResponseClient(accessTokenResponseClient())
+            .and()
+            .clientRegistrationRepository(clientRegistrationRepository())
+            .authorizedClientService(auth2AuthorizedClientService())
+            .successHandler(this::successHandler);
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) {
-        KeycloakAuthenticationProvider provider = keycloakAuthenticationProvider();
-        provider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
-
-        authenticationManagerBuilder.authenticationProvider(provider);
+    private void successHandler(HttpServletRequest request,
+                                HttpServletResponse response, Authentication authentication) throws IOException {
+        response.getWriter().write(new ObjectMapper().writeValueAsString(Collections.singletonMap("accessToken", ((DefaultOidcUser) ((OAuth2AuthenticationToken) authentication).getPrincipal()).getIdToken().getTokenValue())));
     }
 
-    @Component
-    public static class CustomKeycloakConfigResolver implements KeycloakConfigResolver {
+    @Bean
+    public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> accessTokenResponseClient() {
+        return new DefaultAuthorizationCodeTokenResponseClient();
+    }
 
-        private final String serverUrl;
-        private final String realm;
-        private final String clientId;
-        private final String sslRequired;
-        private final String keystoreLocation;
-        private final String keystorePassword;
+    @Bean
+    public AuthorizationRequestRepository<OAuth2AuthorizationRequest> authorizationRequestRepository() {
+        return new HttpSessionOAuth2AuthorizationRequestRepository();
+    }
 
-        private final boolean disableTrustManager;
+    @Bean
+    public ClientRegistrationRepository clientRegistrationRepository() {
+        List<ClientRegistration> registrations = clients.stream()
+                .map(this::getRegistration)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
-        @Autowired
-        public CustomKeycloakConfigResolver(
-                @Value("${keycloak.serverUrl}") String serverUrl,
-                @Value("${keycloak.realm}") String realm,
-                @Value("${keycloak.backend.clientId}") String clientId,
-                @Value("${keycloak.backend.sslRequired}") String sslRequired,
-                @Value("${keycloak.backend.keystoreLocation}") String keystoreLocation,
-                @Value("${keycloak.backend.keystorePassword}") String keystorePassword,
+        return new InMemoryClientRegistrationRepository(registrations);
+    }
 
-                @Value("${keycloak.disableTrustManager:false}") boolean disableTrustManager
-        ) {
-            this.serverUrl = serverUrl;
-            this.realm = realm;
-            this.clientId = clientId;
-            this.sslRequired = sslRequired;
-            this.keystoreLocation = keystoreLocation;
-            this.keystorePassword = keystorePassword;
+    private ClientRegistration getRegistration(String client) {
+        return CommonOAuth2Provider.GOOGLE.getBuilder(client)
+                .redirectUriTemplate(redirectUriTemplate)
+                .clientId(googleClientId)
+                .clientSecret(googleClientSecret)
+                .build();
+    }
 
-            this.disableTrustManager = disableTrustManager;
-        }
-
-        @Override
-        public KeycloakDeployment resolve(HttpFacade.Request facade) {
-            AdapterConfig adapterConfig = new AdapterConfig();
-            adapterConfig.setRealm(realm);
-            adapterConfig.setAuthServerUrl(serverUrl);
-            adapterConfig.setSslRequired(sslRequired);
-            adapterConfig.setResource(clientId);
-            adapterConfig.setClientKeystore(keystoreLocation);
-            adapterConfig.setClientKeystorePassword(keystorePassword);
-            adapterConfig.setPublicClient(true);
-            adapterConfig.setBearerOnly(true);
-
-            adapterConfig.setDisableTrustManager(disableTrustManager);
-
-            return KeycloakDeploymentBuilder.build(adapterConfig);
-        }
+    @Bean
+    public OAuth2AuthorizedClientService auth2AuthorizedClientService() {
+        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
     }
 }

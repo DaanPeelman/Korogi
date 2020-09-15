@@ -31,8 +31,8 @@ jobs:
         with:
           name: delivery-artifacts
           path: 
-            delivery/deployments
-            delivery/config/korogi/tomcat
+            delivery/deployments/*
+            delivery/config/korogi/tomcat/**/*
 
   build-push-docker:
     runs-on: ubuntu-latest

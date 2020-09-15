@@ -30,9 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2.1.4
         with:
           name: delivery-artifacts
-          path: 
-            delivery/deployments/*
-            delivery/config/korogi/tomcat/**/*
+          path: delivery
 
   build-push-docker:
     runs-on: ubuntu-latest

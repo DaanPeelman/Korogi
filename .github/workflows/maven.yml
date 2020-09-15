@@ -49,3 +49,18 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
     - name: Package
       run: mvn clean package -B -PJenkins
+      
+  build-push-docker:
+    runs-on: ubuntu-latest
+    needs: package
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Build and push docker image
+        uses: docker/build-push-action@v1.1.1
+        with: 
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          repository: daanpeelman/korogi
+          tags: latest
+          push: true

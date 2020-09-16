@@ -172,7 +172,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.parent.parent.basedir}/config/korogi-web/deployment</outputDirectory>
+                            <outputDirectory>${project.parent.parent.basedir}/delivery/korogi-web/deployment</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>dist</directory>

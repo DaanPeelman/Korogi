@@ -169,7 +169,7 @@
                             <artifactId>${project.artifactId}</artifactId>
                             <type>war</type>
                             <overWrite>true</overWrite>
-                            <outputDirectory>${project.parent.parent.basedir}/config/korogi-api/deployment</outputDirectory>
+                            <outputDirectory>${project.parent.parent.basedir}/delivery/korogi-api/deployment</outputDirectory>
                         </artifactItem>
                     </artifactItems>
                 </configuration>
@@ -188,7 +188,7 @@
                         </goals>
                         <configuration>
                             <sourceFile>target/classes/tomcat/context.xml</sourceFile>
-                            <destinationFile>${project.parent.parent.basedir}/config/korogi-api/config/contexts/ROOT.xml</destinationFile>
+                            <destinationFile>${project.parent.parent.basedir}/delivery/korogi-api/config/contexts/ROOT.xml</destinationFile>
                             <overWrite>true</overWrite>
                         </configuration>
                     </execution>

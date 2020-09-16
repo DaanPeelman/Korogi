@@ -48,12 +48,6 @@
             <artifactId>spring-security-web</artifactId>
         </dependency>
 
-        <!-- KEYCLOAK -->
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-spring-security-adapter</artifactId>
-        </dependency>
-
         <!-- JACKSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -175,7 +169,7 @@
                             <artifactId>${project.artifactId}</artifactId>
                             <type>war</type>
                             <overWrite>true</overWrite>
-                            <outputDirectory>${project.parent.parent.basedir}/delivery/deployments</outputDirectory>
+                            <outputDirectory>${project.parent.parent.basedir}/config/korogi-api/deployment</outputDirectory>
                         </artifactItem>
                     </artifactItems>
                 </configuration>
@@ -194,7 +188,7 @@
                         </goals>
                         <configuration>
                             <sourceFile>target/classes/tomcat/context.xml</sourceFile>
-                            <destinationFile>${project.parent.parent.basedir}/delivery/config/korogi/tomcat/contexts/rest.xml</destinationFile>
+                            <destinationFile>${project.parent.parent.basedir}/config/korogi-api/config/contexts/ROOT.xml</destinationFile>
                             <overWrite>true</overWrite>
                         </configuration>
                     </execution>

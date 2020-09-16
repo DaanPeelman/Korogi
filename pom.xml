@@ -145,19 +145,6 @@
                 <version>${version.spring-security}</version>
             </dependency>
 
-            <!-- KEYCLOAK -->
-            <dependency>
-                <groupId>org.keycloak</groupId>
-                <artifactId>keycloak-spring-security-adapter</artifactId>
-                <version>${version.keycloak}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
             <!-- DATABASE -->
             <dependency>
                 <groupId>org.postgresql</groupId>
@@ -454,9 +441,10 @@
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
                     <filesets>
-                        <!-- CLEAN DEPLOYMENTS FOLDER -->
+                        <!-- API -->
+                        <!-- CLEAN DEPLOYMENT FOLDER -->
                         <fileset>
-                            <directory>delivery/deployments</directory>
+                            <directory>config/korogi-api/deployment</directory>
                             <includes>
                                 <include>**/*</include>
                             </includes>
@@ -464,7 +452,17 @@
                         </fileset>
                         <!-- CLEAN TOMCAT CONTEXTS FOLDER -->
                         <fileset>
-                            <directory>delivery/config/korogi/tomcat/contexts</directory>
+                            <directory>config/korogi-api/config/contexts</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+
+                        <!-- WEB -->
+                        <!-- CLEAN DEPLOYMENT FOLDER -->
+                        <fileset>
+                            <directory>config/korogi-web/deployment</directory>
                             <includes>
                                 <include>**/*</include>
                             </includes>

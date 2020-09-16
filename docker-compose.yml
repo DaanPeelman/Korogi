@@ -1,33 +1,19 @@
 version: "2"
 services:
-  korogi:
-    image: "korogi"
+  reverse-proxy:
+    image: "nginx:1.19-alpine"
+    restart: on-failure
     depends_on:
-      - korogi-postgres
-      - keycloak
-    restart: always
-    build: .
-    ports:
-      - 8081:8080
-      - 8788:8000
-      - 8444:8443
-    volumes:
-      - ./delivery/config/korogi/certificates:/usr/local/tomcat/conf/certificates:ro
-      - ./delivery/config/korogi/keycloak:/opt/keystore:ro
-      - ./logs:/opt/logs
-    env_file:
-      - delivery/config/korogi/secrets/database.properties
-      - delivery/config/korogi/secrets/keycloak.properties
-    environment:
-      - JPDA_ADDRESS=*:8000
-      - JPDA_TRANSPORT=dt_socket
-      - TZ=${KOROGI_TZ}
+      - korogi-api
+      - korogi-web
     links:
-      - korogi-postgres:korogi-postgres
-      - keycloak:keycloak
-    entrypoint: catalina.sh
-    command: jpda run
-  korogi-postgres:
+      - korogi-api:korogi-api
+      - korogi-web:korogi-web
+    volumes:
+    - ./delivery/reverse_proxy/config/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8080:80
+  postgres:
     image: "postgres:9.6-alpine"
     restart: on-failure
     ports:
@@ -37,16 +23,27 @@ services:
     environment:
       - POSTGRES_USER=korogi
       - POSTGRES_PASSWORD=korogi
-  keycloak:
-    image: "jboss/keycloak:9.0.0"
-    restart: on-failure
+  korogi-api:
+    image: "korogi-api"
+    depends_on:
+      - postgres
+    restart: always
+    build: delivery/korogi-api
     ports:
-      - 8080:8080
-      - 8443:8443
+      - 8788:8000
     volumes:
-      - ./delivery/config/keycloak/realms:/tmp/keycloak:ro
-      - ./delivery/config/keycloak/certificates:/etc/x509/https:ro
+      - ./logs:/opt/logs
+    env_file:
+      - delivery/korogi-api/secrets/database.properties
     environment:
-      - KEYCLOAK_USER=keycloak_admin
-      - KEYCLOAK_PASSWORD=secret
-      - KEYCLOAK_IMPORT=/tmp/keycloak/korogi-realm.json
+      - JPDA_ADDRESS=*:8000
+      - JPDA_TRANSPORT=dt_socket
+      - TZ=${KOROGI_TZ}
+    links:
+      - postgres:korogi-postgres
+    entrypoint: catalina.sh
+    command: jpda run
+  korogi-web:
+    image: "korogi-web"
+    restart: always
+    build: delivery/korogi-web

@@ -11,10 +11,7 @@ ENV CATALINA_CONF_CATALINA $CATALINA_CONF/Catalina
 
 RUN rm -rf $CATALINA_WEBAPPS/*
 
-EXPOSE 8443
 EXPOSE 8000
 
-COPY delivery/config/korogi/tomcat/server.xml $CATALINA_CONF
-COPY delivery/config/korogi/tomcat/contexts $CATALINA_CONF_CATALINA/localhost
-
-COPY delivery/deployments $CATALINA_HOME/deploy
+COPY config/contexts $CATALINA_CONF_CATALINA/localhost
+COPY deployment $CATALINA_HOME/deploy

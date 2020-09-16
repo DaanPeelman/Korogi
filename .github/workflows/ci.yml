@@ -69,11 +69,21 @@ jobs:
         with:
           name: delivery-artifacts
           path: delivery
-      - name: Build and push Docker image
+      - name: Build and push API Docker image
         uses: docker/build-push-action@v1.1.1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          repository: daanpeelman/korogi
+          repository: daanpeelman/korogi-api
+          docker-file: delivery/korogi-api/Dockerfile
           tags: latest
           push: true
+      - name: Build and push Web Docker image
+        uses: docker/build-push-action@v1.1.1
+          with:
+            username: ${{ secrets.DOCKER_HUB_USERNAME }}
+            password: ${{ secrets.DOCKER_HUB_TOKEN }}
+            repository: daanpeelman/korogi-web
+            docker-file: delivery/korogi-web/Dockerfile
+            tags: latest
+            push: true

@@ -12,7 +12,7 @@
 
     <artifactId>webapp</artifactId>
     <name>Korogi - Webapplication</name>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <properties>
         <npm.executable>npm</npm.executable>
@@ -48,42 +48,9 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.korogi</groupId>
-            <artifactId>core</artifactId>
-            <type>test-jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources-filtered</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
         <plugins>
             <!-- CLEAN ANGULAR DIST & GENERATED FOLDER -->
             <plugin>
@@ -192,60 +159,25 @@
                 </executions>
             </plugin>
 
-            <!-- ADD ANGULAR GENERATED RESOURCES AS WEB-RESOURCES -->
+            <!-- COPY ANGULAR DIST FOLDER TO WEB DEPLOYMENT FOLDER FOR DOCKER BUILD -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>${project.basedir}/dist</directory>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-
-            <!-- COPY WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
                 <executions>
                     <execution>
                         <id>copy</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>copy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <artifactItems>
-                        <artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>${project.artifactId}</artifactId>
-                            <type>war</type>
-                            <overWrite>true</overWrite>
-                            <outputDirectory>${project.parent.parent.basedir}/delivery/deployments</outputDirectory>
-                        </artifactItem>
-                    </artifactItems>
-                </configuration>
-            </plugin>
-
-            <!-- COPY CONTEXT FILE INTO TOMCAT CONFIG FOLDER FOR DOCKER BUILD -->
-            <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-context-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>target/classes/tomcat/context.xml</sourceFile>
-                            <destinationFile>${project.parent.parent.basedir}/delivery/config/korogi/tomcat/contexts/ROOT.xml</destinationFile>
-                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.parent.parent.basedir}/config/korogi-web/deployment</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>dist</directory>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>

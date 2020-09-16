@@ -80,10 +80,10 @@ jobs:
           push: true
       - name: Build and push Web Docker image
         uses: docker/build-push-action@v1.1.1
-          with:
-            username: ${{ secrets.DOCKER_HUB_USERNAME }}
-            password: ${{ secrets.DOCKER_HUB_TOKEN }}
-            repository: daanpeelman/korogi-web
-            docker-file: delivery/korogi-web/Dockerfile
-            tags: latest
-            push: true
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          repository: daanpeelman/korogi-web
+          docker-file: delivery/korogi-web/Dockerfile
+          tags: latest
+          push: true

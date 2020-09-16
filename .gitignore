@@ -1,6 +1,8 @@
 .scripts/
 delivery/config/korogi/tomcat/contexts/
-delivery/config/deployments/
+delivery/korogi-api/deployment/
+delivery/korogi-api/config/contexts
+delivery/korogi-web/deployment/
 logs/*
 **/target/
 application/web/src/main/webapp/**/*

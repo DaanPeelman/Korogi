@@ -75,7 +75,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
           repository: daanpeelman/korogi-api
-          docker-file: delivery/korogi-api/Dockerfile
+          path: delivery/korogi-api
           tags: latest
           push: true
       - name: Build and push Web Docker image
@@ -84,6 +84,6 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
           repository: daanpeelman/korogi-web
-          docker-file: delivery/korogi-web/Dockerfile
+          path: delivery/korogi-web
           tags: latest
           push: true

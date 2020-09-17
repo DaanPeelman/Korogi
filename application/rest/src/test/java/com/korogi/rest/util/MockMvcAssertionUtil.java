@@ -1,4 +1,4 @@
-package com.korogi.rest.service.util;
+package com.korogi.rest.util;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

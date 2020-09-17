@@ -1,9 +1,9 @@
 package com.korogi.core.persistence.anime;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 import com.korogi.core.domain.Anime;
 import org.springframework.stereotype.Repository;
 

@@ -15,9 +15,9 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- INTERNAL PROJECTS -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <!-- INTERNAL PROJECTS -->
+            <groupId>com.korogi</groupId>
             <artifactId>dto</artifactId>
         </dependency>
 

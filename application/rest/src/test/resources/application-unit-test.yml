@@ -1,0 +1,12 @@
+logging:
+  level:
+    root: info
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        ejb:
+          interceptor: com.korogi.core.interceptor.HibernateStatisticsInterceptor
+        format_sql: true
+    show-sql: true

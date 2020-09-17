@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import com.korogi.core.domain.enumeration.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,7 +39,6 @@ import lombok.ToString;
 public class Role extends BaseEntity {
     private static final long serialVersionUID = 2000395564011152659L;
 
-    @NotNull
     @Enumerated(STRING)
     @Column(name = "role_type")
     private RoleType roleType;

@@ -9,9 +9,6 @@ import static lombok.AccessLevel.PROTECTED;
 import static lombok.AccessLevel.PUBLIC;
 import static org.hibernate.annotations.LazyToOneOption.NO_PROXY;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -23,9 +20,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import com.korogi.core.domain.enumeration.AnimeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +31,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.LazyToOne;
-import org.hibernate.validator.constraints.URL;
 
 /**
  * Entity class representing an Anime in the database.
@@ -57,18 +53,13 @@ import org.hibernate.validator.constraints.URL;
 public class Anime extends BaseEntity {
     private static final long serialVersionUID = -2472387246309958379L;
 
-    @NotNull
     @Enumerated(STRING)
     @Column(name = "anime_type")
     private AnimeType animeType;
 
-    @NotBlank
-    @Size(max = 512)
     @Column(name = "name_en")
     private String nameEnglish;
 
-    @NotBlank
-    @Size(max = 512)
     @Column(name = "name_ro")
     private String nameRomanized;
 
@@ -78,19 +69,12 @@ public class Anime extends BaseEntity {
     @Column(name = "end_air")
     private LocalDate endAir;
 
-    @NotBlank
     @Column(name = "synopsis")
     private String synopsis;
 
-    @URL
-    @NotBlank
-    @Size(max = 512)
     @Column(name = "backdrop_url")
     private String backdropUrl;
 
-    @URL
-    @NotBlank
-    @Size(max = 512)
     @Column(name = "poster_url")
     private String posterUrl;
 
@@ -109,7 +93,6 @@ public class Anime extends BaseEntity {
     private List<Episode> episodes = new ArrayList<>();
 
     @Builder.Default
-    @Size(min = 1)
     @ManyToMany(fetch = LAZY, cascade = PERSIST)
     @JoinTable(
             name = "ANIME_PERSONAGES",

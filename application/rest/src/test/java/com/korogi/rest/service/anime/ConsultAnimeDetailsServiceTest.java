@@ -4,7 +4,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.korogi.rest.service.BaseServiceTest;
+import com.korogi.rest.BaseServiceTest;
+import com.korogi.rest.util.HibernateStatisticsUtil;
 import org.junit.jupiter.api.Test;
 
 class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
@@ -23,7 +24,7 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
             .andExpect(status().isOk())
             .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithSequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -39,7 +40,7 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -55,7 +56,7 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequalAndSequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -71,7 +72,7 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithoutPrequalOrSequal_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -87,6 +88,6 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
                 .andExpect(status().isNotFound())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_notExisting_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 }

@@ -7,16 +7,13 @@ import static lombok.AccessLevel.PROTECTED;
 import static lombok.AccessLevel.PUBLIC;
 import static org.hibernate.annotations.LazyToOneOption.NO_PROXY;
 
-import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,26 +43,20 @@ import org.hibernate.annotations.LazyToOne;
 public class Episode extends BaseEntity {
     private static final long serialVersionUID = -970686580041286530L;
 
-    @NotNull
     @ManyToOne(fetch = LAZY, cascade = PERSIST)
     @JoinColumn(name = "anime_id", nullable = false)
     @LazyToOne(NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime anime;
 
-    @NotBlank
-    @Size(max = 128)
     @Column(name = "name")
     private String name;
 
-    @NotBlank
     @Column(name = "synopsis")
     private String synopsis;
 
-    @NotNull
     @Column(name = "duration_in_minutes")
     private Integer durationInMinutes;
 
-    @NotNull
     @Column(name = "air_date")
     private LocalDate airDate;
 }

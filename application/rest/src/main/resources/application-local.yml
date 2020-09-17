@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    password: korogi
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: korogi
+  mvc:
+    servlet:
+      path: /rest

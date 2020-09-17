@@ -19,26 +19,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.UUID;
 import com.korogi.core.persistence.anime.AnimeRepository;
 import com.korogi.core.util.UUIDGenerator;
-import com.korogi.rest.config.TestRestControllerExceptionAdviceConfig;
+import com.korogi.rest.BaseServiceTest;
 import com.korogi.rest.exception.ResourceNotFoundException;
-import com.korogi.rest.service.BaseServiceTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 /**
  * @author Daan Peelman
  */
-@ContextConfiguration(classes = { TestRestControllerExceptionAdviceConfig.class })
 class RestControllerExceptionAdviceTest extends BaseServiceTest {
 
-    @Autowired
+    @MockBean
     private AnimeRepository animeRepository;
 
-    @Autowired
+    @MockBean
     private UUIDGenerator uuidGenerator;
 
     private Logger logger;
@@ -51,8 +48,6 @@ class RestControllerExceptionAdviceTest extends BaseServiceTest {
 
     @AfterEach
     void resetMocks() {
-        reset(animeRepository);
-        reset(uuidGenerator);
         reset(logger);
     }
 

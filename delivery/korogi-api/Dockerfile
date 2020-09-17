@@ -1,17 +1,8 @@
-FROM tomcat:8.5-jre11-slim
-#TODO use alpine image once available
+FROM openjdk:11-jre-slim
 MAINTAINER Daan Peelman <daanpeelman@gmail.com>
 
-#RUN apk add --no-cache tzdata
-#TODO uncomment wen using alpine image
+COPY deployment/korogi.jar /app/korogi.jar
 
-ENV CATALINA_WEBAPPS $CATALINA_HOME/webapps
-ENV CATALINA_CONF $CATALINA_HOME/conf
-ENV CATALINA_CONF_CATALINA $CATALINA_CONF/Catalina
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=docker", "-Dspring.config.additional-location=/etc/secrets/korogi.yml", "/app/korogi.jar"]
 
-RUN rm -rf $CATALINA_WEBAPPS/*
-
-EXPOSE 8000
-
-COPY config/contexts $CATALINA_CONF_CATALINA/localhost
-COPY deployment $CATALINA_HOME/deploy
+EXPOSE 8080

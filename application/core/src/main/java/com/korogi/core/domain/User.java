@@ -8,10 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,27 +36,18 @@ import lombok.ToString;
 public class User extends BaseEntity {
     private static final long serialVersionUID = -7094382652553816643L;
 
-    @NotBlank
-    @Size(max = 128)
-    @Email
     @Column(name = "email")
     private String email;
 
-    @NotBlank
-    @Size(max = 128)
     @Column(name = "username")
     private String username;
 
-    @NotBlank
-    @Size(max = 128)
     @Column(name = "password")
     private String password;
 
-    @Size(min = 36, max = 36)
     @Column(name = "activation_code")
     private String activationCode;
 
-    @NotNull
     @Column(name = "activated")
     private Boolean activated;
 }

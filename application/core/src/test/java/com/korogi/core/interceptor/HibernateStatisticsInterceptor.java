@@ -2,24 +2,21 @@ package com.korogi.core.interceptor;
 
 import java.util.concurrent.atomic.AtomicLong;
 import org.hibernate.EmptyInterceptor;
-import org.springframework.stereotype.Component;
 
-@Component
 public class HibernateStatisticsInterceptor extends EmptyInterceptor {
-    private AtomicLong queryCount = new AtomicLong(0L);
+    private static final AtomicLong QUERY_COUNT = new AtomicLong(0L);
 
     @Override
     public String onPrepareStatement(String sql) {
-        queryCount.incrementAndGet();
-
+        QUERY_COUNT.incrementAndGet();
         return super.onPrepareStatement(sql);
     }
 
-    public void resetQueryCount() {
-        queryCount.set(0L);
+    public static void resetQueryCount() {
+        QUERY_COUNT.set(0L);
     }
 
-    public long getQueryCount() {
-        return queryCount.get();
+    public static long getQueryCount() {
+        return QUERY_COUNT.get();
     }
 }

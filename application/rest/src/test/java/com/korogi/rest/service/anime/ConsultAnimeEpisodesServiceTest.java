@@ -4,7 +4,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.korogi.rest.service.BaseServiceTest;
+import com.korogi.rest.BaseServiceTest;
+import com.korogi.rest.util.HibernateStatisticsUtil;
 import org.junit.jupiter.api.Test;
 
 class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
@@ -23,7 +24,7 @@ class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
                 .andExpect(status().isOk())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 
     /**
@@ -39,6 +40,6 @@ class ConsultAnimeEpisodesServiceTest extends BaseServiceTest {
                 .andExpect(status().isNotFound())
                 .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeEpisodesServiceTest_consultAnimeEpisodes_notExistingAnime_expected.json");
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 }

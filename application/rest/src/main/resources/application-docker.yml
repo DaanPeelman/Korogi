@@ -1,0 +1,12 @@
+logging:
+  file:
+    name: /opt/logs/korogi.log
+  pattern:
+    rolling-file-name: korogi-%d{yyyy-MM-dd}.%i.log
+
+spring:
+  profiles:
+    include: ${ENV:placeholder}
+  mvc:
+    servlet:
+      path: /

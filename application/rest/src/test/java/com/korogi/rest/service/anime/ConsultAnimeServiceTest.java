@@ -3,7 +3,8 @@ package com.korogi.rest.service.anime;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.korogi.rest.service.BaseServiceTest;
+import com.korogi.rest.BaseServiceTest;
+import com.korogi.rest.util.HibernateStatisticsUtil;
 import org.junit.jupiter.api.Test;
 
 class ConsultAnimeServiceTest extends BaseServiceTest {
@@ -14,6 +15,6 @@ class ConsultAnimeServiceTest extends BaseServiceTest {
         performAndPrint(get(URL))
                 .andExpect(status().isOk());
 
-        hibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
+        HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
 }

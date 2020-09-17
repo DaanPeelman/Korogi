@@ -6,8 +6,6 @@ import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 import static lombok.AccessLevel.PUBLIC;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -16,15 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.validator.constraints.URL;
 
 /**
  * Entity class representing a Personage in the database.
@@ -45,23 +42,16 @@ import org.hibernate.validator.constraints.URL;
 @Table(name = "PERSONAGES")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_PERSONAGE", allocationSize = 1)
 public class Personage extends BaseEntity {
-    @NotBlank
-    @Size(max = 128)
     @Column(name = "first_name")
     private String firstName;
 
-    @NotBlank
-    @Size(max = 128)
     @Column(name = "last_name")
     private String lastName;
 
-    @URL
-    @Size(max = 512)
     @Column(name = "photo_url")
     private String photoUrl;
 
     @Builder.Default
-    @Size(min = 1)
     @ManyToMany(fetch = LAZY, cascade = PERSIST)
     @JoinTable(
             name = "ANIME_PERSONAGES",

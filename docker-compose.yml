@@ -10,7 +10,7 @@ services:
       - korogi-api:korogi-api
       - korogi-web:korogi-web
     volumes:
-    - ./delivery/reverse_proxy/config/nginx.conf:/etc/nginx/nginx.conf
+    - ./delivery/reverse-proxy/config/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 8080:80
   postgres:
@@ -29,20 +29,11 @@ services:
       - postgres
     restart: always
     build: delivery/korogi-api
-    ports:
-      - 8788:8000
     volumes:
+      - ./delivery/korogi-api/secrets:/etc/secrets:ro
       - ./logs:/opt/logs
-    env_file:
-      - delivery/korogi-api/secrets/database.properties
-    environment:
-      - JPDA_ADDRESS=*:8000
-      - JPDA_TRANSPORT=dt_socket
-      - TZ=${KOROGI_TZ}
     links:
       - postgres:korogi-postgres
-    entrypoint: catalina.sh
-    command: jpda run
   korogi-web:
     image: "korogi-web"
     restart: always

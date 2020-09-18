@@ -18,7 +18,7 @@
         <npm.executable>npm</npm.executable>
         <npm.install.command>install</npm.install.command>
         <!--suppress UnresolvedMavenProperty -->
-        <npm.skip.ci>${skipNpmCi}</npm.skip.ci>
+        <npm.skip.install>${skipNpmInstall}</npm.skip.install>
         <!--suppress UnresolvedMavenProperty -->
         <npm.skip.tests>${skipTests}</npm.skip.tests>
     </properties>
@@ -126,7 +126,7 @@
                             <executable>${npm.executable}</executable>
                             <commandlineArgs>${npm.install.command}</commandlineArgs>
                             <workingDirectory>${project.basedir}</workingDirectory>
-                            <skip>${npm.skip.ci}</skip>
+                            <skip>${npm.skip.install}</skip>
                         </configuration>
                     </execution>
 

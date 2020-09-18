@@ -8,6 +8,12 @@ logging:
     console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
     file: ${logging.pattern.console}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, info
+
 server:
   forward-headers-strategy: framework
 

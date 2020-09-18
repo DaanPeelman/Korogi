@@ -1,5 +1,6 @@
 package com.korogi.rest.service.personage;
 
+import static com.korogi.rest.util.CustomContentResultMatchers.json;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,8 +22,8 @@ class ConsultPersonageDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/personage/ConsultPersonageDetailsServiceTest_consultPersonageDetails.xml")
     void consultPersonageDetails() throws Exception {
         performAndPrint(get(URL, 1))
-                .andExpect(status().isOk())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/personage/ConsultPersonageDetailsServiceTest_consultPersonageDetails_expected.json");
+            .andExpect(status().isOk())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/personage/ConsultPersonageDetailsServiceTest_consultPersonageDetails_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -37,8 +38,8 @@ class ConsultPersonageDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/personage/ConsultPersonageDetailsServiceTest_consultPersonageDetails.xml")
     void consultPersonageDetails_notExisting() throws Exception {
         performAndPrint(get(URL, 99))
-                .andExpect(status().isNotFound())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/personage/ConsultPersonageDetailsServiceTest_consultPersonageDetails_notExisting_expected.json");
+            .andExpect(status().isNotFound())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/personage/ConsultPersonageDetailsServiceTest_consultPersonageDetails_notExisting_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }

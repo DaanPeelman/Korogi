@@ -1,5 +1,6 @@
 package com.korogi.rest.service.anime;
 
+import static com.korogi.rest.util.CustomContentResultMatchers.json;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,7 +23,7 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     void consultAnimeDetails_animeWithSequal() throws Exception {
         performAndPrint(get(URL, 1))
             .andExpect(status().isOk())
-            .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithSequal_expected.json");
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -37,8 +38,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
     void consultAnimeDetails_animeWithPrequal() throws Exception {
         performAndPrint(get(URL, 3))
-                .andExpect(status().isOk())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequal_expected.json");
+            .andExpect(status().isOk())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -53,8 +54,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
     void consultAnimeDetails_animeWithPrequalAndSequal() throws Exception {
         performAndPrint(get(URL, 2))
-                .andExpect(status().isOk())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequalAndSequal_expected.json");
+            .andExpect(status().isOk())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequalAndSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -69,8 +70,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
     void consultAnimeDetails_animeWithoutPrequalOrSequal() throws Exception {
         performAndPrint(get(URL, 4))
-                .andExpect(status().isOk())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithoutPrequalOrSequal_expected.json");
+            .andExpect(status().isOk())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithoutPrequalOrSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -85,8 +86,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails.xml")
     void consultAnimeDetails_notExisting() throws Exception {
         performAndPrint(get(URL, 99))
-                .andExpect(status().isNotFound())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_notExisting_expected.json");
+            .andExpect(status().isNotFound())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_notExisting_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }

@@ -1,5 +1,6 @@
 package com.korogi.rest.service.anime;
 
+import static com.korogi.rest.util.CustomContentResultMatchers.json;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,8 +23,8 @@ class ConsultAnimeSequalDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails.xml")
     void consultAnimeSequalDetails() throws Exception {
         performAndPrint(get(URL, 2))
-                .andExpect(status().isOk())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_expected.json");
+            .andExpect(status().isOk())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -39,8 +40,8 @@ class ConsultAnimeSequalDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails.xml")
     void consultAnimeSequalDetails_withPrequalAndSequal() throws Exception {
         performAndPrint(get(URL, 1))
-                .andExpect(status().isOk())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_withPrequalAndSequal_expected.json");
+            .andExpect(status().isOk())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_withPrequalAndSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -55,8 +56,8 @@ class ConsultAnimeSequalDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails.xml")
     void consultAnimeSequalDetails_hasNoSequal() throws Exception {
         performAndPrint(get(URL, 3))
-                .andExpect(status().isNotFound())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_hasNoSequal_expected.json");
+            .andExpect(status().isNotFound())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_hasNoSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -71,8 +72,8 @@ class ConsultAnimeSequalDetailsServiceTest extends BaseServiceTest {
     @DatabaseSetup("/com/korogi/rest/service/anime/ConsultAnimePrequalDetailsServiceTest_consultAnimePrequalDetails.xml")
     void consultAnimeSequalDetails_notExisting() throws Exception {
         performAndPrint(get(URL, 99))
-                .andExpect(status().isNotFound())
-                .andExpectResponseMatchingFile("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_notExisting_expected.json");
+            .andExpect(status().isNotFound())
+            .andExpect(json().matchesFileContent("com/korogi/rest/service/anime/ConsultAnimeSequalDetailsServiceTest_consultAnimeSequalDetails_notExisting_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }

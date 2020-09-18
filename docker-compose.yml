@@ -1,4 +1,4 @@
-version: "2"
+version: "2.4"
 services:
   reverse-proxy:
     image: "nginx:1.19-alpine"
@@ -23,10 +23,16 @@ services:
     environment:
       - POSTGRES_USER=korogi
       - POSTGRES_PASSWORD=korogi
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U korogi"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
   korogi-api:
     image: "korogi-api"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     restart: always
     build: delivery/korogi-api
     volumes:

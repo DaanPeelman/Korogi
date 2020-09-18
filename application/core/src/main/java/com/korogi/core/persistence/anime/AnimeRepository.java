@@ -4,7 +4,6 @@ import java.util.Optional;
 import com.korogi.core.domain.Anime;
 import com.korogi.core.persistence.EntityRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 /**
  * Repository for CRUD operations with an <code>Anime</code> entity.
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Repository;
  * @see AnimeCriteriaRepository
  * @see Anime
  */
-@Repository
 public interface AnimeRepository extends EntityRepository<Anime>, AnimeCriteriaRepository {
     @Query("select a.prequal from Anime a where a.id = ?1")
     Optional<Anime> findPrequalOfAnime(Long id);

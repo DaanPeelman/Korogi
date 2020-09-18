@@ -13,21 +13,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 @DataJpaTest(properties = { "spring.jpa.properties.hibernate.format_sql=true" })
 @ContextConfiguration(classes = { RepositoryConfig.class, DbUnitProstresqlConfig.class })
 @EntityScan(basePackageClasses = BaseEntity.class)
 @TestExecutionListeners(
-        value = {
-                DependencyInjectionTestExecutionListener.class,
-                DirtiesContextTestExecutionListener.class,
-                TransactionalTestExecutionListener.class,
-                DbUnitTestExecutionListener.class
-        },
-        mergeMode = MERGE_WITH_DEFAULTS
+    value = { DbUnitTestExecutionListener.class },
+    mergeMode = MERGE_WITH_DEFAULTS
 )
 @AutoConfigureEmbeddedDatabase
 public abstract class BaseRepositoryTest {

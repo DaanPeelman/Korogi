@@ -11,12 +11,11 @@ import com.korogi.dto.EpisodeDTO;
 import com.korogi.rest.mapper.BaseResourceMapper;
 import com.korogi.rest.service.EpisodeRestServiceImpl;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 
 @Mapper(componentModel = COMPONENT_MODEL)
 abstract class EpisodeResourceMapper extends BaseResourceMapper<EpisodeDTO, Episode> {
-    @Autowired
+
     public EpisodeResourceMapper() {
         super(Episode.class);
     }

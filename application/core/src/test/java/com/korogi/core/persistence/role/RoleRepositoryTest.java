@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Daan Peelman
  */
 class RoleRepositoryTest extends BaseRepositoryTest {
+
     @Autowired
     private RoleRepository repository;
 

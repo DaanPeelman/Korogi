@@ -15,13 +15,11 @@ import com.korogi.dto.AnimeDTO;
 import com.korogi.rest.mapper.BaseResourceMapper;
 import com.korogi.rest.service.AnimeRestServiceImpl;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 
 @Mapper(componentModel = COMPONENT_MODEL)
 abstract class AnimeResourceMapper extends BaseResourceMapper<AnimeDTO, Anime> {
 
-    @Autowired
     public AnimeResourceMapper() {
         super(Anime.class);
     }

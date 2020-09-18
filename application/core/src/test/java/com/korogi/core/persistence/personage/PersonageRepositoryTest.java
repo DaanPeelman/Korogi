@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 class PersonageRepositoryTest extends BaseRepositoryTest {
+
     @Autowired
     private PersonageRepository repository;
 

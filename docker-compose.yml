@@ -14,7 +14,7 @@ services:
     ports:
       - 8080:80
   postgres:
-    image: "postgres:9.6-alpine"
+    image: "postgres:12-alpine"
     restart: on-failure
     ports:
       - 5432:5432

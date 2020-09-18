@@ -13,7 +13,7 @@ class ConsultAnimeServiceTest extends BaseServiceTest {
     @Test
     void consultAnime() throws Exception {
         performAndPrint(get(URL))
-                .andExpect(status().isOk());
+            .andExpect(status().isOk());
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }

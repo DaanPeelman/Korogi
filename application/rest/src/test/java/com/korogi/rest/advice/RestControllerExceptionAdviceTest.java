@@ -56,10 +56,10 @@ class RestControllerExceptionAdviceTest extends BaseServiceTest {
         when(animeRepository.findById(1L)).thenThrow(new ResourceNotFoundException());
 
         performAndPrint(get("/anime/{id}", 1L))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.status", equalTo("Not Found")))
-                .andExpect(jsonPath("$.code", equalTo(404)))
-                .andExpect(jsonPath("$.message", equalTo("Resource not found")));
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.status", equalTo("Not Found")))
+            .andExpect(jsonPath("$.code", equalTo(404)))
+            .andExpect(jsonPath("$.message", equalTo("Resource not found")));
     }
 
     @Test
@@ -72,10 +72,10 @@ class RestControllerExceptionAdviceTest extends BaseServiceTest {
         doNothing().when(logger).error(anyString(), any(RuntimeException.class));
 
         performAndPrint(get("/anime"))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.status", equalTo("Internal Server Error")))
-                .andExpect(jsonPath("$.code", equalTo(500)))
-                .andExpect(jsonPath("$.message", startsWith("An unexpected error occurred. If this problem keeps persisting please contact our technical support with code: '" + generatedUUID + "'.")));
+            .andExpect(status().isInternalServerError())
+            .andExpect(jsonPath("$.status", equalTo("Internal Server Error")))
+            .andExpect(jsonPath("$.code", equalTo(500)))
+            .andExpect(jsonPath("$.message", startsWith("An unexpected error occurred. If this problem keeps persisting please contact our technical support with code: '" + generatedUUID + "'.")));
 
         verify(logger, times(1)).error(eq("Unexpected error: '" + generatedUUID + "'"), eq(runtimeExceptionToThrow));
     }

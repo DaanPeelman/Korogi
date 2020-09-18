@@ -15,8 +15,8 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- INTERNAL PROJECTS -->
         <dependency>
-            <!-- INTERNAL PROJECTS -->
             <groupId>${project.groupId}</groupId>
             <artifactId>dto</artifactId>
         </dependency>

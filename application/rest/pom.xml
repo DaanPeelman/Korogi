@@ -115,7 +115,7 @@
                 </executions>
             </plugin>
 
-            <!-- COPY WAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
+            <!-- COPY SPRING-BOOT JAR INTO DEPLOYMENTS FOLDER FOR DOCKER BUILD -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

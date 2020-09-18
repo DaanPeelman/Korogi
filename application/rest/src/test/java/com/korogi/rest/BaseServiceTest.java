@@ -10,16 +10,12 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.korogi.rest.util.HibernateStatisticsUtil;
 import com.korogi.rest.util.MockMvcAssertionUtil;
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
@@ -27,12 +23,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 @ActiveProfiles("unit-test")
 @Transactional
 @TestExecutionListeners(
-    value = {
-            DependencyInjectionTestExecutionListener.class,
-            DirtiesContextTestExecutionListener.class,
-            TransactionalTestExecutionListener.class,
-            DbUnitTestExecutionListener.class
-    },
+    value = { DbUnitTestExecutionListener.class },
     mergeMode = MERGE_WITH_DEFAULTS
 )
 @AutoConfigureMockMvc
@@ -43,7 +34,8 @@ public abstract class BaseServiceTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
+        HibernateStatisticsUtil.resetQueryCount();
     }
 
     protected MockMvcAssertionUtil performAndPrint(RequestBuilder requestBuilder) throws Exception {
@@ -52,10 +44,5 @@ public abstract class BaseServiceTest {
                     .andDo(print())
                     .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
         );
-    }
-
-    @AfterEach
-    void after() throws Exception {
-        HibernateStatisticsUtil.resetQueryCount();
     }
 }

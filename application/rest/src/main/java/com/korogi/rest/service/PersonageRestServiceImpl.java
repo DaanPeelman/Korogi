@@ -1,5 +1,6 @@
 package com.korogi.rest.service;
 
+import static lombok.AccessLevel.PUBLIC;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -9,7 +10,7 @@ import com.korogi.core.persistence.personage.PersonageRepository;
 import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.mapper.EntityToDTOResourceMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,20 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/personages", produces = { APPLICATION_JSON_VALUE })
 @Transactional(readOnly = true)
+@RequiredArgsConstructor(access = PUBLIC)
 public class PersonageRestServiceImpl implements PersonageRestService {
     private static final String PATH_VARIABLE_ID = "id";
 
     private final PersonageRepository personageRepository;
     private final EntityToDTOResourceMapper entityToDTOResourceMapper;
-
-    @Autowired
-    public PersonageRestServiceImpl(
-            PersonageRepository personageRepository,
-            EntityToDTOResourceMapper entityToDTOResourceMapper
-    ) {
-        this.personageRepository = personageRepository;
-        this.entityToDTOResourceMapper = entityToDTOResourceMapper;
-    }
 
     @GetMapping
     @ResponseStatus(OK)

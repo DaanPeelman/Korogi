@@ -7,24 +7,18 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import com.korogi.core.util.UUIDGenerator;
 import com.korogi.dto.ErrorDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 @Slf4j
+@RequiredArgsConstructor
 public class RestControllerExceptionAdvice {
 
     private final UUIDGenerator uuidGenerator;
-
-    @Autowired
-    public RestControllerExceptionAdvice(
-            UUIDGenerator uuidGenerator
-    ) {
-        this.uuidGenerator = uuidGenerator;
-    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception) {

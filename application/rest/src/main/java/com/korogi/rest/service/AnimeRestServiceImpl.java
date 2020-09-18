@@ -3,6 +3,7 @@ package com.korogi.rest.service;
 import static com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils.fromAttributePaths;
 import static com.korogi.core.domain.Anime_.EPISODES;
 import static com.korogi.core.domain.Anime_.PERSONAGES;
+import static lombok.AccessLevel.PUBLIC;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -15,7 +16,7 @@ import com.korogi.dto.EpisodeDTO;
 import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.mapper.EntityToDTOResourceMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,20 +30,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/anime", produces = { APPLICATION_JSON_VALUE })
 @Transactional(readOnly = true)
+@RequiredArgsConstructor(access = PUBLIC)
 public class AnimeRestServiceImpl implements AnimeRestService {
     private static final String PATH_VARIABLE_ID = "id";
 
     private final AnimeRepository animeRepository;
     private final EntityToDTOResourceMapper entityToDTOResourceMapper;
-
-    @Autowired
-    public AnimeRestServiceImpl(
-            AnimeRepository animeRepository,
-            EntityToDTOResourceMapper entityToDTOResourceMapper
-    ) {
-        this.animeRepository = animeRepository;
-        this.entityToDTOResourceMapper = entityToDTOResourceMapper;
-    }
 
     @GetMapping
     @ResponseStatus(OK)

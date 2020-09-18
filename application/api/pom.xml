@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <!-- INTERNAL PROJECTS -->
-            <groupId>com.korogi</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>dto</artifactId>
         </dependency>
 

@@ -11,12 +11,11 @@ import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.mapper.BaseResourceMapper;
 import com.korogi.rest.service.PersonageRestServiceImpl;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 
 @Mapper(componentModel = COMPONENT_MODEL)
 abstract class PersonageResourceMapper extends BaseResourceMapper<PersonageDTO, Personage> {
-    @Autowired
+
     public PersonageResourceMapper() {
         super(Personage.class);
     }

@@ -36,7 +36,7 @@
             </properties>
         </profile>
         <profile>
-            <id>jenkins</id>
+            <id>ci</id>
             <properties>
                 <npm.install.command>ci</npm.install.command>
             </properties>

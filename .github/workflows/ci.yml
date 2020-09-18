@@ -26,7 +26,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Compile, run tests and package
-        run: mvn package -B -PJenkins
+        run: mvn package -B -Pci
       - name: Upload delivery artifacts
         uses: actions/upload-artifact@v2.1.4
         with:

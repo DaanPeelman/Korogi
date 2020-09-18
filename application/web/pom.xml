@@ -16,6 +16,7 @@
 
     <properties>
         <npm.executable>npm</npm.executable>
+        <npm.install.command>install</npm.install.command>
         <!--suppress UnresolvedMavenProperty -->
         <npm.skip.ci>${skipNpmCi}</npm.skip.ci>
         <!--suppress UnresolvedMavenProperty -->
@@ -32,6 +33,12 @@
             </activation>
             <properties>
                 <npm.executable>npm.cmd</npm.executable>
+            </properties>
+        </profile>
+        <profile>
+            <id>jenkins</id>
+            <properties>
+                <npm.install.command>ci</npm.install.command>
             </properties>
         </profile>
     </profiles>
@@ -110,14 +117,14 @@
                 <executions>
                     <!-- INSTALL NPM MODULES -->
                     <execution>
-                        <id>npm ci</id>
+                        <id>npm install</id>
                         <goals>
                             <goal>exec</goal>
                         </goals>
                         <phase>initialize</phase>
                         <configuration>
                             <executable>${npm.executable}</executable>
-                            <commandlineArgs>ci</commandlineArgs>
+                            <commandlineArgs>${npm.install.command}</commandlineArgs>
                             <workingDirectory>${project.basedir}</workingDirectory>
                             <skip>${npm.skip.ci}</skip>
                         </configuration>

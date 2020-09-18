@@ -8,8 +8,14 @@ logging:
     console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
     file: ${logging.pattern.console}
 
+server:
+  forward-headers-strategy: framework
+
 spring:
   hateoas:
     use-hal-as-default-json-media-type: false
   jpa:
     open-in-view: false
+  mvc:
+    servlet:
+      path: /rest

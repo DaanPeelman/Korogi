@@ -1,7 +1,8 @@
 package com.korogi.core.domain;
 
+import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.User.newUser;
-import static org.assertj.core.api.Assertions.assertThat;
+import static java.lang.Boolean.TRUE;
 
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -29,11 +30,12 @@ class UserTest {
                 .activated(true)
                 .build();
 
-        assertThat(user).isNotNull();
-        assertThat(user.getEmail()).isNotNull().isEqualTo(email);
-        assertThat(user.getUsername()).isNotNull().isEqualTo(username);
-        assertThat(user.getPassword()).isNotNull().isEqualTo(password);
-        assertThat(user.getActivationCode()).isNotNull().isEqualTo(activationCode);
-        assertThat(user.getActivated()).isNotNull().isTrue();
+        assertThat(user)
+                .isNotNull()
+                .hasEmail(email)
+                .hasUsername(username)
+                .hasPassword(password)
+                .hasActivationCode(activationCode)
+                .hasActivated(TRUE);
     }
 }

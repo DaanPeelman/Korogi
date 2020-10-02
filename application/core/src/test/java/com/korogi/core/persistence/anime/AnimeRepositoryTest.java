@@ -1,5 +1,6 @@
 package com.korogi.core.persistence.anime;
 
+import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.testdata.AnimeTestData.steinsGate_notPersisted;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,13 +29,11 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
 
         Anime foundAnime = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundAnime).isNotNull();
-        assertThat(foundAnime.getId()).isEqualTo(idToFind);
-
-        assertThat(foundAnime.getSequal()).isNotNull();
-        assertThat(foundAnime.getSequal().getId()).isEqualTo(2L);
-
-        assertThat(foundAnime.getPrequal()).isNull();
+        assertThat(foundAnime)
+                .isNotNull()
+                .hasId(idToFind)
+                .hasSequal(em.find(Anime.class, 2L))
+                .hasPrequal(null);
     }
 
     /**
@@ -47,13 +46,11 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
 
         Anime foundAnime = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundAnime).isNotNull();
-        assertThat(foundAnime.getId()).isEqualTo(idToFind);
-
-        assertThat(foundAnime.getPrequal()).isNotNull();
-        assertThat(foundAnime.getPrequal().getId()).isEqualTo(2L);
-
-        assertThat(foundAnime.getSequal()).isNull();
+        assertThat(foundAnime)
+                .isNotNull()
+                .hasId(idToFind)
+                .hasPrequal(em.find(Anime.class, 2L))
+                .hasSequal(null);
     }
 
     /**
@@ -91,8 +88,8 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
         assertThat(savedAnime.getModifiedBy()).isNull();
         assertThat(savedAnime.getVersion()).isNotNull();
 
-        assertThat(savedAnime.getPersonages()).isNotEmpty().contains(personage);
-        assertThat(personage.getAnime()).isNotEmpty().contains(savedAnime);
+        assertThat(savedAnime).hasOnlyPersonages(personage);
+        assertThat(personage).hasAnime(savedAnime);
     }
 
     /**

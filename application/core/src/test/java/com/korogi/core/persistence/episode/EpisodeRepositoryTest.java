@@ -1,5 +1,6 @@
 package com.korogi.core.persistence.episode;
 
+import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.testdata.EpisodeTestData.steinsGateEpisode1_notPeristed;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,13 +29,14 @@ class EpisodeRepositoryTest extends BaseRepositoryTest {
 
         Episode foundEpisode = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundEpisode).isNotNull();
-        assertThat(foundEpisode.getId()).isEqualTo(idToFind);
-        assertThat(foundEpisode.getAnime()).isNotNull().isEqualTo(em.find(Anime.class, 1L));
-        assertThat(foundEpisode.getName()).isNotNull().isEqualTo("Prologue of the Beginning and Ending");
-        assertThat(foundEpisode.getSynopsis()).isNotNull().isEqualTo("Prologue of the Beginning and Ending synopsis here");
-        assertThat(foundEpisode.getDurationInMinutes()).isNotNull().isEqualTo(24);
-        assertThat(foundEpisode.getAirDate()).isNotNull().isEqualTo(LocalDate.of(2011, 4, 5));
+        assertThat(foundEpisode)
+                .isNotNull()
+                .hasId(idToFind)
+                .hasAnime(em.find(Anime.class, 1L))
+                .hasName("Prologue of the Beginning and Ending")
+                .hasSynopsis("Prologue of the Beginning and Ending synopsis here")
+                .hasDurationInMinutes(24)
+                .hasAirDate(LocalDate.of(2011, 4, 5));
     }
 
     /**
@@ -72,7 +74,7 @@ class EpisodeRepositoryTest extends BaseRepositoryTest {
         assertThat(savedEpisode.getVersion()).isNotNull();
         assertThat(savedEpisode.getAnime()).isEqualTo(anime);
 
-        assertThat(anime.getEpisodes()).contains(savedEpisode);
+        assertThat(anime).hasEpisodes(savedEpisode);
     }
 
     /**

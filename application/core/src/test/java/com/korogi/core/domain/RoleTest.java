@@ -1,7 +1,7 @@
 package com.korogi.core.domain;
 
+import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.Role.newRole;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import com.korogi.core.domain.enumeration.RoleType;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,8 @@ class RoleTest {
                 .roleType(roleType)
                 .build();
 
-        assertThat(role).isNotNull();
-        assertThat(role.getRoleType()).isEqualTo(roleType);
+        assertThat(role)
+                .isNotNull()
+                .hasRoleType(roleType);
     }
 }

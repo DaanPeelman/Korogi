@@ -1,5 +1,6 @@
 package com.korogi.core.persistence.personage;
 
+import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.testdata.PersonageTestData.okabeRintarou_notPersisted;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,13 +29,13 @@ class PersonageRepositoryTest extends BaseRepositoryTest {
 
         Personage foundPersonage = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundPersonage).isNotNull();
-        assertThat(foundPersonage.getId()).isEqualTo(idToFind);
-        assertThat(foundPersonage.getFirstName()).isNotNull().isEqualTo("Okabe");
-        assertThat(foundPersonage.getLastName()).isNotNull().isEqualTo("Rintarou");
-        assertThat(foundPersonage.getPhotoUrl()).isNotNull().isEqualTo("http://photo.url.be");
-
-        assertThat(foundPersonage.getAnime()).isNotNull().hasSize(1).contains(em.find(Anime.class, 1L));
+        assertThat(foundPersonage)
+                .isNotNull()
+                .hasId(idToFind)
+                .hasFirstName("Okabe")
+                .hasLastName("Rintarou")
+                .hasPhotoUrl("http://photo.url.be")
+                .hasOnlyAnime(em.find(Anime.class, 1L));
     }
 
     /**
@@ -70,7 +71,7 @@ class PersonageRepositoryTest extends BaseRepositoryTest {
         assertThat(savedPersonage.getModificationDate()).isNull();
         assertThat(savedPersonage.getModifiedBy()).isNull();
         assertThat(savedPersonage.getVersion()).isNotNull();
-        assertThat(savedPersonage.getAnime()).isNotEmpty().hasSize(1).contains(anime);
+        assertThat(savedPersonage).hasOnlyAnime(anime);
     }
 
     /**

@@ -6,4 +6,4 @@ logging:
 
 spring:
   profiles:
-    include: ${ENV:placeholder}
+    include: ${ENV:}

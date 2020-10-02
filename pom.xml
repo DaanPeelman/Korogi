@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
+		<version>2.3.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,6 +22,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+
+		<korogi-spring-boot.version>2.3.4.RELEASE</korogi-spring-boot.version>
 
 		<typescript-generator-maven-plugin.version>2.25.695</typescript-generator-maven-plugin.version>
 		<assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
@@ -103,7 +105,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-test</artifactId>
-				<version>${spring-boot.version}</version>
+				<version>${korogi-spring-boot.version}</version>
 				<scope>test</scope>
 				<exclusions>
 					<exclusion>

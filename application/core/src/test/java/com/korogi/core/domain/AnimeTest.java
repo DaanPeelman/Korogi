@@ -43,6 +43,7 @@ class AnimeTest {
                 .hasNameEnglish(nameEnglish)
                 .hasNameRomanized(nameRomanized)
                 .hasStartAir(startAir)
+                .hasEndAir(endAir)
                 .hasSynopsis(synopsis)
                 .hasPrequal(prequal);
         assertThat(prequal).hasSequal(anime);

@@ -11,10 +11,13 @@ import com.korogi.core.domain.BaseEntity;
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 
-@DataJpaTest(properties = { "spring.jpa.properties.hibernate.format_sql=true" })
+@DataJpaTest
+@ActiveProfiles("unit-test")
+//@DataJpaTest(properties = { "spring.jpa.properties.hibernate.format_sql=true", "spring.flyway.placeholders.read-user=postgres" })
 @ContextConfiguration(classes = { RepositoryConfig.class, DbUnitProstresqlConfig.class })
 @EntityScan(basePackageClasses = BaseEntity.class)
 @TestExecutionListeners(

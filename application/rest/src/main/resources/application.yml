@@ -18,6 +18,8 @@ server:
   forward-headers-strategy: framework
 
 spring:
+  application:
+    name: Korogi
   hateoas:
     use-hal-as-default-json-media-type: false
   jpa:
@@ -25,5 +27,6 @@ spring:
   mvc:
     servlet:
       path: /rest
-  application:
-    name: Korogi
+  flyway:
+    placeholders:
+      read-user: ${spring.datasource.username}

@@ -3,6 +3,9 @@ logging:
     root: info
 
 spring:
+  flyway:
+    placeholders:
+      read-user: postgres
   jpa:
     properties:
       hibernate:

@@ -1,6 +1,5 @@
 package com.korogi.rest.mapper.episode;
 
-import static com.korogi.rest.mapper.BaseResourceMapper.COMPONENT_MODEL;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -13,7 +12,7 @@ import com.korogi.rest.service.EpisodeRestServiceImpl;
 import org.mapstruct.Mapper;
 import org.springframework.hateoas.Link;
 
-@Mapper(componentModel = COMPONENT_MODEL)
+@Mapper
 abstract class EpisodeResourceMapper extends BaseResourceMapper<EpisodeDTO, Episode> {
 
     public EpisodeResourceMapper() {

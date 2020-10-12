@@ -4,7 +4,6 @@ import static com.korogi.dto.AnimeDTO.AnimeRelation.EPISODES;
 import static com.korogi.dto.AnimeDTO.AnimeRelation.PERSONAGES;
 import static com.korogi.dto.AnimeDTO.AnimeRelation.PREQUAL;
 import static com.korogi.dto.AnimeDTO.AnimeRelation.SEQUAL;
-import static com.korogi.rest.mapper.BaseResourceMapper.COMPONENT_MODEL;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -17,7 +16,7 @@ import com.korogi.rest.service.AnimeRestServiceImpl;
 import org.mapstruct.Mapper;
 import org.springframework.hateoas.Link;
 
-@Mapper(componentModel = COMPONENT_MODEL)
+@Mapper
 abstract class AnimeResourceMapper extends BaseResourceMapper<AnimeDTO, Anime> {
 
     public AnimeResourceMapper() {

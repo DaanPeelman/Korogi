@@ -5,8 +5,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 
 public abstract class BaseResourceMapper<TO, FROM> implements ResourceMapper<TO, FROM> {
-    public static final String COMPONENT_MODEL = "spring";
-
     private final Class<FROM> fromClass;
 
     public BaseResourceMapper(Class<FROM> fromClass) {

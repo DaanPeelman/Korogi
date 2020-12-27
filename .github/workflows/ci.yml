@@ -27,11 +27,16 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Compile, run tests and package
         run: mvn package -B -Pci
-      - name: Upload delivery artifacts
+      - name: Upload api artifacts
         uses: actions/upload-artifact@v2.1.4
         with:
-          name: delivery-artifacts
-          path: delivery
+          name: api-artifacts
+          path: delivery/korogi-api/deployment
+      - name: Upload web artifacts
+        uses: actions/upload-artifact@v2.1.4
+        with:
+          name: web-artifacts
+          path: delivery/korogi-web/deployment
 
   build_and_push_docker_image:
     name: Build and push Docker image to Docker Hub
@@ -40,11 +45,16 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Download Tomcat config artifacts
+      - name: Download api artifacts
         uses: actions/download-artifact@v2.0.5
         with:
-          name: delivery-artifacts
-          path: delivery
+          name: api-artifacts
+          path: delivery/korogi-api/deployment
+      - name: Download web artifacts
+        uses: actions/download-artifact@v2.0.5
+        with:
+          name: web-artifacts
+          path: delivery/korogi-web/deployment
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub

@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: 11
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v2
       - name: Cache Maven packages
         uses: actions/cache@v2
         with:
@@ -28,12 +28,12 @@ jobs:
       - name: Compile, run tests and package
         run: mvn package -B -Pci
       - name: Upload api artifacts
-        uses: actions/upload-artifact@v2.1.4
+        uses: actions/upload-artifact@v2
         with:
           name: api-artifacts
           path: delivery/korogi-api/deployment
       - name: Upload web artifacts
-        uses: actions/upload-artifact@v2.1.4
+        uses: actions/upload-artifact@v2
         with:
           name: web-artifacts
           path: delivery/korogi-web/deployment
@@ -46,12 +46,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Download api artifacts
-        uses: actions/download-artifact@v2.0.5
+        uses: actions/download-artifact@v2
         with:
           name: api-artifacts
           path: delivery/korogi-api/deployment
       - name: Download web artifacts
-        uses: actions/download-artifact@v2.0.5
+        uses: actions/download-artifact@v2
         with:
           name: web-artifacts
           path: delivery/korogi-web/deployment
@@ -63,14 +63,14 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Build and push API Docker image
-        uses: docker/build-push-action@v2.2.1
+        uses: docker/build-push-action@v2
         with:
           context: delivery/korogi-api
           file: delivery/korogi-api/Dockerfile
           tags: daanpeelman/korogi-api:latest
           push: true
       - name: Build and push Web Docker image
-        uses: docker/build-push-action@v2.2.1
+        uses: docker/build-push-action@v2
         with:
           context: delivery/korogi-web
           file: delivery/korogi-web/Dockerfile

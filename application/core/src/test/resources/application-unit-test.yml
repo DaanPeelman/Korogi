@@ -13,3 +13,8 @@ spring:
           interceptor: com.korogi.core.interceptor.HibernateStatisticsInterceptor
         format_sql: true
     show-sql: true
+
+zonky:
+  test:
+    database:
+      provider: zonky

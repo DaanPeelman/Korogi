@@ -17,7 +17,6 @@ import org.springframework.test.context.TestExecutionListeners;
 
 @DataJpaTest
 @ActiveProfiles("unit-test")
-//@DataJpaTest(properties = { "spring.jpa.properties.hibernate.format_sql=true", "spring.flyway.placeholders.read-user=postgres" })
 @ContextConfiguration(classes = { RepositoryConfig.class, DbUnitProstresqlConfig.class })
 @EntityScan(basePackageClasses = BaseEntity.class)
 @TestExecutionListeners(

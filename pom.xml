@@ -33,8 +33,6 @@
 		<mapstruct.version>1.4.1.Final</mapstruct.version>
 		<dbunit.version>2.7.0</dbunit.version>
 		<spring-test-dbunit.version>1.3.0</spring-test-dbunit.version>
-		<embedded-postgres-binaries.version>12.5.0-1</embedded-postgres-binaries.version>
-		<embedded-postgres.version>1.2.9</embedded-postgres.version>
 		<embedded-database-spring-test.version>2.0.0-beta1</embedded-database-spring-test.version> <!-- TODO release version once available -->
 	</properties>
 
@@ -139,19 +137,6 @@
 						<artifactId>dbunit</artifactId>
 					</exclusion>
 				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>io.zonky.test.postgres</groupId>
-				<artifactId>embedded-postgres-binaries-bom</artifactId>
-				<version>${embedded-postgres-binaries.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>io.zonky.test</groupId>
-				<artifactId>embedded-postgres</artifactId>
-				<version>${embedded-postgres.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.zonky.test</groupId>

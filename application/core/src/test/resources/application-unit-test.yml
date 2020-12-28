@@ -17,4 +17,6 @@ spring:
 zonky:
   test:
     database:
-      provider: zonky
+      postgres:
+        docker:
+          image: postgres:12-alpine

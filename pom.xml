@@ -27,6 +27,7 @@
 
 		<typescript-generator-maven-plugin.version>2.27.744</typescript-generator-maven-plugin.version>
 		<assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
+		<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
 		<spring-data-jpa-entity-graph.version>2.4.1</spring-data-jpa-entity-graph.version>
 		<mapstruct.version>1.4.1.Final</mapstruct.version>
@@ -196,6 +197,11 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${exec-maven-plugin.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

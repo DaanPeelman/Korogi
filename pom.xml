@@ -23,8 +23,6 @@
 	<properties>
 		<java.version>11</java.version>
 
-		<korogi-spring-boot.version>2.4.1</korogi-spring-boot.version>
-
 		<typescript-generator-maven-plugin.version>2.27.744</typescript-generator-maven-plugin.version>
 		<assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
 		<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
@@ -102,18 +100,6 @@
 			</dependency>
 
 			<!-- TESTING -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-test</artifactId>
-				<version>${korogi-spring-boot.version}</version>
-				<scope>test</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>org.junit.vintage</groupId>
-						<artifactId>junit-vintage-engine</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
 			<dependency>
 				<groupId>org.dbunit</groupId>
 				<artifactId>dbunit</artifactId>

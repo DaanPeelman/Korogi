@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { AnimeDetailComponent } from './anime-detail.component';
 import { AnimeService } from "../../shared/services/anime/anime.service";
 import { anyString, instance, mock, verify, when } from "ts-mockito";
@@ -22,7 +22,7 @@ describe('AnimeDetailComponent', () => {
 
     let activatedRouteStub;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             schemas: [
                 CUSTOM_ELEMENTS_SCHEMA

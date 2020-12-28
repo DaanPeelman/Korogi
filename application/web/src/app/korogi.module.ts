@@ -19,7 +19,7 @@ import { MapperModule } from "./shared/mapper/mapper.module";
         BrowserModule,
         HeaderModule,
         HttpClientModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
 
         MapperModule.forRoot(),
 

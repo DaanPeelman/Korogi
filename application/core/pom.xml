@@ -73,8 +73,8 @@
             <artifactId>dbunit</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.springtestdbunit</groupId>
-            <artifactId>spring-test-dbunit</artifactId>
+            <groupId>com.github.ppodgorsek</groupId>
+            <artifactId>spring-test-dbunit-core</artifactId>
         </dependency>
         <dependency>
             <groupId>io.zonky.test</groupId>

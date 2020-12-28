@@ -40,6 +40,7 @@ services:
       - ./logs:/opt/logs
     links:
       - postgres:korogi-postgres
+    user: ${CURRENT_USER_UID}
   korogi-web:
     image: "korogi-web"
     restart: always

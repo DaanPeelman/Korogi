@@ -23,7 +23,7 @@
 	<properties>
 		<java.version>11</java.version>
 
-		<typescript-generator-maven-plugin.version>2.27.744</typescript-generator-maven-plugin.version>
+		<typescript-generator-maven-plugin.version>2.28.785</typescript-generator-maven-plugin.version>
 		<assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
 		<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 

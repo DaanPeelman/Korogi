@@ -12,7 +12,7 @@ import java.util.List;
 import com.korogi.core.domain.Anime;
 import com.korogi.dto.AnimeDTO;
 import com.korogi.rest.mapper.BaseResourceMapper;
-import com.korogi.rest.service.AnimeRestServiceImpl;
+import com.korogi.rest.restservice.AnimeRestServiceImpl;
 import org.mapstruct.Mapper;
 import org.springframework.hateoas.Link;
 

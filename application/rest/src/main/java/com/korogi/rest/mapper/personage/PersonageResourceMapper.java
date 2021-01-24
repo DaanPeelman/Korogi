@@ -8,7 +8,7 @@ import java.util.List;
 import com.korogi.core.domain.Personage;
 import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.mapper.BaseResourceMapper;
-import com.korogi.rest.service.PersonageRestServiceImpl;
+import com.korogi.rest.restservice.PersonageRestServiceImpl;
 import org.mapstruct.Mapper;
 import org.springframework.hateoas.Link;
 

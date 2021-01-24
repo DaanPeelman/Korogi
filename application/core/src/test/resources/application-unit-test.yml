@@ -1,3 +1,9 @@
+korogi:
+  oauth:
+    token-secret: Korogi-test
+    token-expiration-m-sec: 864000000
+    front-end-return-url: "http://dummyUrl:8080"
+
 logging:
   level:
     root: info

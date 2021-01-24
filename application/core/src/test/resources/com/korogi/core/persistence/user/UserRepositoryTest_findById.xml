@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
     <USERS  ID="1"
+            PROVIDER_ID="1"
             EMAIL="john.doe@test.com"
             USERNAME="john.doe"
-            PASSWORD="Password123"
+            BIOGRAPHY="John Doe's Biography"
             ACTIVATED="true"
+            SALT="1"
 
             CREATION_DATE="2016-08-27 00:00:00"
             CREATED_BY="john.doe"
@@ -13,10 +15,12 @@
             VERSION="1" />
 
     <USERS  ID="2"
+            PROVIDER_ID="2"
             EMAIL="john.doe@test.com"
             USERNAME="jane.doe"
-            PASSWORD="Password456"
+            BIOGRAPHY="Jane Doe's Biography"
             ACTIVATED="true"
+            SALT="2"
 
             CREATION_DATE="2016-08-27 00:00:00"
             CREATED_BY="jane.doe"

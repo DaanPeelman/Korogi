@@ -8,7 +8,7 @@ import java.util.List;
 import com.korogi.core.domain.Episode;
 import com.korogi.dto.EpisodeDTO;
 import com.korogi.rest.mapper.BaseResourceMapper;
-import com.korogi.rest.service.EpisodeRestServiceImpl;
+import com.korogi.rest.restservice.EpisodeRestServiceImpl;
 import org.mapstruct.Mapper;
 import org.springframework.hateoas.Link;
 

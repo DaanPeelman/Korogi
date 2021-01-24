@@ -64,6 +64,8 @@ class UserRepositoryTest extends BaseRepositoryTest {
         assertThat(savedUser.getModificationDate()).isNull();
         assertThat(savedUser.getModifiedBy()).isNull();
         assertThat(savedUser.getVersion()).isNotNull();
+
+        assertThat(savedUser.getSalt()).isEqualTo(userToSave.getSalt());
     }
 
     /**

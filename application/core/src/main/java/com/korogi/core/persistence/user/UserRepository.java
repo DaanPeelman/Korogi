@@ -1,5 +1,6 @@
 package com.korogi.core.persistence.user;
 
+import java.util.Optional;
 import com.korogi.core.domain.User;
 import com.korogi.core.persistence.EntityRepository;
 
@@ -12,4 +13,5 @@ import com.korogi.core.persistence.EntityRepository;
  * @see User
  */
 public interface UserRepository extends EntityRepository<User> {
+    Optional<User> findByProviderId(String providerId);
 }

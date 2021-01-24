@@ -15,6 +15,8 @@ management:
         include: health, metrics, info
 
 server:
+  servlet:
+    context-path: /rest
   forward-headers-strategy: framework
 
 spring:
@@ -24,9 +26,8 @@ spring:
     use-hal-as-default-json-media-type: false
   jpa:
     open-in-view: false
-  mvc:
-    servlet:
-      path: /rest
   flyway:
     placeholders:
       read-user: ${spring.datasource.username}
+  profiles:
+    include: ${DEV:}

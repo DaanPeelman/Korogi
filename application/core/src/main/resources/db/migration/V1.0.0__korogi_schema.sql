@@ -1,8 +1,10 @@
 CREATE TABLE USERS (
   id BIGINT NOT NULL,
+  provider_id VARCHAR(64) NOT NULL,
   email VARCHAR(128) NOT NULL,
   username VARCHAR(128) NOT NULL,
-  password VARCHAR(128) NOT NULL,
+  biography TEXT NOT NULL,
+  salt bytea NOT NULL,
   activation_code CHAR(36),
   activated BOOLEAN NOT NULL,
 
@@ -14,6 +16,9 @@ CREATE TABLE USERS (
 
   CONSTRAINT pk_users PRIMARY KEY(id)
 );
+
+CREATE INDEX idx_users_provider_id ON USERS(provider_id);
+CREATE INDEX idx_users_username ON USERS(username);
 
 CREATE SEQUENCE SEQ_USER START WITH 1;
 

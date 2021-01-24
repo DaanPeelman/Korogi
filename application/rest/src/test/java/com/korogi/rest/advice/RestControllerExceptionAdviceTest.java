@@ -7,8 +7,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -21,9 +19,9 @@ import com.korogi.core.persistence.anime.AnimeRepository;
 import com.korogi.core.util.UUIDGenerator;
 import com.korogi.rest.BaseServiceTest;
 import com.korogi.rest.exception.ResourceNotFoundException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -38,17 +36,12 @@ class RestControllerExceptionAdviceTest extends BaseServiceTest {
     @MockBean
     private UUIDGenerator uuidGenerator;
 
+    @Mock
     private Logger logger;
 
     @BeforeEach
     void injectLogger() throws Exception {
-        this.logger = mock(Logger.class);
         injectIntoStaticField(RestControllerExceptionAdvice.class, "log", logger);
-    }
-
-    @AfterEach
-    void resetMocks() {
-        reset(logger);
     }
 
     @Test

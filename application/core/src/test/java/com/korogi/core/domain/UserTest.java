@@ -19,13 +19,11 @@ class UserTest {
     void newUser_new() throws Exception {
         String email = "john.doe@test.com";
         String username = "john.doe";
-        String password = "p@ssw0rd";
         String activationCode = UUID.randomUUID().toString();
 
         User user = newUser()
                 .email(email)
                 .username(username)
-                .password(password)
                 .activationCode(activationCode)
                 .activated(true)
                 .build();
@@ -34,7 +32,6 @@ class UserTest {
                 .isNotNull()
                 .hasEmail(email)
                 .hasUsername(username)
-                .hasPassword(password)
                 .hasActivationCode(activationCode)
                 .hasActivated(TRUE);
     }

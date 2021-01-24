@@ -1,3 +1,11 @@
+korogi:
+  oauth:
+    token-secret: Korogi-local
+    token-expiration-m-sec: 864000000
+    front-end-return-url: "http://localhost:4200"
+  encryption:
+    key: DRzFcdL773M6UfeebRpvwNHuQaWMvAui
+
 logging:
   level:
     root: info
@@ -7,3 +15,10 @@ spring:
     password: korogi
     url: jdbc:postgresql://localhost:5432/postgres
     username: korogi
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 636747221147-eotnrnmv15nll3gov4c8slb60rgrur04.apps.googleusercontent.com
+            client-secret: 7QMkZWHkl9fzBhoILxHOHiDI

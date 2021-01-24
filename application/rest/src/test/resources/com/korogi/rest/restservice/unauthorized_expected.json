@@ -1,0 +1,5 @@
+{
+  "status": "Unauthorized",
+  "code": 401,
+  "message": "Authentication is required to view or perform actions on this resource"
+}

@@ -4,6 +4,3 @@ logging:
   pattern:
     rolling-file-name: korogi-%d{yyyy-MM-dd}.%i.log
 
-spring:
-  profiles:
-    include: ${ENV:}

@@ -36,14 +36,20 @@ import lombok.ToString;
 public class User extends BaseEntity {
     private static final long serialVersionUID = -7094382652553816643L;
 
+    @Column(name = "provider_id")
+    private String providerId;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "biography")
+    private String biography;
+
+    @Column(name = "salt")
+    private byte[] salt;
 
     @Column(name = "activation_code")
     private String activationCode;

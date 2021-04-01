@@ -113,18 +113,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
-                <configuration>
-                    <packages>com.korogi.core.domain</packages>
-                    <excludes>
-                        <param>.*Builder</param>
-                        <param>.*_</param>
-                        <param>.*TestData</param>
-                    </excludes>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>

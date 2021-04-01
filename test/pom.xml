@@ -13,4 +13,15 @@
     <artifactId>test</artifactId>
     <name>Korogi - Tests</name>
     <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.paulhammant</groupId>
+            <artifactId>ngwebdriver</artifactId>
+        </dependency>
+    </dependencies>
 </project>

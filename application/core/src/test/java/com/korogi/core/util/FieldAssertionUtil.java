@@ -1,15 +1,9 @@
 package com.korogi.core.util;
 
-import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import lombok.Getter;
 
 /**
@@ -35,44 +29,34 @@ public class FieldAssertionUtil {
         return this;
     }
 
-    public FieldAssertionUtil expectFieldValue(String fieldName, Object expectedValue) {
+    public FieldAssertionUtil expectFieldValue(
+            String fieldName,
+            Object expectedValue
+    ) {
         this.customFieldAssertions.put(fieldName, CustomFieldAssertion.equal(expectedValue));
 
         return this;
     }
 
     public void assertAllFieldValuesAreEqual() throws IllegalAccessException {
-        Map<String, Field> fieldsWithExpectedValues = stream(objectWithExpectedValues.getClass().getDeclaredFields())
-                .map(this::setAccessibleAndReturn)
-                .collect(Collectors.toMap(
-                        Field::getName,
-                        Function.identity()
-                ));
+        assertThat(objectWithValuesToAssert)
+                .usingRecursiveComparison()
+                .ignoringOverriddenEqualsForTypes(
+                        objectWithValuesToAssert.getClass(),
+                        objectWithValuesToAssert.getClass()
+                )
+                .ignoringFields(customFieldAssertions.keySet().toArray(new String[0]))
+                .isEqualTo(objectWithExpectedValues);
 
-        List<Field> fieldsToAssert = stream(objectWithValuesToAssert.getClass().getDeclaredFields())
-                .map(this::setAccessibleAndReturn)
-                .filter(this::isFieldToBeAsserted)
-                .collect(toList());
+        for (String fieldToAssert : customFieldAssertions.keySet()) {
+            CustomFieldAssertion customFieldAssertion = customFieldAssertions.get(fieldToAssert);
 
-        for (Field fieldToAssert : fieldsToAssert) {
-            Object expectedValue = this.customFieldAssertions.containsKey(fieldToAssert.getName()) ?
-                    this.customFieldAssertions.get(fieldToAssert.getName()).getExpectedValue() : fieldsWithExpectedValues.get(fieldToAssert.getName()).get(objectWithExpectedValues);
-            Object actualValue = fieldToAssert.get(objectWithValuesToAssert);
-
-            assertThat(actualValue)
-                    .as("Expecting the value in field '%s' to equal '%s' but was '%s'", fieldToAssert.getName(), expectedValue, actualValue)
-                    .isEqualTo(expectedValue);
+            if (customFieldAssertion.shouldNotBeIgnored()) {
+                assertThat(objectWithValuesToAssert)
+                        .extracting(fieldToAssert)
+                        .isEqualTo(customFieldAssertion.expectedValue);
+            }
         }
-    }
-
-    private boolean isFieldToBeAsserted(Field field) {
-        return ! this.customFieldAssertions.containsKey(field.getName()) || this.customFieldAssertions.get(field.getName()).shouldNotBeIgnored();
-    }
-
-    private Field setAccessibleAndReturn(Field field) {
-        field.setAccessible(true);
-
-        return field;
     }
 
     private static class CustomFieldAssertion {

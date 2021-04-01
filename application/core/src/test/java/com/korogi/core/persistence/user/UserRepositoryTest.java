@@ -1,6 +1,5 @@
 package com.korogi.core.persistence.user;
 
-import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.testdata.UserTestData.johnDoe;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,9 +29,8 @@ class UserRepositoryTest extends BaseRepositoryTest {
 
         User foundUser = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundUser)
-                .isNotNull()
-                .hasId(idToFind);
+        assertThat(foundUser).isNotNull();
+        assertThat(foundUser.getId()).isEqualTo(idToFind);
     }
 
     /**

@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 import lombok.Builder;
+import lombok.ToString;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
 /**
  * @author Daan Peelman
@@ -108,8 +108,8 @@ class FieldAssertionUtilTest {
             new FieldAssertionUtil(objectWithExpectedValues, objectToAssert)
                     .assertAllFieldValuesAreEqual();
             fail("Expected AssertionFailedError to have been thrown but it wasn't");
-        } catch (AssertionFailedError e) {
-            assertThat(e.getMessage()).contains("Expecting the value in field 'field1' to equal 'different value 1' but was 'value 1'");
+        } catch (AssertionError e) {
+            assertThat(e.getMessage()).contains("\nExpecting:");
         }
     }
 
@@ -145,8 +145,8 @@ class FieldAssertionUtilTest {
             new FieldAssertionUtil(objectWithExpectedValues, objectToAssert)
                     .assertAllFieldValuesAreEqual();
             fail("Expected AssertionFailedError to have been thrown but it wasn't");
-        } catch (AssertionFailedError e) {
-            assertThat(e.getMessage()).contains("Expecting the value in field 'field2' to equal 'different value 2' but was 'value 2'");
+        } catch (AssertionError e) {
+            assertThat(e.getMessage()).contains("\nExpecting:");
         }
     }
 
@@ -255,8 +255,8 @@ class FieldAssertionUtilTest {
                     .ignoreField("field1")
                     .assertAllFieldValuesAreEqual();
             fail("Expected AssertionFailedError to have been thrown but it wasn't");
-        } catch (AssertionFailedError e) {
-            assertThat(e.getMessage()).contains("Expecting the value in field 'field2' to equal 'different value 2' but was 'value 2'");
+        } catch (AssertionError e) {
+            assertThat(e.getMessage()).contains("\nExpecting:");
         }
     }
 
@@ -330,18 +330,20 @@ class FieldAssertionUtilTest {
                     .expectFieldValue("field2", "another different value 2")
                     .assertAllFieldValuesAreEqual();
             fail("Expected AssertionFailedError to have been thrown but it wasn't");
-        } catch (AssertionFailedError e) {
-            assertThat(e.getMessage()).contains("Expecting the value in field 'field2' to equal 'another different value 2' but was 'value 2'");
+        } catch (AssertionError e) {
+            assertThat(e.getMessage()).contains("\nExpecting:");
         }
     }
 
     @Builder(builderMethodName = "newFieldAssertionUtilTestObject1")
+    @ToString
     private static class FieldAssertionUtilTestObject1 {
         private Object field1;
         private Object field2;
     }
 
     @Builder(builderMethodName = "newFieldAssertionUtilTestObject2")
+    @ToString
     private static class FieldAssertionUtilTestObject2 {
         private Object field1;
         private Object field2;

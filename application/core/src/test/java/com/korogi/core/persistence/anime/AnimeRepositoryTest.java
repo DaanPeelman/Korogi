@@ -1,6 +1,5 @@
 package com.korogi.core.persistence.anime;
 
-import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.testdata.AnimeTestData.steinsGate_notPersisted;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,11 +28,10 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
 
         Anime foundAnime = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundAnime)
-                .isNotNull()
-                .hasId(idToFind)
-                .hasSequal(em.find(Anime.class, 2L))
-                .hasPrequal(null);
+        assertThat(foundAnime).isNotNull();
+        assertThat(foundAnime.getId()).isEqualTo(idToFind);
+        assertThat(foundAnime.getSequal()).isEqualTo(em.find(Anime.class, 2L));
+        assertThat(foundAnime.getPrequal()).isNull();
     }
 
     /**
@@ -46,11 +44,10 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
 
         Anime foundAnime = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundAnime)
-                .isNotNull()
-                .hasId(idToFind)
-                .hasPrequal(em.find(Anime.class, 2L))
-                .hasSequal(null);
+        assertThat(foundAnime).isNotNull();
+        assertThat(foundAnime.getId()).isEqualTo(idToFind);
+        assertThat(foundAnime.getPrequal()).isEqualTo(em.find(Anime.class, 2L));
+        assertThat(foundAnime.getSequal()).isNull();
     }
 
     /**
@@ -88,8 +85,8 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
         assertThat(savedAnime.getModifiedBy()).isNull();
         assertThat(savedAnime.getVersion()).isNotNull();
 
-        assertThat(savedAnime).hasOnlyPersonages(personage);
-        assertThat(personage).hasAnime(savedAnime);
+        assertThat(savedAnime.getPersonages()).containsOnly(personage);
+        assertThat(personage.getAnime()).containsOnly(savedAnime);
     }
 
     /**

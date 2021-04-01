@@ -1,9 +1,9 @@
 package com.korogi.core.domain;
 
-import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.enumeration.AnimeType.TV;
 import static com.korogi.core.domain.testdata.AnimeTestData.steinsGate_notPersisted;
 import static java.time.Month.DECEMBER;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import com.korogi.core.domain.enumeration.AnimeType;
@@ -37,15 +37,14 @@ class AnimeTest {
                 .prequal(prequal)
                 .build();
 
-        assertThat(anime)
-                .isNotNull()
-                .hasAnimeType(animeType)
-                .hasNameEnglish(nameEnglish)
-                .hasNameRomanized(nameRomanized)
-                .hasStartAir(startAir)
-                .hasEndAir(endAir)
-                .hasSynopsis(synopsis)
-                .hasPrequal(prequal);
-        assertThat(prequal).hasSequal(anime);
+        assertThat(anime).isNotNull();
+        assertThat(anime.getAnimeType()).isEqualTo(animeType);
+        assertThat(anime.getNameEnglish()).isEqualTo(nameEnglish);
+        assertThat(anime.getNameRomanized()).isEqualTo(nameRomanized);
+        assertThat(anime.getStartAir()).isEqualTo(startAir);
+        assertThat(anime.getEndAir()).isEqualTo(endAir);
+        assertThat(anime.getSynopsis()).isEqualTo(synopsis);
+        assertThat(anime.getPrequal()).isEqualTo(prequal);
+        assertThat(prequal.getSequal()).isEqualTo(anime);
     }
 }

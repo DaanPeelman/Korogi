@@ -1,6 +1,5 @@
 package com.korogi.core.persistence.role;
 
-import static com.korogi.core.domain.Assertions.assertThat;
 import static com.korogi.core.domain.testdata.RoleTestData.admin;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,9 +29,8 @@ class RoleRepositoryTest extends BaseRepositoryTest {
 
         Role foundRole = repository.findById(idToFind).orElse(null);
 
-        assertThat(foundRole)
-                .isNotNull()
-                .hasId(idToFind);
+        assertThat(foundRole).isNotNull();
+        assertThat(foundRole.getId()).isEqualTo(idToFind);
     }
 
     /**

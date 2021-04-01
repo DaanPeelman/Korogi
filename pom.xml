@@ -31,7 +31,9 @@
 		<mapstruct.version>1.4.1.Final</mapstruct.version>
 		<dbunit.version>2.7.0</dbunit.version>
 		<spring-test-dbunit.version>5.2.0</spring-test-dbunit.version>
-		<embedded-database-spring-test.version>2.0.0-beta1</embedded-database-spring-test.version> <!-- TODO release version once available -->
+		<embedded-database-spring-test.version>1.6.3</embedded-database-spring-test.version>
+		<selenium-java.version>3.141.59</selenium-java.version>
+		<ngwebdriver.version>1.1.5</ngwebdriver.version>
 	</properties>
 
 	<dependencyManagement>
@@ -137,6 +139,18 @@
 				<version>${embedded-database-spring-test.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>${selenium-java.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.paulhammant</groupId>
+				<artifactId>ngwebdriver</artifactId>
+				<version>${ngwebdriver.version}</version>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -162,26 +176,6 @@
 					<groupId>cz.habarta.typescript-generator</groupId>
 					<artifactId>typescript-generator-maven-plugin</artifactId>
 					<version>${typescript-generator-maven-plugin.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.assertj</groupId>
-					<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
-					<version>${assertj-assertions-generator-maven-plugin.version}</version>
-					<dependencies>
-						<dependency>
-							<groupId>junit</groupId>
-							<artifactId>junit</artifactId>
-							<version>4.13.1</version>
-						</dependency>
-					</dependencies>
-					<executions>
-						<execution>
-							<id>generate custom AssertJ assertions</id>
-							<goals>
-								<goal>generate-assertions</goal>
-							</goals>
-						</execution>
-					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>

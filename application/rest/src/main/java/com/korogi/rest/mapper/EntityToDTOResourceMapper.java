@@ -23,20 +23,25 @@ public class EntityToDTOResourceMapper {
             List<ResourceMapper<?, ? extends BaseEntity>> resourceMappers
     ) {
         mappers = resourceMappers.stream()
-                .collect(toMap(
-                        ResourceMapper::fromObjectClass,
-                        Function.identity()
-                ));
+                                 .collect(toMap(
+                                         ResourceMapper::fromObjectClass,
+                                         Function.identity()
+                                 ));
     }
 
     @SuppressWarnings("unchecked")
     public <DTO> EntityModel<DTO> toDTOResource(BaseEntity entity) {
         return (EntityModel<DTO>) Optional.ofNullable(mappers.get(entity.getClass()))
-                .orElseThrow(() -> new RuntimeException("No mapper found for class '" + entity.getClass() + "'."))
-                .toDTOResource(entity);
+                                          .orElseThrow(() -> new RuntimeException(
+                                                  "No mapper found for class '" + entity.getClass() + "'."))
+                                          .toDTOResource(entity);
     }
 
-    public <DTO> PagedModel<EntityModel<DTO>> toPagedResources(List<? extends BaseEntity> entities, long pageNumber, long totalElements) {
+    public <DTO> PagedModel<EntityModel<DTO>> toPagedResources(
+            List<? extends BaseEntity> entities,
+            long pageNumber,
+            long totalElements
+    ) {
         List<EntityModel<DTO>> dtos = this.toDTOResourceList(entities);
 
         PageMetadata metadata = new PageMetadata(dtos.size(), pageNumber, totalElements);
@@ -45,7 +50,7 @@ public class EntityToDTOResourceMapper {
 
     private <DTO> List<EntityModel<DTO>> toDTOResourceList(List<? extends BaseEntity> entities) {
         return entities.stream()
-                .map(this::<DTO>toDTOResource)
-                .collect(toList());
+                       .map(this::<DTO>toDTOResource)
+                       .collect(toList());
     }
 }

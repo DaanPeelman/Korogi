@@ -11,8 +11,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.4.4</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>com.korogi</groupId>
@@ -23,12 +23,12 @@
 	<properties>
 		<java.version>11</java.version>
 
-		<typescript-generator-maven-plugin.version>2.28.785</typescript-generator-maven-plugin.version>
-		<assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
+		<typescript-generator-maven-plugin.version>2.30.840</typescript-generator-maven-plugin.version>
 		<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
-		<spring-data-jpa-entity-graph.version>2.4.1</spring-data-jpa-entity-graph.version>
-		<mapstruct.version>1.4.1.Final</mapstruct.version>
+		<spring-data-jpa-entity-graph.version>2.4.2</spring-data-jpa-entity-graph.version>
+		<jjwt.version>0.9.1</jjwt.version>
+		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<dbunit.version>2.7.0</dbunit.version>
 		<spring-test-dbunit.version>5.2.0</spring-test-dbunit.version>
 		<embedded-database-spring-test.version>1.6.3</embedded-database-spring-test.version>
@@ -83,7 +83,7 @@
 			<dependency>
 				<groupId>io.jsonwebtoken</groupId>
 				<artifactId>jjwt</artifactId>
-				<version>0.9.1</version>
+				<version>${jjwt.version}</version>
 			</dependency>
 
 			<!-- LOMBOK -->

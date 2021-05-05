@@ -25,6 +25,24 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     private String email;
     private boolean enabled;
 
+    public static UserPrincipal create(User user) {
+        return newUserPrincipal()
+            .username(user.getProviderId())
+            .email(user.getEmail())
+            .enabled(user.getActivated())
+            .build();
+    }
+
+    public static UserPrincipal initialUserPrincipal(
+        String username,
+        String email
+    ) {
+        return newUserPrincipal()
+            .username(username)
+            .email(email)
+            .enabled(false)
+            .build();
+    }
 
     @Override
     public String getPassword() {
@@ -59,21 +77,5 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     @Override
     public String getName() {
         return username;
-    }
-
-    public static UserPrincipal create(User user) {
-        return newUserPrincipal()
-                .username(user.getProviderId())
-                .email(user.getEmail())
-                .enabled(user.getActivated())
-                .build();
-    }
-
-    public static UserPrincipal initialUserPrincipal(String username, String email) {
-        return newUserPrincipal()
-                .username(username)
-                .email(email)
-                .enabled(false)
-                .build();
     }
 }

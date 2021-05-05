@@ -2,11 +2,11 @@ package com.korogi.rest.filter;
 
 import static org.springframework.util.StringUtils.hasText;
 
-import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import com.korogi.rest.security.TokenProvider;
 import com.korogi.rest.security.UserPrincipal;
 import com.korogi.rest.service.user.UserService;
@@ -30,7 +30,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final UserService userService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain
+    ) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
 
@@ -38,10 +42,17 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                 Claims claims = tokenProvider.getUserIdFromToken(jwt);
 
                 UserPrincipal userPrincipal = userService.getUserByProviderId(claims.getSubject())
-                        .map(UserPrincipal::create)
-                        .orElseGet(() -> UserPrincipal.initialUserPrincipal(claims.getSubject(), (String) claims.get("email")));
+                                                         .map(UserPrincipal::create)
+                                                         .orElseGet(() -> UserPrincipal.initialUserPrincipal(
+                                                             claims.getSubject(),
+                                                             (String) claims.get("email")
+                                                         ));
 
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null, null);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    userPrincipal,
+                    null,
+                    null
+                );
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);

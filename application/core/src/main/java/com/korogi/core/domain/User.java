@@ -19,7 +19,6 @@ import lombok.ToString;
  * Entity class representing a User in the database.
  *
  * @author Daan Peelman
- *
  * @see BaseEntity
  * @see UserBuilder
  */
@@ -34,7 +33,7 @@ import lombok.ToString;
 @Table(name = "USERS")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_USER", allocationSize = 1)
 public class User extends BaseEntity {
-    private static final long serialVersionUID = -7094382652553816643L;
+    private static final long serialVersionUID = - 7094382652553816643L;
 
     @Column(name = "provider_id")
     private String providerId;

@@ -55,8 +55,8 @@ class PersonageRepositoryTest extends BaseRepositoryTest {
     void save() throws Exception {
         Anime anime = em.find(Anime.class, 1L);
         Personage personageToSave = okabeRintarou_notPersisted()
-                .anime(singletonList(anime))
-                .build();
+            .anime(singletonList(anime))
+            .build();
 
         Personage savedPersonage = repository.save(personageToSave);
 

@@ -4,10 +4,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static javax.crypto.Cipher.DECRYPT_MODE;
 import static javax.crypto.Cipher.ENCRYPT_MODE;
 
-import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
 import com.korogi.rest.config.KorogiProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -23,7 +23,10 @@ public class EncryptorUtil {
     private final KorogiProperties properties;
 
     @SneakyThrows
-    public String encrypt(byte[] salt, String stringToEncrypt) {
+    public String encrypt(
+        byte[] salt,
+        String stringToEncrypt
+    ) {
         IvParameterSpec iv = new IvParameterSpec(salt);
         SecretKeySpec spec = new SecretKeySpec(properties.getEncryption().getKey().getBytes(UTF_8), "AES");
 
@@ -34,7 +37,10 @@ public class EncryptorUtil {
     }
 
     @SneakyThrows
-    public String decrypt(String salt, String stringToDecrypt) {
+    public String decrypt(
+        String salt,
+        String stringToDecrypt
+    ) {
         IvParameterSpec iv = new IvParameterSpec(salt.getBytes(UTF_8));
         SecretKeySpec spec = new SecretKeySpec(properties.getEncryption().getKey().getBytes(UTF_8), "AES");
 

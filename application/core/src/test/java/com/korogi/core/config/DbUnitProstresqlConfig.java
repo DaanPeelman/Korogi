@@ -19,7 +19,8 @@ public class DbUnitProstresqlConfig {
         DatabaseConfigBean bean = new DatabaseConfigBean();
         bean.setDatatypeFactory(new PostgresqlDataTypeFactory());
 
-        DatabaseDataSourceConnectionFactoryBean dbConnectionFactory = new DatabaseDataSourceConnectionFactoryBean(dataSource);
+        DatabaseDataSourceConnectionFactoryBean dbConnectionFactory = new DatabaseDataSourceConnectionFactoryBean(
+            dataSource);
         dbConnectionFactory.setDatabaseConfig(bean);
         return dbConnectionFactory;
     }

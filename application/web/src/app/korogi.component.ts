@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-@Component({
-  selector: 'korogi-root',
-  templateUrl: './korogi.component.html',
-  styleUrls: ['./korogi.component.scss']
-})
+@Component(
+    {
+        selector: "korogi-root",
+        templateUrl: "./korogi.component.html",
+        styleUrls: ["./korogi.component.scss"]
+    }
+)
 export class KorogiComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

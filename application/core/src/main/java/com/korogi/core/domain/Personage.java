@@ -6,8 +6,6 @@ import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 import static lombok.AccessLevel.PUBLIC;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -16,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +27,6 @@ import lombok.ToString;
  * Entity class representing a Personage in the database.
  *
  * @author Daan Peelman
- *
  * @see BaseEntity
  * @see PersonageBuilder
  */
@@ -54,9 +53,9 @@ public class Personage extends BaseEntity {
     @Builder.Default
     @ManyToMany(fetch = LAZY, cascade = PERSIST)
     @JoinTable(
-            name = "ANIME_PERSONAGES",
-            joinColumns = @JoinColumn(name = "personage_id"),
-            inverseJoinColumns = @JoinColumn(name = "anime_id")
+        name = "ANIME_PERSONAGES",
+        joinColumns = @JoinColumn(name = "personage_id"),
+        inverseJoinColumns = @JoinColumn(name = "anime_id")
     )
     @OrderBy(Anime_.ID)
     private List<Anime> anime = new ArrayList<>();

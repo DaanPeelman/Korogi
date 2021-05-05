@@ -1,18 +1,26 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark" [class.bg-none]="transparent" [class.bg-light]="! transparent">
-  <div class="container">
-    <a class="navbar-brand" href="#">Korogi</a>
-    <button class="navbar-toggler" type="button">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" [routerLink]="['/dashboard']" [routerLinkActive]="'active'"><a class="nav-link" href="#">Dashboard</a></li>
-        <li class="nav-item" [routerLink]="['/anime']" [routerLinkActive]="'active'"><a class="nav-link" href="#">Anime</a></li>
-        <li class="nav-item" [routerLink]="['/community']" [routerLinkActive]="'active'"><a class="nav-link" href="#">Community</a></li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item no-border-hover"><a class="nav-link" href="#" (click)="login()"><img class="rounded-circle border-white border-2 avatar-small" src="assets/images/avatar.jpg"></a></li>
-      </ul>
+<nav [class.bg-light]="! transparent" [class.bg-none]="transparent"
+     class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Korogi</a>
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li [routerLinkActive]="'active'" [routerLink]="['/dashboard']" class="nav-item"><a class="nav-link"
+                                                                                                    href="#">Dashboard</a>
+                </li>
+                <li [routerLinkActive]="'active'" [routerLink]="['/anime']" class="nav-item"><a class="nav-link"
+                                                                                                href="#">Anime</a></li>
+                <li [routerLinkActive]="'active'" [routerLink]="['/community']" class="nav-item"><a class="nav-link"
+                                                                                                    href="#">Community</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item no-border-hover"><a (click)="login()" class="nav-link" href="#"><img
+                        class="rounded-circle border-white border-2 avatar-small" src="assets/images/avatar.jpg"></a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>

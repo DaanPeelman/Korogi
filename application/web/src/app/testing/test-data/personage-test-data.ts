@@ -1,23 +1,23 @@
 import { PersonageDTO } from "../../shared/models/personage-dto";
 
 export class PersonageTestData {
-  static okabeRintarou(): PersonageDTO {
-    let personageDTO: PersonageDTO = new PersonageDTO();
+    static okabeRintarou(): PersonageDTO {
+        const personageDTO: PersonageDTO = new PersonageDTO();
 
-    personageDTO.firstName = "Okabe";
-    personageDTO.lastName = "Rintarou";
-    personageDTO.photoUrl = "http://photo.url.com/okabe.rintarou";
+        personageDTO.firstName = "Okabe";
+        personageDTO.lastName = "Rintarou";
+        personageDTO.photoUrl = "http://photo.url.com/okabe.rintarou";
 
-    return personageDTO;
-  }
+        return personageDTO;
+    }
 
-  static makiseKurisu(): PersonageDTO {
-    let personageDTO: PersonageDTO = new PersonageDTO();
+    static makiseKurisu(): PersonageDTO {
+        const personageDTO: PersonageDTO = new PersonageDTO();
 
-    personageDTO.firstName = "Makise";
-    personageDTO.lastName = "Kurisu";
-    personageDTO.photoUrl = "http://photo.url.com/makise.kurisu";
+        personageDTO.firstName = "Makise";
+        personageDTO.lastName = "Kurisu";
+        personageDTO.photoUrl = "http://photo.url.com/makise.kurisu";
 
-    return personageDTO;
-  }
+        return personageDTO;
+    }
 }

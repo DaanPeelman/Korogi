@@ -1,6 +1,6 @@
-import { forkJoin as observableForkJoin, Observable, of as observableOf } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { forkJoin as observableForkJoin, Observable, of as observableOf } from "rxjs";
+import { catchError, map } from "rxjs/operators";
+import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
 import { ModelMapperService } from "../model-mapper/model-mapper.service";
@@ -19,15 +19,21 @@ export class RelationLoaderService {
     ) {
     }
 
-    public populateWithRelations<T>(enrichedResource: EnrichedResource<T>, relationsToLoad: string[]): Observable<EnrichedResource<T>> {
-        let observables: Observable<any>[] = [observableOf(enrichedResource)].concat(this.createRelationHttpRequests(enrichedResource, relationsToLoad));
+    public populateWithRelations<T>(
+        enrichedResource: EnrichedResource<T>,
+        relationsToLoad: string[]
+    ): Observable<EnrichedResource<T>> {
+        const observables: Observable<any>[] = [observableOf(enrichedResource)].concat(this.createRelationHttpRequests(
+            enrichedResource,
+            relationsToLoad
+        ));
 
         return observableForkJoin(observables).pipe(
             map((value: any[]) => {
-                let resourceToEnrich: EnrichedResource<T> = value[0];
-                let loadedRelations: Relation[] = value.splice(1);
+                const resourceToEnrich: EnrichedResource<T> = value[0];
+                const loadedRelations: Relation[] = value.splice(1);
 
-                for (let loadedRelation of loadedRelations) {
+                for (const loadedRelation of loadedRelations) {
                     resourceToEnrich.embedded[loadedRelation.relation] = loadedRelation.data;
                 }
 
@@ -36,22 +42,30 @@ export class RelationLoaderService {
         );
     }
 
-    private createRelationHttpRequests(enrichedResource: EnrichedResource<any>, relationsToLoad: string[]): Observable<any>[] {
+    private createRelationHttpRequests(
+        enrichedResource: EnrichedResource<any>,
+        relationsToLoad: string[]
+    ): Observable<any>[] {
         return enrichedResource.links
-            .filter(link => relationsToLoad.indexOf(link.rel) > -1)
-            .map(link =>
-                this.httpClient.get<Resource>(link.href).pipe(
-                    map(resource => new Relation(link.rel, this.mapToModel(resource))),
-                    catchError(e => this.returnEmptyRelationOrThrowError(e, link.rel))
-                )
-            );
+                               .filter(link => relationsToLoad.indexOf(link.rel) > - 1)
+                               .map(link =>
+                                        this.httpClient.get<Resource>(link.href).pipe(
+                                            map(resource => new Relation(link.rel, this.mapToModel(resource))),
+                                            catchError(e => this.returnEmptyRelationOrThrowError(e, link.rel))
+                                        )
+                               );
     }
 
     private mapToModel(resource: Resource): any {
-        return ResourceUtil.isSingleResource(resource) ? this.modelMapper.mapToModel(<SingleResource>resource) : this.modelMapper.mapToModels(<MultipleResources>resource)
+        return ResourceUtil.isSingleResource(resource) ?
+               this.modelMapper.mapToModel(<SingleResource>resource) :
+               this.modelMapper.mapToModels(<MultipleResources>resource);
     }
 
-    private returnEmptyRelationOrThrowError(e: HttpErrorResponse, rel: string): Observable<Relation> {
+    private returnEmptyRelationOrThrowError(
+        e: HttpErrorResponse,
+        rel: string
+    ): Observable<Relation> {
         if (e.status === 404) {
             return observableOf(new Relation(rel, undefined));
         } else {

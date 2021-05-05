@@ -6,40 +6,41 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { instance, mock } from "ts-mockito";
 import { AuthenticationService } from "../../services/authentication/authentication-service";
 
-describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+describe("HeaderComponent", () => {
+    let component: HeaderComponent;
+    let fixture: ComponentFixture<HeaderComponent>;
 
-  const authenticationServiceMock: AuthenticationService = mock(AuthenticationService);
+    const authenticationServiceMock: AuthenticationService = mock(AuthenticationService);
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA
-      ],
-      declarations: [
-        HeaderComponent
-      ],
-      imports: [
-        RouterTestingModule
-      ],
-      providers: [
-        {
-          provide: AuthenticationService,
-          useFactory: () => instance(authenticationServiceMock)
-        }
-      ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule(
+            {
+                schemas: [
+                    CUSTOM_ELEMENTS_SCHEMA
+                ],
+                declarations: [
+                    HeaderComponent
+                ],
+                imports: [
+                    RouterTestingModule
+                ],
+                providers: [
+                    {
+                        provide: AuthenticationService,
+                        useFactory: () => instance(authenticationServiceMock)
+                    }
+                ]
+            }
+        ).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HeaderComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should be created", () => {
+        expect(component).toBeTruthy();
+    });
 });

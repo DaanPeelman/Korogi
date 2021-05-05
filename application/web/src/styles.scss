@@ -1,13 +1,13 @@
 /* Korogi */
 
 $theme-colors: (
-  "primary":    black,
-  "secondary":  red,
+        "primary": black,
+        "secondary": red,
   //"success":    $success,
   //"info":       $info,
-  "warning":    cyan,
-  "danger":     cyan,
-  "light":      yellow
+        "warning": cyan,
+        "danger": cyan,
+        "light": yellow
 );
 
 $navbar-dark-color: #ecf0f1;
@@ -57,8 +57,8 @@ $navbar-dark-active-color: #e67e22;
 }
 
 .straight-top {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .full-height {
@@ -91,6 +91,7 @@ $navbar-dark-active-color: #e67e22;
     }
   }
 }
+
 //@import "styles/variables";
 //@import "styles/responsive_utils";
 //@import "styles/general";

@@ -11,6 +11,6 @@ import com.korogi.core.domain.enumeration.RoleType;
 public class RoleTestData {
     public static Role.RoleBuilder admin() {
         return newRole()
-                .roleType(RoleType.ADMIN);
+            .roleType(RoleType.ADMIN);
     }
 }

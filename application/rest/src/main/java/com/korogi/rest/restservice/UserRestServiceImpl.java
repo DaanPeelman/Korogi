@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,7 +49,7 @@ public class UserRestServiceImpl implements UserRestService {
     @Transactional
     @Override
     public void saveUser(
-            @RequestBody UserDTO userDTO
+        @RequestBody UserDTO userDTO
     ) {
         UserPrincipal oidcUser = getOidcUser();
 
@@ -58,14 +57,14 @@ public class UserRestServiceImpl implements UserRestService {
 
         // TODO roles
         User user = newUser()
-                .providerId(oidcUser.getName())
-                .email(encryptorUtil.encrypt(salt, oidcUser.getEmail()))
-                .username(userDTO.getUsername())
-                .biography(userDTO.getBiography())
-                .salt(salt)
-                .activationCode(UUID.randomUUID().toString())
-                .activated(FALSE)
-                .build();
+            .providerId(oidcUser.getName())
+            .email(encryptorUtil.encrypt(salt, oidcUser.getEmail()))
+            .username(userDTO.getUsername())
+            .biography(userDTO.getBiography())
+            .salt(salt)
+            .activationCode(UUID.randomUUID().toString())
+            .activated(FALSE)
+            .build();
 
         userRepository.save(user);
     }
@@ -82,8 +81,9 @@ public class UserRestServiceImpl implements UserRestService {
     @GetMapping(value = "current")
     @ResponseStatus(OK)
     @Override
-    public @ResponseBody EntityModel<UserDTO> getCurrentUser() {
-        User user = userRepository.findByProviderId(getOidcUser().getName()).orElseThrow(ResourceNotFoundException::new);
+    public EntityModel<UserDTO> getCurrentUser() {
+        User user = userRepository.findByProviderId(getOidcUser().getName())
+                                  .orElseThrow(ResourceNotFoundException::new);
 
         return entityToDTOResourceMapper.toDTOResource(user);
     }

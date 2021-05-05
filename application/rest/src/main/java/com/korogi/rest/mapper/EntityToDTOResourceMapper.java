@@ -20,12 +20,12 @@ public class EntityToDTOResourceMapper {
 
     @Autowired
     public EntityToDTOResourceMapper(
-            List<ResourceMapper<?, ? extends BaseEntity>> resourceMappers
+        List<ResourceMapper<?, ? extends BaseEntity>> resourceMappers
     ) {
         mappers = resourceMappers.stream()
                                  .collect(toMap(
-                                         ResourceMapper::fromObjectClass,
-                                         Function.identity()
+                                     ResourceMapper::fromObjectClass,
+                                     Function.identity()
                                  ));
     }
 
@@ -33,14 +33,14 @@ public class EntityToDTOResourceMapper {
     public <DTO> EntityModel<DTO> toDTOResource(BaseEntity entity) {
         return (EntityModel<DTO>) Optional.ofNullable(mappers.get(entity.getClass()))
                                           .orElseThrow(() -> new RuntimeException(
-                                                  "No mapper found for class '" + entity.getClass() + "'."))
+                                              "No mapper found for class '" + entity.getClass() + "'."))
                                           .toDTOResource(entity);
     }
 
     public <DTO> PagedModel<EntityModel<DTO>> toPagedResources(
-            List<? extends BaseEntity> entities,
-            long pageNumber,
-            long totalElements
+        List<? extends BaseEntity> entities,
+        long pageNumber,
+        long totalElements
     ) {
         List<EntityModel<DTO>> dtos = this.toDTOResourceList(entities);
 

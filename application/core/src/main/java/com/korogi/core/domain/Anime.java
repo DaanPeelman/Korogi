@@ -9,9 +9,6 @@ import static lombok.AccessLevel.PROTECTED;
 import static lombok.AccessLevel.PUBLIC;
 import static org.hibernate.annotations.LazyToOneOption.NO_PROXY;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -23,6 +20,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import com.korogi.core.domain.enumeration.AnimeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +36,6 @@ import org.hibernate.annotations.LazyToOne;
  * Entity class representing an Anime in the database.
  *
  * @author Daan Peelman
- *
  * @see BaseEntity
  * @see AnimeBuilder
  */
@@ -51,7 +50,7 @@ import org.hibernate.annotations.LazyToOne;
 @Table(name = "ANIME")
 @SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ANIME", allocationSize = 1)
 public class Anime extends BaseEntity {
-    private static final long serialVersionUID = -2472387246309958379L;
+    private static final long serialVersionUID = - 2472387246309958379L;
 
     @Enumerated(STRING)
     @Column(name = "anime_type")
@@ -80,11 +79,13 @@ public class Anime extends BaseEntity {
 
     @OneToOne(fetch = LAZY, cascade = PERSIST)
     @JoinColumn(name = "prequal_id")
-    @LazyToOne(NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
+    @LazyToOne(NO_PROXY)
+    // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime prequal;
 
     @OneToOne(fetch = LAZY, cascade = PERSIST, mappedBy = "prequal")
-    @LazyToOne(NO_PROXY) // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
+    @LazyToOne(NO_PROXY)
+    // avoid N+1 queries (by using hibernate-enhance-maven-plugin) for bidirectional OneToOne mapping
     private Anime sequal;
 
     @Builder.Default
@@ -95,9 +96,9 @@ public class Anime extends BaseEntity {
     @Builder.Default
     @ManyToMany(fetch = LAZY, cascade = PERSIST)
     @JoinTable(
-            name = "ANIME_PERSONAGES",
-            joinColumns = @JoinColumn(name = "anime_id"),
-            inverseJoinColumns = @JoinColumn(name = "personage_id")
+        name = "ANIME_PERSONAGES",
+        joinColumns = @JoinColumn(name = "anime_id"),
+        inverseJoinColumns = @JoinColumn(name = "personage_id")
     )
     @OrderBy(Personage_.ID)
     private List<Personage> personages = new ArrayList<>();

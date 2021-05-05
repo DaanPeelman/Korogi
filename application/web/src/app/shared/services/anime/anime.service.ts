@@ -1,5 +1,5 @@
-import { map, mergeMap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { map, mergeMap } from "rxjs/operators";
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { BaseRestService } from "../base-rest-service";
@@ -26,14 +26,20 @@ export class AnimeService extends BaseRestService implements IAnimeService {
 
     findAllAnime(): Observable<PagedResources<AnimeDTO>> {
         return this.httpClient
-            .get<MultipleResources>(this.baseRestEndPoint).pipe(
-                map(data => new PagedResources<AnimeDTO>(this.modelMapper.mapToModels(data), PageMetaData.toPageMetaData(data.page)))
+                   .get<MultipleResources>(this.baseRestEndPoint).pipe(
+                map(data => new PagedResources<AnimeDTO>(
+                    this.modelMapper.mapToModels(data),
+                    PageMetaData.toPageMetaData(data.page)
+                ))
             );
     }
 
-    findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<AnimeDTO>> {
+    findAnime(
+        id: string,
+        ...relationsToLoad: string[]
+    ): Observable<EnrichedResource<AnimeDTO>> {
         return this.httpClient
-            .get<SingleResource>(`${this.baseRestEndPoint}/${id}`).pipe(
+                   .get<SingleResource>(`${this.baseRestEndPoint}/${id}`).pipe(
                 map(res => new EnrichedResource<AnimeDTO>(this.modelMapper.mapToModel(res), res.links)),
                 mergeMap(resource => this.relationLoaderService.populateWithRelations(resource, relationsToLoad))
             );
@@ -42,5 +48,9 @@ export class AnimeService extends BaseRestService implements IAnimeService {
 
 export interface IAnimeService {
     findAllAnime(): Observable<PagedResources<AnimeDTO>>;
-    findAnime(id: string, ...relationsToLoad: string[]): Observable<EnrichedResource<AnimeDTO>>;
+
+    findAnime(
+        id: string,
+        ...relationsToLoad: string[]
+    ): Observable<EnrichedResource<AnimeDTO>>;
 }

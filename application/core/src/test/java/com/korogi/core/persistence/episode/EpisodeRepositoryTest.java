@@ -56,8 +56,8 @@ class EpisodeRepositoryTest extends BaseRepositoryTest {
     void save() throws Exception {
         Anime anime = em.find(Anime.class, 1L);
         Episode episodeToSave = steinsGateEpisode1_notPeristed()
-                .anime(anime)
-                .build();
+            .anime(anime)
+            .build();
 
         Episode savedEpisode = repository.save(episodeToSave);
 

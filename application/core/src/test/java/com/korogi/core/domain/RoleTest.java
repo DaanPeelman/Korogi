@@ -19,8 +19,8 @@ class RoleTest {
         RoleType roleType = RoleType.ADMIN;
 
         Role role = newRole()
-                .roleType(roleType)
-                .build();
+            .roleType(roleType)
+            .build();
 
         assertThat(role).isNotNull();
         assertThat(role.getRoleType()).isEqualTo(roleType);

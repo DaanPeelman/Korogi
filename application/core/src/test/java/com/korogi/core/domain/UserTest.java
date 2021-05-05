@@ -22,11 +22,11 @@ class UserTest {
         String activationCode = UUID.randomUUID().toString();
 
         User user = newUser()
-                .email(email)
-                .username(username)
-                .activationCode(activationCode)
-                .activated(true)
-                .build();
+            .email(email)
+            .username(username)
+            .activationCode(activationCode)
+            .activated(true)
+            .build();
 
         assertThat(user).isNotNull();
         assertThat(user.getEmail()).isEqualTo(email);

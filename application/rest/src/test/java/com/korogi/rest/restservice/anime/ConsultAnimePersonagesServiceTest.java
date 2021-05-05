@@ -23,7 +23,8 @@ class ConsultAnimePersonagesServiceTest extends BaseServiceTest {
     void consultAnimePersonages() throws Exception {
         performAndPrint(get(URL, 1))
             .andExpect(status().isOk())
-            .andExpect(json().matchesFileContent("com/korogi/rest/restservice/anime/ConsultAnimePersonagesServiceTest_consultAnimePersonages_expected.json"));
+            .andExpect(json().matchesFileContent(
+                "com/korogi/rest/restservice/anime/ConsultAnimePersonagesServiceTest_consultAnimePersonages_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }

@@ -25,20 +25,20 @@ class AnimeResourceMapperTest {
         assertThat(mappedResource).isNotNull();
         assertThat(mappedResource.getContent()).isNotNull();
         new FieldAssertionUtil(animeToMap, mappedResource.getContent())
-                .expectFieldValue("TYPE", "anime")
-                .assertAllFieldValuesAreEqual();
+            .expectFieldValue("TYPE", "anime")
+            .assertAllFieldValuesAreEqual();
 
         assertThat(mappedResource.getLinks())
-                .isNotNull()
-                .isNotEmpty()
-                .hasSize(5)
-                .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
-                .containsExactly(
-                        new Link("/anime/{id}", "self"),
-                        new Link("/anime/{id}/prequal", "prequal"),
-                        new Link("/anime/{id}/sequal", "sequal"),
-                        new Link("/anime/{id}/episodes", "episodes"),
-                        new Link("/anime/{id}/personages", "personages")
-                );
+            .isNotNull()
+            .isNotEmpty()
+            .hasSize(5)
+            .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
+            .containsExactly(
+                new Link("/anime/{id}", "self"),
+                new Link("/anime/{id}/prequal", "prequal"),
+                new Link("/anime/{id}/sequal", "sequal"),
+                new Link("/anime/{id}/episodes", "episodes"),
+                new Link("/anime/{id}/personages", "personages")
+            );
     }
 }

@@ -3,35 +3,35 @@ import { DateUtil } from "../../shared/utils/date-util";
 
 export class AnimeTestData {
     static steinsGate(): AnimeDTO {
-        let animeDTO: AnimeDTO = new AnimeDTO();
+        const animeDTO: AnimeDTO = new AnimeDTO();
 
-        animeDTO.nameEnglish = 'Steins;Gate';
-        animeDTO.nameRomanized = 'Steins;Gate';
-        animeDTO.startAir = DateUtil.parse('2011-04-06');
-        animeDTO.endAir = DateUtil.parse('2011-09-14');
-        animeDTO.synopsis = 'The self-proclaimed mad scientist Rintarou Okabe rents out a room in a rickety old building in Akihabara, where he indulges himself in his hobby of inventing prospective \'future gadgets\' with fellow lab members: Mayuri Shiina, his air-headed childhood friend, and Hashida Itaru, a perverted hacker nicknamed \'Daru.\' The three pass the time by tinkering with their most promising contraption yet, a machine dubbed the \'Phone Microwave,\' which performs the strange function of morphing bananas into piles of green gel.';
-        animeDTO.backdropUrl = 'https://localhost:8443/assets/images/backdrop.steins.gate.jpg';
-        animeDTO.posterUrl = 'https://localhost:8443/assets/images/poster.steins.gate.jpg';
+        animeDTO.nameEnglish = "Steins;Gate";
+        animeDTO.nameRomanized = "Steins;Gate";
+        animeDTO.startAir = DateUtil.parse("2011-04-06");
+        animeDTO.endAir = DateUtil.parse("2011-09-14");
+        animeDTO.synopsis = "The self-proclaimed mad scientist Rintarou Okabe rents out a room in a rickety old building in Akihabara, where he indulges himself in his hobby of inventing prospective 'future gadgets' with fellow lab members: Mayuri Shiina, his air-headed childhood friend, and Hashida Itaru, a perverted hacker nicknamed 'Daru.' The three pass the time by tinkering with their most promising contraption yet, a machine dubbed the 'Phone Microwave,' which performs the strange function of morphing bananas into piles of green gel.";
+        animeDTO.backdropUrl = "https://localhost:8443/assets/images/backdrop.steins.gate.jpg";
+        animeDTO.posterUrl = "https://localhost:8443/assets/images/poster.steins.gate.jpg";
 
         return animeDTO;
     }
 
     static steinsGateEgoisticPoriomania(): AnimeDTO {
-        let animeDTO: AnimeDTO = new AnimeDTO();
+        const animeDTO: AnimeDTO = new AnimeDTO();
 
         animeDTO.nameEnglish = "Steins;Gate: Egoistic Poriomania";
         animeDTO.nameRomanized = "Steins;Gate: Oukoubakko no Poriomania";
         animeDTO.startAir = DateUtil.parse("2012-02-22");
         animeDTO.endAir = DateUtil.parse("2012-02-22");
         animeDTO.synopsis = "Special episode included in the last of the nine Blu-ray/DVD volumes. The story is set a few months after the last scene of the television series. On a calm day in Akihabara, Okabe and the other laboratory members are invited by Feyris to go to America. Mayuri and the rest are planning to reunite with Kurisu, who had come back to an American laboratory. A few days later, Okabe's mad scientist persona Hououin Kyouma arrives alone at the airport in Los Angeles, where he may be taking the first step to leading the world into chaos.";
-        animeDTO.backdropUrl = 'https://localhost:8443/assets/images/backdrop.steins.gate.egoistic.poriomania.jpg';
-        animeDTO.posterUrl = 'https://localhost:8443/assets/images/poster.steins.gate.egoistic.poriomania.jpg';
+        animeDTO.backdropUrl = "https://localhost:8443/assets/images/backdrop.steins.gate.egoistic.poriomania.jpg";
+        animeDTO.posterUrl = "https://localhost:8443/assets/images/poster.steins.gate.egoistic.poriomania.jpg";
 
         return animeDTO;
     }
 
     static naruto(): AnimeDTO {
-        let animeDTO: AnimeDTO = new AnimeDTO();
+        const animeDTO: AnimeDTO = new AnimeDTO();
 
         animeDTO.nameEnglish = "Naruto";
         animeDTO.nameRomanized = "Naruto";

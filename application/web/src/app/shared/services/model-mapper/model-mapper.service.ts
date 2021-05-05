@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable } from "@angular/core";
 import { SingleResource } from "../../resources/original/single-resource";
 import { MultipleResources } from "../../resources/original/multiple-resources";
 import { IMapper } from "../../mapper/mapper";
@@ -11,7 +11,7 @@ export class ModelMapperService {
     constructor(
         @Inject(MAPPERS) mappers: IMapper<any>[]
     ) {
-        for (let mapper of mappers) {
+        for (const mapper of mappers) {
             this.mappersByType.set(mapper.forType(), mapper);
         }
     }
@@ -21,6 +21,6 @@ export class ModelMapperService {
     }
 
     mapToModels<T>(resourceToMap: MultipleResources): T[] {
-        return resourceToMap.content.map(resource => this.mapToModel(resource))
+        return resourceToMap.content.map(resource => this.mapToModel(resource));
     }
 }

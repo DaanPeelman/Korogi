@@ -1,5 +1,5 @@
-import { mergeMap } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { mergeMap } from "rxjs/operators";
+import { Component, OnInit } from "@angular/core";
 import { AnimeService } from "../../shared/services/anime/anime.service";
 import { ActivatedRoute } from "@angular/router";
 import { EnrichedResource } from "../../shared/resources/final/enriched-resource";
@@ -10,11 +10,13 @@ import { PersonageDTO } from "../../shared/models/personage-dto";
 import { BaseAnimeRelation } from "../../generated/models";
 import { of as observableOf } from "rxjs";
 
-@Component({
-    selector: 'korogi-anime-detail',
-    templateUrl: './anime-detail.component.html',
-    styleUrls: ['./anime-detail.component.scss']
-})
+@Component(
+    {
+        selector: "korogi-anime-detail",
+        templateUrl: "./anime-detail.component.html",
+        styleUrls: ["./anime-detail.component.scss"]
+    }
+)
 export class AnimeDetailComponent implements OnInit {
     anime: AnimeDTO;
     prequal: AnimeDTO;
@@ -32,7 +34,13 @@ export class AnimeDetailComponent implements OnInit {
     ngOnInit() {
         this.route.paramMap.pipe(
             mergeMap(params => observableOf(params.get("id"))),
-            mergeMap(id => this.animeService.findAnime(id, BaseAnimeRelation.PREQUAL, BaseAnimeRelation.SEQUAL, BaseAnimeRelation.EPISODES, BaseAnimeRelation.PERSONAGES))
+            mergeMap(id => this.animeService.findAnime(
+                id,
+                BaseAnimeRelation.PREQUAL,
+                BaseAnimeRelation.SEQUAL,
+                BaseAnimeRelation.EPISODES,
+                BaseAnimeRelation.PERSONAGES
+            ))
         ).subscribe((resource: EnrichedResource<AnimeDTO>) => this.setData(resource));
     }
 

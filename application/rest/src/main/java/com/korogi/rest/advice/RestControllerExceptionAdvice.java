@@ -24,26 +24,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @RequiredArgsConstructor
 public class RestControllerExceptionAdvice {
     private static final ErrorDTO UNAUTHORIZED_ERROR_DTO = newErrorDTO()
-            .status(UNAUTHORIZED.getReasonPhrase())
-            .code(UNAUTHORIZED.value())
-            .message("Authentication is required to view or perform actions on this resource")
-            .build();
+        .status(UNAUTHORIZED.getReasonPhrase())
+        .code(UNAUTHORIZED.value())
+        .message("Authentication is required to view or perform actions on this resource")
+        .build();
 
     private static final ErrorDTO FORBIDDEN_ERROR_DTO = newErrorDTO()
-            .status(FORBIDDEN.getReasonPhrase())
-            .code(FORBIDDEN.value())
-            .message("You are not authorized to view or perform actions on this resource")
-            .build();
+        .status(FORBIDDEN.getReasonPhrase())
+        .code(FORBIDDEN.value())
+        .message("You are not authorized to view or perform actions on this resource")
+        .build();
 
     private final UUIDGenerator uuidGenerator;
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception) {
         ErrorDTO errorDTO = newErrorDTO()
-                .status(NOT_FOUND.getReasonPhrase())
-                .code(NOT_FOUND.value())
-                .message(exception.getMessage())
-                .build();
+            .status(NOT_FOUND.getReasonPhrase())
+            .code(NOT_FOUND.value())
+            .message(exception.getMessage())
+            .build();
 
         return new ResponseEntity<>(errorDTO, NOT_FOUND);
     }
@@ -66,10 +66,11 @@ public class RestControllerExceptionAdvice {
         log.error("Unexpected error: '" + logCode + "'", throwable);
 
         ErrorDTO errorDTO = newErrorDTO()
-                .status(INTERNAL_SERVER_ERROR.getReasonPhrase())
-                .code(INTERNAL_SERVER_ERROR.value())
-                .message("An unexpected error occurred. If this problem keeps persisting please contact our technical support with code: '" + logCode + "'.")
-                .build();
+            .status(INTERNAL_SERVER_ERROR.getReasonPhrase())
+            .code(INTERNAL_SERVER_ERROR.value())
+            .message(
+                "An unexpected error occurred. If this problem keeps persisting please contact our technical support with code: '" + logCode + "'.")
+            .build();
 
         return new ResponseEntity<>(errorDTO, INTERNAL_SERVER_ERROR);
     }

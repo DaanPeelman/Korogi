@@ -4,11 +4,11 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class AnimeMapper extends BaseMapper<AnimeDTO> {
-    protected getObjectInstance(): AnimeDTO {
-        return new AnimeDTO();
-    }
-
     forType(): string {
         return "anime";
+    }
+
+    protected getObjectInstance(): AnimeDTO {
+        return new AnimeDTO();
     }
 }

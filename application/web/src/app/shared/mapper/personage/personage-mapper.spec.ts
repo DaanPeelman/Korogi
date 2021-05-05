@@ -7,11 +7,13 @@ describe("PersonageMapper", () => {
     let mapper: PersonageMapper;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                PersonageMapper
-            ]
-        });
+        TestBed.configureTestingModule(
+            {
+                providers: [
+                    PersonageMapper
+                ]
+            }
+        );
     });
 
     beforeEach(inject([PersonageMapper], (_mapper: PersonageMapper) => {
@@ -20,11 +22,11 @@ describe("PersonageMapper", () => {
 
     describe("map", () => {
         it("should create a Personage instance with all the values of the JSON object that was passed", () => {
-            let expectedPersonage: PersonageDTO = PersonageTestData.makiseKurisu();
-            let resource: any = JSON.parse(JSON.stringify(expectedPersonage));
+            const expectedPersonage: PersonageDTO = PersonageTestData.makiseKurisu();
+            const resource: any = JSON.parse(JSON.stringify(expectedPersonage));
             resource["type"] = "personage";
 
-            let mappedResource: PersonageDTO = mapper.map(resource);
+            const mappedResource: PersonageDTO = mapper.map(resource);
 
             expect(mappedResource).toEqual(expectedPersonage);
         });

@@ -25,16 +25,16 @@ class EpisodeResourceMapperTest {
         assertThat(mappedResource).isNotNull();
         assertThat(mappedResource.getContent()).isNotNull();
         new FieldAssertionUtil(episodeToMap, mappedResource.getContent())
-                .expectFieldValue("TYPE", "episode")
-                .assertAllFieldValuesAreEqual();
+            .expectFieldValue("TYPE", "episode")
+            .assertAllFieldValuesAreEqual();
 
         assertThat(mappedResource.getLinks())
-                .isNotNull()
-                .isNotEmpty()
-                .hasSize(1)
-                .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
-                .containsExactly(
-                        new Link("/episodes/{id}", "self")
-                );
+            .isNotNull()
+            .isNotEmpty()
+            .hasSize(1)
+            .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
+            .containsExactly(
+                new Link("/episodes/{id}", "self")
+            );
     }
 }

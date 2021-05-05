@@ -4,11 +4,11 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class EpisodeMapper extends BaseMapper<EpisodeDTO> {
-    protected getObjectInstance(): EpisodeDTO {
-        return new EpisodeDTO();
-    }
-
     forType(): string {
         return "episode";
+    }
+
+    protected getObjectInstance(): EpisodeDTO {
+        return new EpisodeDTO();
     }
 }

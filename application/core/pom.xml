@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -103,8 +103,10 @@
                         <id>enhance-entities</id>
                         <configuration>
                             <failOnError>true</failOnError>
-                            <enableLazyInitialization>true</enableLazyInitialization> <!-- avoid unnecessary N+1 queries for bidirectional OneToOne mappings -->
-                            <enableAssociationManagement>true</enableAssociationManagement> <!-- auto set child/parent in bidirectional relationships without having to create custom setters  -->
+                            <enableLazyInitialization>true
+                            </enableLazyInitialization> <!-- avoid unnecessary N+1 queries for bidirectional OneToOne mappings -->
+                            <enableAssociationManagement>true
+                            </enableAssociationManagement> <!-- auto set child/parent in bidirectional relationships without having to create custom setters  -->
                             <enableDirtyTracking>true</enableDirtyTracking>
                         </configuration>
                         <goals>

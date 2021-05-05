@@ -3,7 +3,7 @@ import { ParamMap } from "@angular/router";
 export class ParamMapImpl implements ParamMap {
     readonly keys: string[];
 
-    constructor(){
+    constructor() {
         this.keys = [];
     }
 
@@ -19,7 +19,10 @@ export class ParamMapImpl implements ParamMap {
         return this.keys[name] !== undefined && this.keys[name] !== null;
     }
 
-    add(name: string, value: any) {
+    add(
+        name: string,
+        value: any
+    ) {
         this.keys[name] = value;
     }
 }

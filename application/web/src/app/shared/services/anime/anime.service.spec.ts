@@ -1,6 +1,6 @@
-import { inject, TestBed } from '@angular/core/testing';
-import { AnimeService } from './anime.service';
-import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
+import { inject, TestBed } from "@angular/core/testing";
+import { AnimeService } from "./anime.service";
+import { HttpClientTestingModule, HttpTestingController, TestRequest } from "@angular/common/http/testing";
 import { AnimeTestData } from "../../../testing/test-data/anime-test-data";
 import { PagedResources } from "../../resources/final/paged-resources";
 import { MultipleResources } from "../../resources/original/multiple-resources";
@@ -14,45 +14,53 @@ import { of as observableOf } from "rxjs";
 import { EnrichedResource } from "../../resources/final/enriched-resource";
 import { AnimeDTO } from "../../models/anime-dto";
 
-describe('AnimeService', () => {
+describe("AnimeService", () => {
     let animeService: AnimeService;
 
-    let modelMapperService: ModelMapperService = mock(ModelMapperService);
-    let relationLoaderService: RelationLoaderService = mock(RelationLoaderService);
+    const modelMapperService: ModelMapperService = mock(ModelMapperService);
+    const relationLoaderService: RelationLoaderService = mock(RelationLoaderService);
 
     let httpMock: HttpTestingController;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                AnimeService,
-                {
-                    provide: ModelMapperService,
-                    useFactory: () => instance(modelMapperService)
-                },
-                {
-                    provide: RelationLoaderService,
-                    useFactory: () => instance(relationLoaderService)
-                }
-            ],
-            imports: [HttpClientTestingModule]
-        });
+        TestBed.configureTestingModule(
+            {
+                providers: [
+                    AnimeService,
+                    {
+                        provide: ModelMapperService,
+                        useFactory: () => instance(modelMapperService)
+                    },
+                    {
+                        provide: RelationLoaderService,
+                        useFactory: () => instance(relationLoaderService)
+                    }
+                ],
+                imports: [HttpClientTestingModule]
+            }
+        );
     });
 
-    beforeEach(inject([AnimeService, HttpTestingController], (_animeService: AnimeService, _httpMock: HttpTestingController) => {
-        animeService = _animeService;
-        httpMock = _httpMock;
-    }));
+    beforeEach(inject(
+        [AnimeService, HttpTestingController],
+        (
+            _animeService: AnimeService,
+            _httpMock: HttpTestingController
+        ) => {
+            animeService = _animeService;
+            httpMock = _httpMock;
+        }
+    ));
 
     afterEach(() => {
         httpMock.verify();
     });
 
-    describe('findAllAnime', () => {
-        it('should return an observable of PagedResources of Anime', () => {
+    describe("findAllAnime", () => {
+        it("should return an observable of PagedResources of Anime", () => {
             const responseContent: SingleResource = <any>AnimeTestData.steinsGate();
             responseContent.links = [
-                new Link('self', 'http:localhost:8080/rest/self')
+                new Link("self", "http:localhost:8080/rest/self")
             ];
 
             const response: MultipleResources = {
@@ -84,19 +92,24 @@ describe('AnimeService', () => {
         });
     });
 
-    describe('findAnime', () => {
-        it('should return an EmbeddedResource of an Anime', () => {
-            const id: string = '123';
+    describe("findAnime", () => {
+        it("should return an EmbeddedResource of an Anime", () => {
+            const id: string = "123";
             const response: SingleResource = <any>AnimeTestData.steinsGate();
-            const selfLink: Link = new Link('self', 'http:localhost:8080/rest/self');
+            const selfLink: Link = new Link("self", "http:localhost:8080/rest/self");
             response.links = [selfLink];
 
             when(modelMapperService.mapToModel<AnimeDTO>(response)).thenReturn(AnimeTestData.steinsGate());
-            const enrichedResource: EnrichedResource<AnimeDTO> = new EnrichedResource<AnimeDTO>(AnimeTestData.steinsGate(), [selfLink]);
-            when(relationLoaderService.populateWithRelations(anything(), anything())).thenReturn(observableOf(enrichedResource));
+            const enrichedResource: EnrichedResource<AnimeDTO> = new EnrichedResource<AnimeDTO>(
+                AnimeTestData.steinsGate(),
+                [selfLink]
+            );
+            when(relationLoaderService.populateWithRelations(anything(), anything()))
+                .thenReturn(observableOf(enrichedResource));
 
             animeService.findAnime(id).subscribe((result: EnrichedResource<AnimeDTO>) => {
-                const [capturedEnrichedResource, capturedRelationsToLoad] = capture(relationLoaderService.populateWithRelations).last();
+                const [capturedEnrichedResource, capturedRelationsToLoad] = capture(relationLoaderService.populateWithRelations)
+                    .last();
 
                 expect((<EnrichedResource<AnimeDTO>>capturedEnrichedResource).data).toEqual(AnimeTestData.steinsGate());
                 expect((<EnrichedResource<AnimeDTO>>capturedEnrichedResource).links.length).toEqual(1);

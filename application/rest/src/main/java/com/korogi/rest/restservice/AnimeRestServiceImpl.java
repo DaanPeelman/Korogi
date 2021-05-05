@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +38,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping
     @ResponseStatus(OK)
-    @ResponseBody
     @Override
     public PagedModel<EntityModel<AnimeDTO>> getAnime() {
         List<Anime> anime = animeRepository.findByCriteria();
@@ -49,7 +47,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}")
     @ResponseStatus(OK)
-    @ResponseBody
     @Override
     public EntityModel<AnimeDTO> getAnimeDetails(
         @PathVariable(PATH_VARIABLE_ID) Long id
@@ -61,7 +58,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/prequal")
     @ResponseStatus(OK)
-    @ResponseBody
     @Override
     public EntityModel<AnimeDTO> getPrequalDetails(
         @PathVariable(PATH_VARIABLE_ID) Long id
@@ -73,7 +69,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/sequal")
     @ResponseStatus(OK)
-    @ResponseBody
     @Override
     public EntityModel<AnimeDTO> getSequalDetails(
         @PathVariable(PATH_VARIABLE_ID) Long id
@@ -85,7 +80,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/episodes")
     @ResponseStatus(OK)
-    @ResponseBody
     @Override
     public PagedModel<EntityModel<EpisodeDTO>> getAnimeEpisodes(
         @PathVariable(PATH_VARIABLE_ID) Long id
@@ -98,7 +92,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/personages")
     @ResponseStatus(OK)
-    @ResponseBody
     @Override
     public PagedModel<EntityModel<PersonageDTO>> getAnimePersonages(
         @PathVariable(PATH_VARIABLE_ID) Long id

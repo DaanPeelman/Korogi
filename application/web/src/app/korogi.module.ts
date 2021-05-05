@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
 import { KorogiComponent } from "./korogi.component";
 import { HeaderModule } from "./shared/components/header/header.module";
@@ -14,32 +14,34 @@ import { LoginModule } from "./login/login.module";
 import { AuthenticationInterceptor } from "./shared/intercepters/authentication/authentication.interceptor";
 
 @NgModule({
-    declarations: [
-        KorogiComponent
-    ],
-    imports: [
-        BrowserModule,
-        HeaderModule,
-        HttpClientModule,
-        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+              declarations: [
+                  KorogiComponent
+              ],
+              imports: [
+                  BrowserModule,
+                  HeaderModule,
+                  HttpClientModule,
+                  RouterModule.forRoot([], { relativeLinkResolution: "legacy" }),
 
-        MapperModule.forRoot(),
+                  MapperModule.forRoot(),
 
-        AnimeModule,
-        LoginModule
-    ],
-    providers: [
-        {
-          provide: HTTP_INTERCEPTORS,
-          useClass: AuthenticationInterceptor,
-          multi: true
-        },
+                  AnimeModule,
+                  LoginModule
+              ],
+              providers: [
+                  {
+                      provide: HTTP_INTERCEPTORS,
+                      useClass: AuthenticationInterceptor,
+                      multi: true
+                  },
 
-        RelationLoaderService,
-        ModelMapperService,
-        AnimeService
-    ],
-    bootstrap: [KorogiComponent]
-})
+                  RelationLoaderService,
+                  ModelMapperService,
+                  AnimeService
+              ],
+              bootstrap: [
+                  KorogiComponent
+              ]
+          })
 export class KorogiModule {
 }

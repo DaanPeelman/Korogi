@@ -7,8 +7,16 @@
     height: 0;
     overflow: hidden;
 }
-.cf:after {clear: both;}
-.cf {zoom: 1;} /* IE < 8 */
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    zoom: 1;
+}
+
+/* IE < 8 */
 
 
 /*

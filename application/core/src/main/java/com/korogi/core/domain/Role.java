@@ -22,7 +22,6 @@ import lombok.ToString;
  * Entity class representing a Role in the database.
  *
  * @author Daan Peelman
- *
  * @see BaseEntity
  * @see RoleBuilder
  */

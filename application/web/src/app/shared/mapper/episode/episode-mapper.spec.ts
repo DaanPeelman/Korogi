@@ -7,11 +7,13 @@ describe("EpisodeMapper", () => {
     let mapper: EpisodeMapper;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                EpisodeMapper
-            ]
-        });
+        TestBed.configureTestingModule(
+            {
+                providers: [
+                    EpisodeMapper
+                ]
+            }
+        );
     });
 
     beforeEach(inject([EpisodeMapper], (_mapper: EpisodeMapper) => {
@@ -20,11 +22,11 @@ describe("EpisodeMapper", () => {
 
     describe("map", () => {
         it("should create an Episode instance with all the values of the JSON object that was passed", () => {
-            let expectedEpisode: EpisodeDTO = EpisodeTestData.steinsGate_episode1();
-            let resource: any = JSON.parse(JSON.stringify(expectedEpisode));
+            const expectedEpisode: EpisodeDTO = EpisodeTestData.steinsGate_episode1();
+            const resource: any = JSON.parse(JSON.stringify(expectedEpisode));
             resource["type"] = "episode";
 
-            let mappedResource: EpisodeDTO = mapper.map(resource);
+            const mappedResource: EpisodeDTO = mapper.map(resource);
 
             expect(mappedResource).toEqual(expectedEpisode);
         });

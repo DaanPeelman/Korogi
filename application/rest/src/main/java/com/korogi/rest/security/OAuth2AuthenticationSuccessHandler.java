@@ -1,8 +1,8 @@
 package com.korogi.rest.security;
 
-import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import com.korogi.rest.config.KorogiProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -21,7 +21,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private final KorogiProperties properties;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+    public void onAuthenticationSuccess(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Authentication authentication
+    ) throws IOException {
         String targetUrl = determineTargetUrl(request, response, authentication);
 
         if (response.isCommitted()) {
@@ -32,11 +36,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 
-    protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+    protected String determineTargetUrl(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Authentication authentication
+    ) {
         String token = tokenProvider.createToken(authentication);
 
         return UriComponentsBuilder.fromUriString(properties.getOAuth().getFrontEndReturnUrl() + "/login/oauth/google")
-                .queryParam("token", token)
-                .build().toUriString();
+                                   .queryParam("token", token)
+                                   .build().toUriString();
     }
 }

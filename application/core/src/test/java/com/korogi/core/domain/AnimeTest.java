@@ -28,14 +28,14 @@ class AnimeTest {
         Anime prequal = steinsGate_notPersisted().build();
 
         Anime anime = Anime.newAnime()
-                .animeType(animeType)
-                .nameEnglish(nameEnglish)
-                .nameRomanized(nameRomanized)
-                .startAir(startAir)
-                .endAir(endAir)
-                .synopsis(synopsis)
-                .prequal(prequal)
-                .build();
+                           .animeType(animeType)
+                           .nameEnglish(nameEnglish)
+                           .nameRomanized(nameRomanized)
+                           .startAir(startAir)
+                           .endAir(endAir)
+                           .synopsis(synopsis)
+                           .prequal(prequal)
+                           .build();
 
         assertThat(anime).isNotNull();
         assertThat(anime.getAnimeType()).isEqualTo(animeType);

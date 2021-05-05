@@ -68,7 +68,11 @@ class RestControllerExceptionAdviceTest extends BaseServiceTest {
             .andExpect(status().isInternalServerError())
             .andExpect(jsonPath("$.status", equalTo("Internal Server Error")))
             .andExpect(jsonPath("$.code", equalTo(500)))
-            .andExpect(jsonPath("$.message", startsWith("An unexpected error occurred. If this problem keeps persisting please contact our technical support with code: '" + generatedUUID + "'.")));
+            .andExpect(jsonPath(
+                "$.message",
+                startsWith(
+                    "An unexpected error occurred. If this problem keeps persisting please contact our technical support with code: '" + generatedUUID + "'.")
+            ));
 
         verify(logger, times(1)).error(eq("Unexpected error: '" + generatedUUID + "'"), eq(runtimeExceptionToThrow));
     }

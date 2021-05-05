@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <USERS  EMAIL="john.doe@test.com"
-            PROVIDER_ID="1"
-            USERNAME="john.doe"
-            BIOGRAPHY="John Doe's Biography"
-            ACTIVATION_CODE="123456789012345678901234567890123456"
-            ACTIVATED="false"/>
+    <USERS EMAIL="john.doe@test.com"
+           PROVIDER_ID="1"
+           USERNAME="john.doe"
+           BIOGRAPHY="John Doe's Biography"
+           ACTIVATION_CODE="123456789012345678901234567890123456"
+           ACTIVATED="false" />
 </dataset>

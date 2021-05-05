@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as moment from "moment";
 import { InvalidDateFormatException } from "../exceptions/invalid-date-format-exception";
 
 export class DateUtil {

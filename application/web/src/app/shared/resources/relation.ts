@@ -1,6 +1,7 @@
 export class Relation {
-  constructor(
-    public relation: string,
-    public data: any
-  ) {}
+    constructor(
+        public relation: string,
+        public data: any
+    ) {
+    }
 }

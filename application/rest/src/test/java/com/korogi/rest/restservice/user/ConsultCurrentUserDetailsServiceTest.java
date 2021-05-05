@@ -33,6 +33,7 @@ public class ConsultCurrentUserDetailsServiceTest extends BaseServiceTest {
     void consultCurrentUserDetails_authenticatedRegisteredUser() throws Exception {
         performAndPrint(get(URL).header("Authorization", "Bearer " + generateToken("1")))
             .andExpect(status().isOk())
-            .andExpect(json().matchesFileContent("com/korogi/rest/restservice/user/ConsultCurrentUserDetailsServiceTest_consultCurrentUserDetails_authenticatedRegisteredUser_expected.json"));
+            .andExpect(json().matchesFileContent(
+                "com/korogi/rest/restservice/user/ConsultCurrentUserDetailsServiceTest_consultCurrentUserDetails_authenticatedRegisteredUser_expected.json"));
     }
 }

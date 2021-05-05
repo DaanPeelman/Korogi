@@ -23,7 +23,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     void consultAnimeDetails_animeWithSequal() throws Exception {
         performAndPrint(get(URL, 1))
             .andExpect(status().isOk())
-            .andExpect(json().matchesFileContent("com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithSequal_expected.json"));
+            .andExpect(json().matchesFileContent(
+                "com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -39,7 +40,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     void consultAnimeDetails_animeWithPrequal() throws Exception {
         performAndPrint(get(URL, 3))
             .andExpect(status().isOk())
-            .andExpect(json().matchesFileContent("com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequal_expected.json"));
+            .andExpect(json().matchesFileContent(
+                "com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -55,7 +57,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     void consultAnimeDetails_animeWithPrequalAndSequal() throws Exception {
         performAndPrint(get(URL, 2))
             .andExpect(status().isOk())
-            .andExpect(json().matchesFileContent("com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequalAndSequal_expected.json"));
+            .andExpect(json().matchesFileContent(
+                "com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithPrequalAndSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }
@@ -71,7 +74,8 @@ class ConsultAnimeDetailsServiceTest extends BaseServiceTest {
     void consultAnimeDetails_animeWithoutPrequalOrSequal() throws Exception {
         performAndPrint(get(URL, 4))
             .andExpect(status().isOk())
-            .andExpect(json().matchesFileContent("com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithoutPrequalOrSequal_expected.json"));
+            .andExpect(json().matchesFileContent(
+                "com/korogi/rest/restservice/anime/ConsultAnimeDetailsServiceTest_consultAnimeDetails_animeWithoutPrequalOrSequal_expected.json"));
 
         HibernateStatisticsUtil.assertAmountOfQuerriesExecuted(1);
     }

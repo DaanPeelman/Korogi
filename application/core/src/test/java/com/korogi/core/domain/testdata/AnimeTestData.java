@@ -14,13 +14,13 @@ import com.korogi.core.domain.Anime;
 public class AnimeTestData {
     public static Anime.AnimeBuilder steinsGate_notPersisted() {
         return newAnime()
-                .animeType(TV)
-                .nameEnglish("Steins;Gate")
-                .nameRomanized("Steins;Gate")
-                .startAir(of(2011, APRIL, 6))
-                .endAir(of(2011, SEPTEMBER, 14))
-                .synopsis("Steins;Gate synopsis")
-                .backdropUrl("http://backdrop.url.be/steins.gate")
-                .posterUrl("http://poster.url.be/stains.gate");
+            .animeType(TV)
+            .nameEnglish("Steins;Gate")
+            .nameRomanized("Steins;Gate")
+            .startAir(of(2011, APRIL, 6))
+            .endAir(of(2011, SEPTEMBER, 14))
+            .synopsis("Steins;Gate synopsis")
+            .backdropUrl("http://backdrop.url.be/steins.gate")
+            .posterUrl("http://poster.url.be/stains.gate");
     }
 }

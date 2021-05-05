@@ -8,5 +8,6 @@ import org.springframework.hateoas.EntityModel;
  */
 public interface UserRestService {
     void saveUser(UserDTO userDTO);
+
     EntityModel<UserDTO> getCurrentUser();
 }

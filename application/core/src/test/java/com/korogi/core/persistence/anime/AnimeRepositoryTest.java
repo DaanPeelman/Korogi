@@ -70,8 +70,8 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
         Personage personage = em.find(Personage.class, 1L);
 
         Anime animeToSave = steinsGate_notPersisted()
-                .personages(singletonList(personage))
-                .build();
+            .personages(singletonList(personage))
+            .build();
 
         Anime savedAnime = repository.save(animeToSave);
 
@@ -112,8 +112,8 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
         Anime animeToFind = em.find(Anime.class, 1L);
 
         assertThat(repository.findPrequalOfAnime(2L))
-                .isPresent()
-                .contains(animeToFind);
+            .isPresent()
+            .contains(animeToFind);
     }
 
     /**
@@ -143,8 +143,8 @@ class AnimeRepositoryTest extends BaseRepositoryTest {
         Anime animeToFind = em.find(Anime.class, 2L);
 
         assertThat(repository.findSequalOfAnime(1L))
-                .isPresent()
-                .contains(animeToFind);
+            .isPresent()
+            .contains(animeToFind);
     }
 
     /**

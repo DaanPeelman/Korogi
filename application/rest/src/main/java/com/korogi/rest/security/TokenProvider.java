@@ -33,19 +33,19 @@ public class TokenProvider {
         Date expiryDate = new Date(now.getTime() + properties.getOAuth().getTokenExpirationMSec());
 
         return Jwts.builder()
-                .setSubject(userPrincipal.getName())
-                .addClaims(Collections.singletonMap("email", userPrincipal.getEmail()))
-                .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, properties.getOAuth().getTokenSecret())
-                .compact();
+                   .setSubject(userPrincipal.getName())
+                   .addClaims(Collections.singletonMap("email", userPrincipal.getEmail()))
+                   .setIssuedAt(new Date())
+                   .setExpiration(expiryDate)
+                   .signWith(SignatureAlgorithm.HS512, properties.getOAuth().getTokenSecret())
+                   .compact();
     }
 
     public Claims getUserIdFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(properties.getOAuth().getTokenSecret())
-                .parseClaimsJws(token)
-                .getBody();
+                   .setSigningKey(properties.getOAuth().getTokenSecret())
+                   .parseClaimsJws(token)
+                   .getBody();
     }
 
     public boolean isValidToken(String authToken) {

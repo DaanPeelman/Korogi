@@ -7,10 +7,9 @@ import org.springframework.data.repository.NoRepositoryBean;
 /**
  * Repository to do CRUD operations on entity objects into the database.
  *
- * @author Daan Peelman
- *
  * @param <E> the entity to do CRUD operations with
  *
+ * @author Daan Peelman
  * @see EntityGraphJpaRepository
  * @see BaseEntity
  */

@@ -6,5 +6,6 @@ import org.springframework.hateoas.PagedModel;
 
 public interface PersonageRestService {
     PagedModel<EntityModel<PersonageDTO>> getPersonages();
+
     EntityModel<PersonageDTO> getPersonageDetails(Long id);
 }

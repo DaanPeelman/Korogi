@@ -7,7 +7,6 @@ import com.korogi.core.persistence.EntityCriteriaRepository;
  * Criteria repository for read operations with an <code>Anime</code> entity.
  *
  * @author Daan Peelman
- *
  * @see EntityCriteriaRepository
  * @see Anime
  */

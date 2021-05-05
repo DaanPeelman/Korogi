@@ -20,8 +20,15 @@ public class CustomContentResultMatchers {
     public static class CustomJsonContentResultMatcher {
         @SneakyThrows
         public ResultMatcher matchesFileContent(String filePath) {
-            String expectedContent = Files.readString(Paths.get(this.getClass().getClassLoader().getResource(filePath).toURI()), UTF_8);
-            return result -> JSONAssert.assertEquals(expectedContent, result.getResponse().getContentAsString(UTF_8), JSONCompareMode.STRICT);
+            String expectedContent = Files.readString(Paths.get(this.getClass()
+                                                                    .getClassLoader()
+                                                                    .getResource(filePath)
+                                                                    .toURI()), UTF_8);
+            return result -> JSONAssert.assertEquals(
+                expectedContent,
+                result.getResponse().getContentAsString(UTF_8),
+                JSONCompareMode.STRICT
+            );
         }
     }
 }

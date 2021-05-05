@@ -15,33 +15,30 @@
  */
 
 /***************************************************************************************************
-* BROWSER POLYFILLS
+ * BROWSER POLYFILLS
  */
 
 /** Evergreen browsers require these. **/
-import 'core-js/es6/reflect';
+import "core-js/es6/reflect";
 import "core-js/client/shim";
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
  */
-import 'zone.js/dist/zone'; // Included with Angular CLI.
+import "zone.js/dist/zone"; // Included with Angular CLI.
 /**
  * Date, currency, decimal and percent pipes.
  * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10
  */
-import 'intl'; // Run `npm install --save intl`.
+import "intl"; // Run `npm install --save intl`.
 
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
-
 
 /**
  * Required to support Web Animations `@angular/animation`.
  * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
  **/
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
-
-
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

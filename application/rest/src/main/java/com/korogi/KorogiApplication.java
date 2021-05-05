@@ -9,8 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties(KorogiProperties.class)
 public class KorogiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KorogiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(KorogiApplication.class, args);
+    }
 
 }

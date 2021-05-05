@@ -3,7 +3,7 @@ import { DateUtil } from "../../shared/utils/date-util";
 
 export class EpisodeTestData {
     static steinsGate_episode1(): EpisodeDTO {
-        let episodeDTO: EpisodeDTO = new EpisodeDTO();
+        const episodeDTO: EpisodeDTO = new EpisodeDTO();
 
         episodeDTO.name = "Prologue of the Beginning and Ending";
         episodeDTO.synopsis = "Steins Gate episode 1 synopsis";
@@ -14,7 +14,7 @@ export class EpisodeTestData {
     }
 
     static steinsGate_episode2(): EpisodeDTO {
-        let episodeDTO: EpisodeDTO = new EpisodeDTO();
+        const episodeDTO: EpisodeDTO = new EpisodeDTO();
 
         episodeDTO.name = "Paranoia of Time Leaps";
         episodeDTO.synopsis = "Steins Gate episode 2 synopsis";

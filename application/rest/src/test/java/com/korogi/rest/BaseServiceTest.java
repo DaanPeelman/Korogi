@@ -36,10 +36,9 @@ import org.springframework.test.web.servlet.ResultActions;
 public abstract class BaseServiceTest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
     protected TokenProvider tokenProvider;
+    @Autowired
+    private MockMvc mockMvc;
 
     @BeforeEach
     void setup() {
@@ -48,8 +47,8 @@ public abstract class BaseServiceTest {
 
     protected ResultActions performAndPrint(RequestBuilder requestBuilder) throws Exception {
         return this.mockMvc.perform(requestBuilder)
-                    .andDo(print())
-                    .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
+                           .andDo(print())
+                           .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON));
     }
 
     protected String generateToken(String providerId) {

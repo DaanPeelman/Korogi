@@ -1,7 +1,7 @@
 export abstract class BaseRestService {
-  protected baseRestEndPoint: string;
+    protected baseRestEndPoint: string;
 
-  constructor(restEndPoint: string) {
-    this.baseRestEndPoint = "/rest/" + restEndPoint;
-  }
+    protected constructor(restEndPoint: string) {
+        this.baseRestEndPoint = "/rest/" + restEndPoint;
+    }
 }

@@ -15,8 +15,8 @@ public class FieldAssertionUtil {
     private final Map<String, CustomFieldAssertion> customFieldAssertions;
 
     public FieldAssertionUtil(
-            Object objectWithExpectedValues,
-            Object objectWithValuesToAssert
+        Object objectWithExpectedValues,
+        Object objectWithValuesToAssert
     ) {
         this.objectWithExpectedValues = objectWithExpectedValues;
         this.objectWithValuesToAssert = objectWithValuesToAssert;
@@ -30,8 +30,8 @@ public class FieldAssertionUtil {
     }
 
     public FieldAssertionUtil expectFieldValue(
-            String fieldName,
-            Object expectedValue
+        String fieldName,
+        Object expectedValue
     ) {
         this.customFieldAssertions.put(fieldName, CustomFieldAssertion.equal(expectedValue));
 
@@ -40,34 +40,26 @@ public class FieldAssertionUtil {
 
     public void assertAllFieldValuesAreEqual() throws IllegalAccessException {
         assertThat(objectWithValuesToAssert)
-                .usingRecursiveComparison()
-                .ignoringOverriddenEqualsForTypes(
-                        objectWithValuesToAssert.getClass(),
-                        objectWithValuesToAssert.getClass()
-                )
-                .ignoringFields(customFieldAssertions.keySet().toArray(new String[0]))
-                .isEqualTo(objectWithExpectedValues);
+            .usingRecursiveComparison()
+            .ignoringOverriddenEqualsForTypes(
+                objectWithValuesToAssert.getClass(),
+                objectWithValuesToAssert.getClass()
+            )
+            .ignoringFields(customFieldAssertions.keySet().toArray(new String[0]))
+            .isEqualTo(objectWithExpectedValues);
 
         for (String fieldToAssert : customFieldAssertions.keySet()) {
             CustomFieldAssertion customFieldAssertion = customFieldAssertions.get(fieldToAssert);
 
             if (customFieldAssertion.shouldNotBeIgnored()) {
                 assertThat(objectWithValuesToAssert)
-                        .extracting(fieldToAssert)
-                        .isEqualTo(customFieldAssertion.expectedValue);
+                    .extracting(fieldToAssert)
+                    .isEqualTo(customFieldAssertion.expectedValue);
             }
         }
     }
 
     private static class CustomFieldAssertion {
-        public static CustomFieldAssertion equal(Object expectedValue) {
-            return new CustomFieldAssertion(expectedValue);
-        }
-
-        public static CustomFieldAssertion ignore() {
-            return new CustomFieldAssertion(true);
-        }
-
         @Getter
         private Object expectedValue;
         private boolean ignore;
@@ -78,6 +70,14 @@ public class FieldAssertionUtil {
 
         private CustomFieldAssertion(boolean ignore) {
             this.ignore = ignore;
+        }
+
+        public static CustomFieldAssertion equal(Object expectedValue) {
+            return new CustomFieldAssertion(expectedValue);
+        }
+
+        public static CustomFieldAssertion ignore() {
+            return new CustomFieldAssertion(true);
         }
 
         private boolean shouldBeIgnored() {

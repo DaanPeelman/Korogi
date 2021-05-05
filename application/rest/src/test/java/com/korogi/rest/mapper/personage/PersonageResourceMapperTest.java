@@ -25,16 +25,16 @@ class PersonageResourceMapperTest {
         assertThat(mappedResource).isNotNull();
         assertThat(mappedResource.getContent()).isNotNull();
         new FieldAssertionUtil(personageToMap, mappedResource.getContent())
-                .expectFieldValue("TYPE", "personage")
-                .assertAllFieldValuesAreEqual();
+            .expectFieldValue("TYPE", "personage")
+            .assertAllFieldValuesAreEqual();
 
         assertThat(mappedResource.getLinks())
-                .isNotNull()
-                .isNotEmpty()
-                .hasSize(1)
-                .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
-                .containsExactly(
-                        new Link("/personages/{id}", "self")
-                );
+            .isNotNull()
+            .isNotEmpty()
+            .hasSize(1)
+            .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
+            .containsExactly(
+                new Link("/personages/{id}", "self")
+            );
     }
 }

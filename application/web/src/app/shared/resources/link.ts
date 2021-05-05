@@ -1,6 +1,7 @@
 export class Link {
-  constructor(
-    public rel: string,
-    public href: string
-  ) {}
+    constructor(
+        public rel: string,
+        public href: string
+    ) {
+    }
 }

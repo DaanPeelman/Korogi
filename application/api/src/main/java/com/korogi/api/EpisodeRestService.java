@@ -6,5 +6,6 @@ import org.springframework.hateoas.PagedModel;
 
 public interface EpisodeRestService {
     PagedModel<EntityModel<EpisodeDTO>> getEpisodes();
+
     EntityModel<EpisodeDTO> getEpisodeDetails(Long id);
 }

@@ -8,9 +8,14 @@ import org.springframework.hateoas.PagedModel;
 
 public interface AnimeRestService {
     PagedModel<EntityModel<AnimeDTO>> getAnime();
+
     EntityModel<AnimeDTO> getAnimeDetails(Long id);
+
     EntityModel<AnimeDTO> getPrequalDetails(Long id);
+
     EntityModel<AnimeDTO> getSequalDetails(Long id);
+
     PagedModel<EntityModel<EpisodeDTO>> getAnimeEpisodes(Long id);
+
     PagedModel<EntityModel<PersonageDTO>> getAnimePersonages(Long id);
 }

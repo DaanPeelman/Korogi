@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
  * Repository for CRUD operations with an <code>Anime</code> entity.
  *
  * @author Daan Peelman
- *
  * @see EntityRepository
  * @see AnimeCriteriaRepository
  * @see Anime

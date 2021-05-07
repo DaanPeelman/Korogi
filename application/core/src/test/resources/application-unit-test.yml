@@ -26,3 +26,4 @@ zonky:
       postgres:
         docker:
           image: postgres:12-alpine
+      provider: docker

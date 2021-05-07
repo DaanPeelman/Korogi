@@ -32,6 +32,7 @@
 		<dbunit.version>2.7.0</dbunit.version>
 		<spring-test-dbunit.version>5.2.0</spring-test-dbunit.version>
 		<embedded-database-spring-test.version>1.6.3</embedded-database-spring-test.version>
+		<testcontainers-postgresql.version>1.15.3</testcontainers-postgresql.version>
 		<selenium-java.version>3.141.59</selenium-java.version>
 		<ngwebdriver.version>1.1.5</ngwebdriver.version>
 	</properties>
@@ -137,6 +138,12 @@
 				<groupId>io.zonky.test</groupId>
 				<artifactId>embedded-database-spring-test</artifactId>
 				<version>${embedded-database-spring-test.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.testcontainers</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>${testcontainers-postgresql.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>

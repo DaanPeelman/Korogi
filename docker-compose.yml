@@ -2,7 +2,6 @@ version: "2.4"
 services:
   reverse-proxy:
     image: "nginx:1.19-alpine"
-    restart: on-failure
     depends_on:
       - korogi-api
       - korogi-web
@@ -15,11 +14,10 @@ services:
       - 8080:80
   postgres:
     image: "postgres:12-alpine"
-    restart: on-failure
     ports:
       - 5432:5432
     volumes:
-      - ./postgresql:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=korogi
       - POSTGRES_PASSWORD=korogi
@@ -33,7 +31,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    restart: always
     build: delivery/korogi-api
     volumes:
       - ./delivery/korogi-api/secrets:/etc/secrets:ro
@@ -43,5 +40,7 @@ services:
     user: ${CURRENT_USER_UID}
   korogi-web:
     image: "korogi-web"
-    restart: always
     build: delivery/korogi-web
+
+volumes:
+  postgres:

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EntityToDTOResourceMapper {
+    @SuppressWarnings("rawtypes")
     private final Map<? extends Class<? extends BaseEntity>, ResourceMapper> mappers;
 
     @Autowired
@@ -45,7 +46,7 @@ public class EntityToDTOResourceMapper {
         List<EntityModel<DTO>> dtos = this.toDTOResourceList(entities);
 
         PageMetadata metadata = new PageMetadata(dtos.size(), pageNumber, totalElements);
-        return new PagedModel<>(dtos, metadata);
+        return PagedModel.of(dtos, metadata);
     }
 
     private <DTO> List<EntityModel<DTO>> toDTOResourceList(List<? extends BaseEntity> entities) {

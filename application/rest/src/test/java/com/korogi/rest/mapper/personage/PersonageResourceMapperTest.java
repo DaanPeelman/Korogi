@@ -34,7 +34,7 @@ class PersonageResourceMapperTest {
             .hasSize(1)
             .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
             .containsExactly(
-                new Link("/personages/{id}", "self")
+                Link.of("/personages/{id}", "self")
             );
     }
 }

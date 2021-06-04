@@ -34,7 +34,7 @@ class EpisodeResourceMapperTest {
             .hasSize(1)
             .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
             .containsExactly(
-                new Link("/episodes/{id}", "self")
+                Link.of("/episodes/{id}", "self")
             );
     }
 }

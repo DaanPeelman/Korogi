@@ -34,11 +34,11 @@ class AnimeResourceMapperTest {
             .hasSize(5)
             .extracting(ResourceMapperTestUtil::toLinkWithNoAffordances)
             .containsExactly(
-                new Link("/anime/{id}", "self"),
-                new Link("/anime/{id}/prequal", "prequal"),
-                new Link("/anime/{id}/sequal", "sequal"),
-                new Link("/anime/{id}/episodes", "episodes"),
-                new Link("/anime/{id}/personages", "personages")
+                Link.of("/anime/{id}", "self"),
+                Link.of("/anime/{id}/prequal", "prequal"),
+                Link.of("/anime/{id}/sequal", "sequal"),
+                Link.of("/anime/{id}/episodes", "episodes"),
+                Link.of("/anime/{id}/personages", "personages")
             );
     }
 }

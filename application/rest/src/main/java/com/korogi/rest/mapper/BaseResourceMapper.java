@@ -13,7 +13,7 @@ public abstract class BaseResourceMapper<TO, FROM> implements ResourceMapper<TO,
 
     @Override
     public EntityModel<TO> toDTOResource(FROM from) {
-        return new EntityModel<>(map(from), createLinks(from));
+        return EntityModel.of(map(from), createLinks(from));
     }
 
     @Override

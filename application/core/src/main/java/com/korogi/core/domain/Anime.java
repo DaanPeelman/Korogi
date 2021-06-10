@@ -1,6 +1,5 @@
 package com.korogi.core.domain;
 
-import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.EnumType.STRING;
@@ -18,7 +17,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,7 +46,6 @@ import org.hibernate.annotations.LazyToOne;
 
 @Entity
 @Table(name = "ANIME")
-@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_ANIME", allocationSize = 1)
 public class Anime extends BaseEntity {
     private static final long serialVersionUID = - 2472387246309958379L;
 

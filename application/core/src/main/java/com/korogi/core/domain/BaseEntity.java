@@ -1,6 +1,6 @@
 package com.korogi.core.domain;
 
-import static javax.persistence.GenerationType.SEQUENCE;
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 import javax.persistence.Column;
@@ -29,10 +29,10 @@ import lombok.ToString;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
-    protected static final String ENTITY_SEQUENCE_GENERATOR = "ENTITY_SEQUENCE_GENERATOR";
     private static final long serialVersionUID = - 7083538719673685269L;
+
     @Id
-    @GeneratedValue(strategy = SEQUENCE, generator = ENTITY_SEQUENCE_GENERATOR)
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id")
     private Long id;
 

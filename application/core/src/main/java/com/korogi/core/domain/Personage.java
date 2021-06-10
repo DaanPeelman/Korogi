@@ -1,6 +1,5 @@
 package com.korogi.core.domain;
 
-import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
@@ -12,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +37,6 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "PERSONAGES")
-@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_PERSONAGE", allocationSize = 1)
 public class Personage extends BaseEntity {
     @Column(name = "first_name")
     private String firstName;

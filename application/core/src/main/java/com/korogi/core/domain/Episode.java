@@ -1,6 +1,5 @@
 package com.korogi.core.domain;
 
-import static com.korogi.core.domain.BaseEntity.ENTITY_SEQUENCE_GENERATOR;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
@@ -11,7 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -38,7 +36,6 @@ import org.hibernate.annotations.LazyToOne;
 
 @Entity
 @Table(name = "EPISODES")
-@SequenceGenerator(name = ENTITY_SEQUENCE_GENERATOR, sequenceName = "SEQ_EPISODE", allocationSize = 1)
 public class Episode extends BaseEntity {
     private static final long serialVersionUID = - 970686580041286530L;
 

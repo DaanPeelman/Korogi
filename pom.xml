@@ -27,6 +27,7 @@
 		<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
 		<spring-data-jpa-entity-graph.version>2.4.2</spring-data-jpa-entity-graph.version>
+        <specification-arg-resolver.version>2.6.2</specification-arg-resolver.version>
 		<jjwt.version>0.9.1</jjwt.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<dbunit.version>2.7.0</dbunit.version>
@@ -69,26 +70,32 @@
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>webapp</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+                <artifactId>webapp</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-			<!-- SPRING -->
-			<dependency>
-				<groupId>com.cosium.spring.data</groupId>
-				<artifactId>spring-data-jpa-entity-graph</artifactId>
-				<version>${spring-data-jpa-entity-graph.version}</version>
-			</dependency>
+            <!-- SPRING -->
+            <dependency>
+                <groupId>com.cosium.spring.data</groupId>
+                <artifactId>spring-data-jpa-entity-graph</artifactId>
+                <version>${spring-data-jpa-entity-graph.version}</version>
+            </dependency>
 
-			<!-- JWT -->
-			<dependency>
-				<groupId>io.jsonwebtoken</groupId>
-				<artifactId>jjwt</artifactId>
-				<version>${jjwt.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>net.kaczmarzyk</groupId>
+                <artifactId>specification-arg-resolver</artifactId>
+                <version>${specification-arg-resolver.version}</version>
+            </dependency>
 
-			<!-- LOMBOK -->
-			<dependency>
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- LOMBOK -->
+            <dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${lombok.version}</version>

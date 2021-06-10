@@ -10,10 +10,9 @@ import org.springframework.data.jpa.repository.Query;
  *
  * @author Daan Peelman
  * @see EntityRepository
- * @see AnimeCriteriaRepository
  * @see Anime
  */
-public interface AnimeRepository extends EntityRepository<Anime>, AnimeCriteriaRepository {
+public interface AnimeRepository extends EntityRepository<Anime> {
     @Query("select a.prequal from Anime a where a.id = ?1")
     Optional<Anime> findPrequalOfAnime(Long id);
 

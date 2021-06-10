@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -24,6 +25,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 /**
  * @author Daan Peelman
@@ -60,7 +63,8 @@ class RestControllerExceptionAdviceTest extends BaseServiceTest {
         RuntimeException runtimeExceptionToThrow = new RuntimeException();
         String generatedUUID = UUID.randomUUID().toString();
 
-        when(animeRepository.findByCriteria()).thenThrow(runtimeExceptionToThrow);
+        when(animeRepository.findAll(nullable(Specification.class), any(Pageable.class))).thenThrow(
+            runtimeExceptionToThrow);
         when(uuidGenerator.generateUUIDString()).thenReturn(generatedUUID);
         doNothing().when(logger).error(anyString(), any(RuntimeException.class));
 

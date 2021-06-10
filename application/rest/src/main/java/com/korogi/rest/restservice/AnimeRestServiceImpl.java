@@ -7,8 +7,6 @@ import static lombok.AccessLevel.PUBLIC;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.List;
-import com.korogi.api.AnimeRestService;
 import com.korogi.core.domain.Anime;
 import com.korogi.core.persistence.anime.AnimeRepository;
 import com.korogi.dto.AnimeDTO;
@@ -16,7 +14,14 @@ import com.korogi.dto.EpisodeDTO;
 import com.korogi.dto.PersonageDTO;
 import com.korogi.rest.exception.ResourceNotFoundException;
 import com.korogi.rest.mapper.EntityToDTOResourceMapper;
+import com.korogi.rest.specification.SimilarAnimeName;
 import lombok.RequiredArgsConstructor;
+import net.kaczmarzyk.spring.data.jpa.domain.Equal;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/anime", produces = { APPLICATION_JSON_VALUE })
 @Transactional(readOnly = true)
 @RequiredArgsConstructor(access = PUBLIC)
-public class AnimeRestServiceImpl implements AnimeRestService {
+public class AnimeRestServiceImpl {
     private static final String PATH_VARIABLE_ID = "id";
 
     private final AnimeRepository animeRepository;
@@ -38,16 +43,20 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping
     @ResponseStatus(OK)
-    @Override
-    public PagedModel<EntityModel<AnimeDTO>> getAnime() {
-        List<Anime> anime = animeRepository.findByCriteria();
+    public PagedModel<EntityModel<AnimeDTO>> getAnime(
+        @And({
+            @Spec(path = "name", spec = SimilarAnimeName.class),
+            @Spec(path = "animeType", spec = Equal.class)
+        }) Specification<Anime> specification,
+        Pageable pageable
+    ) {
+        Page<Anime> page = animeRepository.findAll(specification, pageable);
 
-        return entityToDTOResourceMapper.toPagedResources(anime, 1L, 20L);
+        return entityToDTOResourceMapper.toPagedResources(page.getContent(), page.getNumber(), page.getTotalElements());
     }
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}")
     @ResponseStatus(OK)
-    @Override
     public EntityModel<AnimeDTO> getAnimeDetails(
         @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
@@ -58,7 +67,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/prequal")
     @ResponseStatus(OK)
-    @Override
     public EntityModel<AnimeDTO> getPrequalDetails(
         @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
@@ -69,7 +77,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/sequal")
     @ResponseStatus(OK)
-    @Override
     public EntityModel<AnimeDTO> getSequalDetails(
         @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
@@ -80,7 +87,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/episodes")
     @ResponseStatus(OK)
-    @Override
     public PagedModel<EntityModel<EpisodeDTO>> getAnimeEpisodes(
         @PathVariable(PATH_VARIABLE_ID) Long id
     ) {
@@ -92,7 +98,6 @@ public class AnimeRestServiceImpl implements AnimeRestService {
 
     @GetMapping(value = "{" + PATH_VARIABLE_ID + "}/personages")
     @ResponseStatus(OK)
-    @Override
     public PagedModel<EntityModel<PersonageDTO>> getAnimePersonages(
         @PathVariable(PATH_VARIABLE_ID) Long id
     ) {

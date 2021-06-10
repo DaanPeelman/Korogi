@@ -1,0 +1,139 @@
+{
+  "links": [],
+  "content": [
+    {
+      "nameEnglish": "Steins;Gate",
+      "nameRomanized": "Steins;Gate",
+      "startAir": "2011-04-06",
+      "endAir": "2011-09-14",
+      "synopsis": "Steins;Gate synopsis here",
+      "backdropUrl": "http://backdrop.url.be/steins.gate",
+      "posterUrl": "http://poster.url.be/steins.gate",
+      "type": "anime",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/anime/1"
+        },
+        {
+          "rel": "prequal",
+          "href": "http://localhost/anime/1/prequal"
+        },
+        {
+          "rel": "sequal",
+          "href": "http://localhost/anime/1/sequal"
+        },
+        {
+          "rel": "episodes",
+          "href": "http://localhost/anime/1/episodes"
+        },
+        {
+          "rel": "personages",
+          "href": "http://localhost/anime/1/personages"
+        }
+      ]
+    },
+    {
+      "nameEnglish": "Steins;Gate: Egoistic Poriomania",
+      "nameRomanized": "Steins;Gate: Oukoubakko no Poriomania",
+      "startAir": "2012-02-22",
+      "endAir": "2012-02-22",
+      "synopsis": "Steins;Gate: Egoistic Poriomania synopsis here",
+      "backdropUrl": "http://backdrop.url.be/steins.gate.egoistic.poriomania",
+      "posterUrl": "http://poster.url.be/steins.gate.egoistic.poriomania",
+      "type": "anime",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/anime/2"
+        },
+        {
+          "rel": "prequal",
+          "href": "http://localhost/anime/2/prequal"
+        },
+        {
+          "rel": "sequal",
+          "href": "http://localhost/anime/2/sequal"
+        },
+        {
+          "rel": "episodes",
+          "href": "http://localhost/anime/2/episodes"
+        },
+        {
+          "rel": "personages",
+          "href": "http://localhost/anime/2/personages"
+        }
+      ]
+    },
+    {
+      "nameEnglish": "Steins;Gate: The Movie − Load Region of Déjà Vu",
+      "nameRomanized": "Steins;Gate Movie: Fuka Ryouiki no Déjà vu",
+      "startAir": "2013-04-20",
+      "endAir": "2013-04-20",
+      "synopsis": "Steins;Gate: The Movie − Load Region of Déjà Vu synopsis here",
+      "backdropUrl": "http://backdrop.url.be/steins.gate.load.region.of.deja.vu",
+      "posterUrl": "http://poster.url.be/steins.gate.load.region.of.deja.vu",
+      "type": "anime",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/anime/3"
+        },
+        {
+          "rel": "prequal",
+          "href": "http://localhost/anime/3/prequal"
+        },
+        {
+          "rel": "sequal",
+          "href": "http://localhost/anime/3/sequal"
+        },
+        {
+          "rel": "episodes",
+          "href": "http://localhost/anime/3/episodes"
+        },
+        {
+          "rel": "personages",
+          "href": "http://localhost/anime/3/personages"
+        }
+      ]
+    },
+    {
+      "nameEnglish": "From the New World",
+      "nameRomanized": "Shinsekai yori",
+      "startAir": "2012-09-29",
+      "endAir": "2013-03-23",
+      "synopsis": "From the New World synopsis here",
+      "backdropUrl": "http://backdrop.url.be/from.the.new.world",
+      "posterUrl": "http://poster.url.be/from.the.new.world",
+      "type": "anime",
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost/anime/4"
+        },
+        {
+          "rel": "prequal",
+          "href": "http://localhost/anime/4/prequal"
+        },
+        {
+          "rel": "sequal",
+          "href": "http://localhost/anime/4/sequal"
+        },
+        {
+          "rel": "episodes",
+          "href": "http://localhost/anime/4/episodes"
+        },
+        {
+          "rel": "personages",
+          "href": "http://localhost/anime/4/personages"
+        }
+      ]
+    }
+  ],
+  "page": {
+    "size": 4,
+    "totalElements": 4,
+    "totalPages": 1,
+    "number": 0
+  }
+}

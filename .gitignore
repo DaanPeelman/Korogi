@@ -11,7 +11,8 @@ application/web/src/app/generated/**/*
 postgresql/
 
 # IntelliJ #
-**/.idea/
+**/.idea/**/*.xml
+!**/.idea/runConfigurations/**/*
 **/*.iml
 **/out/
 
